@@ -27,8 +27,16 @@ def signal(lines,price):
         y = m2 * (price - center)
     return y
 
-def execute_trade(price, Rsi, nearst_line,last_state,BB,lines):
+def execute_trade(price, Rsi, nearst_line,last_state,BB,lines,W,last_order_price):
     response = None
+    orderprice =None
+
+    if last_order_price and last_state == "buy":
+        profit_or_loss = ((price - last_order_price) / last_order_price) * 100
+        if profit_or_loss <= -5 or profit_or_loss >= 5:
+            response = "sellSL"
+            print("sl activate")
+            return [response]
 
     two_lines = the_two_lines(lines,nearst_line)
     RSI_Signal = ((50-Rsi)*2)/100
@@ -42,9 +50,10 @@ def execute_trade(price, Rsi, nearst_line,last_state,BB,lines):
     distanceOftwoLines=1
     #print(f"lines signal is : {lines_Signal:.4f} ",f"RSI signal : {RSI_Signal} ",f"BB signal : {BB_Signal}")
     # شرط خرید
-    if (1.3*BB_Signal+RSI_Signal+0.5*lines_Signal)/3 <= -0.85 and last_state == "sell":
+    if (W[0]*BB_Signal+W[1]*RSI_Signal+W[2]*lines_Signal)/3 <= -0.85 and last_state == "sell":
         #response = place_order("buy", ticker, amount, last_price+0.005)
         response = "buy"
+        orderprice=price
     # شرط فروش
 
     elif (1.3*BB_Signal+RSI_Signal+0.5*lines_Signal)/3 >= 0.85 and last_state == "buy":
@@ -55,6 +64,6 @@ def execute_trade(price, Rsi, nearst_line,last_state,BB,lines):
     # به‌روزرسانی پورتفولیو
 
 
-    return response
+    return [response,orderprice]
 
 

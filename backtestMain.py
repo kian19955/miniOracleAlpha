@@ -8,6 +8,7 @@ from strategies.BB_RSI_Lines import find_closest_line, execute_trade
 t=0
 i=0
 n=0
+m=0
 l=[]
 tickers = ["BTCUSDT"]  # لیست تیکرها
 portfolio = {ticker: {"balance": 10000, "coin": 0, "buy_price": None} for ticker in tickers}
@@ -29,7 +30,7 @@ while t<8321 :
         if t == 8320:
             if portfolio["BTCUSDT"]["coin"] != 0:
                 print(portfolio["BTCUSDT"]["coin"] * data["Close"].iloc[-1],n)
-            else:print(portfolio["BTCUSDT"]["balance"],n)
+            else:print(portfolio["BTCUSDT"]["balance"],n,m)
             print(l)
 
         coin =portfolio[ticker]["coin"]
@@ -47,13 +48,18 @@ while t<8321 :
             last_order_type = "buy"
 
         # Execute trade
-        response = execute_trade(last_price, Rsi, nearst_line, last_order_type, BB.iloc[-1], lines)
-        if response == "sell":
+        response = execute_trade(last_price, Rsi, nearst_line, last_order_type, BB.iloc[-1], lines,[1.5,1,0.5],portfolio[ticker]["buy_price"])
+        if response[0] == "sell":
             portfolio[ticker]["balance"]=coin*data["Close"].iloc[-1]
             portfolio[ticker]["coin"]=0
             print("sell",portfolio)
             n +=1
-        elif response == "buy":
+        elif response[0] == "sellSL":
+            portfolio[ticker]["balance"]=coin*data["Close"].iloc[-1]
+            portfolio[ticker]["coin"]=0
+            print("sellSL",portfolio)
+            m +=1
+        elif response[0] == "buy":
 
             portfolio[ticker]["coin"]=balance/data["Close"].iloc[-1]
             portfolio[ticker]["balance"] = 0
@@ -62,7 +68,7 @@ while t<8321 :
 
 
         # Print trade info if applicable
-        if response:
+        if response[0]!=None:
             print(response)
         else:pass
             #print("nothing happend")
