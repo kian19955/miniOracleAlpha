@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="6">
-      <change beforePath="$PROJECT_DIR$/historical_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/historical_data.csv" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="7">
+      <change beforePath="$PROJECT_DIR$/backtestMain.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtestMain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wallet_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/wallet_data.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,9 +56,9 @@
     "Python.BB_RSI_Lines.executor": "Run",
     "Python.RSI_Lines.executor": "Run",
     "Python.SEPWallet.executor": "Debug",
-    "Python.backtestMain.executor": "Run",
+    "Python.backtestMain.executor": "Debug",
     "Python.bollingerBands.executor": "Run",
-    "Python.main.executor": "Run",
+    "Python.main.executor": "Debug",
     "Python.orders.executor": "Run",
     "Python.s2.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -151,7 +152,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736529562147</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="7">
+      <option name="closed" value="true" />
+      <created>1736529615419</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1736529615419</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -185,7 +194,8 @@
     <MESSAGE value="4" />
     <MESSAGE value="5" />
     <MESSAGE value="6" />
-    <option name="LAST_COMMIT_MESSAGE" value="6" />
+    <MESSAGE value="7" />
+    <option name="LAST_COMMIT_MESSAGE" value="7" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -209,6 +219,11 @@
           <url>file://$PROJECT_DIR$/main.py</url>
           <line>49</line>
           <option name="timeStamp" value="34" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/strategies/BB_RSI_Lines.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="38" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

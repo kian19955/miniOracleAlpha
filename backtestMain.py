@@ -60,9 +60,9 @@ while t<8321 :
             print("sellSL",portfolio)
             m +=1
         elif response[0] == "buy":
-
             portfolio[ticker]["coin"]=balance/data["Close"].iloc[-1]
             portfolio[ticker]["balance"] = 0
+            portfolio[ticker]["buy_price"] = response[1]
             print("buy",portfolio)
 
 
