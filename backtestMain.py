@@ -29,7 +29,7 @@ while t<8321 :
             else: l.append(portfolio["BTCUSDT"]["balance"])
         if t == 8320:
             if portfolio["BTCUSDT"]["coin"] != 0:
-                print(portfolio["BTCUSDT"]["coin"] * data["Close"].iloc[-1],n)
+                print(portfolio["BTCUSDT"]["coin"] * data["Close"].iloc[-1],n,m)
             else:print(portfolio["BTCUSDT"]["balance"],n,m)
             print(l)
 
