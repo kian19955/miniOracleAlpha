@@ -33,7 +33,7 @@ def execute_trade(price, Rsi, nearst_line,last_state,BB,lines,W,last_order_price
 
     if last_order_price and last_state == "buy":
         profit_or_loss = ((price - last_order_price) / last_order_price) * 100
-        if profit_or_loss <= -4 or profit_or_loss >= 4:
+        if profit_or_loss <= -6 or profit_or_loss >= 6:
             response = "sellSL"
             print("sl activate")
             return [response]
