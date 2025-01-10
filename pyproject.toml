@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "minioraclev1-0"
+version = "0.1.0"
+description = ""
+authors = ["kian19955 <kiansharifi84@gmail.com>"]
+readme = "README.md"
+packages = [{include = "minioraclev1"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+scikit-learn = "^1.6.0"
+scipy = "^1.14.1"
+pandas = "^2.2.3"
+numpy = "^2.2.1"
+yagmail = "^0.15.293"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
