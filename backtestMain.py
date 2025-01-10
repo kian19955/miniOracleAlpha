@@ -4,7 +4,7 @@ from indicators.bollingerBands import bollinger_bands
 from indicators.rsi import calculate_rsi_ema
 from patterns.S_R_lines import support_and_resistance
 from strategies.BB_RSI_Lines import find_closest_line, execute_trade
-#q
+
 t=0
 i=0
 n=0
