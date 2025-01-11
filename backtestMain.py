@@ -102,12 +102,17 @@ def backtest(W) :
 
 
 # تابع هدف: محاسبه بازدهی استراتژی بر اساس ضرایب
+evaluation_count = 0
 def fitness_function(weights):
+    global evaluation_count
+
     # مثال فرضی: ترکیب وزنی سیگنال‌ها
 
     weighted_sum = backtest(weights)
     print(weighted_sum)
     # هدف بهینه‌سازی: مثلاً حداکثر کردن سیگنال (قابلیت تغییر)
+    evaluation_count += 1
+    print("GEN :",evaluation_count)
     return weighted_sum,
 
 # تنظیم فضای مسئله
@@ -134,8 +139,8 @@ toolbox.register("select", tools.selTournament, tournsize=3)  # انتخاب
 # اجرای الگوریتم
 def genetic_optimization():
     random.seed(42)  # برای قابلیت بازتولید
-    population = toolbox.population(n=50)  # جمعیت اولیه
-    generations = 100  # تعداد نسل‌ها
+    population = toolbox.population(n=40)  # جمعیت اولیه
+    generations = 50  # تعداد نسل‌ها
 
     # آمارگیری
     stats = tools.Statistics(lambda ind: ind.fitness.values)
