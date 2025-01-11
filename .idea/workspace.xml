@@ -4,15 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="10">
-      <change afterPath="$PROJECT_DIR$/plotter.py" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="ea">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backtestMain.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtestMain.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indicators/bollingerBands.py" beforeDir="false" afterPath="$PROJECT_DIR$/indicators/bollingerBands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/strategies/BB_RSI_Lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/BB_RSI_Lines.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallet_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/wallet_data.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1736530310539</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="ea">
+      <option name="closed" value="true" />
+      <created>1736587437208</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1736587437208</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -229,7 +232,8 @@
     <MESSAGE value="8" />
     <MESSAGE value="9" />
     <MESSAGE value="10" />
-    <option name="LAST_COMMIT_MESSAGE" value="10" />
+    <MESSAGE value="ea" />
+    <option name="LAST_COMMIT_MESSAGE" value="ea" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

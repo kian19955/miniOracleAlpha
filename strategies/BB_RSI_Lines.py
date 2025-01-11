@@ -35,7 +35,6 @@ def execute_trade(price, Rsi, nearst_line,last_state,BB,lines,W,last_order_price
         profit_or_loss = ((price - last_order_price) / last_order_price) * 100
         if profit_or_loss <= -100 or profit_or_loss >= 100:
             response = "sellSL"
-            print("sl activate")
             return [response]
 
     two_lines = the_two_lines(lines,nearst_line)

@@ -104,7 +104,9 @@ def backtest(W) :
 # تابع هدف: محاسبه بازدهی استراتژی بر اساس ضرایب
 def fitness_function(weights):
     # مثال فرضی: ترکیب وزنی سیگنال‌ها
+
     weighted_sum = backtest(weights)
+    print(weighted_sum)
     # هدف بهینه‌سازی: مثلاً حداکثر کردن سیگنال (قابلیت تغییر)
     return weighted_sum,
 
