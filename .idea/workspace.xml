@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="7">
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="10">
+      <change afterPath="$PROJECT_DIR$/plotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backtestMain.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtestMain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indicators/bollingerBands.py" beforeDir="false" afterPath="$PROJECT_DIR$/indicators/bollingerBands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategies/BB_RSI_Lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/strategies/BB_RSI_Lines.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/wallet_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/wallet_data.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,12 +41,12 @@
     &quot;assignee&quot;: &quot;kian19955&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/kian19955/miniOracleAlpha.git",
-    "accountId": "b0170990-588f-48ff-85c9-6b43e722ef7c"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kian19955/miniOracleAlpha.git&quot;,
+    &quot;accountId&quot;: &quot;b0170990-588f-48ff-85c9-6b43e722ef7c&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -56,10 +62,11 @@
     "Python.BB_RSI_Lines.executor": "Run",
     "Python.RSI_Lines.executor": "Run",
     "Python.SEPWallet.executor": "Debug",
-    "Python.backtestMain.executor": "Debug",
+    "Python.backtestMain.executor": "Run",
     "Python.bollingerBands.executor": "Run",
-    "Python.main.executor": "Debug",
+    "Python.main.executor": "Run",
     "Python.orders.executor": "Run",
+    "Python.plotter.executor": "Run",
     "Python.s2.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
@@ -160,7 +167,31 @@
       <option name="project" value="LOCAL" />
       <updated>1736529615419</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="8">
+      <option name="closed" value="true" />
+      <created>1736529930993</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1736529930993</updated>
+    </task>
+    <task id="LOCAL-00011" summary="9">
+      <option name="closed" value="true" />
+      <created>1736530107589</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1736530107589</updated>
+    </task>
+    <task id="LOCAL-00012" summary="10">
+      <option name="closed" value="true" />
+      <created>1736530310539</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1736530310539</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,7 +226,10 @@
     <MESSAGE value="5" />
     <MESSAGE value="6" />
     <MESSAGE value="7" />
-    <option name="LAST_COMMIT_MESSAGE" value="7" />
+    <MESSAGE value="8" />
+    <MESSAGE value="9" />
+    <MESSAGE value="10" />
+    <option name="LAST_COMMIT_MESSAGE" value="10" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -221,9 +255,14 @@
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/backtestMain.py</url>
+          <line>69</line>
+          <option name="timeStamp" value="40" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/strategies/BB_RSI_Lines.py</url>
-          <line>34</line>
-          <option name="timeStamp" value="38" />
+          <line>29</line>
+          <option name="timeStamp" value="42" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

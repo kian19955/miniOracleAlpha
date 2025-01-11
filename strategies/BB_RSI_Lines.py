@@ -33,7 +33,7 @@ def execute_trade(price, Rsi, nearst_line,last_state,BB,lines,W,last_order_price
 
     if last_order_price and last_state == "buy":
         profit_or_loss = ((price - last_order_price) / last_order_price) * 100
-        if profit_or_loss <= -6 or profit_or_loss >= 15:
+        if profit_or_loss <= -100 or profit_or_loss >= 100:
             response = "sellSL"
             print("sl activate")
             return [response]
@@ -50,13 +50,13 @@ def execute_trade(price, Rsi, nearst_line,last_state,BB,lines,W,last_order_price
     distanceOftwoLines=1
     #print(f"lines signal is : {lines_Signal:.4f} ",f"RSI signal : {RSI_Signal} ",f"BB signal : {BB_Signal}")
     # شرط خرید
-    if (W[0]*BB_Signal+W[1]*RSI_Signal+W[2]*lines_Signal)/3 <= -0.85 and last_state == "sell":
+    if (W[0]*BB_Signal+W[1]*RSI_Signal+W[2]*lines_Signal)/sum(W) <= -0.7 and last_state == "sell":
         #response = place_order("buy", ticker, amount, last_price+0.005)
         response = "buy"
         orderprice=price
     # شرط فروش
 
-    elif (1.3*BB_Signal+RSI_Signal+0.5*lines_Signal)/3 >= 0.85 and last_state == "buy":
+    elif (W[0]*BB_Signal+W[1]*RSI_Signal+W[2]*lines_Signal)/sum(W) >= 0.7 and last_state == "buy":
 
         #response = place_order("sell", ticker, coin-0.01, last_price+0.006)
         response = "sell"
