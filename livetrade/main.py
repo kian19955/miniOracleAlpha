@@ -11,7 +11,7 @@ import pandas as pd
 from patterns.S_R_lines import support_and_resistance
 
 
-tickers = ["ADAUSDT","DOGEUSDT"]
+tickers = ["BTCUSDT"]
 wallet_tickers=[ticker.lower().replace("usdt","") +"_active_balance" for ticker in tickers ]
 SEP_wallet_Update()
 
@@ -38,7 +38,7 @@ while True:
 
             try:
                 # Fetch data and calculate indicators
-                data = fetch_historical_data(ticker, "15", "15")
+                data = fetch_historical_data(ticker, "60", "15")
                 BB = bollinger_bands(data,20)
                 data['RSI'] = calculate_rsi_ema(data['Close'], period=14)
                 Rsi = data['RSI'].iloc[-1]
@@ -47,7 +47,7 @@ while True:
                 nearst_line = find_closest_line(lines, last_price)
 
                 # Execute trade
-                response = execute_trade(last_price,Rsi, nearst_line,last_order_type,BB.iloc[-1],lines)
+                response = execute_trade(last_price,Rsi, nearst_line,last_order_type,BB.iloc[-1],lines,[1,0,0],95000)
                 if response == "sell1":
                     place_order("sell",ticker,portfolio[f"{ticker.lower().replace("usdt","") +"_active_balance"}"]["balance"],last_price-(last_price*0.0004))
                 elif response == "buy1":

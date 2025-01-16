@@ -22,7 +22,7 @@ def bollinger_bands(df, window, bbw_min=0.02, bbw_max=0.5):
     df['Bollinger_Lower'] = df['SMA'] - (num_std_dev * df['STD'])
 
     # محاسبه Bollinger Band Width (BBW)
-    df['BBW'] = df['Bollinger_Upper'] - df['Bollinger_Lower']
+    df['BBW'] = (df['Bollinger_Upper'] - df['Bollinger_Lower'])/  df['SMA']
 
     # محاسبه سیگنال نرمال‌شده
     df['BBW_Normalized'] = (df['BBW'] - bbw_min) / (bbw_max - bbw_min)

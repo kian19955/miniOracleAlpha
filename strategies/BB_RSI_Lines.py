@@ -46,18 +46,22 @@ def execute_trade(price, Rsi, nearst_line,last_state,BB,lines,W,last_order_price
         lines_Signal =0
 
     BB_Signal = signal([BB["Bollinger_Upper"],BB["Bollinger_Lower"]],price)/100
-    distanceOftwoLines=1
-    #print(f"lines signal is : {lines_Signal:.4f} ",f"RSI signal : {RSI_Signal} ",f"BB signal : {BB_Signal}")
+
+
+    s=(W[0]*BB_Signal+W[1]*RSI_Signal+W[2]*lines_Signal)/sum(W)
+    #print(f"lines signal is : {lines_Signal:.4f} ", f"RSI signal : {RSI_Signal} ", f"BB signal : {BB_Signal}","s :",s)
     # شرط خرید
-    if (W[0]*BB_Signal+W[1]*RSI_Signal+W[2]*lines_Signal)/sum(W) <= -0.7 and last_state == "sell":
+    if (W[0]*BB_Signal+W[1]*RSI_Signal+W[2]*lines_Signal)/sum(W) >= 0.9 and last_state == "sell":
         #response = place_order("buy", ticker, amount, last_price+0.005)
+
         response = "buy"
         orderprice=price
     # شرط فروش
 
-    elif (W[0]*BB_Signal+W[1]*RSI_Signal+W[2]*lines_Signal)/sum(W) >= 0.7 and last_state == "buy":
+    elif (W[0]*BB_Signal+W[1]*RSI_Signal+W[2]*lines_Signal)/sum(W) <= -0.85 and last_state == "buy":
 
         #response = place_order("sell", ticker, coin-0.01, last_price+0.006)
+
         response = "sell"
 
     # به‌روزرسانی پورتفولیو
