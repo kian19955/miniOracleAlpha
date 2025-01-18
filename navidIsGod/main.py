@@ -7,6 +7,7 @@ headers = [
     "timestamp",
     "type",
     "price",
+    "fee",
     "confidence"
 ]
 
@@ -34,8 +35,11 @@ def main():
         filename=ticker + "_" + str(days) + "_" + interval + ".csv",
     )
 
+    # Plot X and Y are placeholders for defining what to plot
     analyze(
         data=data,
+        plotX=True,
+        plotY=True
     )
 
 if __name__ == "__main__":

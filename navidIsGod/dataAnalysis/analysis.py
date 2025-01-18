@@ -1,2 +1,4 @@
-def analyze():
+def analyze(
+    data: list[list[str | int | float]],
+):
     ...

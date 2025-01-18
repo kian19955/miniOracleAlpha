@@ -13,14 +13,13 @@ def backtest(
         sell_limit: float = -0.75,
         buy_limit: float = 0.75
 ):
+    df: DataFrame = ...
     balance: int = balance
 
     assets: float = 0.0
 
-    total_fees = 0
-
     history_data: list = []
-    def append_to_history(timestamp, order_type, asset_price, tc_confidence):
+    def append_to_history(timestamp, order_type, asset_price, fee, tc_confidence):
         data = [timestamp, order_type, asset_price, tc_confidence]
         history_data.append(data)
 
@@ -31,23 +30,21 @@ def backtest(
             price: float = df["Close"].iloc[i]
 
             fee = assets * price * maker_fee
-            total_fees += fee
             balance += assets * price - fee
 
             assets = 0
 
-            append_to_history(df.index[i], "sell", price, confidence)
+            append_to_history(df.index[i], "sell", price, fee, confidence)
 
         elif confidence >= buy_limit and balance > 0:
             price: float = df["Close"].iloc[i]
 
             fee = balance * taker_fee
-            total_fees += fee
 
             assets += (balance - fee) / price
             balance = 0
 
-            append_to_history(df.index[i], "buy", price, confidence)
+            append_to_history(df.index[i], "buy", price, fee, confidence)
 
     return history_data
 
