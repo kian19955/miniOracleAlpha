@@ -3,7 +3,7 @@ import csv
 from datetime import datetime
 
 
-from navidIsGod.config import rel_data_dir_path
+from navidIsGod.constants import bt_data_dir_path
 
 def write_to_csv(
         headers: list[str],
@@ -24,7 +24,7 @@ def write_to_csv(
     elif not filename.endswith(".csv"):
         filename += ".csv"
 
-    file_path = rel_data_dir_path + filename
+    file_path = f"{bt_data_dir_path}/{filename}"
 
     mode: str = "a" if append else "w"
 
@@ -38,7 +38,7 @@ def write_to_csv(
 
 
 def read_from_csv(filename: str) -> list[list[str | int | float]]:
-    file_path = rel_data_dir_path + filename
+    file_path = bt_data_dir_path + filename
 
     if not file_path.endswith(".csv"):
         file_path += ".csv"

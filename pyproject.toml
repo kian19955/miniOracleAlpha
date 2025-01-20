@@ -15,6 +15,7 @@ numpy = "^2.2.1"
 yagmail = "^0.15.293"
 matplotlib = "^3.10.0"
 deap = "^1.4.2"
+pandas-ta = "^0.3.14b0"
 
 
 [build-system]

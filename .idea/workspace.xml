@@ -4,7 +4,39 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(core): initialize project structure&#10;&#10;• create essential files and directories&#10;• add placeholder class and basic config&#10;• update project sdk and module settings" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(core): initialize project structure&#10;&#10;• Create essential files and directories&#10;• Add placeholder class and basic config&#10;• Update project sdk and module settings">
+      <change afterPath="$PROJECT_DIR$/navidIsGod/api/binanceApi.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/navidIsGod/api/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/navidIsGod/api/utils/handleStatus.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/navidIsGod/constants.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/indicators/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/patterns/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/plugins/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/NobitexApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/api/NobitexApi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/api/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtest/backtestMain.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtest/backtestMain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtest/dataAnalyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtest/dataAnalyse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtest/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtest/plotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indicators/bollingerBands.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/indicators/bollingerBands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/indicators/rsi.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/livetrade/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/livetrade/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livetrade/orders.py" beforeDir="false" afterPath="$PROJECT_DIR$/livetrade/orders.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/config.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/dataAnalysis/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/dataAnalysis/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/fileHandler/csvHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/fileHandler/csvHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/marketHisData/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/patterns/S_R_lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/patterns/S_R_lines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plugins.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/plugins/plugins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/strategies/BB_RSI_Lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/BB_RSI_Lines.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -47,41 +79,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python tests.Doctests in common.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.BB_RSI_Lines.executor&quot;: &quot;Run&quot;,
-    &quot;Python.RSI_Lines.executor&quot;: &quot;Run&quot;,
-    &quot;Python.SEPWallet.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.backtestMain.executor&quot;: &quot;Run&quot;,
-    &quot;Python.bollingerBands.executor&quot;: &quot;Run&quot;,
-    &quot;Python.csvHandler.executor&quot;: &quot;Run&quot;,
-    &quot;Python.csvWriter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataAnalyse.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.nd.executor&quot;: &quot;Run&quot;,
-    &quot;Python.orders.executor&quot;: &quot;Run&quot;,
-    &quot;Python.plotter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.s2.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kians/PycharmProjects/miniOracleV1.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Doctests in common.executor": "Debug",
+    "Python.BB_RSI_Lines.executor": "Run",
+    "Python.NobitexApi.executor": "Run",
+    "Python.RSI_Lines.executor": "Run",
+    "Python.SEPWallet.executor": "Debug",
+    "Python.analysis.executor": "Run",
+    "Python.backtestMain.executor": "Run",
+    "Python.backtester.executor": "Run",
+    "Python.bollingerBands.executor": "Run",
+    "Python.constants.executor": "Run",
+    "Python.csvHandler.executor": "Run",
+    "Python.csvWriter.executor": "Run",
+    "Python.dataAnalyse.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.nd.executor": "Run",
+    "Python.orders.executor": "Run",
+    "Python.plotter.executor": "Run",
+    "Python.s2.executor": "Run",
+    "Python.scratch.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/kians/PycharmProjects/miniOracleV1.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\tradingComponents" />
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\plugins" />
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\data\backtestData" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\data" />
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\fileHandler" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod" />
-      <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0\backtest" />
-      <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0\livetrade" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -228,7 +264,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737205268488</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="feat(core): initialize project structure&#10;&#10;• Create essential files and directories&#10;• Add placeholder class and basic config&#10;• Update project sdk and module settings">
+      <option name="closed" value="true" />
+      <created>1737205842434</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1737205842434</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -270,7 +314,8 @@
     <MESSAGE value="ea2" />
     <MESSAGE value="ea3" />
     <MESSAGE value="feat(core): initialize project structure&#10;&#10;• create essential files and directories&#10;• add placeholder class and basic config&#10;• update project sdk and module settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(core): initialize project structure&#10;&#10;• create essential files and directories&#10;• add placeholder class and basic config&#10;• update project sdk and module settings" />
+    <MESSAGE value="feat(core): initialize project structure&#10;&#10;• Create essential files and directories&#10;• Add placeholder class and basic config&#10;• Update project sdk and module settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(core): initialize project structure&#10;&#10;• Create essential files and directories&#10;• Add placeholder class and basic config&#10;• Update project sdk and module settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -292,16 +337,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/livetrade/main.py</url>
-          <line>49</line>
+          <line>48</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/strategies/BB_RSI_Lines.py</url>
+          <url>file://$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/BB_RSI_Lines.py</url>
           <line>29</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/strategies/BB_RSI_Lines.py</url>
+          <url>file://$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/BB_RSI_Lines.py</url>
           <line>55</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>

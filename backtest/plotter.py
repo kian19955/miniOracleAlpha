@@ -1,8 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from indicators.bollingerBands import bollinger_bands
-
 # خواندن فایل CSV
 csv_file = "plot_data.csv"
 data = pd.read_csv(csv_file)

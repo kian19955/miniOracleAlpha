@@ -1,1 +1,0 @@
-rel_data_dir_path = "../data/"

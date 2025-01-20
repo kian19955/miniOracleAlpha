@@ -2,13 +2,11 @@ import csv
 
 import pandas as pd
 
-from indicators.bollingerBands import bollinger_bands
-from indicators.rsi import calculate_rsi_ema
-from patterns.S_R_lines import support_and_resistance
-from plugins import BBW_plugin
-from strategies.BB_RSI_Lines import find_closest_line, execute_trade
-import random
-from deap import base, creator, tools, algorithms
+from navidIsGod.tradingComponents.indicators.bollingerBands import bollinger_bands
+from navidIsGod.tradingComponents.indicators.relativeStrengthIndex import calculate_rsi_ema
+from navidIsGod.tradingComponents.patterns.S_R_lines import support_and_resistance
+from navidIsGod.tradingComponents.plugins.plugins import BBW_plugin
+from navidIsGod.tradingComponents.strategies.BB_RSI_Lines import find_closest_line, execute_trade
 
 
 def save_to_csv(file_name, price, response, value,bbu,bbl,sma):

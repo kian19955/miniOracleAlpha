@@ -1,12 +1,10 @@
-import csv
-import time
-
 import requests
 from datetime import datetime, timedelta
 import pandas as pd
 
 from TK import Token
-from api.utils import write_to_csv
+from navidIsGod.api.utils import write_to_csv
+from navidIsGod.constants import rel_market_his_dir_path
 
 API_TOKEN = Token  # توکن خود را جایگزین کنید
 BASE_URL = "https://api.nobitex.ir"
@@ -15,9 +13,9 @@ headers = {
 }
 
 
-def fetch_historical_data(ticker, interval, lookback):
+def fetch_historical_data(ticker, interval, days, save_to_csv=True):
     now = datetime.now()
-    start_time = now - timedelta(days=15)
+    start_time = now - timedelta(days=days)
     start_timestamp = int(start_time.timestamp())
     end_timestamp = int(now.timestamp())
 
@@ -42,6 +40,11 @@ def fetch_historical_data(ticker, interval, lookback):
                 "Close": data["c"]
             })
             df["timestamp"] = pd.to_datetime(df["timestamp"], unit='s')
+
+            if save_to_csv:
+                csv_path = f"{rel_market_his_dir_path}/{ticker}_{days}_{interval}.csv"
+                df.to_csv(csv_path, index=True)
+
             return df
         else:
             raise ValueError(f"Invalid or empty data returned from API for {ticker}. Data: {data}")
@@ -106,4 +109,4 @@ def update_wallet():
         print(f"Error in main loop: {e}")
 
 if __name__ == "__main__":
-    update_wallet()
+    fetch_historical_data("BTCUSDT", "D", 1)
