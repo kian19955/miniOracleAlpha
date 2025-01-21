@@ -2,8 +2,8 @@ import logging
 
 import requests
 
-from TK import Token
-from navidIsGod.api.utils import write_to_csv
+from kianIsGod.TK import Token
+from api.utils import write_to_csv
 
 API_TOKEN = Token  # توکن خود را جایگزین کنید
 BASE_URL = "https://api.nobitex.ir"

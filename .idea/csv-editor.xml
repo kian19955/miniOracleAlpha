@@ -10,7 +10,21 @@
             </Attribute>
           </value>
         </entry>
-        <entry key="\navidIsGod\data\marketHistoryData\BTCUSDT_14_1h.csv">
+        <entry key="\livetrade\SEPwallet.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\livetrade\orders_data.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\livetrade\wallet_data.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

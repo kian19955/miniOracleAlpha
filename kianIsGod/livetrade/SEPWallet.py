@@ -3,7 +3,7 @@ import os
 import requests
 import pandas as pd
 
-from TK import Token
+from kianIsGod.TK import Token
 
 csv_filename = "SEPwallet.csv"
 def SEP_wallet_Update():

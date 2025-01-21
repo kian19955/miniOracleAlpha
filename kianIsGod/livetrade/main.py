@@ -1,13 +1,13 @@
 import time
 
 from SEPWallet import get_SEP_wallet, SEP_wallet_Update
-from navidIsGod.api.NobitexApi import update_wallet, fetch_historical_data
-from navidIsGod.tradingComponents.indicators.bollingerBands import bollinger_bands
-from navidIsGod.tradingComponents.indicators.relativeStrengthIndex import calculate_rsi_ema
+from api.NobitexApi import update_wallet, fetch_historical_data
+from tradingComponents.indicators.bollingerBands import bollinger_bands
+from tradingComponents.indicators.relativeStrengthIndex import calculate_rsi_ema
 from orders import place_order
-from navidIsGod.tradingComponents.strategies.BB_RSI_Lines import  execute_trade, find_closest_line
+from tradingComponents.strategies.BB_RSI_Lines import  execute_trade, find_closest_line
 import pandas as pd
-from navidIsGod.tradingComponents.patterns.S_R_lines import support_and_resistance
+from tradingComponents.patterns.S_R_lines import support_and_resistance
 
 
 tickers = ["BTCUSDT"]

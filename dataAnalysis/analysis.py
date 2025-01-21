@@ -1,0 +1,101 @@
+from typing import Optional, Hashable
+
+import pandas as pd
+from pandas import DataFrame, read_csv
+from numpy import std, nan
+
+from constants import market_his_dir_path, bt_data_dir_path
+
+from .plotter import plot_data
+
+balance = 100
+def analyze(
+        target_filename: str,
+        his_df: Optional[DataFrame] = None,
+        bt_df: Optional[DataFrame] = None,
+        sell_limit: Optional[float] = None,
+        buy_limit: Optional[float] = None,
+        display_volume: bool = True,
+        plot_liquidity: bool = True,
+        plot_orders: bool = True,
+        plot_limits: bool = True,
+        plot_conf: bool = True,
+        trade_long: bool = True,
+        trade_short: bool = True,
+):
+    # Load data
+    if his_df is None:
+        his_df: DataFrame = read_csv(f"{market_his_dir_path}/{target_filename}")
+        his_df.set_index("timestamp", inplace=True)
+        his_df.index = pd.to_datetime(his_df.index)
+
+    if bt_df is None:
+        bt_df: DataFrame = read_csv(f"{bt_data_dir_path}/{target_filename}")
+        bt_df.set_index("timestamp", inplace=True)
+        bt_df.index = pd.to_datetime(bt_df.index)
+
+    order_df: DataFrame = bt_df[bt_df["type"] != nan]
+    buy_df: DataFrame = bt_df[bt_df["type"] == "buy"]
+    sell_df: DataFrame = bt_df[bt_df["type"] == "sell"]
+
+    profit_his: dict[Hashable, float] = {}
+    last_liquidity: Optional[float] = None
+
+    for index, order in order_df.iterrows():
+        if order[1]["type"] == "buy":
+            # The profit of short trade
+            if trade_short and last_liquidity is not None:
+                profit_his[index] = (last_liquidity / order[1]["liquidity"])
+            if trade_long and trade_long:
+                last_liquidity = order[1]["liquidity"]
+
+        if order[1]["type"] == "sell":
+            # The profit of long trade
+            if last_liquidity is not None:
+                profit_his[index] = (order[1]["liquidity"] / last_liquidity)
+            if trade_short:
+                last_liquidity = order[1]["liquidity"]
+
+    total_buys = len(buy_df)
+    total_sells = len(sell_df)
+    total_orders = total_buys + total_sells
+
+    total_fee_buy: float = sum(buy_df["fee"])
+    total_fee_sell: float = sum(sell_df["fee"])
+    avg_fee_per_buy: float = total_fee_buy / total_buys
+    avg_fee_per_sell: float = total_fee_sell / total_sells
+
+    total_fee_orders: float = total_fee_buy + total_fee_sell
+    avg_fee_orders: float = total_fee_orders / total_orders
+
+    percentage_fee_of_net_worth: float = (total_fee_orders / (bt_df["liquidity"].iloc[-1] * balance))
+    percentage_fee_of_profit: float = 0.0
+    if total_orders > 0:
+        percentage_fee_of_profit: float = (total_fee_orders / ((bt_df["liquidity"].iloc[-1] - bt_df["liquidity"].iloc[0]) * balance))
+
+    print(f"Total buys: {total_buys:.3f}, "
+          f"Total sells: {total_sells:.3f}, "
+          f"Total orders: {total_orders:.3f}")
+    print(f"Total fee buy: {total_fee_buy:.3f}, "
+          f"Total fee sell: {total_fee_sell:.3f}, "
+          f"Total fee orders: {total_fee_orders:.3f}")
+    print(f"Average fee per buy: {avg_fee_per_buy:.3f}, "
+          f"Average fee per sell: {avg_fee_per_sell:.3f}, "
+          f"Average fee per order: {avg_fee_orders:.3f}")
+    print(f"Percentage fee of net worth: {percentage_fee_of_net_worth:.3%}, "
+          f"Percentage fee of profit: {percentage_fee_of_profit:.3%}")
+    print(f"Profit History: {his_df}")
+
+
+    plot_data(
+        plot_title=target_filename,
+        his_df=his_df,
+        bt_df=bt_df,
+        sell_limit=sell_limit,
+        buy_limit=buy_limit,
+        display_volume=display_volume,
+        plot_liquidity=plot_liquidity,
+        plot_orders=plot_orders,
+        plot_limits=plot_limits,
+        plot_conf=plot_conf
+    )

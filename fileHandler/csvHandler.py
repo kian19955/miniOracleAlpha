@@ -3,7 +3,7 @@ import csv
 from datetime import datetime
 
 
-from navidIsGod.constants import bt_data_dir_path
+from constants import bt_data_dir_path
 
 def write_to_csv(
         headers: list[str],

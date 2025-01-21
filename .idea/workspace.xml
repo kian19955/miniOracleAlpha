@@ -5,37 +5,46 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(core): initialize project structure&#10;&#10;• Create essential files and directories&#10;• Add placeholder class and basic config&#10;• Update project sdk and module settings">
-      <change afterPath="$PROJECT_DIR$/navidIsGod/api/binanceApi.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/navidIsGod/api/utils/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/navidIsGod/api/utils/handleStatus.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/navidIsGod/constants.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/indicators/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/patterns/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/plugins/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tradingComponents/strategies/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/NobitexApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/api/NobitexApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/api/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtest/backtestMain.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtest/backtestMain.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtest/dataAnalyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtest/dataAnalyse.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtest/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtest/plotter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indicators/bollingerBands.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/indicators/bollingerBands.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/indicators/rsi.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/livetrade/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/livetrade/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/livetrade/orders.py" beforeDir="false" afterPath="$PROJECT_DIR$/livetrade/orders.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navidIsGod/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/backtester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navidIsGod/config.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/navidIsGod/dataAnalysis/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/dataAnalysis/analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navidIsGod/fileHandler/csvHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/fileHandler/csvHandler.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navidIsGod/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/navidIsGod/marketHisData/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/api/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/patterns/S_R_lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/patterns/S_R_lines.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plugins.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/plugins/plugins.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/strategies/BB_RSI_Lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/BB_RSI_Lines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TK.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/TK.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtest/backtestMain.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/backtest/backtestMain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtest/dataAnalyse.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/backtest/dataAnalyse.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtest/historical_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/backtest/historical_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtest/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/backtest/plotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livetrade/SEPWallet.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/livetrade/SEPWallet.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livetrade/SEPwallet.csv" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/livetrade/SEPwallet.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livetrade/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/livetrade/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livetrade/orders.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/livetrade/orders.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livetrade/orders_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/livetrade/orders_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/livetrade/wallet_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/livetrade/wallet_data.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/api/NobitexApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/NobitexApi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/api/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/plotter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/api/binanceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceApi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/api/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/api/utils/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/utils/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/api/utils/handleStatus.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/utils/handleStatus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/dataAnalysis/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/dataAnalysis/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/fileHandler/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileHandler/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/fileHandler/csvHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/fileHandler/csvHandler.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/indicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/indicators/bollingerBands.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/bollingerBands.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/patterns/S_R_lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/patterns/S_R_lines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/patterns/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/placeholder.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/placeholder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/plugins/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/patterns/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/plugins/plugins.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/plugins/plugins.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/BB_RSI_Lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/strategies/BB_RSI_Lines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/plugins/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,12 +73,12 @@
     &quot;assignee&quot;: &quot;kian19955&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/kian19955/miniOracleAlpha.git&quot;,
-    &quot;accountId&quot;: &quot;96e72a4d-0d29-4920-942f-c0faf49d958e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kian19955/miniOracleAlpha.git",
+    "accountId": "ad06c969-f73d-4fef-b6f5-d7139e6a852d"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -94,7 +103,7 @@
     "Python.csvHandler.executor": "Run",
     "Python.csvWriter.executor": "Run",
     "Python.dataAnalyse.executor": "Run",
-    "Python.main.executor": "Run",
+    "Python.main.executor": "Debug",
     "Python.nd.executor": "Run",
     "Python.orders.executor": "Run",
     "Python.plotter.executor": "Run",
@@ -113,11 +122,11 @@
       <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\navid_yaghmaei\PycharmProjects\miniOracleAlpha" />
+      <recent name="C:\Users\navid_yaghmaei\PycharmProjects\miniOracleAlpha\kianIsGod" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\tradingComponents" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\plugins" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\data\backtestData" />
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\data" />
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -321,32 +330,32 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/livetrade/orders.py</url>
+          <url>file://$PROJECT_DIR$/kianIsGod/livetrade/orders.py</url>
           <line>11</line>
           <option name="timeStamp" value="22" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/livetrade/orders.py</url>
+          <url>file://$PROJECT_DIR$/kianIsGod/livetrade/orders.py</url>
           <line>14</line>
           <option name="timeStamp" value="23" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/livetrade/orders.py</url>
+          <url>file://$PROJECT_DIR$/kianIsGod/livetrade/orders.py</url>
           <line>33</line>
           <option name="timeStamp" value="24" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/livetrade/main.py</url>
+          <url>file://$PROJECT_DIR$/kianIsGod/livetrade/main.py</url>
           <line>48</line>
           <option name="timeStamp" value="34" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/BB_RSI_Lines.py</url>
+          <url>file://$PROJECT_DIR$/tradingComponents/strategies/BB_RSI_Lines.py</url>
           <line>29</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/navidIsGod/tradingComponents/strategies/BB_RSI_Lines.py</url>
+          <url>file://$PROJECT_DIR$/tradingComponents/strategies/BB_RSI_Lines.py</url>
           <line>55</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
@@ -354,6 +363,31 @@
           <url>file://$PROJECT_DIR$/dataAnalyse.py</url>
           <line>11</line>
           <option name="timeStamp" value="44" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
+          <line>51</line>
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
+          <line>47</line>
+          <option name="timeStamp" value="106" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
+          <line>46</line>
+          <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
+          <line>43</line>
+          <option name="timeStamp" value="108" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

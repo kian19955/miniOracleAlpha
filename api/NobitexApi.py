@@ -2,9 +2,9 @@ import requests
 from datetime import datetime, timedelta
 import pandas as pd
 
-from TK import Token
-from navidIsGod.api.utils import write_to_csv
-from navidIsGod.constants import rel_market_his_dir_path
+from kianIsGod.TK import Token
+from api.utils import write_to_csv
+from constants import rel_market_his_dir_path
 
 API_TOKEN = Token  # توکن خود را جایگزین کنید
 BASE_URL = "https://api.nobitex.ir"

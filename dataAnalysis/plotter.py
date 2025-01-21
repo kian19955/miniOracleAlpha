@@ -1,13 +1,8 @@
-from enum import Enum
-from typing import Optional
-
-import mplfinance as mpf
-import pandas as pd
+from pandas import DataFrame, Series
 from numpy import nan, where
-from pandas import DataFrame, read_csv, Series
+import mplfinance as mpf
 
-from navidIsGod.constants import market_his_dir_path, bt_data_dir_path
-
+from enum import Enum
 
 class CandleTypes(Enum):
     CANDLE = "candle"
@@ -16,38 +11,24 @@ class CandleTypes(Enum):
     RENKO = "renko"
     PNF = "pnf"
 
-
-def analyze(
-        target_filename: str,
-        his_df: Optional[DataFrame] = None,
-        bt_df: Optional[DataFrame] = None,
-        sell_limit: Optional[float] = None,
-        buy_limit: Optional[float] = None,
-        display_volume: bool = True,
-        plot_liquidity: bool = True,
-        plot_orders: bool = True,
-        plot_limits: bool = True,
-        plot_conf: bool = True
+def plot_data(
+        plot_title: str,
+        his_df: DataFrame,
+        bt_df: DataFrame,
+        sell_limit: float,
+        buy_limit: float,
+        display_volume: bool,
+        plot_liquidity: bool,
+        plot_orders: bool,
+        plot_limits: bool,
+        plot_conf: bool
 ):
-    # Load data
-    if his_df is None:
-        his_df: DataFrame = read_csv(f"{market_his_dir_path}/{target_filename}")
-        his_df.set_index("timestamp", inplace=True)
-        his_df.index = pd.to_datetime(his_df.index)
-
-    if bt_df is None:
-        bt_df: DataFrame = read_csv(f"{bt_data_dir_path}/{target_filename}")
-        bt_df.set_index("timestamp", inplace=True)
-        bt_df.index = pd.to_datetime(bt_df.index)
-
-
-
-    ## Prepare data for plotting
     # Buy and sell orders
     buy_orders_series: Series = Series(
         where(bt_df['type'] == 'buy', bt_df['price'], nan),
         index=his_df.index
     )
+
     sell_orders_series: Series = Series(
         where(bt_df['type'] == 'sell', bt_df['price'], nan),
         index=his_df.index
@@ -59,8 +40,14 @@ def analyze(
         add_plots.append(mpf.make_addplot(bt_df['liquidity'], type="line", color="aqua", label="Liquidity"))
 
     if plot_orders:
-        add_plots.append(mpf.make_addplot(buy_orders_series, type="scatter", marker="^", color="green", markersize=100, label="Buy"))
-        add_plots.append(mpf.make_addplot(sell_orders_series, type="scatter", marker="v", color="red", markersize=100, label="Sell"))
+        if not buy_orders_series.isna().all():
+            add_plots.append(
+                mpf.make_addplot(buy_orders_series, type="scatter", marker="^", color="green", markersize=100,
+                                 label="Buy"))
+        if not sell_orders_series.isna().all():
+            add_plots.append(
+                mpf.make_addplot(sell_orders_series, type="scatter", marker="v", color="red", markersize=100,
+                                 label="Sell"))
 
     # Limits
     if plot_limits:
@@ -79,7 +66,7 @@ def analyze(
         his_df,
         type=CandleTypes.CANDLE.value,
         style="binance",
-        title=target_filename,
+        title=plot_title,
         volume=display_volume,
         show_nontrading=True,
         addplot=add_plots

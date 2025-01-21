@@ -6,7 +6,7 @@ from datetime import datetime, timezone
 from pandas import DataFrame, to_datetime, concat
 from dateutil.relativedelta import relativedelta
 
-from navidIsGod.api.utils import handle_binance_status
+from api.utils import handle_binance_status
 
 url_fetch_ticker_price: str = "https://api.binance.com/api/v3/ticker/price"
 url_fetch_klines: str = "https://api.binance.com/api/v3/klines"

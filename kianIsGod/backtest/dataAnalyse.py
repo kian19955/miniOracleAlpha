@@ -1,7 +1,7 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 
-from navidIsGod.tradingComponents.indicators.bollingerBands import bollinger_bands
+from tradingComponents.indicators.bollingerBands import bollinger_bands
 
 csv_file = "plot_data.csv"
 data = pd.read_csv(csv_file)
