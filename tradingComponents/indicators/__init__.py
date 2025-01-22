@@ -1,1 +1,2 @@
 from .relativeStrengthIndex import RelativeStrengthIndex
+from .stochastic import Stochastic

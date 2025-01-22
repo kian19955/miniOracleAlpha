@@ -69,8 +69,9 @@ def analyze(
     avg_fee_orders: float = total_fee_orders / total_orders if total_orders > 0 else nan
 
     total_profit: float = bt_df.iloc[-1]["liquidity"] - bt_df.iloc[0]["liquidity"]
+    avg_profit: float = total_profit / total_orders
 
-    std_liquidity: float = std(list(bt_df.liquidity))
+    std_profit: float = std(list(profit_his.values()))
 
     percentage_fee_of_net_worth: float = (total_fee_orders / (bt_df["liquidity"].iloc[-1] * balance))
     percentage_fee_of_profit: float = 0.0
@@ -92,9 +93,9 @@ def analyze(
     print(f"Profit History")
     for time, profit in profit_his.items():
         print(f"{time}: {profit:.3f}")
-    print(f"Total Profit: {total_profit:.3%}")
-    print(f"Standard Deviation of Liquidity: {std_liquidity:.3%}")
-    print(f"Sharpe Ratio: {total_profit/std_liquidity:.3f}")
+    print(f"Total Profit: {total_profit:.3%}, Average Profit per order: {avg_profit:.3%}")
+    print(f"Standard Deviation of Profit: {std_profit:.3%}")
+    print(f"Sharpe Ratio: {avg_profit/std_profit:.3f}")
 
     plot_data(
         plot_title=target_filename,

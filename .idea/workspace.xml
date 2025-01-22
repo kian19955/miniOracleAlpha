@@ -4,13 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="Updated analysis.py">
-      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="Added Std, Sharpe Ratio, fixed graph issues with liquidity and rpcie, added sold and bought lines">
+      <change afterPath="$PROJECT_DIR$/tradingComponents/indicators/crossoverUtil.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tradingComponents/indicators/stochastic.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataAnalysis/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/analysis.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/plotter.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/plotter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,6 +75,7 @@
     "Python.plotter.executor": "Run",
     "Python.s2.executor": "Run",
     "Python.scratch.executor": "Run",
+    "Python.stochastic.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "com.codeium.enabled": "true",
@@ -255,7 +256,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737464614972</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Added Std, Sharpe Ratio, fixed graph issues with liquidity and rpcie, added sold and bought lines">
+      <option name="closed" value="true" />
+      <created>1737538180168</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1737538180168</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -299,7 +308,8 @@
     <MESSAGE value="feat(core): initialize project structure&#10;&#10;• create essential files and directories&#10;• add placeholder class and basic config&#10;• update project sdk and module settings" />
     <MESSAGE value="feat(core): initialize project structure&#10;&#10;• Create essential files and directories&#10;• Add placeholder class and basic config&#10;• Update project sdk and module settings" />
     <MESSAGE value="Updated analysis.py" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated analysis.py" />
+    <MESSAGE value="Added Std, Sharpe Ratio, fixed graph issues with liquidity and rpcie, added sold and bought lines" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Std, Sharpe Ratio, fixed graph issues with liquidity and rpcie, added sold and bought lines" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

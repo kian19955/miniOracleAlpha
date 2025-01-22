@@ -1,5 +1,5 @@
 from backtester import backtest
-from tradingComponents.indicators import RelativeStrengthIndex
+from tradingComponents.indicators import RelativeStrengthIndex, Stochastic
 from dataAnalysis import analyze
 
 headers = [
@@ -10,22 +10,33 @@ headers = [
     "confidence"
 ]
 
-ticker = "ETHUSDT"
-days = 31
+ticker = "DOGEUSDT"
+days = 14
 interval = "1h"
-sell_limit = -0.55
-buy_limit = 0.55
+sell_limit = -0.9
+buy_limit = 0.9
 maker_fee = 0.00075
 taker_fee = 0.00075
 
 trade_long = True
-trade_short = False
+trade_short = True
 
-tc = RelativeStrengthIndex(
+"""tc = RelativeStrengthIndex(
     period=14,
     lower_band=30,
     upper_band=80,
     rsi_as_signal=False
+)"""
+
+tc = Stochastic(
+    lookback_period=14,
+    smoothing_period=3,
+    crossover_return_strength=False,
+    crossover_max_gradient_degree=1,
+    crossover_gradient_signal_weight=0,
+    crossover_weight_impact=0,
+    stochastic_weight=0,
+    crossover_weight=1,
 )
 
 def main():
@@ -54,9 +65,9 @@ def main():
         display_volume=True,
         plot_liquidity=True,
         plot_orders=True,
-        plot_limits=True,
-        plot_conf=True,
-        plot_order_price_lines=True,
+        plot_limits=False,
+        plot_conf=False,
+        plot_order_price_lines=False,
         trade_long=trade_long,
         trade_short=trade_short
     )
