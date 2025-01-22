@@ -4,12 +4,14 @@ import mplfinance as mpf
 
 from enum import Enum
 
+
 class CandleTypes(Enum):
     CANDLE = "candle"
     LINE = "line"
     OHLCV = "ohlc"
     RENKO = "renko"
     PNF = "pnf"
+
 
 def plot_data(
         plot_title: str,
@@ -21,7 +23,8 @@ def plot_data(
         plot_liquidity: bool,
         plot_orders: bool,
         plot_limits: bool,
-        plot_conf: bool
+        plot_conf: bool,
+        plot_order_price_lines: bool
 ):
     # Buy and sell orders
     buy_orders_series: Series = Series(
@@ -61,6 +64,21 @@ def plot_data(
     # Confidence
     if plot_conf:
         add_plots.append(mpf.make_addplot(bt_df['confidence'], type="line", color="blue", label="Confidence"))
+
+    if plot_order_price_lines:
+        for i, cycle in bt_df.iterrows():
+            if cycle.iloc[1] == "buy":
+                line_clr = "#96f49d"
+            elif cycle.iloc[1] == "sell":
+                line_clr = "#ffc063"
+            else:
+                continue
+
+            price_series: Series = Series(
+                cycle.iloc[2], index=his_df.index
+            )
+            add_plots.append(mpf.make_addplot(price_series, type="line", color=line_clr))
+
 
     mpf.plot(
         his_df,

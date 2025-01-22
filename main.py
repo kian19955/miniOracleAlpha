@@ -11,15 +11,15 @@ headers = [
 ]
 
 ticker = "ETHUSDT"
-days = 160
-interval = "1d"
+days = 31
+interval = "1h"
 sell_limit = -0.55
 buy_limit = 0.55
 maker_fee = 0.00075
 taker_fee = 0.00075
 
 trade_long = True
-trade_short = True
+trade_short = False
 
 tc = RelativeStrengthIndex(
     period=14,
@@ -40,7 +40,8 @@ def main():
         taker_fee=taker_fee,
         trade_long=trade_long,
         trade_short=trade_short,
-        leverage=2
+        leverage=2,
+        use_csv=True
     )
 
     # Plot X and Y are placeholders for defining what to plot
@@ -55,6 +56,7 @@ def main():
         plot_orders=True,
         plot_limits=True,
         plot_conf=True,
+        plot_order_price_lines=True,
         trade_long=trade_long,
         trade_short=trade_short
     )

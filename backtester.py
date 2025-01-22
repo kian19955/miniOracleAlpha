@@ -1,9 +1,9 @@
 from collections.abc import Callable
-from time import perf_counter_ns
 from typing import Optional
 
-from pandas import DataFrame, to_datetime
+from pandas import DataFrame, to_datetime, read_csv
 from numpy import nan
+import os
 
 from api.binanceApi import fetch_klines
 from constants import market_his_dir_path
@@ -20,14 +20,26 @@ def backtest(
         buy_limit: float = 0.75,
         trade_long=True,
         trade_short=True,
-        leverage: int = 1
+        leverage: int = 1,
+        use_csv: bool = False
 ):
-    df: DataFrame = fetch_klines(ticker, interval, days=days)
-    df.to_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
+    file_path = f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv"
+    if not os.path.isfile(file_path):
+        print(f"{file_path} does not exist. Fetching data from Binance API...")
+        use_csv = False
+
+    if use_csv:
+        df: DataFrame = read_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
+        df['timestamp'] = to_datetime(df['timestamp'])
+        df.set_index('timestamp', inplace=True)
+
+    else:
+        df: DataFrame = fetch_klines(ticker, interval, days=days)
+        df.to_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
+
     base_liquidity: float = 100
     balance: float = 100
 
-    assets: float = 0.0
     maker_fee_cost: float = 0.0
     taker_fee_cost: float = 0.0
 
@@ -38,7 +50,7 @@ def backtest(
     position: Optional[str] = None
 
     def get_liquidity():
-        percentage_change: float = ((price / last_traded_price) - 1) * leverage \
+        percentage_change: float = ((df.iloc[i]["Close"] / last_traded_price) - 1) * leverage \
             if last_traded_price is not None else 0
 
         if position == "long":
@@ -134,7 +146,7 @@ def backtest(
         bt_data.append(cycle_info)
 
         # Print status
-        print(f"{(i + 1) / len(df):.2%} || CONF: {confidence:.2%} || BAL: {balance:.2f} || ASSET: {assets:.2f}")
+        print(f"{(i + 1) / len(df):.2%} || CONF: {confidence:.2%} || BAL: {balance:.2f}")
 
     # Convert bt_data list to DataFrame
     bt_df = DataFrame(bt_data)
