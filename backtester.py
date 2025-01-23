@@ -23,7 +23,7 @@ def backtest(
         leverage: int = 1,
         use_csv: bool = False
 ):
-    file_path = f"{bt_data_dir_path}/{ticker}_{days}_{interval}.csv"
+    file_path = f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv"
     if not os.path.isfile(file_path):
         print(f"{file_path} does not exist. Fetching data from Binance API...")
         use_csv = False
@@ -146,7 +146,7 @@ def backtest(
         bt_data.append(cycle_info)
 
         # Print status
-        print(f"{(i + 1) / len(df):.2%} || CONF: {confidence:.2%} || BAL: {balance:.2f}")
+        # print(f"{(i + 1) / len(df):.2%} || CONF: {confidence:.2%} || BAL: {balance:.2f}")
 
     # Convert bt_data list to DataFrame
     bt_df = DataFrame(bt_data)
@@ -156,6 +156,6 @@ def backtest(
     bt_df.set_index('timestamp', inplace=True)
 
     # Save to CSV
-    bt_df.to_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}_orders.csv")
+    bt_df.to_csv(f"{bt_data_dir_path}/{ticker}_{days}_{interval}_orders.csv")
 
     return df, bt_df

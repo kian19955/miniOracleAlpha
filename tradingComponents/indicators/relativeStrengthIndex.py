@@ -35,7 +35,6 @@ class RelativeStrengthIndex():
         self.lower_band = lower_band
         self.upper_band = upper_band
         self.rsi_as_signal = rsi_as_signal
-        self.conditional_exponential = conditional_exponential
 
     def evaluate(self, df: DataFrame) -> float:
         """
@@ -56,14 +55,6 @@ class RelativeStrengthIndex():
         rsi_series: Series = rsi(close=self_df.Close, length=self.period)
 
         rsi_value: float = rsi_series.iloc[-1]
-
-        if self.conditional_exponential:
-            if rsi_value < self.lower_band:
-                return 1
-            elif rsi_value > self.upper_band:
-                return -1
-            else:
-                return ((50 - rsi_value) * 2) / 100
 
         if self.rsi_as_signal:
             return ((50 - rsi_value) * 2) / 100

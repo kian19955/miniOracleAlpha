@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="fixed sharpe ratio, added stochastic.py indicator">
-      <change afterPath="$PROJECT_DIR$/tradingComponents/indicators/kiansVision.py" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)">
+      <change afterPath="$PROJECT_DIR$/fitter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataAnalysis/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,6 +68,7 @@
     "Python.csvHandler.executor": "Run",
     "Python.csvWriter.executor": "Run",
     "Python.dataAnalyse.executor": "Run",
+    "Python.fitter.executor": "Run",
     "Python.kiansVision.executor": "Run",
     "Python.main.executor": "Run",
     "Python.nd.executor": "Run",
@@ -271,7 +273,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737554819788</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)">
+      <option name="closed" value="true" />
+      <created>1737632209408</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1737632209408</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -317,7 +327,8 @@
     <MESSAGE value="Updated analysis.py" />
     <MESSAGE value="Added Std, Sharpe Ratio, fixed graph issues with liquidity and rpcie, added sold and bought lines" />
     <MESSAGE value="fixed sharpe ratio, added stochastic.py indicator" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed sharpe ratio, added stochastic.py indicator" />
+    <MESSAGE value="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

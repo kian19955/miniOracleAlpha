@@ -11,7 +11,7 @@ headers = [
 ]
 
 ticker = "DOGEUSDT"
-days = 300
+days = 7
 interval = "1h"
 sell_limit = -0.9
 buy_limit = 0.9
@@ -21,13 +21,13 @@ taker_fee = 0.00075
 trade_long = True
 trade_short = True
 
-"""tc = RelativeStrengthIndex(
-    period=14,
-    lower_band=30,
-    upper_band=80,
+tc = RelativeStrengthIndex(
+    period=20,
+    lower_band=27,
+    upper_band=74,
     rsi_as_signal=False
-)"""
-
+)
+"""
 tc = Stochastic(
     lookback_period=14,
     smoothing_period=3,
@@ -38,7 +38,7 @@ tc = Stochastic(
     stochastic_weight=0,
     crossover_weight=1,
 )
-
+"""
 def main():
     his_df, bt_df = backtest(
         tc.evaluate,
@@ -51,7 +51,7 @@ def main():
         taker_fee=taker_fee,
         trade_long=trade_long,
         trade_short=trade_short,
-        leverage=2,
+        leverage=1,
         use_csv=True
     )
 
@@ -65,9 +65,9 @@ def main():
         display_volume=True,
         plot_liquidity=True,
         plot_orders=True,
-        plot_limits=False,
-        plot_conf=False,
-        plot_order_price_lines=False,
+        plot_limits=True,
+        plot_conf=True,
+        plot_order_price_lines=True,
         trade_long=trade_long,
         trade_short=trade_short
     )
