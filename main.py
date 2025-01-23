@@ -11,7 +11,7 @@ headers = [
 ]
 
 ticker = "DOGEUSDT"
-days = 14
+days = 300
 interval = "1h"
 sell_limit = -0.9
 buy_limit = 0.9

@@ -6,7 +6,7 @@ from numpy import nan
 import os
 
 from api.binanceApi import fetch_klines
-from constants import market_his_dir_path
+from constants import bt_data_dir_path, market_his_dir_path
 
 
 def backtest(
@@ -23,7 +23,7 @@ def backtest(
         leverage: int = 1,
         use_csv: bool = False
 ):
-    file_path = f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv"
+    file_path = f"{bt_data_dir_path}/{ticker}_{days}_{interval}.csv"
     if not os.path.isfile(file_path):
         print(f"{file_path} does not exist. Fetching data from Binance API...")
         use_csv = False
