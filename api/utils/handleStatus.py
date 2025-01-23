@@ -1,3 +1,5 @@
+import time
+
 from requests import RequestException
 from requests.exceptions import HTTPError
 
@@ -21,6 +23,7 @@ def handle_binance_status(status_code: int, data: dict) -> None:
         case 429:
             raise RuntimeError("Too many requests, rate limit exceeded (429 Too Many Requests). "
                                "Code {}: '{}'".format(getattr(data, "code", None), getattr(data, "msg", None)))
+
         case _:
             if status_code <= 500:
                 raise RequestException("Internal Server Error (5xx). "

@@ -19,7 +19,7 @@ class KiansVision:
             n_lowest_lows: int = 3,
             percentage_of_highest_highs: Optional[float] = None,
             percentage_of_lowest_lows: Optional[float] = None,
-            filter_method: FilterMethod = FilterMethod.ITERATIVE_MEDIAN,
+            filter_method: Optional[FilterMethod] = FilterMethod.ITERATIVE_MEDIAN,
             filter_setting: float = 2.5,
             clustering_eps: Optional[float] = None,
             filter_iterations: Optional[int] = 2
@@ -50,7 +50,7 @@ class KiansVision:
         self.filter_method = filter_method
         self.filter_setting = filter_setting
         self.clustering_eps = clustering_eps
-        self.filter_iterations = min(filter_iterations, 100)
+        self.filter_iterations = min(filter_iterations, 100) if filter_iterations is not None else 100
 
     def evaluate(self, df: DataFrame):
         valid_df_range: int = self.lookback_period + 1
@@ -64,19 +64,23 @@ class KiansVision:
 
 
     def filter(self, df: DataFrame) -> DataFrame:
-        filter_methode: Callable[[DataFrame], DataFrame]
+        if self.filter_method is None:
+            return df
+
+        filter_method: Callable[[DataFrame], DataFrame]
 
         match self.filter_method:
             case FilterMethod.ITERATIVE_MEDIAN:
-                filter_methode = self.iterative_median_filter
+                filter_method = self.iterative_median_filter
             case FilterMethod.PERCENTILE:
-                filter_methode = self.percentile_filter
+                filter_method = self.percentile_filter
             case FilterMethod.CLUSTERING:
-                filter_methode = self.clustering_filter
+                filter_method = self.clustering_filter
 
         original_df_length: int = len(df)
+
         for _ in range(self.filter_iterations):
-            df = filter_methode(df)
+            df = filter_method(df)
 
             if len(df) == original_df_length:
                 break
@@ -109,32 +113,51 @@ class KiansVision:
 
 if __name__ == '__main__':
     from api.binanceApi import fetch_klines
-    df = fetch_klines("BTCUSDT", "1m", minutes=1000)
+    df = fetch_klines("BTCUSDT", "1s", minutes=180)
     import matplotlib.pyplot as plt
+    from pandas import cut
+    from numpy import arange
 
-    def plot_price_occurrences(df: DataFrame, title: str):
-        # Count occurrences of each price level
-        price_occurrences = df["Close"].value_counts().sort_index()
+
+    def plot_price_occurrences(df: DataFrame, title: str, bin_size: float):
+        """
+        Plots price occurrences grouped by bins of specified size.
+
+        :param df: The DataFrame containing price data.
+        :param title: The title of the plot.
+        :param bin_size: The size of each bin for grouping price occurrences.
+        """
+        # Define the bins and group prices into these bins
+        price_bins = cut(df["Close"], bins=arange(df["Close"].min(), df["Close"].max() + bin_size, bin_size))
+
+        # Count occurrences for each bin
+        price_occurrences = price_bins.value_counts().sort_index()
+
+        # Extract bin labels for plotting
+        bin_labels = price_occurrences.index.astype(str)
 
         # Plot bar graph
         plt.figure(figsize=(12, 6))
-        plt.bar(price_occurrences.index, price_occurrences.values, width=0.1, color='blue')
-        plt.xlabel("Price")
+        plt.bar(bin_labels, price_occurrences.values, width=1, color='blue')
+        plt.xlabel("Price Range")
         plt.ylabel("Occurrences")
         plt.title(title)
+        plt.xticks(rotation=45, ha="right")
         plt.grid(axis='y', linestyle='--', alpha=0.7)
+        plt.tight_layout()
         plt.show()
 
 
-    plot_price_occurrences(df, "Price Occurrences")
+    plot_price_occurrences(df, "Price Occurrences", 5)
 
     kv = KiansVision(
         lookback_period=1000,
-        filter_method=FilterMethod.CLUSTERING,
-        filter_setting=3,
+        filter_method=None,
+        filter_iterations=2,
+        filter_setting=0.95,
         clustering_eps=0.1
     )
 
     df = kv.evaluate(df)
 
-    plot_price_occurrences(df, "Filtered Price Occurrences")
+    plot_price_occurrences(df, "Filtered Price Occurrences", 20)
