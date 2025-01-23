@@ -113,7 +113,7 @@ class KiansVision:
 
 if __name__ == '__main__':
     from api.binanceApi import fetch_klines
-    df = fetch_klines("BTCUSDT", "1s", minutes=180)
+    df = fetch_klines("DOGEUSDT", "1s", minutes=15)
     import matplotlib.pyplot as plt
     from pandas import cut
     from numpy import arange
@@ -148,7 +148,7 @@ if __name__ == '__main__':
         plt.show()
 
 
-    plot_price_occurrences(df, "Price Occurrences", 5)
+    plot_price_occurrences(df, "Price Occurrences", 0.00007)
 
     kv = KiansVision(
         lookback_period=1000,
@@ -160,4 +160,4 @@ if __name__ == '__main__':
 
     df = kv.evaluate(df)
 
-    plot_price_occurrences(df, "Filtered Price Occurrences", 20)
+    plot_price_occurrences(df, "Filtered Price Occurrences", 0.5)

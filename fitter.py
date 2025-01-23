@@ -42,19 +42,17 @@ def evaluate(individual):
     # Initialize RSI strategy
     tc = RelativeStrengthIndex(**params)
 
-    try:
-        # Backtest
-        his_df, bt_df = backtest(
-            eval_func=tc.evaluate,
-            ticker="DOGEUSDT",
-            days=7,
-            interval="1h",
-            trade_long=True,
-            trade_short=True,
-            use_csv=True
-        )
-    except Exception:
-        return (-100,)
+    # Backtest
+    his_df, bt_df = backtest(
+        eval_func=tc.evaluate,
+        ticker="DOGEUSDT",
+        days=0.03333333333333333333,
+        interval="1s",
+        trade_long=True,
+        trade_short=True,
+        use_csv=True
+    )
+
 
     # Analyze results
     analysis = analyze(
@@ -63,7 +61,6 @@ def evaluate(individual):
         trade_long=True,
         trade_short=True,
         target_filename="",
-        plot=False,
         print_info=False
     )
     sharpe_ratio = analysis['sharpe_ratio']

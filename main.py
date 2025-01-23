@@ -1,4 +1,5 @@
 from backtester import backtest
+from dataAnalysis.plotter import plot_data
 from tradingComponents.indicators import RelativeStrengthIndex, Stochastic
 from dataAnalysis import analyze
 
@@ -11,8 +12,8 @@ headers = [
 ]
 
 ticker = "DOGEUSDT"
-days = 7
-interval = "1h"
+days = 0.03333333333333333333
+interval = "1s"
 sell_limit = -0.9
 buy_limit = 0.9
 maker_fee = 0.00075
@@ -22,9 +23,9 @@ trade_long = True
 trade_short = True
 
 tc = RelativeStrengthIndex(
-    period=20,
-    lower_band=27,
-    upper_band=74,
+    period=10,
+    lower_band=12.759281324606349,
+    upper_band=64.50757748124984,
     rsi_as_signal=False
 )
 """
@@ -57,7 +58,15 @@ def main():
 
     # Plot X and Y are placeholders for defining what to plot
     analyze(
-        target_filename=ticker + "_" + str(days) + "_" + interval + ".csv",
+        target_filename = ticker + "_" + str(days) + "_" + interval + ".csv",
+        his_df=his_df,
+        bt_df=bt_df,
+        trade_long=trade_long,
+        trade_short=trade_short
+    )
+
+    plot_data(
+        plot_title=ticker + "_" + str(days) + "_" + interval + ".csv",
         his_df=his_df,
         bt_df=bt_df,
         sell_limit=sell_limit,
@@ -67,9 +76,7 @@ def main():
         plot_orders=True,
         plot_limits=True,
         plot_conf=True,
-        plot_order_price_lines=True,
-        trade_long=trade_long,
-        trade_short=trade_short
+        plot_order_price_lines=False
     )
 
 if __name__ == "__main__":

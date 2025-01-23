@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)">
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance.">
+      <change afterPath="$PROJECT_DIR$/.idea/git_toolbox_prj.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/utils/handleStatus.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/utils/handleStatus.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataAnalysis/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fitter.py" beforeDir="false" afterPath="$PROJECT_DIR$/fitter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/kiansVision.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/kiansVision.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,12 +39,12 @@
     &quot;assignee&quot;: &quot;kian19955&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/kian19955/miniOracleAlpha.git&quot;,
-    &quot;accountId&quot;: &quot;ad06c969-f73d-4fef-b6f5-d7139e6a852d&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kian19955/miniOracleAlpha.git",
+    "accountId": "96e72a4d-0d29-4920-942f-c0faf49d958e"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -77,6 +80,7 @@
     &quot;Python.stochastic.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/kians/PycharmProjects/miniOracleV1.0&quot;,
@@ -279,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1737632209408</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance.">
+      <option name="closed" value="true" />
+      <created>1737646433044</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1737646433044</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -326,7 +338,8 @@
     <MESSAGE value="Added Std, Sharpe Ratio, fixed graph issues with liquidity and rpcie, added sold and bought lines" />
     <MESSAGE value="fixed sharpe ratio, added stochastic.py indicator" />
     <MESSAGE value="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)" />
-    <option name="LAST_COMMIT_MESSAGE" value="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)" />
+    <MESSAGE value="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

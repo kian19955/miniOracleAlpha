@@ -16,17 +16,8 @@ def analyze(
         target_filename: str,
         his_df: Optional[DataFrame] = None,
         bt_df: Optional[DataFrame] = None,
-        sell_limit: Optional[float] = None,
-        buy_limit: Optional[float] = None,
-        display_volume: bool = True,
-        plot_liquidity: bool = True,
-        plot_orders: bool = True,
-        plot_limits: bool = True,
-        plot_conf: bool = True,
-        plot_order_price_lines: bool = True,
         trade_long: bool = True,
         trade_short: bool = True,
-        plot: bool = True,
         print_info: bool = True
 ) -> dict[str, float]:
     # Load data
@@ -75,7 +66,7 @@ def analyze(
 
     std_profit: float = std(list(profit_his.values()))
 
-    sharpe_ratio = avg_profit / std_profit if std_profit > 0 else nan
+    sharpe_ratio = avg_profit / std_profit if std_profit > 0 else -100
 
     percentage_fee_of_net_worth: float = (total_fee_orders / (bt_df["liquidity"].iloc[-1] * balance))
     percentage_fee_of_profit: float = 0.0
@@ -101,21 +92,6 @@ def analyze(
         print(f"Total Profit: {total_profit:.3%}, Average Profit per order: {avg_profit:.3%}")
         print(f"Standard Deviation of Profit: {std_profit:.3%}")
         print(f"Sharpe Ratio: {sharpe_ratio:.3f}")
-
-    if plot:
-        plot_data(
-            plot_title=target_filename,
-            his_df=his_df,
-            bt_df=bt_df,
-            sell_limit=sell_limit,
-            buy_limit=buy_limit,
-            display_volume=display_volume,
-            plot_liquidity=plot_liquidity,
-            plot_orders=plot_orders,
-            plot_limits=plot_limits,
-            plot_conf=plot_conf,
-            plot_order_price_lines=plot_order_price_lines
-        )
 
     return {
         "total_buys": total_buys,
