@@ -3,29 +3,19 @@ from typing import Optional, Hashable
 import pandas as pd
 from pandas import DataFrame, read_csv
 from numpy import std, nan
-from pandas_ta import sharpe_ratio
 
-from constants import market_his_dir_path, bt_data_dir_path
-
-from .plotter import plot_data
+from constants import bt_data_dir_path
 
 balance = 100
 
 
 def analyze(
         target_filename: str,
-        his_df: Optional[DataFrame] = None,
         bt_df: Optional[DataFrame] = None,
         trade_long: bool = True,
         trade_short: bool = True,
         print_info: bool = True
 ) -> dict[str, float]:
-    # Load data
-    if his_df is None:
-        his_df: DataFrame = read_csv(f"{market_his_dir_path}/{target_filename}")
-        his_df.set_index("timestamp", inplace=True)
-        his_df.index = pd.to_datetime(his_df.index)
-
     if bt_df is None:
         bt_df: DataFrame = read_csv(f"{bt_data_dir_path}/{target_filename}")
         bt_df.set_index("timestamp", inplace=True)
@@ -72,7 +62,7 @@ def analyze(
     percentage_fee_of_profit: float = 0.0
     if total_orders > 0:
         percentage_fee_of_profit: float = (
-                    total_fee_orders / ((bt_df["liquidity"].iloc[-1] - bt_df["liquidity"].iloc[0]) * balance))
+                total_fee_orders / ((bt_df["liquidity"].iloc[-1] - bt_df["liquidity"].iloc[0]) * balance))
 
     if print_info:
         print(f"Total buys: {total_buys:.3f}, "
