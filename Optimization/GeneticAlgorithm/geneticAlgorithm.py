@@ -34,7 +34,6 @@ class GeneticAlgorithm:
             whitelist_genes: Optional[tuple[str]] = None,
             base_params: Optional[dict[str, any]] = None,
 
-            float_blend: Optional[float] = 0.5,
             int_blend: bool = False,
 
             mate_tp: MateTypeProbabilities = MateTypeProbabilities,
@@ -71,7 +70,6 @@ class GeneticAlgorithm:
         self.key_genomes: dict = key_genomes
         self.genome_settings: dict[str, dict[type, dict[str | type, any]]] = genome_settings
 
-        self.float_blend = float_blend
         self.int_blend = int_blend
 
         self.mate_tp = mate_tp
@@ -220,7 +218,7 @@ class GeneticAlgorithm:
             if type(val1) == type(val2):
                 annotation = type(val1)
 
-            if self.float_blend is not None and annotation is float:
+            if annotation is float:
                 if roll > self.mate_tp.FLOAT:
                     continue
 
@@ -256,7 +254,12 @@ class GeneticAlgorithm:
 
                 child1[param_name], child2[param_name] = val2, val1
 
-    def mutate(self, individual, custom_params_settings: Optional[dict[str, any]] = None):
+    def mutate(
+            self,
+            individual,
+            custom_params_settings: Optional[dict[str, any]] = None,
+            return_individual: bool = False
+    ) -> dict[str, any] | None:
         param_settings: dict[str, any] = custom_params_settings if custom_params_settings is not None \
             else self.tc_params
 
@@ -309,22 +312,25 @@ class GeneticAlgorithm:
             # Handle Optional (Union with None)
             elif get_origin(annotation) is Union:
                 if roll_check(self.mutate_tp.UNION, lambda:
-                    self._mutate_union(param_name, val, annotation)
+                    self._mutate_union(param_name, annotation)
                 ):
                     continue
+                else:
+                    individual[param_name] = self.mutate(
+                        {param_name: val},
+                        {self.tc_params[param_name].name: self.tc_params[param_name]},
+                        True
+                    )[param_name]
 
             else:
                 logging.warning(f"Unsupported type detected for {param_name}: {annotation}")
                 sleep(1)
 
-    def _mutate_union(self, param_name: str, val: any, annotation: tuple[any, ...]):
-        if random.random() > self.mutate_tp.UNION_NEW_TYPE:
-            arg = random.choice(get_args(annotation))
-        else:
-            return self.mutate(
-                {param_name: val},
-                {self.tc_params[param_name].name: self.tc_params[param_name]}
-            )
+        if return_individual:
+            return individual
+
+    def _mutate_union(self, param_name: str, annotation: tuple[any, ...]):
+        arg = random.choice(get_args(annotation))
 
         if arg is type(None):
             return None
@@ -359,4 +365,72 @@ class GeneticAlgorithm:
 
 
 if __name__ == '__main__':
-    from tradingComponents.indicators import relativeStrengthIndex
+    from tradingComponents.indicators import RelativeStrengthIndex
+    from Optimization.GeneticAlgorithm.types import MateTypeProbabilities, MutateTypeProbabilities
+
+    mutate_tp = MutateTypeProbabilities(
+        FLOAT=0.1,
+        INT=0.1,
+        ENUM=0.1,
+        UNION=0.1,
+        BOOL=0.1
+    )
+    mate_tp = MateTypeProbabilities(
+        FLOAT=0.5,
+        INT=0.5,
+        ENUM=0.5,
+        UNION=0.5,
+        BOOL=0.5
+    )
+
+    g_set: dict[str, dict[type, dict[str | type, any]]] = {
+        'period': {
+            int: {
+                'start': 1,
+                'stop': 100,
+                'step': 1
+            }
+        },
+        'lower_band': {
+            float: {
+                'start': 0,
+                'stop': 40,
+                'step': 0.1
+            }
+        },
+        'upper_band': {
+            float: {
+                'start': 60,
+                'stop': 100,
+                'step': 0.1
+            }
+        }
+    }
+
+    ga = GeneticAlgorithm(
+        tc=RelativeStrengthIndex,
+        bt_settings={
+            'ticker': 'SOLUSDT',
+            'days': 14,
+            'interval': '1h',
+            'trade_long': True,
+            'trade_short': True,
+        },
+        key_genomes={
+            'rsi_as_signal': 0.5,
+        },
+        genome_settings=g_set,
+        blacklist_genes=('rsi_as_signal',),
+        whitelist_genes=None,
+        base_params=None,
+        int_blend=False,
+        mutate_tp=mutate_tp,
+        mate_tp=mate_tp,
+        mutation_strength=0.1,
+        tournament_size=2
+    )
+
+    print(ga.run(
+        generations=40,
+        population=50
+    ))
