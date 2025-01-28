@@ -1,8 +1,7 @@
-from typing import Optional, Hashable
+from typing import Optional
 
 import pandas as pd
-from pandas import DataFrame, read_csv
-from numpy import std, nan
+from numpy import std
 
 from constants import bt_data_dir_path
 
@@ -11,92 +10,117 @@ balance = 100
 
 def analyze(
         target_filename: str,
-        bt_df: Optional[DataFrame] = None,
+        bt_df: Optional[pd.DataFrame] = None,
         trade_long: bool = True,
         trade_short: bool = True,
-        print_info: bool = True
-) -> dict[str, float]:
+        print_details: bool = True
+) -> dict[str, Optional[float]]:
+    # Initialize empty DataFrame if no data provided
     if bt_df is None:
-        bt_df: DataFrame = read_csv(f"{bt_data_dir_path}/{target_filename}")
+        bt_df = pd.read_csv(f"{bt_data_dir_path}/{target_filename}")
         bt_df.set_index("timestamp", inplace=True)
         bt_df.index = pd.to_datetime(bt_df.index)
 
-    order_df: DataFrame = bt_df[bt_df["type"].notnull()]
-    buy_df: DataFrame = bt_df[bt_df["type"] == "buy"]
-    sell_df: DataFrame = bt_df[bt_df["type"] == "sell"]
+    # Safe division helper with null handling
+    def safe_divide(numerator: float, denominator: float, zero_override: bool = False) -> Optional[float]:
+        if denominator == 0:
+            return 0.0 if zero_override else None
+        return numerator / denominator
 
-    profit_his: dict[Hashable, float] = {}
-    last_liquidity: Optional[float] = None
+    # Pre-filter orders and initialize containers
+    orders = bt_df[bt_df["type"].notnull()]
+    buys = orders[orders["type"] == "buy"] if trade_long else pd.DataFrame()
+    sells = orders[orders["type"] == "sell"] if trade_short else pd.DataFrame()
 
-    for index, order in order_df.iterrows():
-        if trade_short and order.iloc[1] == "sell" or trade_long and order.iloc[1] == "buy":
-            if last_liquidity is not None:
-                profit_his[index] = (order.iloc[4] / last_liquidity) - 1
+    # Calculate profit history
+    profit_history = {}
+    last_valid_liquidity = None
+    current_position = None  # 'long', 'short', or None
 
-        if order.iloc[1] == "sell" and trade_short or order.iloc[1] == "buy" and trade_long:
-            last_liquidity = order.iloc[4]
+    for idx, row in orders.iterrows():
+        if row["type"] == "buy":
+            if current_position == "short":
+                # Close short position
+                if last_valid_liquidity is not None:
+                    profit_history[idx] = safe_divide(row["liquidity"], last_valid_liquidity) - 1
+                # Open long position
+                last_valid_liquidity = row["liquidity"] if trade_long else None
+                current_position = "long" if trade_long else None
+            elif current_position is None and trade_long:
+                # Open long position
+                last_valid_liquidity = row["liquidity"]
+                current_position = "long"
+        elif row["type"] == "sell":
+            if current_position == "long":
+                # Close long position
+                if last_valid_liquidity is not None:
+                    profit_history[idx] = safe_divide(row["liquidity"], last_valid_liquidity) - 1
+                # Open short position
+                last_valid_liquidity = row["liquidity"] if trade_short else None
+                current_position = "short" if trade_short else None
+            elif current_position is None and trade_short:
+                # Open short position
+                last_valid_liquidity = row["liquidity"]
+                current_position = "short"
 
-    if not order_df.empty:
-        profit_his[bt_df.index[-1]] = (bt_df.iloc[-1]["liquidity"] / last_liquidity) - 1
-
-    total_buys = len(buy_df)
-    total_sells = len(sell_df)
-    total_orders = total_buys + total_sells
-
-    total_fee_buy: float = sum(buy_df["fee"])
-    total_fee_sell: float = sum(sell_df["fee"])
-    avg_fee_per_buy: float = total_fee_buy / total_buys if total_buys > 0 else nan
-    avg_fee_per_sell: float = total_fee_sell / total_sells if total_sells > 0 else nan
-
-    total_fee_orders: float = total_fee_buy + total_fee_sell
-    avg_fee_orders: float = total_fee_orders / total_orders if total_orders > 0 else nan
-
-    total_profit: float = bt_df.iloc[-1]["liquidity"] - bt_df.iloc[0]["liquidity"]
-    avg_profit: float = total_profit / total_orders
-
-    std_profit: float = std(list(profit_his.values()))
-
-    sharpe_ratio = avg_profit / std_profit if std_profit > 0 else -100
-
-    percentage_fee_of_net_worth: float = (total_fee_orders / (bt_df["liquidity"].iloc[-1] * balance))
-    percentage_fee_of_profit: float = 0.0
-    if total_orders > 0:
-        percentage_fee_of_profit: float = (
-                total_fee_orders / ((bt_df["liquidity"].iloc[-1] - bt_df["liquidity"].iloc[0]) * balance))
-
-    if print_info:
-        print(f"Total buys: {total_buys:.3f}, "
-              f"Total sells: {total_sells:.3f}, "
-              f"Total orders: {total_orders:.3f}")
-        print(f"Total fee buy: {total_fee_buy:.3f}, "
-              f"Total fee sell: {total_fee_sell:.3f}, "
-              f"Total fee orders: {total_fee_orders:.3f}")
-        print(f"Average fee per buy: {avg_fee_per_buy:.3f}, "
-              f"Average fee per sell: {avg_fee_per_sell:.3f}, "
-              f"Average fee per order: {avg_fee_orders:.3f}")
-        print(f"Percentage fee of net worth: {percentage_fee_of_net_worth:.3%}, "
-              f"Percentage fee of profit: {percentage_fee_of_profit:.3%}")
-        print(f"Profit History")
-        for time, profit in profit_his.items():
-            print(f"{time}: {profit:.3f}")
-        print(f"Total Profit: {total_profit:.3%}, Average Profit per order: {avg_profit:.3%}")
-        print(f"Standard Deviation of Profit: {std_profit:.3%}")
-        print(f"Sharpe Ratio: {sharpe_ratio:.3f}")
-
-    return {
-        "total_buys": total_buys,
-        "total_sells": total_sells,
-        "total_orders": total_orders,
-        "total_fee_buy": total_fee_buy,
-        "total_fee_sell": total_fee_sell,
-        "avg_fee_per_buy": avg_fee_per_buy,
-        "avg_fee_per_sell": avg_fee_per_sell,
-        "total_fee_orders": total_fee_orders,
-        "avg_fee_orders": avg_fee_orders,
-        "percentage_fee_of_net_worth": percentage_fee_of_net_worth,
-        "percentage_fee_of_profit": percentage_fee_of_profit,
-        "total_profit": total_profit,
-        "avg_profit": avg_profit,
-        "std_profit": std_profit,
-        "sharpe_ratio": sharpe_ratio
+    # Calculate final metrics
+    metrics = {
+        "total_buys": len(buys),
+        "total_sells": len(sells),
+        "total_orders": len(orders),
+        "total_fee_buy": buys["fee"].sum(),
+        "total_fee_sell": sells["fee"].sum(),
+        "total_fee_orders": orders["fee"].sum(),
     }
+
+    # Calculate averages with business-appropriate null handling
+    avg_metrics = {
+        "avg_fee_per_buy": safe_divide(metrics["total_fee_buy"], metrics["total_buys"], zero_override=True),
+        "avg_fee_per_sell": safe_divide(metrics["total_fee_sell"], metrics["total_sells"], zero_override=True),
+        "avg_fee_orders": safe_divide(metrics["total_fee_orders"], metrics["total_orders"], zero_override=True),
+    }
+    metrics.update(avg_metrics)
+
+    # Calculate profit metrics
+    profit_metrics = {
+        "total_profit": bt_df["liquidity"].iloc[-1] - bt_df["liquidity"].iloc[0],
+        "avg_profit": safe_divide(
+            bt_df["liquidity"].iloc[-1] - bt_df["liquidity"].iloc[0],
+            metrics["total_orders"],
+            zero_override=True
+        ),
+        "std_profit": std(list(profit_history.values()), ddof=0) if profit_history else None,
+    }
+    metrics.update(profit_metrics)
+
+    # Calculate complex ratios with proper null handling
+    ratios = {
+        "sharpe_ratio": safe_divide(profit_metrics["avg_profit"], profit_metrics["std_profit"])
+        if (profit_metrics["avg_profit"] and profit_metrics["std_profit"])
+        else None,
+
+        "percentage_fee_of_net_worth": safe_divide(
+            metrics["total_fee_orders"],
+            bt_df["liquidity"].iloc[-1] * balance
+        ),
+
+        "percentage_fee_of_profit": safe_divide(
+            metrics["total_fee_orders"],
+            profit_metrics["total_profit"] * balance
+        ) if profit_metrics["total_profit"] else None,
+    }
+    metrics.update(ratios)
+
+    # Print formatted summary
+    if print_details:
+        print("\n=== Trading Performance Summary ===")
+        print(f"Orders: {metrics['total_orders']} (Buys: {metrics['total_buys']}, Sells: {metrics['total_sells']})")
+        print(f"Total Profit: {metrics['total_profit']:.2f}")
+        print(f"Sharpe Ratio: {metrics['sharpe_ratio'] or 'N/A'}")
+        print(
+            f"Fees: {metrics['total_fee_orders']:.2f} (Net Worth Impact: {metrics['percentage_fee_of_net_worth'] or 'N/A':.2%})")
+        print("\n=== Details ===")
+        for key, value in metrics.items():
+            print(f"{key}: {value or 'N/A'}")
+
+    return metrics

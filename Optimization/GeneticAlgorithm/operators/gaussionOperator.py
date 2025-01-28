@@ -1,11 +1,11 @@
 from random import gauss
-from numpy import clip
+from typing import Optional
 
 def gauss_clamp(
         current: float | int,
         start: float | int,
         stop: float | int,
-        step: float | int,
+        step: Optional[float | int] = None,
         strength: float = 0.1,
         is_int: bool = False
 ) -> float | int:
@@ -27,18 +27,21 @@ def gauss_clamp(
     """
     if start > stop:
         raise ValueError("start must be less than or equal to stop")
-    if step <= 0:
+    if step is not None and step <= 0:
         raise ValueError("step must be positive")
 
     std_dev = (stop - start) * strength
     mutated: float = current + gauss(0, std_dev)
 
     if is_int:
-        step = int(step)
+        step = int(step) if step is not None else 1
         mutated = round(mutated / step) * step
 
     else:
         decimals: int = len(str(step).split('.')[1]) if '.' in str(step) else 0
-        mutated = round(mutated / step, decimals) * step
+        if step is not None:
+            mutated = round(mutated / step, decimals) * step
+        else:
+            mutated = round(mutated, decimals)
 
-    return clip(mutated, start, stop)
+    return max(min(mutated, stop), start)

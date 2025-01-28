@@ -22,7 +22,7 @@ class RelativeStrengthIndex():
     backtest(df: DataFrame, period: int = 14, lower_band: int = 30, upper_band: int = 70, partition_frequency: int = 31) -> float
         Backtests the RSI strategy on historical data and calculates the Return on Investment (ROI).
     """
-    def __init__(self, period: int = 14, lower_band: int = 30, upper_band: int = 70, rsi_as_signal: bool = False):
+    def __init__(self, period: int = 14, lower_band: float = 30, upper_band: float = 70, rsi_as_signal: bool = False):
         """
         Initializes the Relative Strength Index (RSI) trading strategy.
 

@@ -11,9 +11,9 @@ headers = [
     "confidence"
 ]
 
-ticker = "DOGEUSDT"
-days = 0.03333333333333333333
-interval = "1s"
+ticker = "SOLUSDT"
+days = 165
+interval = "1h"
 sell_limit = -0.9
 buy_limit = 0.9
 maker_fee = 0.00075
@@ -23,9 +23,9 @@ trade_long = True
 trade_short = True
 
 tc = RelativeStrengthIndex(
-    period=10,
-    lower_band=12.759281324606349,
-    upper_band=64.50757748124984,
+    period=8,
+    lower_band=7.48,
+    upper_band=99.67000000000003,
     rsi_as_signal=False
 )
 """
@@ -59,7 +59,6 @@ def main():
     # Plot X and Y are placeholders for defining what to plot
     analyze(
         target_filename = ticker + "_" + str(days) + "_" + interval + ".csv",
-        his_df=his_df,
         bt_df=bt_df,
         trade_long=trade_long,
         trade_short=trade_short

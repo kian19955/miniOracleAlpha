@@ -1,9 +1,8 @@
 from collections.abc import Callable
 from typing import Optional
 
-from pandas import DataFrame, to_datetime, read_csv
+from pandas import DataFrame, to_datetime
 from numpy import nan
-import os
 
 from api.binanceApi import fetch_klines
 from constants import bt_data_dir_path, market_his_dir_path
@@ -23,19 +22,7 @@ def backtest(
         leverage: int = 1,
         use_csv: bool = False
 ):
-    file_path = f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv"
-    if not os.path.isfile(file_path):
-        print(f"{file_path} does not exist. Fetching data from Binance API...")
-        use_csv = False
-
-    if use_csv:
-        df: DataFrame = read_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
-        df['timestamp'] = to_datetime(df['timestamp'])
-        df.set_index('timestamp', inplace=True)
-
-    else:
-        df: DataFrame = fetch_klines(ticker, interval, days=days)
-        df.to_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
+    df: DataFrame = fetch_klines(ticker, interval, days=days, use_csv=use_csv)
 
     base_liquidity: float = 100
     balance: float = 100
