@@ -279,3 +279,18 @@
 {"timestamp": "2025-01-29 20:09:39,509", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
 {"timestamp": "2025-01-29 20:11:45,183", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 639, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
 {"timestamp": "2025-01-29 20:11:45,183", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:33:57,166", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 660, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:33:57,166", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 150, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:34:00,972", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 686, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:34:00,972", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 203, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-01-29 20:34:01,230", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 227, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:06,409", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 150, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:10,428", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 684, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:10,428", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 203, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:10,740", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 227, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:44,568", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 150, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:48,682", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 150, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:52,298", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 684, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:52,298", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 203, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:52,298", "level": "WARNING", "file": "geneticAlgorithm.py", "line_number": 208, "function": "run", "message": "Multiprocessing is disabled, the operation will take longer.", "exc_info": null}
+{"timestamp": "2025-01-29 20:35:52,298", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 227, "function": "run", "message": "Creating Initial Population", "exc_info": null}

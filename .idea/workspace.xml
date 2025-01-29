@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="finished ga">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration">
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
     </list>
@@ -67,7 +66,7 @@
     "Python.csvWriter.executor": "Run",
     "Python.dataAnalyse.executor": "Run",
     "Python.fitter.executor": "Run",
-    "Python.geneticAlgorithm.executor": "Run",
+    "Python.geneticAlgorithm.executor": "Debug",
     "Python.kiansVision.executor": "Run",
     "Python.loggingManager.executor": "Run",
     "Python.main.executor": "Run",
@@ -307,7 +306,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738073423156</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration">
+      <option name="closed" value="true" />
+      <created>1738178861410</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1738178861410</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -357,7 +364,8 @@
     <MESSAGE value="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance." />
     <MESSAGE value="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate" />
     <MESSAGE value="finished ga" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished ga" />
+    <MESSAGE value="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -421,6 +429,16 @@
           <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
           <line>121</line>
           <option name="timeStamp" value="211" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
+          <line>484</line>
+          <option name="timeStamp" value="227" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
+          <line>268</line>
+          <option name="timeStamp" value="228" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

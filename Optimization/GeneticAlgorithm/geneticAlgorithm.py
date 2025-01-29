@@ -100,24 +100,20 @@ class GeneticAlgorithm:
         self.mutation_strength = mutation_strength
 
         self.base_params = base_params or {}
-        tc_params: MappingProxyType[str, any] = signature(species).parameters
+        c_params: MappingProxyType[str, any] = signature(species).parameters
 
-        filtered_params: dict[str, any] = dict(tc_params)
+        filtered_params: dict[str, any] = dict(c_params)
 
-        for param_name in tc_params.keys():
+        for param_name in c_params.keys():
             if blacklist_genes is not None and param_name in blacklist_genes:
                 del filtered_params[param_name]
             elif whitelist_genes is not None and param_name not in whitelist_genes:
                 del filtered_params[param_name]
 
-        self.genome_types: dict[str, type] = {}
-        for param_name, param in filtered_params.items():
-            self.genome_types[param_name] = param.annotation
-
-        self.genome_types: OrderedDict[str, type] = OrderedDict(self.genome_types)
-
-        print(self._build_dependency_graph())
-        exit()
+        graph = self._build_dependency_graph()
+        self.genome_types: OrderedDict[str, type] = self._topological_sort(graph, {
+            param_name: param.annotation for param_name, param in filtered_params.items()
+        })
 
         self._validate_genome_settings()
 
@@ -172,28 +168,30 @@ class GeneticAlgorithm:
     def _extract_relation(operation: str) -> list[str]:
         return re.findall(r'\{([^}]+)\}', operation)
 
-    def _topological_sort(self, graph: dict[str, list[str]]) -> OrderedDict[str, type]:
-        in_degree = {param: 0 for param in self.genome_types}
+    @staticmethod
+    def _topological_sort(graph: dict[str, list[str]], param_types: dict[str, type]) -> OrderedDict[str, type]:
+        num_of_param: int = len(param_types)
+        in_degree = {param: 0 for param in param_types}
         for param, deps in graph.items():
             for dep in deps:
                 in_degree[dep] += 1
 
         queue = [param for param, degree in in_degree.items() if degree == 0]
-        sorted_order = []
+        species_types = OrderedDict()
 
         while queue:
             param = queue.pop(0)
-            sorted_order.append(param)
+            species_types[param] = param_types[param]
 
             for dependent in graph[param]:
                 in_degree[dependent] -= 1
                 if in_degree[dependent] == 0:
                     queue.append(dependent)
 
-        if len(sorted_order) != len(self.genome_types):
+        if len(species_types) != num_of_param:
             raise ValueError("Cyclic dependencies detected in genome settings.")
 
-        return sorted_order
+        return species_types
 
     def run(self, generations: int = 40, population_size: int = 50, use_multiprocessing: bool = True):
         def on_exit():
@@ -270,7 +268,8 @@ class GeneticAlgorithm:
         individual: dict[str, any] = {}
         for param_name, annotation in self.genome_types.items():
 
-            if self.genome_settings.get(param_name, None) is not None and len(self.genome_settings[param_name].keys()) != 1:
+            if self.genome_settings.get(param_name, None) is not None and len(
+                    self.genome_settings[param_name].keys()) != 1:
                 possible_types: list[type] = list(self.genome_settings[param_name].keys())
                 annotation = random.choice(possible_types)
 
@@ -317,8 +316,9 @@ class GeneticAlgorithm:
             )
 
             performance: dict[str, any] = analyze(
-                target_filename=self.bt_settings['ticker'] + "_" + str(self.bt_settings['days']) + "_" + self.bt_settings[
-                    'interval'] + ".csv",
+                target_filename=self.bt_settings['ticker'] + "_" + str(self.bt_settings['days']) + "_" +
+                                self.bt_settings[
+                                    'interval'] + ".csv",
                 bt_df=bt_df,
                 trade_long=self.bt_settings.get('trade_long', True),
                 trade_short=self.bt_settings.get('trade_short', True),
@@ -452,15 +452,15 @@ class GeneticAlgorithm:
 
             elif isinstance(annotation, EnumMeta):
                 if roll_check(self.mutate_tp.ENUM, lambda:
-                    self._retrieve_random_enum(param_name, annotation)
-                ):
+                self._retrieve_random_enum(param_name, annotation)
+                              ):
                     continue
 
             # Handle Optional (Union with None)
             elif get_origin(annotation) is Union:
                 if roll_check(self.mutate_tp.UNION, lambda:
-                    self._mutate_union(param_name, tuple(t for t in annotation if t is not type(val)))
-                ):
+                self._mutate_union(param_name, tuple(t for t in annotation if t is not type(val)))
+                              ):
                     continue
                 else:
                     individual[param_name] = self.mutate(
@@ -523,6 +523,7 @@ class GeneticAlgorithm:
         except KeyError:
             return random.choice(list(enum_class))
 
+
 if __name__ == '__main__':
     from tradingComponents.indicators import RelativeStrengthIndex, MovingAverageConvergenceDivergence
     from Optimization.GeneticAlgorithm.gaTypes import MateTypeProbabilities, MutateTypeProbabilities
@@ -547,7 +548,6 @@ if __name__ == '__main__':
         BOOL=0.5,
         OTHER=0.5
     )
-    print(GeneticAlgorithm._extract_relation("{wow} + 1"))
     g_set: dict[str, dict[type, dict[str | type, any]]] = {
         'fast_period': {
             int: {
@@ -656,7 +656,6 @@ if __name__ == '__main__':
         }
     }
 
-    logger.info("Creating Genetic Algorithm...")
 
     ga = GeneticAlgorithm(
         species=MovingAverageConvergenceDivergence,
@@ -687,5 +686,5 @@ if __name__ == '__main__':
     print(ga.run(
         generations=50,
         population_size=15,
-        use_multiprocessing=True
+        use_multiprocessing=False
     ))
