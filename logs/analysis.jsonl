@@ -239,3 +239,43 @@
 {"timestamp": "2025-01-29 15:05:37,972", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 193, "function": "run", "message": "Creating Offspring", "exc_info": null}
 {"timestamp": "2025-01-29 15:05:37,972", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 197, "function": "run", "message": "Mutating Offspring", "exc_info": null}
 {"timestamp": "2025-01-29 15:05:37,973", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 201, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-01-29 19:55:57,299", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 19:55:57,299", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:00:18,256", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 640, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:00:18,256", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:00:54,710", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:00:54,711", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:01:17,220", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:01:17,221", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:02:19,859", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:02:19,859", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:02:36,790", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:02:36,792", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:03:21,326", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:03:21,326", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:04:11,346", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:04:11,346", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:04:48,854", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:04:48,854", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:05:00,559", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:05:00,561", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:05:20,196", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:05:20,196", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:05:57,215", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:05:57,217", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:07,700", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:07,700", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:24,870", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:24,871", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:36,763", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:36,765", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:53,219", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:53,221", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:58,789", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:06:58,790", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:07:36,895", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 638, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:07:36,897", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:09:39,507", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 639, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:09:39,509", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-01-29 20:11:45,183", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 639, "function": "<module>", "message": "Creating Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-01-29 20:11:45,183", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 154, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}

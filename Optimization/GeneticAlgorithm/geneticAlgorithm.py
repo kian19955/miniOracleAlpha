@@ -110,11 +110,14 @@ class GeneticAlgorithm:
             elif whitelist_genes is not None and param_name not in whitelist_genes:
                 del filtered_params[param_name]
 
-        self.tc_types: dict[str, type] = {}
+        self.genome_types: dict[str, type] = {}
         for param_name, param in filtered_params.items():
-            self.tc_types[param_name] = param.annotation
+            self.genome_types[param_name] = param.annotation
 
-        self.tc_types: OrderedDict[str, type] = OrderedDict(self.tc_types)
+        self.genome_types: OrderedDict[str, type] = OrderedDict(self.genome_types)
+
+        print(self._build_dependency_graph())
+        exit()
 
         self._validate_genome_settings()
 
@@ -139,7 +142,7 @@ class GeneticAlgorithm:
         self.toolbox = toolbox
 
     def _validate_genome_settings(self):
-        for param_name, annotation in self.tc_types.items():
+        for param_name, annotation in self.genome_types.items():
             if annotation is int or annotation is float:
                 if (not 'start' in self.genome_settings[param_name][annotation] or
                         not 'stop' in self.genome_settings[param_name][annotation]):
@@ -147,16 +150,17 @@ class GeneticAlgorithm:
                         f"Genome Settings for {param_name} must have a start and a stop value for {annotation}"
                     )
 
-    def _build_dependecy_graph(self) -> dict[str, list[str]]:
+    def _build_dependency_graph(self) -> dict[str, list[str]]:
         logger.info("Building Dependency Graph")
         graph: defaultdict[str, list[str]] = defaultdict(list)
         for param_name, settings in self.genome_settings.items():
             for annotation, config in settings.items():
-                if annotation is not int or annotation is not float:
+                if annotation is not int and annotation is not float:
                     continue
 
                 if isinstance(config.get('start'), str):
-                    graph[param_name].extend(self._extract_relation(config['start']))
+                    rel = self._extract_relation(config['start'])
+                    graph[param_name].extend(rel)
                 if isinstance(config.get('stop'), str):
                     graph[param_name].extend(self._extract_relation(config['stop']))
                 if isinstance(config.get('step'), str):
@@ -165,11 +169,31 @@ class GeneticAlgorithm:
         return graph
 
     @staticmethod
-    def _extract_relation(operation: str) -> str:
-        return re.findall('{fast_period} + 1', operation)[0]
+    def _extract_relation(operation: str) -> list[str]:
+        return re.findall(r'\{([^}]+)\}', operation)
 
-    def _thopolical_sort(self, graph: dict[str, list[str]]) -> OrderedDict[str, type]:
-        ...
+    def _topological_sort(self, graph: dict[str, list[str]]) -> OrderedDict[str, type]:
+        in_degree = {param: 0 for param in self.genome_types}
+        for param, deps in graph.items():
+            for dep in deps:
+                in_degree[dep] += 1
+
+        queue = [param for param, degree in in_degree.items() if degree == 0]
+        sorted_order = []
+
+        while queue:
+            param = queue.pop(0)
+            sorted_order.append(param)
+
+            for dependent in graph[param]:
+                in_degree[dependent] -= 1
+                if in_degree[dependent] == 0:
+                    queue.append(dependent)
+
+        if len(sorted_order) != len(self.genome_types):
+            raise ValueError("Cyclic dependencies detected in genome settings.")
+
+        return sorted_order
 
     def run(self, generations: int = 40, population_size: int = 50, use_multiprocessing: bool = True):
         def on_exit():
@@ -244,7 +268,7 @@ class GeneticAlgorithm:
 
     def create_individual(self):
         individual: dict[str, any] = {}
-        for param_name, annotation in self.tc_types.items():
+        for param_name, annotation in self.genome_types.items():
 
             if self.genome_settings.get(param_name, None) is not None and len(self.genome_settings[param_name].keys()) != 1:
                 possible_types: list[type] = list(self.genome_settings[param_name].keys())
@@ -318,7 +342,7 @@ class GeneticAlgorithm:
         return tuple(values)
 
     def mate(self, ind1, ind2):
-        for param_name, annotation in self.tc_types.items():
+        for param_name, annotation in self.genome_types.items():
             roll: float = random.random()
 
             val1 = ind1[param_name]
@@ -389,7 +413,7 @@ class GeneticAlgorithm:
             return_individual: bool = False
     ) -> dict[str, any] | None:
         param_settings: dict[str, any] = custom_params_settings if custom_params_settings is not None \
-            else self.tc_types
+            else self.genome_types
 
         for param_name, annotation in param_settings.items():
             roll: float = random.random()
@@ -523,7 +547,7 @@ if __name__ == '__main__':
         BOOL=0.5,
         OTHER=0.5
     )
-
+    print(GeneticAlgorithm._extract_relation("{wow} + 1"))
     g_set: dict[str, dict[type, dict[str | type, any]]] = {
         'fast_period': {
             int: {
