@@ -22,6 +22,30 @@ class RelativeStrengthIndex():
     backtest(df: DataFrame, period: int = 14, lower_band: int = 30, upper_band: int = 70, partition_frequency: int = 31) -> float
         Backtests the RSI strategy on historical data and calculates the Return on Investment (ROI).
     """
+    GA_GENOME_SETTINGS: dict[str, dict[type, dict[str | type, any]]] = {
+        'period': {
+            int: {
+                'start': 1,
+                'stop': 100,
+                'step': 1
+            }
+        },
+        'lower_band': {
+            float: {
+                'start': 0,
+                'stop': 40,
+                'step': 0.1
+            }
+        },
+        'upper_band': {
+            float: {
+                'start': 60,
+                'stop': 100,
+                'step': 0.1
+            }
+        }
+    }
+
     def __init__(self, period: int = 14, lower_band: float = 30, upper_band: float = 70, rsi_as_signal: bool = False):
         """
         Initializes the Relative Strength Index (RSI) trading strategy.

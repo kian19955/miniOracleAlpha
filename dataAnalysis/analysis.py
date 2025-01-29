@@ -117,8 +117,11 @@ def analyze(
         print(f"Orders: {metrics['total_orders']} (Buys: {metrics['total_buys']}, Sells: {metrics['total_sells']})")
         print(f"Total Profit: {metrics['total_profit']:.2f}")
         print(f"Sharpe Ratio: {metrics['sharpe_ratio'] or 'N/A'}")
-        print(
-            f"Fees: {metrics['total_fee_orders']:.2f} (Net Worth Impact: {metrics['percentage_fee_of_net_worth'] or 'N/A':.2%})")
+        if metrics['percentage_fee_of_net_worth']:
+            print(
+                f"Fees: {metrics['total_fee_orders']} (Net Worth Impact: {metrics['percentage_fee_of_net_worth']:.2%})")
+        else:
+            print(f"Fees: {metrics['total_fee_orders']} (Net Worth Impact: 'N/A')")
         print("\n=== Details ===")
         for key, value in metrics.items():
             print(f"{key}: {value or 'N/A'}")

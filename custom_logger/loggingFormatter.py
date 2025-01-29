@@ -1,4 +1,4 @@
-from logging import Formatter, LogRecord
+from logging import Formatter
 import json
 
 # ANSI color codes for different log levels
@@ -48,8 +48,6 @@ class JsonFormatter(Formatter):
             "timestamp": self.formatTime(record),
             "level": record.levelname,
             "file": record.filename,
-            "indicator": record.indicator if 'indicator' in record.__dict__ else None,
-            "profile": record.profile_id if 'profile_id' in record.__dict__ else None,
             "line_number": record.lineno,
             "function": record.funcName,
             "message": record.getMessage(),

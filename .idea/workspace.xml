@@ -4,21 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate">
-      <change afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/custom_logger/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/custom_logger/loggingFormatter.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/custom_logger/loggingManager.py" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="finished ga">
+      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/baseGenome.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/enumGenome.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/numericGenome.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/species.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tradingComponents/indicators/movingAverageConvergenceDivergence.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tradingComponents/indicators/utils/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tradingComponents/indicators/utils/crossoverUtils.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tradingComponents/indicators/utils/pullbackUtils.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/operators/gaussionOperator.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/operators/gaussionOperator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/types/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/gaTypes/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/types/typeProbabilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/gaTypes/typeProbabilities.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/binanceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/typeHandler.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_logger/loggingFormatter.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_logger/loggingFormatter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_logger/loggingManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_logger/loggingManager.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dataAnalysis/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -48,12 +52,12 @@
     &quot;assignee&quot;: &quot;kian19955&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/kian19955/miniOracleAlpha.git&quot;,
-    &quot;accountId&quot;: &quot;96e72a4d-0d29-4920-942f-c0faf49d958e&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kian19955/miniOracleAlpha.git",
+    "accountId": "ad06c969-f73d-4fef-b6f5-d7139e6a852d"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -81,6 +85,7 @@
     "Python.fitter.executor": "Run",
     "Python.geneticAlgorithm.executor": "Run",
     "Python.kiansVision.executor": "Run",
+    "Python.loggingManager.executor": "Run",
     "Python.main.executor": "Run",
     "Python.nd.executor": "Run",
     "Python.orders.executor": "Run",
@@ -310,7 +315,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738055057231</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="finished ga">
+      <option name="closed" value="true" />
+      <created>1738073423156</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1738073423156</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -359,7 +372,8 @@
     <MESSAGE value="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)" />
     <MESSAGE value="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance." />
     <MESSAGE value="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate" />
-    <option name="LAST_COMMIT_MESSAGE" value="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate" />
+    <MESSAGE value="finished ga" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished ga" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -420,24 +434,9 @@
           <option name="timeStamp" value="159" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>259</line>
-          <option name="timeStamp" value="207" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>262</line>
-          <option name="timeStamp" value="208" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>270</line>
-          <option name="timeStamp" value="209" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>125</line>
-          <option name="timeStamp" value="210" />
+          <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
+          <line>121</line>
+          <option name="timeStamp" value="211" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
