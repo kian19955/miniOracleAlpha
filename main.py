@@ -31,17 +31,12 @@ settings = {'fast_period': 42, 'slow_period': 90, 'signal_line_period': 24, 'mom
  'zero_line_pullback_tolerance_percent': 0.5487446218136476, 'zero_line_pullback_weight': 0.41714182779059517,
  'return_pullback_strength': True, 'magnitude_weight': 0.8083685289854661, 'rate_of_change_weight': 0.9985617455723734,
  'weight_impact': 0.4497}
-settings = {'period': 17, 'lower_band': 3.550917741204702, 'upper_band': 73.09752054858266}
+#settings = {'period': 17, 'lower_band': 3.550917741204702, 'upper_band': 73.09752054858266}
 
-tc = RelativeStrengthIndex(
+
+tc = MovingAverageConvergenceDivergence(
     **settings
 )
-"""tc = RelativeStrengthIndex(
-    period=8,
-    lower_band=7.48,
-    upper_band=99.67000000000003,
-    rsi_as_signal=False
-)"""
 """
 tc = Stochastic(
     lookback_period=14,

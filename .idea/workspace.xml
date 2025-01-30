@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration">
-      <change afterPath="$PROJECT_DIR$/data/marketHistoryData/DOGEUSDT_7_1m.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/miniOracleV1.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/miniOracleV1.0.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="finished ga">
+      <change afterPath="$PROJECT_DIR$/scratchBacktester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/marketHistoryData/DOGEUSDT_0.03333333333333333_1s.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/movingAverageConvergenceDivergence.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/movingAverageConvergenceDivergence.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -66,13 +65,14 @@
     "Python.analysis.executor": "Run",
     "Python.backtestMain.executor": "Run",
     "Python.backtester.executor": "Run",
+    "Python.binanceApi.executor": "Run",
     "Python.bollingerBands.executor": "Run",
     "Python.constants.executor": "Run",
     "Python.csvHandler.executor": "Run",
     "Python.csvWriter.executor": "Run",
     "Python.dataAnalyse.executor": "Run",
     "Python.fitter.executor": "Run",
-    "Python.geneticAlgorithm.executor": "Debug",
+    "Python.geneticAlgorithm.executor": "Run",
     "Python.kiansVision.executor": "Run",
     "Python.loggingManager.executor": "Run",
     "Python.main.executor": "Run",
@@ -88,13 +88,12 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/kians/PycharmProjects/miniOracleV1.0/data/marketHistoryData",
+    "last_opened_file_path": "C:/Users/kians/PycharmProjects/miniOracleV1.0",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0\data\marketHistoryData" />
       <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -313,15 +312,7 @@
       <option name="project" value="LOCAL" />
       <updated>1738073423156</updated>
     </task>
-    <task id="LOCAL-00025" summary="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration">
-      <option name="closed" value="true" />
-      <created>1738178861410</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1738178861410</updated>
-    </task>
-    <option name="localTasksCounter" value="26" />
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -371,8 +362,7 @@
     <MESSAGE value="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance." />
     <MESSAGE value="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate" />
     <MESSAGE value="finished ga" />
-    <MESSAGE value="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="finished ga" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -436,21 +426,6 @@
           <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
           <line>121</line>
           <option name="timeStamp" value="211" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>484</line>
-          <option name="timeStamp" value="227" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>268</line>
-          <option name="timeStamp" value="228" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>75</line>
-          <option name="timeStamp" value="229" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
