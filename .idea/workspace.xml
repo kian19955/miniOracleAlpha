@@ -5,8 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration">
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/marketHistoryData/DOGEUSDT_7_1m.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/miniOracleV1.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/miniOracleV1.0.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,12 +88,13 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/kians/PycharmProjects/miniOracleV1.0",
+    "last_opened_file_path": "C:/Users/kians/PycharmProjects/miniOracleV1.0/data/marketHistoryData",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0\data\marketHistoryData" />
       <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -439,6 +446,11 @@
           <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
           <line>268</line>
           <option name="timeStamp" value="228" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/main.py</url>
+          <line>75</line>
+          <option name="timeStamp" value="229" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

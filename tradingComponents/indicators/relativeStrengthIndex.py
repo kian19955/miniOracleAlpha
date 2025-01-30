@@ -19,7 +19,7 @@ class RelativeStrengthIndex():
     evaluate(df: DataFrame, period: int = 14, lower_band: int = 30, upper_band: int = 70) -> int | None
         Evaluates the RSI for the provided DataFrame and returns a buy, sell, or hold signal.
 
-    backtest(df: DataFrame, period: int = 14, lower_band: int = 30, upper_band: int = 70, partition_frequency: int = 31) -> float
+    backtestData(df: DataFrame, period: int = 14, lower_band: int = 30, upper_band: int = 70, partition_frequency: int = 31) -> float
         Backtests the RSI strategy on historical data and calculates the Return on Investment (ROI).
     """
     GA_GENOME_SETTINGS: dict[str, dict[type, dict[str | type, any]]] = {

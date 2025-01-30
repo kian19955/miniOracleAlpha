@@ -1,6 +1,7 @@
 from collections.abc import Callable
 from typing import Optional
 
+import pandas as pd
 from pandas import DataFrame, to_datetime
 from numpy import nan
 
@@ -22,7 +23,7 @@ def backtest(
         leverage: int = 1,
         use_csv: bool = False
 ):
-    df: DataFrame = fetch_klines(ticker, interval, days=days, use_csv=use_csv)
+    df: DataFrame =pd.read_csv("data/marketHistoryData/DOGEUSDT_7_1m.csv") #fetch_klines(ticker, interval, days=days, use_csv=use_csv)
 
     base_liquidity: float = 100
     balance: float = 100
