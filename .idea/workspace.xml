@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance.">
-      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/typeHandler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Optimization/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataAnalysis/analysis.py" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration">
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +38,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/kian19955/miniOracleAlpha.git&quot;,
-    &quot;accountId&quot;: &quot;96e72a4d-0d29-4920-942f-c0faf49d958e&quot;
+    &quot;accountId&quot;: &quot;ad06c969-f73d-4fef-b6f5-d7139e6a852d&quot;
   }
 }</component>
   <component name="ProjectColorInfo">{
@@ -70,8 +66,9 @@
     "Python.csvWriter.executor": "Run",
     "Python.dataAnalyse.executor": "Run",
     "Python.fitter.executor": "Run",
-    "Python.geneticAlgorithm.executor": "Run",
+    "Python.geneticAlgorithm.executor": "Debug",
     "Python.kiansVision.executor": "Run",
+    "Python.loggingManager.executor": "Run",
     "Python.main.executor": "Run",
     "Python.nd.executor": "Run",
     "Python.orders.executor": "Run",
@@ -79,6 +76,7 @@
     "Python.s2.executor": "Run",
     "Python.scratch.executor": "Run",
     "Python.stochastic.executor": "Run",
+    "Python.test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -292,7 +290,31 @@
       <option name="project" value="LOCAL" />
       <updated>1737646433044</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate">
+      <option name="closed" value="true" />
+      <created>1738055057231</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1738055057231</updated>
+    </task>
+    <task id="LOCAL-00024" summary="finished ga">
+      <option name="closed" value="true" />
+      <created>1738073423156</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1738073423156</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration">
+      <option name="closed" value="true" />
+      <created>1738178861410</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1738178861410</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -340,7 +362,10 @@
     <MESSAGE value="fixed sharpe ratio, added stochastic.py indicator" />
     <MESSAGE value="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)" />
     <MESSAGE value="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance." />
+    <MESSAGE value="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate" />
+    <MESSAGE value="finished ga" />
+    <MESSAGE value="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Refactor genetic algorithm dependency graph and type handling&#10;&#10;• Rename `tc_types` to `genome_types` for clarity&#10;• Fix logic in `_build_dependency_graph` to correctly handle non-numeric types&#10;• Implement `_extract_relation` to find all dependencies in a string&#10;• Add `_topological_sort` method to handle dependency ordering&#10;• Correct typo in `_topological_sort` method name&#10;• Update validation logic to use `genome_types`&#10;• Remove debug print statements and exit calls&#10;• Clean up IDE workspace configuration" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -399,6 +424,21 @@
           <url>file://$PROJECT_DIR$/dataAnalysis/plotter.py</url>
           <line>79</line>
           <option name="timeStamp" value="159" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
+          <line>121</line>
+          <option name="timeStamp" value="211" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
+          <line>484</line>
+          <option name="timeStamp" value="227" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
+          <line>268</line>
+          <option name="timeStamp" value="228" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

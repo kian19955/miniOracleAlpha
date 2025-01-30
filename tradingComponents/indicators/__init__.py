@@ -1,2 +1,3 @@
 from .relativeStrengthIndex import RelativeStrengthIndex
 from .stochastic import Stochastic
+from .movingAverageConvergenceDivergence import MovingAverageConvergenceDivergence

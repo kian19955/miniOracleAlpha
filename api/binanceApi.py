@@ -2,11 +2,13 @@ from typing import Optional
 import time
 from requests import Response, get
 from datetime import datetime, timezone
+import os
 
-from pandas import DataFrame, to_datetime, concat
+from pandas import DataFrame, to_datetime, concat, read_csv
 from dateutil.relativedelta import relativedelta
 
 from api.utils import handle_binance_status
+from constants import market_his_dir_path
 
 url_fetch_ticker_price: str = "https://api.binance.com/api/v3/ticker/price"
 url_fetch_klines: str = "https://api.binance.com/api/v3/klines"
@@ -61,7 +63,8 @@ def fetch_klines(
         days: int = 0,
         hours: int = 0,
         minutes: int = 0,
-        seconds: int = 0
+        seconds: int = 0,
+        use_csv: bool = False
 ):
     """
     Retrieves klines from Binance
@@ -77,6 +80,7 @@ def fetch_klines(
     :param hours: The number of hours to go back
     :param minutes: The number of minutes to go back
     :param seconds: The number of seconds to go back
+    :param use_csv: Whether to load data from saved csv if available, else it will overwrite if such file exists
     :return: DataFrame
     """
     if end is not None and start is None:
@@ -89,6 +93,18 @@ def fetch_klines(
     if end is not None and start is None and all(v == 0 for v in [years, months, weeks, days, hours, minutes, seconds]):
         raise ValueError(
             "If end_time is provided, either end_time or a time difference (years, months, etc.) must be provided")
+
+    file_path = f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv"
+    if not os.path.isfile(file_path):
+        print(f"{file_path} does not exist. Fetching data from Binance API...")
+        use_csv = False
+
+    if use_csv:
+        df: DataFrame = read_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
+        df['timestamp'] = to_datetime(df['timestamp'])
+        df.set_index('timestamp', inplace=True)
+
+        return df
 
     time_format = "%Y-%m-%d %H:%M:%S"
 
@@ -154,5 +170,7 @@ def fetch_klines(
 
     for column in df.columns:
         df[column] = df[column].astype(float)
+
+    df.to_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
 
     return df

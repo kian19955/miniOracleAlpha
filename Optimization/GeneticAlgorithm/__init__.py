@@ -1,1 +1,0 @@
-from .typeOperators import IntegerOperator, FloatOperator, BooleanOperator, ListOperator
