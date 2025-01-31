@@ -1,6 +1,6 @@
 import logging
 import re
-from typing import Type, Optional, get_args, get_origin, Union
+from typing import Type, Optional, get_args, get_origin, Union, Any
 from collections import OrderedDict, defaultdict
 from types import MappingProxyType
 from inspect import signature
@@ -151,30 +151,35 @@ class GeneticAlgorithm:
         graph: defaultdict[str, list[str]] = defaultdict(list)
         for param_name, settings in self.genome_settings.items():
             for annotation, config in settings.items():
-                if annotation is not int and annotation is not float:
-                    continue
+                if annotation not in (int, float):
+                    continue  # Only handle int and float dependencies
 
-                if isinstance(config.get('start'), str):
-                    rel = self._extract_relation(config['start'])
-                    graph[param_name].extend(rel)
-                if isinstance(config.get('stop'), str):
-                    graph[param_name].extend(self._extract_relation(config['stop']))
-                if isinstance(config.get('step'), str):
-                    graph[param_name].extend(self._extract_relation(config['step']))
+                dependencies = []
+                # Extract dependencies from start, stop, step
+                for key in ['start', 'stop', 'step']:
+                    value = config.get(key, None)
+                    if isinstance(value, str):
+                        relations, parsed_operation = self._extract_relation(value)
+                        self.genome_settings[param_name][annotation][key] = parsed_operation
+                        dependencies.extend(relations)
+
+                # Add edges from each dependency to the current parameter
+                for dep in dependencies:
+                    graph[dep].append(param_name)
 
         return graph
 
     @staticmethod
-    def _extract_relation(operation: str) -> list[str]:
-        return re.findall(r'\{([^}]+)\}', operation)
+    def _extract_relation(operation: str) -> tuple[list[Any], str]:
+        return re.findall(r'\{\{([^}]+)}}', operation), re.sub(r"\{\{|}}", "", operation)
+
 
     @staticmethod
     def _topological_sort(graph: dict[str, list[str]], param_types: dict[str, type]) -> OrderedDict[str, type]:
-        num_of_param: int = len(param_types)
         in_degree = {param: 0 for param in param_types}
-        for param, deps in graph.items():
-            for dep in deps:
-                in_degree[dep] += 1
+        for dependent in graph.values():
+            for param in dependent:
+                in_degree[param] += 1
 
         queue = [param for param, degree in in_degree.items() if degree == 0]
         species_types = OrderedDict()
@@ -188,7 +193,7 @@ class GeneticAlgorithm:
                 if in_degree[dependent] == 0:
                     queue.append(dependent)
 
-        if len(species_types) != num_of_param:
+        if len(species_types) != len(param_types):
             raise ValueError("Cyclic dependencies detected in genome settings.")
 
         return species_types
@@ -237,7 +242,7 @@ class GeneticAlgorithm:
                 survivors = self.toolbox.select(population, len(population))
                 survivors = list(map(self.toolbox.clone, survivors))
 
-                logger.debug("Creating Offspring")
+                logger.debug("Mating Survivers")
                 for child1, child2 in zip(survivors[::2], survivors[1::2]):
                     self.toolbox.mate(child1, child2)
 
@@ -307,6 +312,8 @@ class GeneticAlgorithm:
 
     def evaluate(self, genome):
         try:
+            if genome["slow_period"] < genome["fast_period"]:
+                raise ValueError("Slow period must be greater than fast period")
             individual = self.tc(**(genome | self.base_params))
 
             _, bt_df = backtest(
@@ -375,14 +382,14 @@ class GeneticAlgorithm:
                 if self.int_blend:
                     blended_int: int = (val1 + val2) // 2
                     ind1[param_name], ind2[param_name] = blended_int, blended_int
-
-                    # Clamp the values
-                    start, stop, _ = self._resolve_genome(param_name, annotation, ind1)
-                    ind1[param_name] = max(min(ind1[param_name], stop), start)
-                    start, stop, _ = self._resolve_genome(param_name, annotation, ind2)
-                    ind2[param_name] = max(min(ind2[param_name], stop), start)
                 else:
                     ind1[param_name], ind2[param_name] = val2, val1
+
+                # Clamp the values
+                start, stop, _ = self._resolve_genome(param_name, annotation, ind1)
+                ind1[param_name] = max(min(ind1[param_name], stop), start)
+                start, stop, _ = self._resolve_genome(param_name, annotation, ind2)
+                ind2[param_name] = max(min(ind2[param_name], stop), start)
 
             # Unified handling for all other gaTypes (int, Enum, Union, etc.)
             # And Fallback for unsupported gaTypes
@@ -406,6 +413,15 @@ class GeneticAlgorithm:
 
                 ind1[param_name], ind2[param_name] = val2, val1
 
+        for ind in [ind1, ind2]:
+            for param_name, annotation in self.genome_types.items():
+                if annotation is float:
+                    start, stop, _ = self._resolve_genome(param_name, annotation, ind)
+                    ind[param_name] = max(min(ind[param_name], stop), start)
+                elif annotation is int:
+                    start, stop, _ = self._resolve_genome(param_name, annotation, ind)
+                    ind[param_name] = max(min(ind[param_name], stop), start)
+
     def mutate(
             self,
             individual,
@@ -418,6 +434,8 @@ class GeneticAlgorithm:
         for param_name, annotation in param_settings.items():
             roll: float = random.random()
             val: any = individual[param_name]
+            if param_name in ["slow_period", "fast_period"]:
+                None
 
             def roll_check(mutate_prob, mutation_func) -> bool:
                 if roll < mutate_prob:
@@ -473,6 +491,11 @@ class GeneticAlgorithm:
                 logger.warning(f"Unsupported type detected for {param_name}: {annotation}")
                 sleep(1)
 
+        for param_name, annotation in self.genome_types.items():
+            if annotation is float or annotation is int:
+                start, stop, _ = self._resolve_genome(param_name, annotation, individual)
+                individual[param_name] = max(min(individual[param_name], stop), start)
+
         if return_individual:
             return individual
 
@@ -482,14 +505,11 @@ class GeneticAlgorithm:
         step = self.genome_settings[genome][annotation].get('step', None)
 
         if isinstance(start, str):
-            start = eval(start, SAFE_GLOBALS, (individual | SAFE_BUILTINS))
+            start = eval(start, SAFE_GLOBALS, dict(individual, **SAFE_BUILTINS, **{"gs": self.genome_settings}))
         if isinstance(stop, str):
-            stop = eval(stop, SAFE_GLOBALS, (individual | SAFE_BUILTINS))
+            stop = eval(stop, SAFE_GLOBALS, dict(individual, **{"gs": self.genome_settings}, **SAFE_BUILTINS))
         if step is not None and isinstance(step, str):
-            step = eval(step, SAFE_GLOBALS, (individual | SAFE_BUILTINS))
-
-        if stop <= start:
-            raise ValueError(f"Invalid range for {genome}: stop ({stop}) must be greater than start ({start}).")
+            step = eval(step, SAFE_GLOBALS, dict(individual, **SAFE_BUILTINS, **{"gs": self.genome_settings}))
 
         return start, stop, step
 
@@ -558,8 +578,8 @@ if __name__ == '__main__':
         },
         'slow_period': {
             int: {
-                'start': '{fast_period} + 1',
-                'stop': 101,
+                'start': '{{fast_period}} + 10',
+                'stop': "{{fast_period}} + 100",
                 'step': 1
             }
         },
@@ -586,7 +606,7 @@ if __name__ == '__main__':
         },
         'crossover_max_gradient_degree': {
             float: {
-                'start': 0.0,
+                'start': 0.5,
                 'stop': 90.0,
                 'step': 0.5
             }
@@ -656,7 +676,6 @@ if __name__ == '__main__':
         }
     }
 
-
     ga = GeneticAlgorithm(
         species=MovingAverageConvergenceDivergence,
         bt_settings={
@@ -674,7 +693,7 @@ if __name__ == '__main__':
         blacklist_genes=None,
         whitelist_genes=None,
         base_params=None,
-        int_blend=False,
+        int_blend=True,
         mutate_tp=mutate_tp,
         mate_tp=mate_tp,
         mutation_strength=0.1,
@@ -685,6 +704,6 @@ if __name__ == '__main__':
 
     print(ga.run(
         generations=50,
-        population_size=15,
-        use_multiprocessing=False
+        population_size=25,
+        use_multiprocessing=True
     ))

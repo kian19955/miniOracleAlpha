@@ -64,7 +64,7 @@ def fetch_klines(
         hours: int = 0,
         minutes: int = 0,
         seconds: int = 0,
-        use_csv: bool = False
+        use_csv: bool = True
 ):
     """
     Retrieves klines from Binance
@@ -129,17 +129,24 @@ def fetch_klines(
         )
 
     # Convert to UNIX timestamp
-    start_timestamp: int = int(time.mktime(start_timestamp.timetuple())) * 1000
-    end_timestamp: int = int(time.mktime(end_timestamp.timetuple())) * 1000
+    start_timestamp_unix: int = int(time.mktime(start_timestamp.timetuple())) * 1000
+    end_timestamp_unix: int = int(time.mktime(end_timestamp.timetuple())) * 1000
 
     df: DataFrame = DataFrame(columns=columns)
 
-    while end_timestamp > start_timestamp:
+    total_time = end_timestamp_unix - start_timestamp_unix
+    current_time = start_timestamp_unix
+
+    while current_time < end_timestamp_unix:
+        # Calculate progress percentage
+        progress = ((current_time - start_timestamp_unix) / total_time) * 100
+        print(f"Fetching data... {progress:.2f}% complete")
+
         params: dict = {
             'symbol': ticker,
             'interval': interval,
-            'startTime': start_timestamp,
-            'endTime': end_timestamp,
+            'startTime': current_time,
+            'endTime': end_timestamp_unix,
             'limit': 1000
         }
 
@@ -148,7 +155,6 @@ def fetch_klines(
         data = response.json()
 
         handle_binance_status(response.status_code, data)
-
 
         if len(data) == 0:
             break
@@ -163,8 +169,8 @@ def fetch_klines(
         else:
             df = concat([df, new_df])
 
-        # +1 to start the next request just after the current one ends.
-        start_timestamp = data[-1][6] + 1
+        # Update current_time to the end of the current batch
+        current_time = data[-1][6] + 1
 
     df.drop("unused", axis=1, inplace=True)
 
@@ -173,4 +179,14 @@ def fetch_klines(
 
     df.to_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
 
+    print("Data fetching complete!")
     return df
+
+
+if __name__ == '__main__':
+    intervals = "15m"
+    days = 92
+    tickers = [ "SOLUSDT"]
+
+    for ticker in tickers:
+        fetch_klines(ticker, intervals, days = days)

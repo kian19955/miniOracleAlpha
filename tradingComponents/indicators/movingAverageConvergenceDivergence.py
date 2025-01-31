@@ -88,8 +88,8 @@ class MovingAverageConvergenceDivergence:
 
         self_df: DataFrame = df.copy().iloc[-valid_df_range:]
 
-        long_term_ema: Series = self_df['close'].ewm(span=self.slow_period, adjust=False).mean()
-        short_term_ema: Series = self_df['close'].ewm(span=self.fast_period, adjust=False).mean()
+        long_term_ema: Series = self_df.Close.ewm(span=self.slow_period, adjust=False).mean()
+        short_term_ema: Series = self_df.Close.ewm(span=self.fast_period, adjust=False).mean()
 
         macd_line = short_term_ema - long_term_ema
         signal_line_ema: Series = macd_line.ewm(span=self.signal_line_period, adjust=False).mean()

@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="finished ga">
-      <change afterPath="$PROJECT_DIR$/scratchBacktester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="tried implementing backtrader into our project">
+      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/miniOracleV1.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/miniOracleV1.0.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_30_2025_10_47_AM__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/marketHistoryData/DOGEUSDT_0.03333333333333333_1s.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/binanceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceApi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtest/plot_data.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/marketHistoryData/DOGEUSDT_7_1m.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/movingAverageConvergenceDivergence.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/movingAverageConvergenceDivergence.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
     </list>
@@ -33,6 +39,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -88,6 +95,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "com.codeium.enabled": "true",
     "git-widget-placeholder": "main",
+    "last.edited.regexp": "{}",
     "last_opened_file_path": "C:/Users/kians/PycharmProjects/miniOracleV1.0",
     "settings.editor.selected.configurable": "preferences.pluginManager"
   }
@@ -312,7 +320,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738073423156</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="tried implementing backtrader into our project">
+      <option name="closed" value="true" />
+      <created>1738245419425</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1738245419425</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -362,7 +378,8 @@
     <MESSAGE value="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance." />
     <MESSAGE value="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate" />
     <MESSAGE value="finished ga" />
-    <option name="LAST_COMMIT_MESSAGE" value="finished ga" />
+    <MESSAGE value="tried implementing backtrader into our project" />
+    <option name="LAST_COMMIT_MESSAGE" value="tried implementing backtrader into our project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -426,6 +443,21 @@
           <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
           <line>121</line>
           <option name="timeStamp" value="211" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
+          <line>509</line>
+          <option name="timeStamp" value="216" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
+          <line>511</line>
+          <option name="timeStamp" value="217" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
+          <line>507</line>
+          <option name="timeStamp" value="243" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

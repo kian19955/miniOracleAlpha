@@ -76,7 +76,7 @@ class RelativeStrengthIndex():
             return 0
 
         self_df: DataFrame = df.iloc[-valid_df_range:]
-        rsi_series: Series = rsi(close=self_df.close, length=self.period)
+        rsi_series: Series = rsi(close=self_df.Close, length=self.period)
 
         rsi_value: float = rsi_series.iloc[-1]
 
