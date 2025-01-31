@@ -188,5 +188,6 @@ if __name__ == '__main__':
     days = 92
     tickers = [ "SOLUSDT"]
 
-    for ticker in tickers:
+    for i, ticker in enumerate(tickers):
+        print(f"{i}/{len(tickers)}, Fetching {ticker}")
         fetch_klines(ticker, intervals, days = days)
