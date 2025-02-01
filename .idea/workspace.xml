@@ -4,20 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="tried implementing backtrader into our project">
-      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/miniOracleV1.0.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/miniOracleV1.0.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_30_2025_10_47_AM__Changes_.xml" beforeDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="\ No newline at end of file&#10;&#10;Update and clean genetic algorithm implementation&#10;&#10;• Refactor genome type handling and dependency graph construction&#10;• Remove debug print statements and exit calls&#10;• Update logging configuration&#10;• Adjust method parameter handling and validation&#10;• Clean up IDE workspace configuration and breakpoints">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/binanceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtest/plot_data.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/marketHistoryData/DOGEUSDT_7_1m.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/movingAverageConvergenceDivergence.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/movingAverageConvergenceDivergence.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scratchBacktester.py" beforeDir="false" afterPath="$PROJECT_DIR$/scratchBacktester.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,12 +39,12 @@
     &quot;assignee&quot;: &quot;kian19955&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/kian19955/miniOracleAlpha.git&quot;,
-    &quot;accountId&quot;: &quot;ad06c969-f73d-4fef-b6f5-d7139e6a852d&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kian19955/miniOracleAlpha.git",
+    "accountId": "96e72a4d-0d29-4920-942f-c0faf49d958e"
   }
-}</component>
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -88,6 +80,7 @@
     "Python.plotter.executor": "Run",
     "Python.s2.executor": "Run",
     "Python.scratch.executor": "Run",
+    "Python.scratchBacktester.executor": "Run",
     "Python.stochastic.executor": "Run",
     "Python.test.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -457,7 +450,7 @@
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
           <line>507</line>
-          <option name="timeStamp" value="243" />
+          <option name="timeStamp" value="244" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

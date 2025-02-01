@@ -185,9 +185,9 @@ def fetch_klines(
 
 if __name__ == '__main__':
     intervals = "15m"
-    days = 92
-    tickers = [ "SOLUSDT"]
+    days = 93
+    tickers = ["XRPUSDT"]
 
     for i, ticker in enumerate(tickers):
-        print(f"{i}/{len(tickers)}, Fetching {ticker}")
+        print(f"{i+1}/{len(tickers)}, Fetching {ticker}")
         fetch_klines(ticker, intervals, days = days)
