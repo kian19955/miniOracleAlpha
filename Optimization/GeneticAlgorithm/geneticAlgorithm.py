@@ -332,6 +332,9 @@ class GeneticAlgorithm:
                 use_csv=True
             )
 
+            for genome_name in self.key_genomes.keys():
+                print(stats[genome_name])
+
             values: list[float | int] = []
             for genome_name, weight in self.key_genomes.items():
                 genome_value = stats[genome_name]

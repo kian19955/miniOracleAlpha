@@ -52,7 +52,7 @@ class Backtester(Strategy):
         # If confidence indicates a 'sell' signal (i.e. want to be short)
         if conf <= self.sell_limit:
             if self.trade_short and not self.position or self.position.is_long:
-                self.sell(sl=self.create_sl(False), tp=self.create_tp(False))
+                self.sell(size=1.0, sl=self.create_sl(False), tp=self.create_tp(False))
 
             # Close long position
             elif self.position.is_long:
@@ -61,8 +61,8 @@ class Backtester(Strategy):
 
         # If confidence indicates a 'buy' signal (i.e. want to be long)
         elif conf >= self.buy_limit:
-            if not self.position or self.position.is_short:
-                self.buy(sl=self.create_sl(True), tp=self.create_tp(True))
+            if self.trade_long and not self.position or self.position.is_short:
+                self.buy(size=1.0, sl=self.create_sl(True), tp=self.create_tp(True))
 
             # Close short position
             elif self.position.is_short:
@@ -116,18 +116,19 @@ def backtest(
 
 if __name__ == "__main__":
     from tradingComponents.indicators import RelativeStrengthIndex
-    tc = RelativeStrengthIndex(period=14, lower_band=30, upper_band=70)
+    tc = RelativeStrengthIndex(period=3, lower_band=28.400000000000002, upper_band=77.4)
     stats, bt = backtest(
         tc.evaluate,
-        ticker="DOGEUSDT",
-        days=100,
-        interval="1h",
+        ticker="BTCUSDT",
+        days=48,
+        interval="5m",
         sell_limit=-0.75,
         buy_limit=0.75,
-        stop_loss=0.02,
-        take_profit=0.04,
-        micro_factor=None,
-        leverage=0.1
+        stop_loss=0.507,
+        take_profit=0.674,
+        trade_long=False,
+        micro_factor=100000,
+        leverage=1
     )
 
     print(stats._trades)
