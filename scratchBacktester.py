@@ -18,26 +18,20 @@ class Backtester(Strategy):
     take_profit = None
     stop_loss = None
 
-    leverage = 1
-
     def init(self):
         if self.eval_func is None:
             raise ValueError("You must set 'eval_func' to a callable that returns a confidence signal.")
 
-        self.tp_level: Optional[float] = None
-        self.sl_level: Optional[float] = None
-
-        self.position_entered = False
+        self.position_closed: bool = False
 
     def create_sl(self, position_long: bool):
         if self.stop_loss is not None:
             if position_long:
-                limit = self.data.Close[-1] * (1 - self.stop_loss)
+                stop = self.data.Close[-1] * (1 - self.stop_loss)
             else:
-                limit = self.data.Close[-1] * (1 + self.stop_loss)
+                stop = self.data.Close[-1] * (1 + self.stop_loss)
 
-            self.sl_level = limit
-            return limit
+            return stop
 
     def create_tp(self, position_long: bool):
         if self.stop_loss is not None:
@@ -46,17 +40,24 @@ class Backtester(Strategy):
             else:
                 limit = self.data.Close[-1] * (1 - self.take_profit)
 
-            self.tp_level = limit
             return limit
 
     def next(self):
         conf = self.eval_func(self.data.df)
+
+        if not self.position and not self.position_closed:
+            self.on_close(True)
+
+        elif not self.position and self.position_closed:
+            self.on_close(True)
+            self.position_closed = False
 
         # If confidence indicates a 'sell' signal (i.e. want to be short)
         if conf <= self.sell_limit:
             if self.trade_short and not self.position or self.position.is_long:
                 self.sell(sl=self.create_sl(False), tp=self.create_tp(False))
             elif self.position.is_long:
+                self.position_closed = True
                 self.position.close()
 
         # If confidence indicates a 'buy' signal (i.e. want to be long)
@@ -64,18 +65,11 @@ class Backtester(Strategy):
             if not self.position or self.position.is_short:
                 self.buy(sl=self.create_sl(True), tp=self.create_tp(True))
             elif self.position.is_short:
+                self.position_closed = True
                 self.position.close()
 
-    def on_trade(self, trade):
-        if trade.is_closed:
-            if self.tp_level is not None and trade.exit_price >= self.tp_level:
-                print("Trade closed due to take profit.")
-
-            elif self.sl_level is not None and trade.exit_price <= self.sl_level:
-                print("Trade closed due to stop loss.")
-
-            self.tp_level, self.sl_level = None, None
-
+    def on_close(self, user_closed: bool = False):
+        ...
 
 def backtest(
     eval_func,
@@ -85,7 +79,7 @@ def backtest(
     sell_limit = -0.75, buy_limit = 0.75,
     trade_long = True, trade_short = True,
     stop_loss = None, take_profit = None,
-    margin = 1,
+    leverage = 1,
     micro_factor: Optional[int] = None,
     use_csv = True,
 ) -> tuple[pd.DataFrame, Backtest]:
@@ -99,8 +93,8 @@ def backtest(
         df,
         Backtester,
         commission=commission,
-        cash=10000,
-        margin=margin,
+        cash=100000000,
+        margin=leverage,
     )
 
     bt._strategy.eval_func = eval_func
@@ -129,9 +123,9 @@ if __name__ == "__main__":
         interval="1m",
         sell_limit=-0.75,
         buy_limit=0.75,
-        stop_loss=0.001,
-        take_profit=0.001,
-        micro_factor=1000000
+        stop_loss=None,
+        take_profit=None,
+        micro_factor=None
     )
 
     print(stats)

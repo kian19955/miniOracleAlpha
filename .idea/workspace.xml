@@ -4,12 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="\ No newline at end of file&#10;&#10;Update and clean genetic algorithm implementation&#10;&#10;• Refactor genome type handling and dependency graph construction&#10;• Remove debug print statements and exit calls&#10;• Update logging configuration&#10;• Adjust method parameter handling and validation&#10;• Clean up IDE workspace configuration and breakpoints">
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_25_2025_7_40_PM_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_25_2025_7_40_PM__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_25_2025_9_32_PM_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_25_2025_9_32_PM__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_25_2025_7_40_PM_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_25_2025_7_40_PM__Changes_1.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/binanceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceApi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scratchBacktester.py" beforeDir="false" afterPath="$PROJECT_DIR$/scratchBacktester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,12 +45,12 @@
     &quot;assignee&quot;: &quot;kian19955&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/kian19955/miniOracleAlpha.git",
-    "accountId": "96e72a4d-0d29-4920-942f-c0faf49d958e"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kian19955/miniOracleAlpha.git&quot;,
+    &quot;accountId&quot;: &quot;96e72a4d-0d29-4920-942f-c0faf49d958e&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -54,45 +60,45 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python tests.Doctests in common.executor": "Debug",
-    "Python.BB_RSI_Lines.executor": "Run",
-    "Python.NobitexApi.executor": "Run",
-    "Python.RSI_Lines.executor": "Run",
-    "Python.SEPWallet.executor": "Debug",
-    "Python.analysis.executor": "Run",
-    "Python.backtestMain.executor": "Run",
-    "Python.backtester.executor": "Run",
-    "Python.binanceApi.executor": "Run",
-    "Python.bollingerBands.executor": "Run",
-    "Python.constants.executor": "Run",
-    "Python.csvHandler.executor": "Run",
-    "Python.csvWriter.executor": "Run",
-    "Python.dataAnalyse.executor": "Run",
-    "Python.fitter.executor": "Run",
-    "Python.geneticAlgorithm.executor": "Run",
-    "Python.kiansVision.executor": "Run",
-    "Python.loggingManager.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.nd.executor": "Run",
-    "Python.orders.executor": "Run",
-    "Python.plotter.executor": "Run",
-    "Python.s2.executor": "Run",
-    "Python.scratch.executor": "Run",
-    "Python.scratchBacktester.executor": "Run",
-    "Python.stochastic.executor": "Run",
-    "Python.test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "last.edited.regexp": "{}",
-    "last_opened_file_path": "C:/Users/kians/PycharmProjects/miniOracleV1.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python tests.Doctests in common.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.BB_RSI_Lines.executor&quot;: &quot;Run&quot;,
+    &quot;Python.NobitexApi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.RSI_Lines.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SEPWallet.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.analysis.executor&quot;: &quot;Run&quot;,
+    &quot;Python.backtestMain.executor&quot;: &quot;Run&quot;,
+    &quot;Python.backtester.executor&quot;: &quot;Run&quot;,
+    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.bollingerBands.executor&quot;: &quot;Run&quot;,
+    &quot;Python.constants.executor&quot;: &quot;Run&quot;,
+    &quot;Python.csvHandler.executor&quot;: &quot;Run&quot;,
+    &quot;Python.csvWriter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.dataAnalyse.executor&quot;: &quot;Run&quot;,
+    &quot;Python.fitter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.kiansVision.executor&quot;: &quot;Run&quot;,
+    &quot;Python.loggingManager.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.nd.executor&quot;: &quot;Run&quot;,
+    &quot;Python.orders.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plotter.executor&quot;: &quot;Run&quot;,
+    &quot;Python.s2.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scratchBacktester.executor&quot;: &quot;Run&quot;,
+    &quot;Python.stochastic.executor&quot;: &quot;Run&quot;,
+    &quot;Python.test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last.edited.regexp&quot;: &quot;{}&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/kians/PycharmProjects/miniOracleV1.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0" />
@@ -321,7 +327,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738245419425</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing">
+      <option name="closed" value="true" />
+      <created>1738425615213</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1738425615213</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -372,7 +386,8 @@
     <MESSAGE value="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate" />
     <MESSAGE value="finished ga" />
     <MESSAGE value="tried implementing backtrader into our project" />
-    <option name="LAST_COMMIT_MESSAGE" value="tried implementing backtrader into our project" />
+    <MESSAGE value="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -436,21 +451,6 @@
           <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
           <line>121</line>
           <option name="timeStamp" value="211" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>509</line>
-          <option name="timeStamp" value="216" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>511</line>
-          <option name="timeStamp" value="217" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>507</line>
-          <option name="timeStamp" value="244" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

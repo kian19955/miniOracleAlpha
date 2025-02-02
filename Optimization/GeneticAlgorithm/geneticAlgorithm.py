@@ -44,6 +44,7 @@ class GeneticAlgorithm:
             key_genomes: dict[str, any],
 
             genome_settings: dict[str, dict[type, dict[str | type, any]]] = None,
+            stop_settings: dict[str, dict[str, float]] = None,
 
             blacklist_genes: Optional[tuple[str]] = None,
             whitelist_genes: Optional[tuple[str]] = None,
@@ -59,7 +60,6 @@ class GeneticAlgorithm:
             tournament_size: int = 2
     ):
         """
-
         :param species: The type of the individual
         :param bt_settings: A dictionary which will be used as the default settings for the backtesting function
         :param key_genomes: Key is key parameter name of the analysis metrics, value is weight where
@@ -89,7 +89,9 @@ class GeneticAlgorithm:
         self.tc: Type = species
         self.bt_settings: dict = bt_settings
         self.key_genomes: OrderedDict = OrderedDict(key_genomes)
+
         self.genome_settings: dict[str, dict[type, dict[str | type, any]]] = genome_settings or {}
+        self.stop_settings: dict[str, dict[str, float]] = stop_settings or {}
 
         self.float_blend = float_blend
         self.int_blend = int_blend
@@ -172,7 +174,6 @@ class GeneticAlgorithm:
     @staticmethod
     def _extract_relation(operation: str) -> tuple[list[Any], str]:
         return re.findall(r'\{\{([^}]+)}}', operation), re.sub(r"\{\{|}}", "", operation)
-
 
     @staticmethod
     def _topological_sort(graph: dict[str, list[str]], param_types: dict[str, type]) -> OrderedDict[str, type]:
@@ -270,7 +271,7 @@ class GeneticAlgorithm:
         return best_performer
 
     def create_individual(self):
-        individual: dict[str, any] = {}
+        dna: dict[str, any] = {}
         for param_name, annotation in self.genome_types.items():
 
             if self.genome_settings.get(param_name, None) is not None and len(
@@ -279,53 +280,61 @@ class GeneticAlgorithm:
                 annotation = random.choice(possible_types)
 
             if annotation is float:
-                individual[param_name] = randfloat(
+                dna[param_name] = randfloat(
                     *self._resolve_genome(
                         param_name,
                         annotation,
-                        individual
+                        dna
                     )
                 )
 
             elif annotation is int:
-                individual[param_name] = random.randrange(
+                dna[param_name] = random.randrange(
                     *self._resolve_genome(
                         param_name,
                         annotation,
-                        individual
+                        dna
                     )
                 )
 
             elif annotation is bool:
-                individual[param_name] = random.choice([True, False])
+                dna[param_name] = random.choice([True, False])
 
             elif isinstance(annotation, EnumMeta):
-                individual[param_name] = self._retrieve_random_enum(param_name, annotation)
+                dna[param_name] = self._retrieve_random_enum(param_name, annotation)
 
             elif annotation is type(None):
-                individual[param_name] = None
+                dna[param_name] = None
 
             else:
                 raise ValueError(f"Unsupported type {annotation} for parameter {param_name}")
 
-        return individual
+        # REMAKE STOPS
+        stops: dict[str, float] = {}
+        for stop_name, settings in self.stop_settings.items():
+            stops[stop_name] = randfloat(
+                **settings
+            )
+        # ------------------
+
+        return {"dna": dna, "stops": stops}
 
     def evaluate(self, genome):
+        # REMAKE stopS
+        # ["dna"] and **genome["stops"]
         try:
-            if genome["slow_period"] < genome["fast_period"]:
-                raise ValueError("Slow period must be greater than fast period")
-            individual = self.tc(**(genome | self.base_params))
+            individual = self.tc(**(genome["dna"] | self.base_params))
 
             _, bt_df = backtest(
                 eval_func=individual.evaluate,
                 **self.bt_settings,
+                **genome["stops"],
                 use_csv=True
             )
 
             performance: dict[str, any] = analyze(
                 target_filename=self.bt_settings['ticker'] + "_" + str(self.bt_settings['days']) + "_" +
-                                self.bt_settings[
-                                    'interval'] + ".csv",
+                                self.bt_settings['interval'] + ".csv",
                 bt_df=bt_df,
                 trade_long=self.bt_settings.get('trade_long', True),
                 trade_short=self.bt_settings.get('trade_short', True),
@@ -349,11 +358,13 @@ class GeneticAlgorithm:
         return tuple(values)
 
     def mate(self, ind1, ind2):
+        # REMAKE stopS
+        # ["dna"]
         for param_name, annotation in self.genome_types.items():
             roll: float = random.random()
 
-            val1 = ind1[param_name]
-            val2 = ind2[param_name]
+            val1 = ind1["dna"][param_name]
+            val2 = ind2["dna"][param_name]
 
             # Resolve actual type if same (simplifies subsequent handling)
             # In case of Union
@@ -365,14 +376,14 @@ class GeneticAlgorithm:
                     continue
 
                 gamma = (1. + 2. * self.float_blend) * random.random() - self.float_blend
-                ind1[param_name] = (1. - gamma) * val1 + gamma * val2
-                ind2[param_name] = gamma * val1 + (1. - gamma) * val2
+                ind1["dna"][param_name] = (1. - gamma) * val1 + gamma * val2
+                ind2["dna"][param_name] = gamma * val1 + (1. - gamma) * val2
 
                 # Clamp the values
                 start, stop, _ = self._resolve_genome(param_name, annotation, ind1)
-                ind1[param_name] = max(min(ind1[param_name], stop), start)
+                ind1["dna"][param_name] = max(min(ind1["dna"][param_name], stop), start)
                 start, stop, _ = self._resolve_genome(param_name, annotation, ind2)
-                ind2[param_name] = max(min(ind2[param_name], stop), start)
+                ind2["dna"][param_name] = max(min(ind2["dna"][param_name], stop), start)
 
 
             elif annotation is int:
@@ -381,15 +392,15 @@ class GeneticAlgorithm:
 
                 if self.int_blend:
                     blended_int: int = (val1 + val2) // 2
-                    ind1[param_name], ind2[param_name] = blended_int, blended_int
+                    ind1["dna"][param_name], ind2["dna"][param_name] = blended_int, blended_int
                 else:
-                    ind1[param_name], ind2[param_name] = val2, val1
+                    ind1["dna"][param_name], ind2["dna"][param_name] = val2, val1
 
                 # Clamp the values
                 start, stop, _ = self._resolve_genome(param_name, annotation, ind1)
-                ind1[param_name] = max(min(ind1[param_name], stop), start)
+                ind1["dna"][param_name] = max(min(ind1["dna"][param_name], stop), start)
                 start, stop, _ = self._resolve_genome(param_name, annotation, ind2)
-                ind2[param_name] = max(min(ind2[param_name], stop), start)
+                ind2["dna"][param_name] = max(min(ind2["dna"][param_name], stop), start)
 
             # Unified handling for all other gaTypes (int, Enum, Union, etc.)
             # And Fallback for unsupported gaTypes
@@ -411,7 +422,20 @@ class GeneticAlgorithm:
                     if roll > self.mate_tp.OTHER:
                         continue
 
-                ind1[param_name], ind2[param_name] = val2, val1
+                ind1["dna"][param_name], ind2["dna"][param_name] = val2, val1
+
+        # REMAKE stopS
+        for stop_name, stop in self.stop_settings.items():
+            if random.random() > self.mate_tp.FLOAT:
+                continue
+
+            stop1 = ind1["stops"][stop_name]
+            stop2 = ind2["stops"][stop_name]
+
+            gamma = (1. + 2. * self.float_blend) * random.random() - self.float_blend
+            ind1["stops"][stop_name] = (1. - gamma) * stop1 + gamma * stop2
+            ind2["stops"][stop_name] = gamma * stop1 + (1. - gamma) * stop2
+        # --------
 
         for ind in [ind1, ind2]:
             for param_name, annotation in self.genome_types.items():
@@ -434,8 +458,6 @@ class GeneticAlgorithm:
         for param_name, annotation in param_settings.items():
             roll: float = random.random()
             val: any = individual[param_name]
-            if param_name in ["slow_period", "fast_period"]:
-                None
 
             def roll_check(mutate_prob, mutation_func) -> bool:
                 if roll < mutate_prob:
@@ -490,6 +512,19 @@ class GeneticAlgorithm:
             else:
                 logger.warning(f"Unsupported type detected for {param_name}: {annotation}")
                 sleep(1)
+
+        # REMAKE stopS
+        for stop_name, stop in self.stop_settings.items():
+            if random.random() > self.mutate_tp.FLOAT:
+                continue
+            individual["stops"][stop_name] = gauss_clamp(
+                individual["stops"][stop_name],
+                stop=self.stop_settings[stop_name]['stop'],
+                start=self.stop_settings[stop_name]['start'],
+                step=self.stop_settings[stop_name]['step'],
+                strength=self.mutation_strength,
+            )
+        # ---------
 
         for param_name, annotation in self.genome_types.items():
             if annotation is float or annotation is int:
@@ -677,19 +712,31 @@ if __name__ == '__main__':
     }
 
     ga = GeneticAlgorithm(
-        species=MovingAverageConvergenceDivergence,
+        species=RelativeStrengthIndex,
         bt_settings={
-            'ticker': 'SOLUSDT',
-            'days': 7,
-            'interval': '1m',
-            'trade_long': True,
+            'ticker': 'BTCUSDT',
+            'days': 31,
+            'interval': '5m',
+            'trade_long': False,
             'trade_short': True,
         },
         key_genomes={
             'sharpe_ratio': 1,
             'total_profit': 1
         },
-        genome_settings=g_set,
+        genome_settings=RelativeStrengthIndex.GA_GENOME_SETTINGS,
+        stop_settings={
+            'stop_loss': {
+                "start": 0.0,
+                "stop": 1.0,
+                "step": 0.001
+            },
+            'take_profit': {
+                "start": 0.0,
+                "stop": 1.0,
+                "step": 0.001
+            }
+        },
         blacklist_genes=None,
         whitelist_genes=None,
         base_params=None,
@@ -703,7 +750,7 @@ if __name__ == '__main__':
     logger.info("Running Genetic Algorithm...")
 
     print(ga.run(
-        generations=50,
-        population_size=25,
+        generations=150,
+        population_size=50,
         use_multiprocessing=True
     ))

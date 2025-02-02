@@ -33,14 +33,14 @@ class RelativeStrengthIndex():
         'lower_band': {
             float: {
                 'start': 0,
-                'stop': 40,
+                'stop': 100,
                 'step': 0.1
             }
         },
         'upper_band': {
             float: {
-                'start': 60,
-                'stop': 100,
+                'start': "{{lower_band}} + 1",
+                'stop': 101,
                 'step': 0.1
             }
         }
