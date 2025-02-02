@@ -325,27 +325,18 @@ class GeneticAlgorithm:
         try:
             individual = self.tc(**(genome["dna"] | self.base_params))
 
-            _, bt_df = backtest(
+            stats, _ = backtest(
                 eval_func=individual.evaluate,
                 **self.bt_settings,
                 **genome["stops"],
                 use_csv=True
             )
 
-            performance: dict[str, any] = analyze(
-                target_filename=self.bt_settings['ticker'] + "_" + str(self.bt_settings['days']) + "_" +
-                                self.bt_settings['interval'] + ".csv",
-                bt_df=bt_df,
-                trade_long=self.bt_settings.get('trade_long', True),
-                trade_short=self.bt_settings.get('trade_short', True),
-                print_details=False
-            )
-
             values: list[float | int] = []
             for genome_name, weight in self.key_genomes.items():
-                genome_value = performance[genome_name]
+                genome_value = stats[genome_name]
                 if genome_value is None:
-                    logger.warning(f"Info: {genome_name} is None; Total Orders: {performance['total_orders']}")
+                    logger.warning(f"Info: {genome_name} is None; Total Orders: {stats['total_orders']}")
                     genome_value = -100 * weight
                 values.append(genome_value)
 
@@ -441,10 +432,10 @@ class GeneticAlgorithm:
             for param_name, annotation in self.genome_types.items():
                 if annotation is float:
                     start, stop, _ = self._resolve_genome(param_name, annotation, ind)
-                    ind[param_name] = max(min(ind[param_name], stop), start)
+                    ind["dna"][param_name] = max(min(ind["dna"][param_name], stop), start)
                 elif annotation is int:
                     start, stop, _ = self._resolve_genome(param_name, annotation, ind)
-                    ind[param_name] = max(min(ind[param_name], stop), start)
+                    ind["dna"][param_name] = max(min(ind["dna"][param_name], stop), start)
 
     def mutate(
             self,
@@ -457,11 +448,11 @@ class GeneticAlgorithm:
 
         for param_name, annotation in param_settings.items():
             roll: float = random.random()
-            val: any = individual[param_name]
+            val: any = individual["dna"][param_name]
 
             def roll_check(mutate_prob, mutation_func) -> bool:
                 if roll < mutate_prob:
-                    individual[param_name] = mutation_func()
+                    individual["dna"][param_name] = mutation_func()
                     return True
                 return False
 
@@ -488,7 +479,7 @@ class GeneticAlgorithm:
             elif annotation is bool:
                 if roll > self.mutate_tp.BOOL:
                     continue
-                individual[param_name] = not val
+                individual["dna"][param_name] = not val
 
             elif isinstance(annotation, EnumMeta):
                 if roll_check(self.mutate_tp.ENUM, lambda:
@@ -503,7 +494,7 @@ class GeneticAlgorithm:
                               ):
                     continue
                 else:
-                    individual[param_name] = self.mutate(
+                    individual["dna"][param_name] = self.mutate(
                         {param_name: val},
                         {param_name: type(val)},
                         True
@@ -529,7 +520,7 @@ class GeneticAlgorithm:
         for param_name, annotation in self.genome_types.items():
             if annotation is float or annotation is int:
                 start, stop, _ = self._resolve_genome(param_name, annotation, individual)
-                individual[param_name] = max(min(individual[param_name], stop), start)
+                individual["dna"][param_name] = max(min(individual["dna"][param_name], stop), start)
 
         if return_individual:
             return individual
@@ -715,15 +706,17 @@ if __name__ == '__main__':
         species=RelativeStrengthIndex,
         bt_settings={
             'ticker': 'BTCUSDT',
-            'days': 31,
+            'days': 93,
             'interval': '5m',
             'trade_long': False,
             'trade_short': True,
+            'leverage': 0.20,
+            'micro_factor': 100000,
 
         },
         key_genomes={
-            'sharpe_ratio': 1,
-            'total_profit': 1
+            'Sharpe Ratio': 1,
+            'Return [%]': 1
         },
         genome_settings=RelativeStrengthIndex.GA_GENOME_SETTINGS,
         stop_settings={
@@ -738,7 +731,7 @@ if __name__ == '__main__':
                 "step": 0.001
             }
         },
-        blacklist_genes=None,
+        blacklist_genes=('rsi_as_signal',),
         whitelist_genes=None,
         base_params=None,
         int_blend=True,
@@ -751,7 +744,7 @@ if __name__ == '__main__':
     logger.info("Running Genetic Algorithm...")
 
     print(ga.run(
-        generations=150,
-        population_size=50,
+        generations=10,
+        population_size=3,
         use_multiprocessing=True
     ))

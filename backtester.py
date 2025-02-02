@@ -45,17 +45,14 @@ class Backtester(Strategy):
     def next(self):
         conf = self.eval_func(self.data.df)
 
-        if not self.position and not self.position_closed:
-            self.on_close(True)
-
-        elif not self.position and self.position_closed:
+        if not self.position and self.position_closed:
             self.on_close(True)
             self.position_closed = False
 
         # If confidence indicates a 'sell' signal (i.e. want to be short)
         if conf <= self.sell_limit:
             if self.trade_short and not self.position or self.position.is_long:
-                self.sell(size=1.0, sl=self.create_sl(False), tp=self.create_tp(False))
+                self.sell(sl=self.create_sl(False), tp=self.create_tp(False))
 
             # Close long position
             elif self.position.is_long:
@@ -65,7 +62,7 @@ class Backtester(Strategy):
         # If confidence indicates a 'buy' signal (i.e. want to be long)
         elif conf >= self.buy_limit:
             if not self.position or self.position.is_short:
-                self.buy(size=1.0, sl=self.create_sl(True), tp=self.create_tp(True))
+                self.buy(sl=self.create_sl(True), tp=self.create_tp(True))
 
             # Close short position
             elif self.position.is_short:
@@ -97,7 +94,7 @@ def backtest(
         df,
         Backtester,
         commission=commission,
-        cash=100000000,
+        cash=10000,
         margin=leverage,
     )
 
@@ -127,10 +124,12 @@ if __name__ == "__main__":
         interval="1h",
         sell_limit=-0.75,
         buy_limit=0.75,
-        stop_loss=None,
-        take_profit=None,
-        micro_factor=None
+        stop_loss=0.02,
+        take_profit=0.04,
+        micro_factor=None,
+        leverage=0.1
     )
 
+    print(stats._trades)
     print(stats)
-    bt.plot(open_browser=False)
+    bt.plot(open_browser=True)

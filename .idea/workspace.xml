@@ -4,13 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing">
-      <change afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="No file selected">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/binanceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceApi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/scratchBacktester.py" beforeDir="false" afterPath="$PROJECT_DIR$/scratchBacktester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -330,7 +328,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738425615213</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing">
+      <option name="closed" value="true" />
+      <created>1738519985552</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1738519985552</updated>
+    </task>
+    <task id="LOCAL-00028" summary="No file selected">
+      <option name="closed" value="true" />
+      <created>1738519999896</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1738519999896</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -357,7 +371,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="first push" />
     <MESSAGE value="1" />
     <MESSAGE value="2" />
     <MESSAGE value="3" />
@@ -382,7 +395,8 @@
     <MESSAGE value="finished ga" />
     <MESSAGE value="tried implementing backtrader into our project" />
     <MESSAGE value="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing" />
+    <MESSAGE value="No file selected" />
+    <option name="LAST_COMMIT_MESSAGE" value="No file selected" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

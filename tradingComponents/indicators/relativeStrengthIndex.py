@@ -26,21 +26,21 @@ class RelativeStrengthIndex():
         'period': {
             int: {
                 'start': 1,
-                'stop': 100,
+                'stop': 20,
                 'step': 1
             }
         },
         'lower_band': {
             float: {
                 'start': 0,
-                'stop': 100,
+                'stop': 50,
                 'step': 0.1
             }
         },
         'upper_band': {
             float: {
-                'start': "{{lower_band}} + 1",
-                'stop': 101,
+                'start': 50,
+                'stop': 100,
                 'step': 0.1
             }
         }
