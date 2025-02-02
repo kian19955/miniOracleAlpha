@@ -719,6 +719,7 @@ if __name__ == '__main__':
             'interval': '5m',
             'trade_long': False,
             'trade_short': True,
+
         },
         key_genomes={
             'sharpe_ratio': 1,

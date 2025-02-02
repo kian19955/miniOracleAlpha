@@ -5,17 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_25_2025_7_40_PM_[Changes]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_25_2025_7_40_PM__Changes_.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_25_2025_9_32_PM_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_1_25_2025_9_32_PM__Changes_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_25_2025_7_40_PM_[Changes]1/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_1_25_2025_7_40_PM__Changes_1.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/csv-editor.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/binanceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceApi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/scratchBacktester.py" beforeDir="false" afterPath="$PROJECT_DIR$/scratchBacktester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/relativeStrengthIndex.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -104,11 +99,11 @@
       <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Navid\AppData\Roaming\JetBrains\PyCharmCE2024.3\scratches" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha" />
       <recent name="C:\Users\navid_yaghmaei\PycharmProjects\miniOracleAlpha" />
       <recent name="C:\Users\navid_yaghmaei\PycharmProjects\miniOracleAlpha\kianIsGod" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\tradingComponents" />
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\plugins" />
     </key>
   </component>
   <component name="SharedIndexes">

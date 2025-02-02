@@ -184,10 +184,10 @@ def fetch_klines(
 
 
 if __name__ == '__main__':
-    intervals = "15m"
-    days = 93
-    tickers = ["XRPUSDT"]
+    intervals = "5m"
+    days = 365
+    tickers = ["BTCUSDT", "DOGEUSDT"]
 
     for i, ticker in enumerate(tickers):
         print(f"{i+1}/{len(tickers)}, Fetching {ticker}")
-        fetch_klines(ticker, intervals, days = days)
+        fetch_klines(ticker, intervals, days = days, use_csv=True)
