@@ -5,9 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="fix(ga): correct genome value evaluation&#10;&#10;• Ensure genome values are retrieved from backtest stats&#10;• Fixes issues when genome_value returned None&#10;• Adjusts mutation logic to prevent out-of-bound values">
+      <change beforePath="$PROJECT_DIR$/.idea/csv-editor.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/binanceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceApi.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/custom_logger/loggingFormatter.py" beforeDir="false" afterPath="$PROJECT_DIR$/custom_logger/loggingFormatter.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -70,7 +73,7 @@
     "Python.csvWriter.executor": "Run",
     "Python.dataAnalyse.executor": "Run",
     "Python.fitter.executor": "Run",
-    "Python.geneticAlgorithm.executor": "Debug",
+    "Python.geneticAlgorithm.executor": "Run",
     "Python.kiansVision.executor": "Run",
     "Python.loggingManager.executor": "Run",
     "Python.main.executor": "Run",
@@ -352,7 +355,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738521313986</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix(ga): correct genome value evaluation&#10;&#10;• Ensure genome values are retrieved from backtest stats&#10;• Fixes issues when genome_value returned None&#10;• Adjusts mutation logic to prevent out-of-bound values">
+      <option name="closed" value="true" />
+      <created>1738522714660</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1738522714660</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -468,16 +479,6 @@
           <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
           <line>121</line>
           <option name="timeStamp" value="211" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>335</line>
-          <option name="timeStamp" value="212" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>334</line>
-          <option name="timeStamp" value="213" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

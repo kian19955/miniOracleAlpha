@@ -1,109 +1,125 @@
-{"timestamp": "2025-02-02 11:58:43,086", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 11:58:46,467", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 750, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 11:58:46,467", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 11:58:46,747", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 12:00:15,153", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 12:00:15,199", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 750, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 12:00:15,200", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 12:00:15,487", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 12:00:36,619", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 12:00:36,664", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 750, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 12:00:36,665", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 12:00:37,006", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 12:01:30,416", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 12:01:30,456", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 750, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 12:01:30,456", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 12:01:30,717", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 12:01:30,719", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 12:01:32,670", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 1", "exc_info": null}
-{"timestamp": "2025-02-02 12:01:32,671", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 12:05:29,517", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 12:05:29,557", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 750, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 12:05:29,557", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 12:05:29,872", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 12:05:29,874", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 12:05:31,959", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 1", "exc_info": null}
-{"timestamp": "2025-02-02 12:05:31,960", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:17,286", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:17,370", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 744, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:17,370", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:17,672", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:17,673", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:30,521", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:30,602", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 744, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:30,602", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:30,873", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:30,873", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:57,886", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 1", "exc_info": null}
-{"timestamp": "2025-02-02 19:31:57,886", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:33:44,992", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 19:33:45,079", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 744, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 19:33:45,079", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 19:33:45,528", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:33:45,528", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:13,711", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 1", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:13,711", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:13,711", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:27,221", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:27,303", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 744, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:27,303", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:27,718", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:27,718", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:54,307", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 1", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:54,308", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:54,308", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:34:54,308", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:21,267", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 1/10: Best Fitness = (0.0, -100.0)", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:21,267", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 2", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:21,268", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:21,268", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:21,268", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:47,823", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 2/10: Best Fitness = (0.0, -100.0)", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:47,823", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 3", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:47,823", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:47,824", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:47,824", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:51,575", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 3/10: Best Fitness = (0.0, -100.0)", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:51,576", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 4", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:51,576", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:51,577", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:51,577", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:55,437", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 4/10: Best Fitness = (0.0, -100.0)", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:55,438", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 5", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:55,438", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:55,438", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:35:55,438", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:22,322", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 5/10: Best Fitness = (0.0, -100.0)", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:22,322", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 6", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:22,323", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:22,323", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:22,323", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:50,053", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 6/10: Best Fitness = (0.0, -100.0)", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:50,053", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 7", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:50,053", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:50,053", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:50,053", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:54,186", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 7/10: Best Fitness = (0.0, -100.0)", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:54,186", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 8", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:54,187", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:54,187", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:54,187", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:58,535", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 8/10: Best Fitness = (0.0, -100.0)", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:58,535", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 9", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:58,535", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:58,535", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:36:58,535", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:02,145", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:02,227", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 747, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:02,227", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:02,489", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:02,489", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:08,565", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 1", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:08,566", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:08,566", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:08,566", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:33,350", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:33,444", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 747, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:33,444", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:33,781", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
-{"timestamp": "2025-02-02 19:37:33,781", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:19:58,833", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 11:20:07,350", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 747, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 11:20:07,351", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 11:20:07,766", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:20:07,767", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:20:42,429", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 1", "exc_info": null}
+{"timestamp": "2025-02-03 11:20:42,429", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 11:20:42,429", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:20:42,429", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:16,550", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 1/10: Best Fitness = (1.3394619437761026, 17.109040345678935)", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:16,550", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 2", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:16,550", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:16,550", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:16,550", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:47,433", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 2/10: Best Fitness = (0.8224873901790416, 19.60765000448411)", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:47,433", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 3", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:47,433", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:47,434", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:21:47,434", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:22:17,001", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 3/10: Best Fitness = (1.1200774569915326, 25.77201428856977)", "exc_info": null}
+{"timestamp": "2025-02-03 11:22:17,002", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 4", "exc_info": null}
+{"timestamp": "2025-02-03 11:22:17,003", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 11:22:17,003", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:22:17,003", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:31,785", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:31,865", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 744, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:31,865", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:32,126", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:32,128", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:38,669", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 152, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:38,754", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 744, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:38,754", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 209, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:39,016", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 233, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:23:39,016", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 236, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:24:11,486", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 1", "exc_info": null}
+{"timestamp": "2025-02-03 11:24:11,487", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 11:24:11,488", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:24:11,488", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:24:41,489", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Generation 1/250: Best Fitness = (-376304747.9204565, -99.61387614670517)", "exc_info": null}
+{"timestamp": "2025-02-03 11:24:41,489", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Running Generation 2", "exc_info": null}
+{"timestamp": "2025-02-03 11:24:41,489", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 11:24:41,490", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 250, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:24:41,490", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 254, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:45:39,510", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 155, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 11:45:39,592", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 780, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 11:45:39,592", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 216, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 11:45:39,851", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 237, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:45:39,853", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:51:04,845", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 155, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 11:51:04,936", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 780, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 11:51:04,936", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 216, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 11:51:05,215", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 237, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:51:05,216", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:51:39,295", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 251, "function": "run", "message": "Running Generation 1", "exc_info": null}
+{"timestamp": "2025-02-03 11:51:39,296", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 255, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 11:51:39,296", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 263, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:51:39,296", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 268, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:52:23,327", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 155, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 11:52:23,411", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 784, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 11:52:23,411", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 216, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 11:52:23,795", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 237, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:52:23,797", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:04,534", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 155, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:04,656", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 784, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:04,657", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 216, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:05,065", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 237, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:05,065", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 242, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:42,925", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 251, "function": "run", "message": "Running Generation 1", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:42,926", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 255, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:42,926", "level": "ERROR", "file": "geneticAlgorithm.py", "line_number": 261, "function": "run", "message": "Deleted fitness values", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:42,926", "level": "ERROR", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Deleted fitness values", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:42,926", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 266, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:42,926", "level": "ERROR", "file": "geneticAlgorithm.py", "line_number": 270, "function": "run", "message": "Deleted fitness values", "exc_info": null}
+{"timestamp": "2025-02-03 11:55:42,926", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 272, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:56:15,710", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 283, "function": "run", "message": "Generation 1/250: Best Fitness = (-37052.289042432305, -96.29162100470772)", "exc_info": null}
+{"timestamp": "2025-02-03 11:56:15,710", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 251, "function": "run", "message": "Running Generation 2", "exc_info": null}
+{"timestamp": "2025-02-03 11:56:15,711", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 255, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 11:56:15,711", "level": "ERROR", "file": "geneticAlgorithm.py", "line_number": 261, "function": "run", "message": "Deleted fitness values", "exc_info": null}
+{"timestamp": "2025-02-03 11:56:15,711", "level": "ERROR", "file": "geneticAlgorithm.py", "line_number": 264, "function": "run", "message": "Deleted fitness values", "exc_info": null}
+{"timestamp": "2025-02-03 11:56:15,711", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 266, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 11:56:15,711", "level": "ERROR", "file": "geneticAlgorithm.py", "line_number": 270, "function": "run", "message": "Deleted fitness values", "exc_info": null}
+{"timestamp": "2025-02-03 11:56:15,711", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 272, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 12:01:58,669", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 156, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 12:01:58,744", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 791, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 12:01:58,744", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 217, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 12:01:59,013", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 238, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:01:59,015", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 249, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:02:04,783", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 156, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 12:02:04,863", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 791, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 12:02:04,863", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 217, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 12:02:05,139", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 238, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:02:05,139", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 249, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:02:37,006", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 258, "function": "run", "message": "Running Generation 1", "exc_info": null}
+{"timestamp": "2025-02-03 12:02:37,006", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 262, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 12:02:37,007", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 271, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 12:02:37,007", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 276, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 12:03:06,691", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 212, "function": "on_exit", "message": "No valid individual found.", "exc_info": null}
+{"timestamp": "2025-02-03 12:03:39,905", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 156, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 12:03:39,987", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 791, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 12:03:39,987", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 217, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 12:03:40,288", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 238, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:03:40,288", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 249, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:04:09,705", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 258, "function": "run", "message": "Running Generation 1", "exc_info": null}
+{"timestamp": "2025-02-03 12:04:09,706", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 262, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 12:04:09,706", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 271, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 12:04:09,706", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 276, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 12:04:38,782", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 289, "function": "run", "message": "Generation 1/250: Best Fitness = (0.0, -100.0) | Stats: {'avg': np.float64(-36.70068345549498), 'std': np.float64(43.85063382874547), 'min': np.float64(-100.0), 'max': np.float64(0.0)}", "exc_info": null}
+{"timestamp": "2025-02-03 12:04:38,782", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 258, "function": "run", "message": "Running Generation 2", "exc_info": null}
+{"timestamp": "2025-02-03 12:04:38,783", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 262, "function": "run", "message": "Mating Survivers", "exc_info": null}
+{"timestamp": "2025-02-03 12:04:38,783", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 271, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 12:04:38,783", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 276, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:09,551", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 159, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:09,630", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 799, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:09,630", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 220, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:09,965", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 241, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:09,965", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 252, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:23,151", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 159, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:23,230", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 799, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:23,230", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 220, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:23,230", "level": "WARNING", "file": "geneticAlgorithm.py", "line_number": 225, "function": "run", "message": "Multiprocessing is disabled, the operation will take longer.", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:23,230", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 241, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:23,230", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 252, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-03 12:10:50,511", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 374, "function": "evaluate", "message": "Finished evaluating individual: <tradingComponents.indicators.relativeStrengthIndex.RelativeStrengthIndex object at 0x0000022B76B1FA70>", "exc_info": null}
+{"timestamp": "2025-02-03 12:11:17,171", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 374, "function": "evaluate", "message": "Finished evaluating individual: <tradingComponents.indicators.relativeStrengthIndex.RelativeStrengthIndex object at 0x0000022B76720D70>", "exc_info": null}
+{"timestamp": "2025-02-03 12:11:30,990", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 215, "function": "on_exit", "message": "No valid individual found.", "exc_info": null}

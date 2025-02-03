@@ -184,8 +184,8 @@ def fetch_klines(
 
 
 if __name__ == '__main__':
-    intervals = "5m"
-    days = 365
+    intervals = "1s"
+    days = 7
     tickers = ["BTCUSDT", "DOGEUSDT"]
 
     for i, ticker in enumerate(tickers):

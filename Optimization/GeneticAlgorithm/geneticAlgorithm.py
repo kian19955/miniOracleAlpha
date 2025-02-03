@@ -9,12 +9,13 @@ from time import sleep
 from multiprocessing import Pool
 from enum import EnumMeta
 import atexit
+from copy import deepcopy
 
 from deap import base, creator, tools
+import numpy as np
 
 from api.binanceApi import fetch_klines
 from backtester import backtest
-from dataAnalysis import analyze
 from oracleMaths import randfloat
 from Optimization.GeneticAlgorithm.gaTypes import MateTypeProbabilities, MutateTypeProbabilities
 from Optimization.GeneticAlgorithm.operators import gauss_clamp
@@ -41,7 +42,7 @@ class GeneticAlgorithm:
             self,
             species: Type,
             bt_settings: dict[str, any],
-            key_genomes: dict[str, any],
+            objectives: dict[str, any],
 
             genome_settings: dict[str, dict[type, dict[str | type, any]]] = None,
             stop_settings: dict[str, dict[str, float]] = None,
@@ -57,12 +58,13 @@ class GeneticAlgorithm:
             mutate_tp: MutateTypeProbabilities = MutateTypeProbabilities,
             mutation_strength: float = 0.1,
 
-            tournament_size: int = 2
+            tournament_size: int = 2,
+            hall_of_fame_size: Optional[int] = None
     ):
         """
         :param species: The type of the individual
         :param bt_settings: A dictionary which will be used as the default settings for the backtesting function
-        :param key_genomes: Key is key parameter name of the analysis metrics, value is weight where
+        :param objectives: Key is key parameter name of the analysis metrics, value is weight where
             1 tries to get the value as high as possible and
             -1 tries to get the value as low as possible.
         :param genome_settings: These will be used to create a new individual or mutate one. For enums you are allowed to set a probability for each enum value, Enum values not given dont have a chance to mutate into
@@ -88,7 +90,7 @@ class GeneticAlgorithm:
 
         self.tc: Type = species
         self.bt_settings: dict = bt_settings
-        self.key_genomes: OrderedDict = OrderedDict(key_genomes)
+        self.objectives: OrderedDict = OrderedDict(objectives)
 
         self.genome_settings: dict[str, dict[type, dict[str | type, any]]] = genome_settings or {}
         self.stop_settings: dict[str, dict[str, float]] = stop_settings or {}
@@ -100,6 +102,8 @@ class GeneticAlgorithm:
         self.mutate_tp = mutate_tp
 
         self.mutation_strength = mutation_strength
+
+        self.hall_of_fame_size = hall_of_fame_size
 
         self.base_params = base_params or {}
         c_params: MappingProxyType[str, any] = signature(species).parameters
@@ -125,7 +129,7 @@ class GeneticAlgorithm:
             days=self.bt_settings['days'],
         )
 
-        creator.create("FitnessMax", base.Fitness, weights=tuple(key_genomes.values()))
+        creator.create("FitnessMax", base.Fitness, weights=tuple(objectives.values()))
         creator.create("Individual", dict, fitness=creator.FitnessMax)
 
         toolbox = base.Toolbox()
@@ -138,6 +142,9 @@ class GeneticAlgorithm:
         toolbox.register("select", tools.selTournament, tournsize=tournament_size)
 
         self.toolbox = toolbox
+
+        # TEST
+        self.indis_processed: int = 0
 
     def _validate_genome_settings(self):
         for param_name, annotation in self.genome_types.items():
@@ -201,7 +208,11 @@ class GeneticAlgorithm:
 
     def run(self, generations: int = 40, population_size: int = 50, use_multiprocessing: bool = True):
         def on_exit():
-            print(f"Best Fallback Performer {fallback_ind} with Fitness: {fallback_fitness}")
+            if hof and len(hof) > 0:
+                best_ind = hof[0]
+                logger.info(f"Best Individual: {best_ind} with Fitness: {best_ind.fitness.values}")
+            else:
+                logger.info("No valid individual found.")
 
         atexit.register(on_exit)
 
@@ -227,10 +238,15 @@ class GeneticAlgorithm:
             pool_context = DummyPool()
 
         with pool_context as pool:
-            fallback_ind = None
-            fallback_fitness = None
-
             logger.debug("Creating Initial Population")
+            hof = tools.HallOfFame(self.hall_of_fame_size) if self.hall_of_fame_size else None
+
+            stats = tools.Statistics(lambda ind: ind.fitness.values)
+            stats.register("avg", np.mean)
+            stats.register("std", np.std)
+            stats.register("min", np.min)
+            stats.register("max", np.max)
+
             population = self.toolbox.population(n=population_size)
 
             logger.debug("Evaluating Initial Population")
@@ -238,37 +254,52 @@ class GeneticAlgorithm:
             for ind, fit in zip(population, fitnesses):
                 ind.fitness.values = fit
 
+            self.indis_processed = 0
+
+            if hof is not None:
+                hof.update(population)
+
             for gen in range(generations):
                 logger.debug(f"Running Generation {gen + 1}")
                 survivors = self.toolbox.select(population, len(population))
                 survivors = list(map(self.toolbox.clone, survivors))
 
                 logger.debug("Mating Survivers")
-                for child1, child2 in zip(survivors[::2], survivors[1::2]):
-                    self.toolbox.mate(child1, child2)
+                for survivor1, survivor2 in zip(survivors[::2], survivors[1::2]):
+                    survivor1_changed, survivor2_changed = self.toolbox.mate(survivor1, survivor2)
+
+                    if survivor1_changed:
+                        del survivor1.fitness.values
+                    if survivor2_changed:
+                        del survivor2.fitness.values
 
                 logger.debug("Mutating Offspring")
-                for child in survivors:
-                    self.toolbox.mutate(child)
+                for survivor in survivors:
+                    if self.toolbox.mutate(survivor):
+                        del survivor.fitness.values
 
                 logger.debug("Evaluating Offspring")
-                fitnesses = pool.map(self.toolbox.evaluate, survivors)
+                invalid_ind = [ind for ind in survivors if not ind.fitness.valid]
+                fitnesses = pool.map(self.toolbox.evaluate, invalid_ind)
                 for ind, fit in zip(survivors, fitnesses):
                     ind.fitness.values = fit
 
                 population[:] = survivors
 
-                if fallback_fitness is None or tools.selBest(population, k=1)[0].fitness.values[0] > fallback_fitness:
-                    fallback_ind = tools.selBest(population, k=1)[0]
-                    fallback_fitness = tools.selBest(population, k=1)[0].fitness.values[0]
+                if hof is not None:
+                    hof.update(population)
+
+                gen_stats = stats.compile(population)
+
                 logger.info(
-                    f"Generation {gen + 1}/{generations}: Best Fitness = {tools.selBest(population, k=1)[0].fitness.values}")
-
-        best_performer = tools.selBest(population, k=1)[0] \
-            if tools.selBest(population, k=1)[0].fitness.values[0] > fallback_fitness else fallback_ind
-
-        logger.info(f"Best Fitness: {best_performer.fitness.values} with Performer: {best_performer}, ")
-        return best_performer
+                    f"Generation {gen + 1}/{generations}: Best Fitness = {tools.selBest(population, k=1)[0].fitness.values} "
+                    f"| Stats: {gen_stats}"
+                )
+        if hof and len(hof) > 0:
+            return hof[0]
+        else:
+            logger.warning("No valid individual found.")
+            return None
 
     def create_individual(self):
         dna: dict[str, any] = {}
@@ -332,28 +363,29 @@ class GeneticAlgorithm:
                 use_csv=True
             )
 
-            for genome_name in self.key_genomes.keys():
-                print(stats[genome_name])
-
             values: list[float | int] = []
-            for genome_name, weight in self.key_genomes.items():
+            for genome_name, weight in self.objectives.items():
                 genome_value = stats[genome_name]
                 if genome_value is None:
                     logger.warning(f"Info: {genome_name} is None; Total Orders: {stats['total_orders']}")
                     genome_value = -100 * weight
                 values.append(genome_value)
 
-            logger.info(f"Finished evaluating individual: {individual}")
-
         except Exception as e:
             logger.error(f"Error evaluating individual: {e}, with Genomes:{(genome | self.base_params)}")
-            values: tuple[float | int] = tuple(-100 * weight for weight in self.key_genomes.values())
+            values: tuple[float | int] = tuple(-100 * weight for weight in self.objectives.values())
+
+        self.indis_processed += 1
+        logger.debug(f"Evaluation finished for individual: {individual} | {self.indis_processed}")
 
         return tuple(values)
 
-    def mate(self, ind1, ind2):
+    def mate(self, ind1, ind2) -> tuple[bool, bool]:
         # REMAKE stopS
         # ["dna"]
+        initial_indi1 = deepcopy(ind1)
+        initial_indi2 = deepcopy(ind2)
+
         for param_name, annotation in self.genome_types.items():
             roll: float = random.random()
 
@@ -440,12 +472,28 @@ class GeneticAlgorithm:
                     start, stop, _ = self._resolve_genome(param_name, annotation, ind)
                     ind["dna"][param_name] = max(min(ind["dna"][param_name], stop), start)
 
+        return tuple(
+            (initial_indi1 != ind1, initial_indi2 != ind2)
+        )
+
     def mutate(
             self,
             individual,
             custom_params_settings: Optional[dict[str, any]] = None,
             return_individual: bool = False
-    ) -> dict[str, any] | None:
+    ) -> dict[str, any] | bool:
+        """
+        Mutate an individual
+        
+        :param individual: The individual
+        :param custom_params_settings: A dictionary which keys are the parameter names and values are the annotation. It will be used instead of self.genome_types
+        :param return_individual: Return the mutated individual
+        :return: 
+            - The mutated individual if return_individual is True
+            - Boolean if the individual was mutated. (Only returned if return_individual is False)
+        """
+        initial_individual = deepcopy(individual)
+        
         param_settings: dict[str, any] = custom_params_settings if custom_params_settings is not None \
             else self.genome_types
 
@@ -527,6 +575,8 @@ class GeneticAlgorithm:
 
         if return_individual:
             return individual
+        else:
+            return initial_individual != individual
 
     def _resolve_genome(self, genome: str, annotation: type, individual) -> tuple[float, float, float]:
         start = self.genome_settings[genome][annotation]['start']
@@ -717,7 +767,7 @@ if __name__ == '__main__':
             'micro_factor': 100000,
 
         },
-        key_genomes={
+        objectives={
             'Sharpe Ratio': 1,
             'Return [%]': 1
         },
@@ -747,7 +797,7 @@ if __name__ == '__main__':
     logger.info("Running Genetic Algorithm...")
 
     print(ga.run(
-        generations=10,
-        population_size=3,
-        use_multiprocessing=True
+        generations=250,
+        population_size=75,
+        use_multiprocessing=False
     ))
