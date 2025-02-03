@@ -242,10 +242,10 @@ class GeneticAlgorithm:
             hof = tools.HallOfFame(self.hall_of_fame_size) if self.hall_of_fame_size else None
 
             stats = tools.Statistics(lambda ind: ind.fitness.values)
-            stats.register("avg", np.mean)
-            stats.register("std", np.std)
-            stats.register("min", np.min)
-            stats.register("max", np.max)
+            stats.register("avg", lambda pop: np.mean([ind.fitness.values for indi in pop], axis=0))
+            stats.register("std", lambda pop: np.std([ind.fitness.values for indi in pop], axis=0))
+            stats.register("min", lambda pop: np.min([ind.fitness.values for indi in pop], axis=0))
+            stats.register("max", lambda pop: np.max([ind.fitness.values for indi in pop], axis=0))
 
             population = self.toolbox.population(n=population_size)
 
@@ -283,6 +283,8 @@ class GeneticAlgorithm:
                 fitnesses = pool.map(self.toolbox.evaluate, invalid_ind)
                 for ind, fit in zip(survivors, fitnesses):
                     ind.fitness.values = fit
+
+                self.indis_processed = 0
 
                 population[:] = survivors
 
@@ -365,18 +367,20 @@ class GeneticAlgorithm:
 
             values: list[float | int] = []
             for genome_name, weight in self.objectives.items():
-                genome_value = stats[genome_name]
-                if genome_value is None:
-                    logger.warning(f"Info: {genome_name} is None; Total Orders: {stats['total_orders']}")
-                    genome_value = -100 * weight
-                values.append(genome_value)
+                # Get the value, defaulting to -100 * weight if the key is missing
+                value = stats.get(genome_name, -100 * weight)
+
+                if np.isnan(value):
+                    value = -100 * weight
+
+                values.append(value)
 
         except Exception as e:
             logger.error(f"Error evaluating individual: {e}, with Genomes:{(genome | self.base_params)}")
             values: tuple[float | int] = tuple(-100 * weight for weight in self.objectives.values())
 
         self.indis_processed += 1
-        logger.debug(f"Evaluation finished for individual: {individual} | {self.indis_processed}")
+        print(f"Evaluation finished for individual: {genome} | {self.indis_processed}")
 
         return tuple(values)
 
@@ -626,18 +630,18 @@ class GeneticAlgorithm:
 if __name__ == '__main__':
     from tradingComponents.indicators import RelativeStrengthIndex, MovingAverageConvergenceDivergence
     from Optimization.GeneticAlgorithm.gaTypes import MateTypeProbabilities, MutateTypeProbabilities
-    from logging import DEBUG
+    from logging import DEBUG, INFO
     from custom_logger import setup_logger
 
-    setup_logger('oracle.analysis', DEBUG, '../../logs/analysis.jsonl', log_in_json=True, stream_in_color=True)
+    setup_logger('oracle.analysis', INFO, '../../logs/analysis.jsonl', log_in_json=True, stream_in_color=True)
 
     mutate_tp = MutateTypeProbabilities(
-        FLOAT=0.1,
-        INT=0.1,
-        ENUM=0.1,
-        UNION=0.1,
-        BOOL=0.1,
-        OTHER=0.1
+        FLOAT=0.5,
+        INT=0.5,
+        ENUM=0.5,
+        UNION=0.5,
+        BOOL=0.5,
+        OTHER=0.5
     )
     mate_tp = MateTypeProbabilities(
         FLOAT=0.5,
@@ -798,6 +802,6 @@ if __name__ == '__main__':
 
     print(ga.run(
         generations=250,
-        population_size=75,
+        population_size=2,
         use_multiprocessing=False
     ))

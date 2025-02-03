@@ -44,14 +44,18 @@ class Backtester(Strategy):
     def create_sl(self, position_long: bool):
         if self.stop_loss is None:
             return None
-        multiplier = 1 - self.stop_loss if position_long else 1 + self.stop_loss
-        return self.data.Close[-1] * multiplier
+        if position_long:
+            return self.data.Close[-1] * (1 - self.stop_loss)
+        else:
+            return self.data.Close[-1] * (1 + self.stop_loss)
 
     def create_tp(self, position_long: bool):
         if self.take_profit is None:
             return None
-        multiplier = 1 + self.take_profit if position_long else 1 - self.take_profit
-        return self.data.Close[-1] * multiplier
+        if position_long:
+            return self.data.Close[-1] * (1 + self.take_profit)
+        else:
+            return self.data.Close[-1] * (1 - self.take_profit)
 
     def next(self):
         conf = self.confs[-1]
@@ -145,9 +149,9 @@ if __name__ == "__main__":
         interval="5m",
         sell_limit=-0.75,
         buy_limit=0.75,
-        stop_loss=None,
-        take_profit=None,
-        trade_long=False,
+        stop_loss=0.1,
+        take_profit=0.1,
+        trade_long=True,
         micro_factor=1,
         leverage=1
     )
