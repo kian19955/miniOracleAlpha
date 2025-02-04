@@ -59,7 +59,9 @@ class GeneticAlgorithm:
             mutation_strength: float = 0.1,
 
             tournament_size: int = 2,
-            hall_of_fame_size: Optional[int] = None
+            hall_of_fame_size: Optional[int] = None,
+
+            tickers = []
     ):
         """
         :param species: The type of the individual
@@ -123,11 +125,14 @@ class GeneticAlgorithm:
 
         self._validate_genome_settings()
 
-        fetch_klines(
-            ticker=self.bt_settings['ticker'],
-            interval=self.bt_settings['interval'],
-            days=self.bt_settings['days'],
-        )
+        # Randomized tickers
+        self.tickers = tickers
+        for ticker in tickers:
+            fetch_klines(
+                ticker=ticker,
+                interval=self.bt_settings['interval'],
+                days=self.bt_settings['days'],
+            )
 
         creator.create("FitnessMax", base.Fitness, weights=tuple(objectives.values()))
         creator.create("Individual", dict, fitness=creator.FitnessMax)
@@ -363,6 +368,7 @@ class GeneticAlgorithm:
                 eval_func=individual.evaluate,
                 **self.bt_settings,
                 **genome["stops"],
+                ticker=random.choice(self.tickers),
                 use_csv=True
             )
 
@@ -381,7 +387,7 @@ class GeneticAlgorithm:
             values: tuple[float | int] = tuple(-100 * weight for weight in self.objectives.values())
 
         self.indis_processed += 1
-        print(f"Evaluation finished for individual: {genome} | {self.indis_processed}{" " * 50}", end="\r")
+        print(f"Evaluation finished with fitness score: {values} for individual: {genome} | {self.indis_processed}{" " * 50}", end="\r")
 
         return tuple(values)
 
@@ -773,10 +779,9 @@ if __name__ == '__main__':
     ga = GeneticAlgorithm(
         species=RelativeStrengthIndex,
         bt_settings={
-            'ticker': 'BTCUSDT',
             'days': 93,
             'interval': '5m',
-            'trade_long': False,
+            'trade_long': True,
             'trade_short': True,
             'leverage': 0.20,
             'micro_factor': 100000,
@@ -807,7 +812,8 @@ if __name__ == '__main__':
         mate_tp=mate_tp,
         mutation_strength=0.1,
         tournament_size=2,
-        hall_of_fame_size=5
+        hall_of_fame_size=5,
+        tickers=["BTCUSDT", "DOGEUSDT", "SOLUSDT"]
     )
     logger.info("Running Genetic Algorithm...")
 
