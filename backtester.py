@@ -23,6 +23,12 @@ class Backtester(Strategy):
         if self.eval_func is None:
             raise ValueError("You must set 'eval_func' to a callable that returns a confidence signal.")
 
+        if self.stop_loss == 0:
+            self.stop_loss = None
+
+        if self.take_profit == 0:
+            self.take_profit = None
+
         self.position_opened: bool = False
         self.confs = self.I(self.compute_confs, self.data.df)
 
@@ -45,17 +51,17 @@ class Backtester(Strategy):
         if self.stop_loss is None:
             return None
         if position_long:
-            return self.data.Close[-1] * (1 - self.stop_loss)
+            return self.data.Open[-1] * (1 - self.stop_loss)
         else:
-            return self.data.Close[-1] * (1 + self.stop_loss)
+            return self.data.Open[-1] * (1 + self.stop_loss)
 
     def create_tp(self, position_long: bool):
         if self.take_profit is None:
             return None
         if position_long:
-            return self.data.Close[-1] * (1 + self.take_profit)
+            return self.data.Open[-1] * (1 + self.take_profit)
         else:
-            return self.data.Close[-1] * (1 - self.take_profit)
+            return self.data.Open[-1] * (1 - self.take_profit)
 
     def next(self):
         conf = self.confs[-1]
@@ -141,18 +147,18 @@ def backtest(
 
 if __name__ == "__main__":
     from tradingComponents.indicators import RelativeStrengthIndex
-    tc = RelativeStrengthIndex(period=3, lower_band=28.400000000000002, upper_band=77.4)
+    tc = RelativeStrengthIndex(period=11, lower_band=6.7242687027438155, upper_band=79)
     stats, bt = backtest(
         tc.evaluate,
-        ticker="DOGEUSDT",
-        days=7,
+        ticker="BTCUSDT",
+        days=93,
         interval="5m",
         sell_limit=-0.75,
         buy_limit=0.75,
-        stop_loss=0.1,
-        take_profit=0.1,
-        trade_long=True,
-        micro_factor=1,
+        stop_loss=0.009605611478765663,
+        take_profit=0.069,
+        trade_long=False,
+        micro_factor=100000,
         leverage=1
     )
 

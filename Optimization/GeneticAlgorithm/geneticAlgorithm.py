@@ -247,9 +247,10 @@ class GeneticAlgorithm:
             stats.register("min", lambda pop: np.min([ind.fitness.values for indi in pop], axis=0))
             stats.register("max", lambda pop: np.max([ind.fitness.values for indi in pop], axis=0))
 
+            logger.info("Creating Initial Population")
             population = self.toolbox.population(n=population_size)
 
-            logger.debug("Evaluating Initial Population")
+            logger.info("Evaluating Initial Population")
             fitnesses = pool.map(self.toolbox.evaluate, population)
             for ind, fit in zip(population, fitnesses):
                 ind.fitness.values = fit
@@ -380,7 +381,7 @@ class GeneticAlgorithm:
             values: tuple[float | int] = tuple(-100 * weight for weight in self.objectives.values())
 
         self.indis_processed += 1
-        print(f"Evaluation finished for individual: {genome} | {self.indis_processed}")
+        print(f"Evaluation finished for individual: {genome} | {self.indis_processed}", end="")
 
         return tuple(values)
 
@@ -398,14 +399,17 @@ class GeneticAlgorithm:
 
             # Resolve actual type if same (simplifies subsequent handling)
             # In case of Union
-            if type(val1) == type(val2):
-                annotation = type(val1)
+            if get_origin(annotation) is Union:
+                union_types = get_args(annotation)
+                # Check for valid type is in union
+                if type(val1) == type(val2) and type(val1) in union_types:
+                    annotation = type(val1)
 
             if annotation is float:
                 if roll > self.mate_tp.FLOAT:
                     continue
 
-                gamma = (1. + 2. * self.float_blend) * random.random() - self.float_blend
+                gamma: float = (1. + 2. * self.float_blend) * random.random() - self.float_blend
                 ind1["dna"][param_name] = (1. - gamma) * val1 + gamma * val2
                 ind2["dna"][param_name] = gamma * val1 + (1. - gamma) * val2
 
@@ -465,6 +469,10 @@ class GeneticAlgorithm:
             gamma = (1. + 2. * self.float_blend) * random.random() - self.float_blend
             ind1["stops"][stop_name] = (1. - gamma) * stop1 + gamma * stop2
             ind2["stops"][stop_name] = gamma * stop1 + (1. - gamma) * stop2
+
+        for stop_name, stop_settings in self.stop_settings.items():
+            ind1["stops"][stop_name] = max(min(ind1["stops"][stop_name], stop_settings['stop']), stop_settings['start'])
+            ind2["stops"][stop_name] = max(min(ind2["stops"][stop_name], stop_settings['stop']), stop_settings['start'])
         # --------
 
         for ind in [ind1, ind2]:
@@ -482,32 +490,32 @@ class GeneticAlgorithm:
 
     def mutate(
             self,
-            individual,
+            indi,
             custom_params_settings: Optional[dict[str, any]] = None,
             return_individual: bool = False
     ) -> dict[str, any] | bool:
         """
         Mutate an individual
         
-        :param individual: The individual
+        :param indi: The individual
         :param custom_params_settings: A dictionary which keys are the parameter names and values are the annotation. It will be used instead of self.genome_types
         :param return_individual: Return the mutated individual
         :return: 
             - The mutated individual if return_individual is True
             - Boolean if the individual was mutated. (Only returned if return_individual is False)
         """
-        initial_individual = deepcopy(individual)
+        initial_individual = deepcopy(indi)
         
         param_settings: dict[str, any] = custom_params_settings if custom_params_settings is not None \
             else self.genome_types
 
         for param_name, annotation in param_settings.items():
             roll: float = random.random()
-            val: any = individual["dna"][param_name]
+            val: any = indi["dna"][param_name]
 
             def roll_check(mutate_prob, mutation_func) -> bool:
                 if roll < mutate_prob:
-                    individual["dna"][param_name] = mutation_func()
+                    indi["dna"][param_name] = mutation_func()
                     return True
                 return False
 
@@ -515,7 +523,7 @@ class GeneticAlgorithm:
                 if roll_check(self.mutate_tp.FLOAT, lambda:
                 gauss_clamp(
                     val,
-                    *self._resolve_genome(param_name, annotation, individual),
+                    *self._resolve_genome(param_name, annotation, indi),
                     self.mutation_strength,
                     False
                 )):
@@ -525,7 +533,7 @@ class GeneticAlgorithm:
                 if roll_check(self.mutate_tp.INT, lambda:
                 gauss_clamp(
                     val,
-                    *self._resolve_genome(param_name, annotation, individual),
+                    *self._resolve_genome(param_name, annotation, indi),
                     self.mutation_strength,
                     True
                 )):
@@ -534,7 +542,7 @@ class GeneticAlgorithm:
             elif annotation is bool:
                 if roll > self.mutate_tp.BOOL:
                     continue
-                individual["dna"][param_name] = not val
+                indi["dna"][param_name] = not val
 
             elif isinstance(annotation, EnumMeta):
                 if roll_check(self.mutate_tp.ENUM, lambda:
@@ -549,7 +557,7 @@ class GeneticAlgorithm:
                               ):
                     continue
                 else:
-                    individual["dna"][param_name] = self.mutate(
+                    indi["dna"][param_name] = self.mutate(
                         {param_name: val},
                         {param_name: type(val)},
                         True
@@ -563,24 +571,27 @@ class GeneticAlgorithm:
         for stop_name, stop in self.stop_settings.items():
             if random.random() > self.mutate_tp.FLOAT:
                 continue
-            individual["stops"][stop_name] = gauss_clamp(
-                individual["stops"][stop_name],
-                stop=self.stop_settings[stop_name]['stop'],
-                start=self.stop_settings[stop_name]['start'],
-                step=self.stop_settings[stop_name]['step'],
+            indi["stops"][stop_name] = gauss_clamp(
+                indi["stops"][stop_name],
+                stop=stop['stop'],
+                start=stop['start'],
+                step=stop['step'],
                 strength=self.mutation_strength,
             )
+
+        for stop_name, stop in self.stop_settings.items():
+            indi["stops"][stop_name] = max(min(indi["stops"][stop_name], self.stop_settings[stop_name]['stop']), self.stop_settings[stop_name]['start'])
         # ---------
 
         for param_name, annotation in self.genome_types.items():
             if annotation is float or annotation is int:
-                start, stop, _ = self._resolve_genome(param_name, annotation, individual)
-                individual["dna"][param_name] = max(min(individual["dna"][param_name], stop), start)
+                start, stop, _ = self._resolve_genome(param_name, annotation, indi)
+                indi["dna"][param_name] = max(min(indi["dna"][param_name], stop), start)
 
         if return_individual:
-            return individual
+            return indi
         else:
-            return initial_individual != individual
+            return initial_individual != indi
 
     def _resolve_genome(self, genome: str, annotation: type, individual) -> tuple[float, float, float]:
         start = self.genome_settings[genome][annotation]['start']
@@ -636,12 +647,12 @@ if __name__ == '__main__':
     setup_logger('oracle.analysis', INFO, '../../logs/analysis.jsonl', log_in_json=True, stream_in_color=True)
 
     mutate_tp = MutateTypeProbabilities(
-        FLOAT=0.5,
-        INT=0.5,
-        ENUM=0.5,
-        UNION=0.5,
-        BOOL=0.5,
-        OTHER=0.5
+        FLOAT=0.1,
+        INT=0.1,
+        ENUM=0.1,
+        UNION=0.1,
+        BOOL=0.1,
+        OTHER=0.1
     )
     mate_tp = MateTypeProbabilities(
         FLOAT=0.5,
@@ -795,9 +806,9 @@ if __name__ == '__main__':
         mutate_tp=mutate_tp,
         mate_tp=mate_tp,
         mutation_strength=0.1,
-        tournament_size=2
+        tournament_size=2,
+        hall_of_fame_size=5
     )
-
     logger.info("Running Genetic Algorithm...")
 
     print(ga.run(
