@@ -1,0 +1,17 @@
+{"timestamp": "2025-02-04 12:43:23,951", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 164, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-04 12:43:36,896", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 164, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-04 12:43:56,956", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 818, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-04 12:43:56,956", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 225, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-04 12:43:56,956", "level": "WARNING", "file": "geneticAlgorithm.py", "line_number": 230, "function": "run", "message": "Multiprocessing is disabled, the operation will take longer.", "exc_info": null}
+{"timestamp": "2025-02-04 12:43:56,956", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-04 12:43:56,956", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 255, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-04 12:43:56,957", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 258, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-04 12:44:37,514", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 220, "function": "on_exit", "message": "No valid individual found.", "exc_info": null}
+{"timestamp": "2025-02-04 12:44:43,549", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 164, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-04 12:44:43,753", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 818, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-04 12:44:43,753", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 225, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-04 12:44:43,754", "level": "WARNING", "file": "geneticAlgorithm.py", "line_number": 230, "function": "run", "message": "Multiprocessing is disabled, the operation will take longer.", "exc_info": null}
+{"timestamp": "2025-02-04 12:44:43,754", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 246, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-04 12:44:43,754", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 255, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-04 12:44:43,754", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 258, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-04 12:46:57,428", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 220, "function": "on_exit", "message": "No valid individual found.", "exc_info": null}
