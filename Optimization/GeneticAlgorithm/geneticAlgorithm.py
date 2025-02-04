@@ -61,7 +61,7 @@ class GeneticAlgorithm:
             tournament_size: int = 2,
             hall_of_fame_size: Optional[int] = None,
 
-            tickers = []
+            elite_injection: Optional[float] = None,
     ):
         """
         :param species: The type of the individual
@@ -106,6 +106,7 @@ class GeneticAlgorithm:
         self.mutation_strength = mutation_strength
 
         self.hall_of_fame_size = hall_of_fame_size
+        self.elite_injection = elite_injection
 
         self.base_params = base_params or {}
         c_params: MappingProxyType[str, any] = signature(species).parameters
@@ -124,15 +125,6 @@ class GeneticAlgorithm:
         })
 
         self._validate_genome_settings()
-
-        # Randomized tickers
-        self.tickers = tickers
-        for ticker in tickers:
-            fetch_klines(
-                ticker=ticker,
-                interval=self.bt_settings['interval'],
-                days=self.bt_settings['days'],
-            )
 
         creator.create("FitnessMax", base.Fitness, weights=tuple(objectives.values()))
         creator.create("Individual", dict, fitness=creator.FitnessMax)
@@ -214,10 +206,10 @@ class GeneticAlgorithm:
     def run(self, generations: int = 40, population_size: int = 50, use_multiprocessing: bool = True):
         def on_exit():
             if hof and len(hof) > 0:
-                best_ind = hof[0]
-                logger.info(f"Best Individual: {best_ind} with Fitness: {best_ind.fitness.values}")
+                for elite in hof:
+                    logger.info(f"Best Individual: {elite} with Fitness: {elite.fitness.values}")
             else:
-                logger.info("No valid individual found.")
+                logger.info("No Hero in the Hall of Fame found.")
 
         atexit.register(on_exit)
 
@@ -291,8 +283,10 @@ class GeneticAlgorithm:
                     ind.fitness.values = fit
 
                 self.indis_processed = 0
-
-                population[:] = survivors
+                if self.elite_injection is not None:
+                    population = survivors + list(map(self.toolbox.clone, hof.items[:5]))
+                else:
+                    population[:] = survivors
 
                 if hof is not None:
                     hof.update(population)
@@ -368,7 +362,6 @@ class GeneticAlgorithm:
                 eval_func=individual.evaluate,
                 **self.bt_settings,
                 **genome["stops"],
-                ticker=random.choice(self.tickers),
                 use_csv=True
             )
 
@@ -387,7 +380,7 @@ class GeneticAlgorithm:
             values: tuple[float | int] = tuple(-100 * weight for weight in self.objectives.values())
 
         self.indis_processed += 1
-        print(f"Evaluation finished with fitness score: {values} for individual: {genome} | {self.indis_processed}         ", end="\r")
+        print(f"Fitness score: {values} for individual: {genome} | {self.indis_processed}", end="\r")
 
         return tuple(values)
 
@@ -781,6 +774,7 @@ if __name__ == '__main__':
         bt_settings={
             'days': 93,
             'interval': '5m',
+            'ticker': "DOGEUSDT",
             'trade_long': True,
             'trade_short': True,
             'leverage': 0.20,
@@ -813,7 +807,6 @@ if __name__ == '__main__':
         mutation_strength=0.1,
         tournament_size=2,
         hall_of_fame_size=5,
-        tickers=["BTCUSDT", "DOGEUSDT", "SOLUSDT"]
     )
     logger.info("Running Genetic Algorithm...")
 

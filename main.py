@@ -1,26 +1,19 @@
 from backtester import backtest
-from dataAnalysis.plotter import plot_data
 from tradingComponents.indicators import RelativeStrengthIndex, Stochastic, MovingAverageConvergenceDivergence
-from dataAnalysis import analyze
 from custom_logger import setup_logger
 from logging import DEBUG, getLogger
 
 setup_logger('oracle.analysis', DEBUG, './logs/analysis.jsonl', log_in_json=True, stream_in_color=True)
-headers = [
-    "timestamp",
-    "type",
-    "price",
-    "fee",
-    "confidence"
-]
 
-ticker = "SOLUSDT"
-days = 7
-interval = "1m"
-sell_limit = -0.75
-buy_limit = 0.75
-maker_fee = 0.00075
-taker_fee = 0.00075
+ticker = "DOGEUSDT"
+days = 93
+interval = "1h"
+sell_limit = -0.5
+buy_limit = 0.5
+commission = 0.00075
+
+stop_loss = None
+take_profit = None
 
 trade_long = True
 trade_short = True
@@ -52,43 +45,23 @@ tc = Stochastic(
 
 
 def main():
-    his_df, bt_df = backtest(
+    stats, bt = backtest(
         tc.evaluate,
         ticker=ticker,
         days=days,
         interval=interval,
         sell_limit=sell_limit,
         buy_limit=buy_limit,
-        maker_fee=maker_fee,
-        taker_fee=taker_fee,
+        commission=commission,
         trade_long=trade_long,
         trade_short=trade_short,
+        stop_loss=stop_loss,
+        take_profit=take_profit,
         leverage=1,
         use_csv=True
     )
-
-    # Plot X and Y are placeholders for defining what to plot
-    analyze(
-        target_filename=ticker + "_" + str(days) + "_" + interval + ".csv",
-        bt_df=bt_df,
-        trade_long=trade_long,
-        trade_short=trade_short
-    )
-
-    plot_data(
-        plot_title=ticker + "_" + str(days) + "_" + interval + ".csv",
-        his_df=his_df,
-        bt_df=bt_df,
-        sell_limit=sell_limit,
-        buy_limit=buy_limit,
-        display_volume=True,
-        plot_liquidity=True,
-        plot_orders=True,
-        plot_limits=False,
-        plot_conf=False,
-        plot_order_price_lines=True
-    )
-
+    print(stats)
+    bt.plot()
 
 if __name__ == "__main__":
     main()

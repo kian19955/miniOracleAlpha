@@ -4,8 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(ga): enhance GA with multi-ticker support&#10;&#10;- Enable multi-ticker backtesting for robust optimization.&#10;- Randomize ticker selection per evaluation.&#10;- Improve genetic algorithm performance and stability.&#10;&#10;This change enhances the genetic algorithm's performance by increasing the population, stability, and adding multi-ticker backtesting support.">
-      <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="shorter text for server">
+      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/boolGenome.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/kianIsGod/navidDOGE.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/baseGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/baseGenome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/enumGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/enumGenome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/numericGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/numericGenome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/species.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/species.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataAnalysis/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataAnalysis/analysis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataAnalysis/plotter.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataAnalysis/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/unionGenome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileHandler/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/fileHandler/csvHandler.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,6 +88,7 @@
     &quot;Python.kiansVision.executor&quot;: &quot;Run&quot;,
     &quot;Python.loggingManager.executor&quot;: &quot;Run&quot;,
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.navidDOGE.executor&quot;: &quot;Run&quot;,
     &quot;Python.nd.executor&quot;: &quot;Run&quot;,
     &quot;Python.orders.executor&quot;: &quot;Run&quot;,
     &quot;Python.plotter.executor&quot;: &quot;Run&quot;,
@@ -100,11 +118,11 @@
       <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\kianIsGod" />
       <recent name="C:\Users\Navid\AppData\Roaming\JetBrains\PyCharmCE2024.3\scratches" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha" />
       <recent name="C:\Users\navid_yaghmaei\PycharmProjects\miniOracleAlpha" />
       <recent name="C:\Users\navid_yaghmaei\PycharmProjects\miniOracleAlpha\kianIsGod" />
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\navidIsGod\tradingComponents" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -419,7 +437,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738669321645</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="feat(ga): enable multi-ticker support&#10;&#10;- Enable multi-ticker backtesting.&#10;- Randomize ticker selection per evaluation.&#10;- Improve GA stability.&#10;&#10;This change enhances the genetic algorithm's performance by adding multi-ticker backtesting support for more robust optimization.">
+      <option name="closed" value="true" />
+      <created>1738669623617</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1738669623617</updated>
+    </task>
+    <task id="LOCAL-00039" summary="shorter text for server">
+      <option name="closed" value="true" />
+      <created>1738669731961</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1738669731961</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -446,8 +480,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="8" />
-    <MESSAGE value="9" />
     <MESSAGE value="10" />
     <MESSAGE value="ea" />
     <MESSAGE value="ea2" />
@@ -471,7 +503,9 @@
     <MESSAGE value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability." />
     <MESSAGE value="feat(ga): Enhance GA performance &amp; stability&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability. Adjusts backtester stop loss value." />
     <MESSAGE value="feat(ga): enhance GA with multi-ticker support&#10;&#10;- Enable multi-ticker backtesting for robust optimization.&#10;- Randomize ticker selection per evaluation.&#10;- Improve genetic algorithm performance and stability.&#10;&#10;This change enhances the genetic algorithm's performance by increasing the population, stability, and adding multi-ticker backtesting support." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(ga): enhance GA with multi-ticker support&#10;&#10;- Enable multi-ticker backtesting for robust optimization.&#10;- Randomize ticker selection per evaluation.&#10;- Improve genetic algorithm performance and stability.&#10;&#10;This change enhances the genetic algorithm's performance by increasing the population, stability, and adding multi-ticker backtesting support." />
+    <MESSAGE value="feat(ga): enable multi-ticker support&#10;&#10;- Enable multi-ticker backtesting.&#10;- Randomize ticker selection per evaluation.&#10;- Improve GA stability.&#10;&#10;This change enhances the genetic algorithm's performance by adding multi-ticker backtesting support for more robust optimization." />
+    <MESSAGE value="shorter text for server" />
+    <option name="LAST_COMMIT_MESSAGE" value="shorter text for server" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
