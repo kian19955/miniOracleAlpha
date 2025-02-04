@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75 for better exploration.&#10;• Added stop limits&#10;• Minor code cleaning&#10;&#10;This change increases the population size of the genetic algorithm to improve the exploration of the search space, potentially leading to better solutions. Also includes a few code cleanups." />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability.">
+      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -57,7 +59,7 @@
     "Python.SEPWallet.executor": "Debug",
     "Python.analysis.executor": "Run",
     "Python.backtestMain.executor": "Run",
-    "Python.backtester.executor": "Debug",
+    "Python.backtester.executor": "Run",
     "Python.binanceApi.executor": "Run",
     "Python.bollingerBands.executor": "Run",
     "Python.constants.executor": "Run",
@@ -393,7 +395,15 @@
       <option name="project" value="LOCAL" />
       <updated>1738668173766</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability.">
+      <option name="closed" value="true" />
+      <created>1738668207442</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1738668207442</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -420,7 +430,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="5" />
     <MESSAGE value="6" />
     <MESSAGE value="7" />
     <MESSAGE value="8" />
@@ -445,7 +454,8 @@
     <MESSAGE value="fix(ga): refine ga logic&#10;&#10;• Correctly retrieve genome values from backtest stats&#10;• Fix issues when genome_value returned None&#10;• Adjust mutation to prevent out-of-bounds values&#10;• Remove unused extra logger information&#10;• Add hall of fame and statistics tracking" />
     <MESSAGE value="pumped pop size to 75" />
     <MESSAGE value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75 for better exploration.&#10;• Added stop limits&#10;• Minor code cleaning&#10;&#10;This change increases the population size of the genetic algorithm to improve the exploration of the search space, potentially leading to better solutions. Also includes a few code cleanups." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75 for better exploration.&#10;• Added stop limits&#10;• Minor code cleaning&#10;&#10;This change increases the population size of the genetic algorithm to improve the exploration of the search space, potentially leading to better solutions. Also includes a few code cleanups." />
+    <MESSAGE value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

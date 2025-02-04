@@ -381,7 +381,7 @@ class GeneticAlgorithm:
             values: tuple[float | int] = tuple(-100 * weight for weight in self.objectives.values())
 
         self.indis_processed += 1
-        print(f"Evaluation finished for individual: {genome} | {self.indis_processed}", end="\r")
+        print(f"Evaluation finished for individual: {genome} | {self.indis_processed}{" " * 50}", end="\r")
 
         return tuple(values)
 
