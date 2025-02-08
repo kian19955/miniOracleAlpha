@@ -777,7 +777,7 @@ if __name__ == '__main__':
             'ticker': "DOGEUSDT",
             'trade_long': True,
             'trade_short': True,
-            'leverage': 0.20,
+            'leverage': 5,
             'micro_factor': 100000,
 
         },

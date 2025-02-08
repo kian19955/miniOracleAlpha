@@ -127,6 +127,7 @@ def backtest(
         commission=commission,
         cash=10000,
         margin=1/leverage,
+        exclusive_orders=True
     )
 
     # Run the backtest
@@ -177,4 +178,4 @@ if __name__ == "__main__":
 
     print(stats._trades)
     print(stats)
-    bt.plot()
+    bt.plot(open_browser=False)

@@ -61,7 +61,10 @@ def main():
         use_csv=True
     )
     print(stats)
-    bt.plot()
+    rades = stats._trades
+    for equity in stats._equity_curve:
+        print(equity)
+    bt.plot(open_browser=False)
 
 if __name__ == "__main__":
     main()
