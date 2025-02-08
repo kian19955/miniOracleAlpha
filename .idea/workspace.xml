@@ -4,25 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="shorter text for server">
-      <change afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/boolGenome.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kianIsGod/navidDOGE.py" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/baseGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/baseGenome.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/enumGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/enumGenome.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes(WIP)/numericGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/numericGenome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/baseGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/baseGenome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/boolGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/boolGenome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/enumGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/enumGenome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/numericGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/numericGenome.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/unionGenome.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/unionGenome.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/species.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/species.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/analysis.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/plotter.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dataAnalysis/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/species/genomes/unionGenome.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileHandler/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/fileHandler/csvHandler.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -453,7 +442,23 @@
       <option name="project" value="LOCAL" />
       <updated>1738669731961</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility">
+      <option name="closed" value="true" />
+      <created>1739010685204</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1739010685204</updated>
+    </task>
+    <task id="LOCAL-00041" summary="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility">
+      <option name="closed" value="true" />
+      <created>1739010818062</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1739010818062</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -480,8 +485,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="10" />
-    <MESSAGE value="ea" />
     <MESSAGE value="ea2" />
     <MESSAGE value="ea3" />
     <MESSAGE value="feat(core): initialize project structure&#10;&#10;• create essential files and directories&#10;• add placeholder class and basic config&#10;• update project sdk and module settings" />
@@ -504,8 +507,10 @@
     <MESSAGE value="feat(ga): Enhance GA performance &amp; stability&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability. Adjusts backtester stop loss value." />
     <MESSAGE value="feat(ga): enhance GA with multi-ticker support&#10;&#10;- Enable multi-ticker backtesting for robust optimization.&#10;- Randomize ticker selection per evaluation.&#10;- Improve genetic algorithm performance and stability.&#10;&#10;This change enhances the genetic algorithm's performance by increasing the population, stability, and adding multi-ticker backtesting support." />
     <MESSAGE value="feat(ga): enable multi-ticker support&#10;&#10;- Enable multi-ticker backtesting.&#10;- Randomize ticker selection per evaluation.&#10;- Improve GA stability.&#10;&#10;This change enhances the genetic algorithm's performance by adding multi-ticker backtesting support for more robust optimization." />
+    <MESSAGE value="feat(ga): Refactor genomes &amp; species&#10;&#10;- Rename and move genome files for clarity.&#10;- Implement BoolGenome, EnumGenome, and UnionGenome.&#10;- Build dependency graph for parameter resolution." />
     <MESSAGE value="shorter text for server" />
-    <option name="LAST_COMMIT_MESSAGE" value="shorter text for server" />
+    <MESSAGE value="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

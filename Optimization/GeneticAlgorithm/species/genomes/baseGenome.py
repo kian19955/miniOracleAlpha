@@ -1,19 +1,24 @@
 from typing import Optional
+from dataclasses import dataclass
 
 
+@dataclass
 class BaseGenome:
-    def __init__(self, name: str,
-                 mutate_probability: Optional[float] = None,
-                 mate_probability: Optional[float] = None):
-        if not 0 >= mutate_probability >= 1:
+    name: str
+
+    mutate_probability: Optional[float] = None
+    mate_probability: Optional[float] = None
+
+    mutate_operator: Optional[...] = None
+    mate_operator: Optional[...] = None
+
+    type_value: any = None
+
+    def __post_init__(self):
+        if self.mutate_probability is None or not (0 <= self.mutate_probability <= 1):
             raise ValueError("mutate_probability must be between 0 and 1")
-        if not 0 >= mate_probability >= 1:
+        if self.mate_probability is None or not (0 <= self.mate_probability <= 1):
             raise ValueError("mate_probability must be between 0 and 1")
 
-        self.name: str = name
-        self.mutate_probability: Optional[float] = mutate_probability
-        self.mate_probability: Optional[float] = mate_probability
-        self.type_value = None
-
-    def create(self):
+    def create(self, *args, **kwargs) -> any:
         return self.type_value

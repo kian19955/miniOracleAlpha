@@ -1,12 +1,9 @@
 import random
-from typing import Optional
+from dataclasses import dataclass
 
 from .baseGenome import BaseGenome
 
+@dataclass
 class BoolGenome(BaseGenome):
-    def __init__(self, name: str, mutate_probability: Optional[float] = None, mate_probability: Optional[float] = None):
-        super().__init__(name, mutate_probability, mate_probability)
-
-    @staticmethod
-    def create():
+    def create(self, *args, **kwargs) -> bool:
         return random.choice([True, False])

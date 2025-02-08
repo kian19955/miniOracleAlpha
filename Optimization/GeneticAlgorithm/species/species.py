@@ -3,7 +3,7 @@ from enum import EnumMeta
 from inspect import signature
 from types import MappingProxyType
 from collections import defaultdict, OrderedDict
-from typing import Optional, get_origin, Union, get_args
+from typing import Optional, get_origin, Union, get_args, Iterator
 
 from .genomes import BaseGenome, BoolGenome, EnumGenome, NumericGenome, UnionGenome
 
@@ -14,15 +14,24 @@ import logging
 logger = logging.getLogger("oracle.analysis")
 
 class Species:
+    """
+   Represents a species blueprint that holds species genomes and market genomes.
+
+   :ivar _genomes: An ordered dictionary mapping parameter names to species genome objects.
+   :ivar env_genomes: A dictionary mapping parameter names to market genome objects.
+   """
     def __init__(self):
         self._genomes: dict[str, BaseGenome] = OrderedDict()
-        self.market_genomes: dict[str, BaseGenome] = {}
+        self.env_genomes: dict[str, BaseGenome] = {}
 
     @staticmethod
     def _extract_relation(operation: str) -> tuple[list[str], str]:
         """
-        Extract dependency placeholders in the form '{{param}}' from the given operation
-        and return a list of dependency names along with a parsed version of the operation.
+        Extract dependency placeholders in the form ``{{param}}`` from the given operation
+        and return a tuple containing a list of dependency names and a parsed version of the operation.
+
+        :param operation: The string operation containing placeholders.
+        :return: A tuple of the form (list_of_dependency_names, parsed_operation).
         """
         relations = re.findall(r'\{\{([^}]+)}}', operation)
         parsed_operation = re.sub(r"\{\{|}}", "", operation)
@@ -30,15 +39,18 @@ class Species:
 
     def _build_dependency_graph(self) -> dict[str, list[str]]:
         """
-        Iterate over the genomes. For each genome that defines start/stop/step as strings,
-        extract dependencies (placeholders) and build a graph.
+        Iterate over the species genomes and build a dependency graph for numeric genomes.
+        For each genome that defines ``start``, ``stop``, or ``step`` as strings, extract
+        dependency placeholders and add edges in the graph.
+
+        :return: A dictionary representing the dependency graph.
         """
         graph = defaultdict(list)
         for param_name, genome in self._genomes.items():
-            if (isinstance(genome, UnionGenome) and not NumericGenome in genome._genomes) or not isinstance(genome, NumericGenome):
+            if (isinstance(genome, UnionGenome) and not NumericGenome in genome.genome_args) or not isinstance(genome, NumericGenome):
                 continue
             elif isinstance(genome, UnionGenome):
-                genomes = [g for g in genome._genomes if isinstance(g, NumericGenome)]
+                genomes = [g for g in genome.genome_args if isinstance(g, NumericGenome)]
             else:
                 genomes = [genome]
 
@@ -46,11 +58,11 @@ class Species:
                 dependencies = []
 
                 for key in ['start', 'stop', 'step']:
-                    value = getattr(genome, key, None)
+                    value = getattr(g, key, None)
 
                     if isinstance(value, str):
                         rels, parsed_operation = self._extract_relation(value)
-                        setattr(genome, key, parsed_operation)
+                        setattr(g, key, parsed_operation)
                         dependencies.extend(rels)
 
                 for dep in dependencies:
@@ -61,7 +73,10 @@ class Species:
     def _topological_sort(self, graph: dict[str, list[str]]) -> OrderedDict[str, BaseGenome]:
         """
         Perform a topological sort on the dependency graph.
-        param_types is a dict mapping parameter names to their type annotations.
+
+        :param graph: A dictionary mapping parameter names to lists of dependent parameter names.
+        :return: An OrderedDict mapping parameter names to genome objects in dependency order.
+        :raises ValueError: If cyclic dependencies are detected.
         """
         # Initialize in-degree for each parameter.
         in_degree = {param: 0 for param in self._genomes}
@@ -87,10 +102,19 @@ class Species:
         return ordered
 
     def _create_default_genomes(self, annotation: type, param_name: str):
+        """
+        Create a default genome object for a given annotation.
+
+        :param annotation: The type annotation of the parameter.
+        :param param_name: The parameter name.
+        :return: A genome object appropriate for the annotation.
+        :raises NotImplementedError: If a NumericGenome for the parameter is not defined.
+        :raises ValueError: If the annotation is unknown.
+        """
         if annotation is bool:
             return BoolGenome(param_name)
 
-        elif isinstance(annotation, EnumMeta):
+        elif isinstance(annotation, type) and issubclass(annotation, EnumMeta):
             return EnumGenome(param_name)
 
         elif annotation in [int, float]:
@@ -119,9 +143,13 @@ class Species:
             whitelist_genes: Optional[tuple[str]] = None
     ):
         """
-        Build the blueprint for the given species (a class whose __init__ parameters
-        are to be evolved). The parameters may be filtered by blacklist or whitelist.
-        For each parameter, a genome is created if not already present.
+        Build the blueprint for the given species. The species is a class whose __init__
+        parameters are to be evolved. Optionally filter parameters using a blacklist or whitelist.
+        For each parameter, create a default genome if one is not already present.
+
+        :param species: The species class.
+        :param blacklist_genes: An optional tuple of parameter names to exclude.
+        :param whitelist_genes: An optional tuple of parameter names to include.
         """
         # Get the constructor parameters of the species.
         c_params: MappingProxyType[str, any] = signature(species).parameters
@@ -137,7 +165,6 @@ class Species:
         # For each parameter, create or update a genome.
         for param_name, param in filtered_params.items():
             ann = param.annotation
-            # If a genome was already added by the user, keep it.
             if param_name in self._genomes and isinstance(self._genomes[param_name], BaseGenome):
                 continue
             else:
@@ -146,57 +173,19 @@ class Species:
         graph = self._build_dependency_graph()
         self._genomes = self._topological_sort(graph)
 
-    def add_genome(self, genome: BaseGenome | list[BaseGenome]):
-        if not isinstance(genome, list):
-            genome = [genome]
-
-        for g in genome:
-            self._genomes[g.name] = g
-
-    def remove_genomes(self, genome: str | list[str]):
-        if not isinstance(genome, list):
-            genome = [genome]
-
-        for g in genome:
-            del self._genomes[g]
-
-    def get(self, name: str):
-        return self._genomes.get(name)
-
-    def add_market_genome(self, genome: BaseGenome | list[BaseGenome | str] | str, annotation: Optional[type] = None):
-        """
-        Add market genomes.
-        :param genome: The genome or list of genomes to add.
-        :param annotation: The annotation of the parameter, only used if for the genome param the name is provided.
-        """
-        if not isinstance(genome, list):
-            genome = [genome]
-
-        for g in genome:
-            if not isinstance(g, BaseGenome):
-                g = self._create_default_genomes(annotation, g)
-            self.market_genomes[g.name] = g
-
-    def remove_market_genome(self, genome: str | list[str]):
-        """
-        Remove market genomes.
-        """
-        if not isinstance(genome, list):
-            genome = [genome]
-        for g in genome:
-            if g in self.market_genomes:
-                del self.market_genomes[g]
-
     @staticmethod
     def _create_genome(genome_obj: BaseGenome, context: dict[str, any]):
-        if isinstance(genome_obj, UnionGenome):
-            genome_obj = random.choice(genome_obj.genome_args)
+        """
+        Create a value from a genome object using the provided context.
 
-        if isinstance(genome_obj, NumericGenome):
+        :param genome_obj: The genome object.
+        :param context: A context dictionary to pass to the create method.
+        :return: The generated value.
+        :raises ValueError: If the genome type is unsupported.
+        """
+        if isinstance(genome_obj, (NumericGenome, UnionGenome)):
             return genome_obj.create(context)
-        elif isinstance(genome_obj, BoolGenome) or isinstance(genome_obj, EnumGenome):
-            return genome_obj.create()
-        elif isinstance(genome_obj, BaseGenome):
+        elif isinstance(genome_obj, (BoolGenome, EnumGenome, BaseGenome)):
             return genome_obj.create()
         else:
             raise ValueError(f"Unsupported type {genome_obj} for parameter {genome_obj.name}")
@@ -215,7 +204,82 @@ class Species:
             dna[param_name] = self._create_genome(genome_obj, dna)
 
         env: dict[str, float] = {}
-        for feature, genome in self.market_genomes.items():
+        for feature, genome in self.env_genomes.items():
             env[feature] = self._create_genome(genome, env)
 
         return {"dna": dna, "env": env}
+
+    def iter_all_genomes(self) -> Iterator[BaseGenome]:
+        """
+        Iterate over all species genomes.
+        First iterates over species genomes in the dependency order, then iterates over env genomes.
+
+        :return: An iterator over all species genomes.
+        """
+        for g in self._genomes.values():
+            yield g
+
+        for g in self.env_genomes.values():
+            yield g
+
+    def add_genome(self, genome: BaseGenome | list[BaseGenome]):
+        """
+        Add species genome(s) to the blueprint.
+
+        :param genome: A genome object or list of genome objects.
+        """
+        if not isinstance(genome, list):
+            genome = [genome]
+
+        for g in genome:
+            self._genomes[g.name] = g
+
+    def remove_genomes(self, genome_name: str | list[str]):
+        """
+        Remove species genome(s) by name.
+
+        :param genome_name: A genome name or list of genome names to remove.
+        """
+        if not isinstance(genome_name, list):
+            genome_name = [genome_name]
+
+        for gn in genome_name:
+            del self._genomes[gn]
+
+    def add_env_genome(self, genome: BaseGenome | list[BaseGenome | str] | str, annotation: Optional[type] = None):
+        """
+        Add env genome(s). If a string is provided instead of a genome object,
+        a default genome will be created using the given annotation.
+
+        :param genome: A genome object, a string (name), or a list of them.
+        :param annotation: The annotation to use if a name is provided.
+        """
+        if not isinstance(genome, list):
+            genome = [genome]
+
+        for g in genome:
+            if not isinstance(g, BaseGenome):
+                g = self._create_default_genomes(annotation, g)
+            self.env_genomes[g.name] = g
+
+    def remove_env_genome(self, genome_names: str | list[str]):
+        """
+        Remove market genome(s) by name.
+
+        :param genome_names: A genome name or list of genome names to remove.
+        """
+        if not isinstance(genome_names, list):
+            genome_names = [genome_names]
+        for gn in genome_names:
+            if gn in self.env_genomes:
+                del self.env_genomes[gn]
+
+    def get(self, name: str, from_env: bool = False) -> BaseGenome:
+        """
+        Retrieve a species genome by name.
+
+        :param name: The name of the genome.
+        :param from_env: Whether to retrieve from the environment genomes.
+        :return: The genome object or None if not found.
+        """
+        return self.env_genomes.get(name) if from_env else self._genomes.get(name)
