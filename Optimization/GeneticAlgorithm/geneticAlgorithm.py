@@ -813,5 +813,5 @@ if __name__ == '__main__':
     print(ga.run(
         generations=250,
         population_size=75,
-        use_multiprocessing=False
+        use_multiprocessing=True
     ))
