@@ -248,7 +248,7 @@ class GeneticAlgorithm:
                 for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
                     fitnesses.append(fit)
                     counter += 1
-                    print(f"Evaluated {counter}/{total_to_evaluate} individuals", end="\r")
+                    print(f"Evaluated {counter}/{total_to_evaluate} individuals with Fitness: {fit}", end="\r")
 
                 for ind, fit in zip(invalid_ind, fitnesses):
                     ind.fitness.values = fit
