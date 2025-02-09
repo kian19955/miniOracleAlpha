@@ -253,8 +253,7 @@ class GeneticAlgorithm:
             for ind, fit in zip(population, fitnesses):
                 ind.fitness.values = fit
 
-            with self.lock:
-                self.indis_processed.value = 0
+            self.indis_processed.value = 0
 
             if hof is not None:
                 hof.update(population)
@@ -284,8 +283,7 @@ class GeneticAlgorithm:
                 for ind, fit in zip(survivors, fitnesses):
                     ind.fitness.values = fit
 
-                with self.lock:
-                    self.indis_processed.value = 0
+                self.indis_processed.value = 0
 
                 if self.elite_injection is not None:
                     population = survivors + list(map(self.toolbox.clone, hof.items[:5]))
