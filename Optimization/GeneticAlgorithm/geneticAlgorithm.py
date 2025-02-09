@@ -208,7 +208,7 @@ class GeneticAlgorithm:
         def on_exit():
             if hof and len(hof) > 0:
                 for elite in hof:
-                    logger.info(f"Best Individual: {elite} with Fitness: {elite.fitness.values}")
+                    logger.info(f"Best with Fitness: {elite.fitness.values}, Elite: {elite} ")
             else:
                 logger.info("No Elites in the Hall of Fame found.")
 
