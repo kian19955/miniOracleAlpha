@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility">
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="perf(geneticAlgorithm): enable multiprocessing for speed&#10;&#10;Enable multiprocessing to improve execution time.&#10;&#10;- Use multiprocessing for faster GA runs&#10;- Reduce overall computation time">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
@@ -74,7 +74,7 @@
     "Python.geneticAlgorithm.executor": "Run",
     "Python.kiansVision.executor": "Run",
     "Python.loggingManager.executor": "Run",
-    "Python.main.executor": "Debug",
+    "Python.main.executor": "Run",
     "Python.navidDOGE.executor": "Run",
     "Python.nd.executor": "Run",
     "Python.orders.executor": "Run",
@@ -92,7 +92,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "last.edited.regexp": "{}",
     "last_opened_file_path": "C:/Users/kians/PycharmProjects/miniOracleV1.0",
-    "settings.editor.selected.configurable": "power.mode.ii"
+    "settings.editor.selected.configurable": "promo.remoteSsh"
   },
   "keyToStringList": {
     "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
@@ -112,6 +112,110 @@
       <recent name="C:\Users\navid_yaghmaei\PycharmProjects\miniOracleAlpha\kianIsGod" />
     </key>
   </component>
+  <component name="RunManager">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="miniOracleAlpha" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="Tox" factoryName="Tox">
+      <module name="miniOracleAlpha" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Docutils task">
+      <module name="miniOracleAlpha" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="docs" factoryName="Sphinx task">
+      <module name="miniOracleAlpha" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="docutils_input_file" value="" />
+      <option name="docutils_output_file" value="" />
+      <option name="docutils_params" value="" />
+      <option name="docutils_task" value="" />
+      <option name="docutils_open_in_browser" value="false" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="miniOracleAlpha" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="miniOracleAlpha" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
+      <method v="2" />
+    </configuration>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -120,6 +224,12 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration>C:\Users\Navid\AppData\Roaming\Subversion</configuration>
+    <option name="sshConnectionType" value="PASSWORD" />
+    <option name="sshExecutablePath" value="ssh root@188.245.72.118" />
+    <option name="sshUserName" value="root" />
+  </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="" />
@@ -464,7 +574,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739013513927</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL-00043" summary="perf(geneticAlgorithm): enable multiprocessing for speed&#10;&#10;Enable multiprocessing to improve execution time.&#10;&#10;- Use multiprocessing for faster GA runs&#10;- Reduce overall computation time">
+      <option name="closed" value="true" />
+      <created>1739041414676</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1739041414677</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -491,8 +609,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="ea2" />
-    <MESSAGE value="ea3" />
     <MESSAGE value="feat(core): initialize project structure&#10;&#10;• create essential files and directories&#10;• add placeholder class and basic config&#10;• update project sdk and module settings" />
     <MESSAGE value="feat(core): initialize project structure&#10;&#10;• Create essential files and directories&#10;• Add placeholder class and basic config&#10;• Update project sdk and module settings" />
     <MESSAGE value="Updated analysis.py" />
@@ -516,7 +632,9 @@
     <MESSAGE value="feat(ga): Refactor genomes &amp; species&#10;&#10;- Rename and move genome files for clarity.&#10;- Implement BoolGenome, EnumGenome, and UnionGenome.&#10;- Build dependency graph for parameter resolution." />
     <MESSAGE value="shorter text for server" />
     <MESSAGE value="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility" />
+    <MESSAGE value="chore(repo): add gitignore file&#10;&#10;Add a .gitignore file to exclude common files.&#10;&#10;- Prevent tracking of IDE, system, and Python specific files.&#10;- Improve repository cleanliness.&#10;- Avoid committing sensitive information." />
+    <MESSAGE value="perf(geneticAlgorithm): enable multiprocessing for speed&#10;&#10;Enable multiprocessing to improve execution time.&#10;&#10;- Use multiprocessing for faster GA runs&#10;- Reduce overall computation time" />
+    <option name="LAST_COMMIT_MESSAGE" value="perf(geneticAlgorithm): enable multiprocessing for speed&#10;&#10;Enable multiprocessing to improve execution time.&#10;&#10;- Use multiprocessing for faster GA runs&#10;- Reduce overall computation time" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -583,7 +701,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/main.py</url>
-          <line>64</line>
+          <line>70</line>
           <option name="timeStamp" value="213" />
         </line-breakpoint>
       </breakpoints>

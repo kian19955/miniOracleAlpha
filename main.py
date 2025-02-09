@@ -7,27 +7,33 @@ setup_logger('oracle.analysis', DEBUG, './logs/analysis.jsonl', log_in_json=True
 
 ticker = "DOGEUSDT"
 days = 93
-interval = "1h"
-sell_limit = -0.5
-buy_limit = 0.5
+interval = "5m"
+sell_limit = -0.75
+buy_limit = 0.75
+
+leverage = 5
+microfactor = 100000
 commission = 0.00075
 
-stop_loss = None
-take_profit = None
+stop_loss = 0.9390000000000001
+take_profit = 0.462
 
 trade_long = True
 trade_short = True
-settings = {'fast_period': 42, 'slow_period': 90, 'signal_line_period': 24, 'momentum_max_lookback': 51,
- 'momentum_signal_weight': 0.5578000000000001, 'crossover_return_weight': True,
- 'crossover_max_gradient_degree': 88.03937584556466, 'crossover_gradient_signal_weight': 0.8212,
- 'crossover_weight_impact': 0.1265, 'zero_line_crossover_weight': 0.998639817622752, 'zero_line_pullback_lookback': 19,
- 'zero_line_pullback_tolerance_percent': 0.5487446218136476, 'zero_line_pullback_weight': 0.41714182779059517,
- 'return_pullback_strength': True, 'magnitude_weight': 0.8083685289854661, 'rate_of_change_weight': 0.9985617455723734,
- 'weight_impact': 0.4497}
-#settings = {'period': 17, 'lower_band': 3.550917741204702, 'upper_band': 73.09752054858266}
+settings = {'period': 15, 'lower_band': 28.900000000000002, 'upper_band': 74.2}
 
+bt_settings = {
+    'days': 93,
+    'interval': '5m',
+    'ticker': "DOGEUSDT",
+    'trade_long': True,
+    'trade_short': True,
+    'leverage': 5,
+    'micro_factor': 100000,
 
-tc = MovingAverageConvergenceDivergence(
+}
+
+tc = RelativeStrengthIndex(
     **settings
 )
 """
@@ -57,7 +63,7 @@ def main():
         trade_short=trade_short,
         stop_loss=stop_loss,
         take_profit=take_profit,
-        leverage=1,
+        leverage=leverage,
         use_csv=True
     )
     print(stats)

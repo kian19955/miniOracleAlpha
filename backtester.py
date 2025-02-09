@@ -37,15 +37,13 @@ class Backtester(Strategy):
         Compute a signal value for each candle by iteratively calling eval_func on
         the data from the start until the current candle.
         """
-        signals = []
+        confs = []
         for i in range(1, len(df) + 1):
-            # Slice the dataframe up to and including the current candle
             sub_df = df.iloc[:i]
-            # Call the evaluation function on the sub-dataframe
-            signal = self.eval_func(sub_df)
-            signals.append(signal)
+            conf = self.eval_func(sub_df)
+            confs.append(conf)
 
-        return signals
+        return confs
 
     def create_sl(self, position_long: bool):
         if self.stop_loss is None:
@@ -156,9 +154,9 @@ if __name__ == "__main__":
                 'return_pullback_strength': True, 'magnitude_weight': 0.8083685289854661,
                 'rate_of_change_weight': 0.9985617455723734,
                 'weight_impact': 0.4497}
-    # settings = {'period': 17, 'lower_band': 3.550917741204702, 'upper_band': 73.09752054858266}
+    settings = {'period': 17, 'lower_band': 3.550917741204702, 'upper_band': 73.09752054858266}
 
-    tc = MovingAverageConvergenceDivergence(
+    tc = RelativeStrengthIndex(
         **settings
     )
 
@@ -166,7 +164,7 @@ if __name__ == "__main__":
         tc.evaluate,
         ticker="DOGEUSDT",
         days=93,
-        interval="1h",
+        interval="5m",
         sell_limit=-0.75,
         buy_limit=0.75,
         stop_loss=None,

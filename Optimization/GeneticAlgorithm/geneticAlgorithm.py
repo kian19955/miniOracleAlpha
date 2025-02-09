@@ -6,7 +6,7 @@ from types import MappingProxyType
 from inspect import signature
 import random
 from time import sleep
-from multiprocessing import Pool
+from multiprocessing import Pool, Value, Lock
 from enum import EnumMeta
 import atexit
 from copy import deepcopy
@@ -141,7 +141,8 @@ class GeneticAlgorithm:
         self.toolbox = toolbox
 
         # TEST
-        self.indis_processed: int = 0
+        self.indis_processed: Value = Value('i', 0)
+        self.lock = Lock()
 
     def _validate_genome_settings(self):
         for param_name, annotation in self.genome_types.items():
@@ -209,7 +210,7 @@ class GeneticAlgorithm:
                 for elite in hof:
                     logger.info(f"Best Individual: {elite} with Fitness: {elite.fitness.values}")
             else:
-                logger.info("No Hero in the Hall of Fame found.")
+                logger.info("No Elites in the Hall of Fame found.")
 
         atexit.register(on_exit)
 
@@ -252,7 +253,8 @@ class GeneticAlgorithm:
             for ind, fit in zip(population, fitnesses):
                 ind.fitness.values = fit
 
-            self.indis_processed = 0
+            with self.lock:
+                self.indis_processed.value = 0
 
             if hof is not None:
                 hof.update(population)
@@ -282,7 +284,9 @@ class GeneticAlgorithm:
                 for ind, fit in zip(survivors, fitnesses):
                     ind.fitness.values = fit
 
-                self.indis_processed = 0
+                with self.lock:
+                    self.indis_processed.value = 0
+
                 if self.elite_injection is not None:
                     population = survivors + list(map(self.toolbox.clone, hof.items[:5]))
                 else:
@@ -379,8 +383,10 @@ class GeneticAlgorithm:
             logger.error(f"Error evaluating individual: {e}, with Genomes:{(genome | self.base_params)}")
             values: tuple[float | int] = tuple(-100 * weight for weight in self.objectives.values())
 
-        self.indis_processed += 1
-        print(f"Evaluation finished with fitness score: {values} for individual: {genome} | {self.indis_processed}         ", end="\r")
+        with self.lock:
+            self.indis_processed.value += 1
+
+        print(f"Fitness: {values} individual: {genome} | {self.indis_processed}", end="\r")
 
         return tuple(values)
 
@@ -671,8 +677,8 @@ if __name__ == '__main__':
         },
         'slow_period': {
             int: {
-                'start': '{{fast_period}} + 10',
-                'stop': "{{fast_period}} + 100",
+                'start': '{{fast_period}} + 1',
+                'stop': 101,
                 'step': 1
             }
         },
@@ -770,7 +776,7 @@ if __name__ == '__main__':
     }
 
     ga = GeneticAlgorithm(
-        species=RelativeStrengthIndex,
+        species=MovingAverageConvergenceDivergence,
         bt_settings={
             'days': 93,
             'interval': '5m',
@@ -785,7 +791,7 @@ if __name__ == '__main__':
             'Sharpe Ratio': 1,
             'Return [%]': 1
         },
-        genome_settings=RelativeStrengthIndex.GA_GENOME_SETTINGS,
+        genome_settings=g_set,
         stop_settings={
             'stop_loss': {
                 "start": 0.0,
@@ -807,11 +813,12 @@ if __name__ == '__main__':
         mutation_strength=0.1,
         tournament_size=2,
         hall_of_fame_size=5,
+        elite_injection=4
     )
     logger.info("Running Genetic Algorithm...")
 
     print(ga.run(
         generations=250,
         population_size=75,
-        use_multiprocessing=True
+        use_multiprocessing=False
     ))
