@@ -199,15 +199,15 @@ class Species:
             - Then, for each market parameter (such as stop loss or take profit),
               generate its value using a randfloat-like function.
         """
-        dna: dict[str, any] = {}
+        s: dict[str, any] = {}
         for param_name, genome_obj in self._genomes.items():
-            dna[param_name] = self._create_genome(genome_obj, dna)
+            s[param_name] = self._create_genome(genome_obj, s)
 
         env: dict[str, float] = {}
         for feature, genome in self.env_genomes.items():
             env[feature] = self._create_genome(genome, env)
 
-        return {"dna": dna, "env": env}
+        return {"self": s, "env": env}
 
     def iter_all_genomes(self) -> Iterator[BaseGenome]:
         """

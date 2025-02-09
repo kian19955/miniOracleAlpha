@@ -136,9 +136,11 @@ class GeneticAlgorithm:
         toolbox.register("evaluate", self.evaluate)
         toolbox.register("mate", self.mate)
         toolbox.register("mutate", self.mutate)
-        toolbox.register("select", tools.selTournament, tournsize=tournament_size)
+        toolbox.register("select", tools.selNSGA2)
 
         self.toolbox = toolbox
+
+        self.eval_counter = 0
 
     def _validate_genome_settings(self):
         for param_name, annotation in self.genome_types.items():
@@ -201,6 +203,8 @@ class GeneticAlgorithm:
         return species_types
 
     def run(self, generations: int = 40, population_size: int = 50, use_multiprocessing: bool = True):
+        self.eval_counter = 0
+
         def on_exit():
             if hof and len(hof) > 0:
                 for elite in hof:
@@ -214,15 +218,20 @@ class GeneticAlgorithm:
         logger.debug("Creating Pool")
         if use_multiprocessing:
             pool_context = Pool()
-            progress_queue = Queue()
         else:
             # Create a dummy pool that runs sequentially
+            logger.warning("Multiprocessing is disabled, the operation will take longer.")
+
             logger.warning("Multiprocessing is disabled, the operation will take longer.")
 
             class DummyPool:
                 @staticmethod
                 def map(func, iterable):
                     return list(map(func, iterable))
+
+                @staticmethod
+                def imap(func, iterable):
+                    return map(func, iterable)
 
                 def __enter__(self):
                     return self
@@ -233,22 +242,35 @@ class GeneticAlgorithm:
             pool_context = DummyPool()
 
         with pool_context as pool:
+            def _eval_individuals(individuals):
+                invalid_ind = [ind for ind in individuals if not ind.fitness.valid]
+                total_to_evaluate = len(invalid_ind)
+                fitnesses = []
+                counter = 0
+                for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
+                    fitnesses.append(fit)
+                    counter += 1
+                    print(f"Evaluated {counter}/{total_to_evaluate} individuals", end="\r")
+
+                for ind, fit in zip(invalid_ind, fitnesses):
+                    ind.fitness.values = fit
+
             logger.debug("Creating Initial Population")
             hof = tools.HallOfFame(self.hall_of_fame_size) if self.hall_of_fame_size else None
 
             stats = tools.Statistics(lambda ind: ind.fitness.values)
-            stats.register("avg", lambda pop: np.mean([ind.fitness.values for indi in pop], axis=0))
-            stats.register("std", lambda pop: np.std([ind.fitness.values for indi in pop], axis=0))
-            stats.register("min", lambda pop: np.min([ind.fitness.values for indi in pop], axis=0))
-            stats.register("max", lambda pop: np.max([ind.fitness.values for indi in pop], axis=0))
+            stats.register("avg", lambda pop: np.mean([ind.fitness.values for ind in pop], axis=0))
+            stats.register("std", lambda pop: np.std([ind.fitness.values for ind in pop], axis=0))
+            stats.register("min", lambda pop: np.min([ind.fitness.values for ind in pop], axis=0))
+            stats.register("max", lambda pop: np.max([ind.fitness.values for ind in pop], axis=0))
 
             logger.info("Creating Initial Population")
             population = self.toolbox.population(n=population_size)
 
             logger.info("Evaluating Initial Population")
-            fitnesses = pool.map(self.toolbox.evaluate, population)
-            for ind, fit in zip(population, fitnesses):
-                ind.fitness.values = fit
+            _eval_individuals(population)
+
+            self.eval_counter = 0
 
             if hof is not None:
                 hof.update(population)
@@ -273,10 +295,7 @@ class GeneticAlgorithm:
                         del survivor.fitness.values
 
                 logger.debug("Evaluating Offspring")
-                invalid_ind = [ind for ind in survivors if not ind.fitness.valid]
-                fitnesses = pool.map(self.toolbox.evaluate, invalid_ind)
-                for ind, fit in zip(survivors, fitnesses):
-                    ind.fitness.values = fit
+                _eval_individuals(survivors)
 
                 if self.elite_injection is not None:
                     population = survivors + list(map(self.toolbox.clone, hof.items[:5]))
@@ -284,7 +303,9 @@ class GeneticAlgorithm:
                     population[:] = survivors
 
                 if hof is not None:
-                    hof.update(population)
+                    pareto_front = tools.selNSGA2(population, k=self.hall_of_fame_size)
+                    hof.clear()
+                    hof.items.extend(pareto_front)
 
                 gen_stats = stats.compile(population)
 
