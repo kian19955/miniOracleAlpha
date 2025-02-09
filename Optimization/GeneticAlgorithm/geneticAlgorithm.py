@@ -222,8 +222,6 @@ class GeneticAlgorithm:
             # Create a dummy pool that runs sequentially
             logger.warning("Multiprocessing is disabled, the operation will take longer.")
 
-            logger.warning("Multiprocessing is disabled, the operation will take longer.")
-
             class DummyPool:
                 @staticmethod
                 def map(func, iterable):
