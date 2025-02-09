@@ -328,7 +328,7 @@ class GeneticAlgorithm:
                     *self._resolve_genome(
                         param_name,
                         annotation,
-                        dna
+                        {"dna": dna}
                     )
                 )
 
@@ -384,7 +384,7 @@ class GeneticAlgorithm:
         with self.lock:
             self.indis_processed.value += 1
 
-        print(f"Fitness: {values} individual: {genome} | {self.indis_processed}", end="\r")
+        print(f"Fitness: {values} individual: {genome} | {self.indis_processed.value}", end="\r")
 
         return tuple(values)
 
@@ -480,12 +480,11 @@ class GeneticAlgorithm:
 
         for ind in [ind1, ind2]:
             for param_name, annotation in self.genome_types.items():
-                if annotation is float:
-                    start, stop, _ = self._resolve_genome(param_name, annotation, ind)
-                    ind["dna"][param_name] = max(min(ind["dna"][param_name], stop), start)
-                elif annotation is int:
-                    start, stop, _ = self._resolve_genome(param_name, annotation, ind)
-                    ind["dna"][param_name] = max(min(ind["dna"][param_name], stop), start)
+                if annotation not in [int, float]:
+                    continue
+
+                start, stop, _ = self._resolve_genome(param_name, annotation, ind)
+                ind["dna"][param_name] = max(min(ind["dna"][param_name], stop), start)
 
         return tuple(
             (initial_indi1 != ind1, initial_indi2 != ind2)
@@ -602,11 +601,11 @@ class GeneticAlgorithm:
         step = self.genome_settings[genome][annotation].get('step', None)
 
         if isinstance(start, str):
-            start = eval(start, SAFE_GLOBALS, dict(individual, **SAFE_BUILTINS, **{"gs": self.genome_settings}))
+            start = eval(start, SAFE_GLOBALS, dict(individual["dna"], **SAFE_BUILTINS))
         if isinstance(stop, str):
-            stop = eval(stop, SAFE_GLOBALS, dict(individual, **{"gs": self.genome_settings}, **SAFE_BUILTINS))
+            stop = eval(stop, SAFE_GLOBALS, dict(individual["dna"], **SAFE_BUILTINS))
         if step is not None and isinstance(step, str):
-            step = eval(step, SAFE_GLOBALS, dict(individual, **SAFE_BUILTINS, **{"gs": self.genome_settings}))
+            step = eval(step, SAFE_GLOBALS, dict(individual["dna"], **SAFE_BUILTINS))
 
         return start, stop, step
 
@@ -818,5 +817,5 @@ if __name__ == '__main__':
     print(ga.run(
         generations=250,
         population_size=75,
-        use_multiprocessing=False
+        use_multiprocessing=True
     ))

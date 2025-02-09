@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="perf(geneticAlgorithm): enable multiprocessing&#10;&#10;Enable multiprocessing for faster GA runs.&#10;&#10;- Use multiprocessing to improve execution time&#10;- Reduce overall computation time">
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs with lock removal.&#10;&#10;- Remove unnecessary lock for shared variable updates.&#10;- Improve execution time with multiprocessing.&#10;- Reduce overall computation time.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,52 +52,52 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python tests.Doctests in common.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.BB_RSI_Lines.executor&quot;: &quot;Run&quot;,
-    &quot;Python.NobitexApi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.RSI_Lines.executor&quot;: &quot;Run&quot;,
-    &quot;Python.SEPWallet.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.analysis.executor&quot;: &quot;Run&quot;,
-    &quot;Python.backtestMain.executor&quot;: &quot;Run&quot;,
-    &quot;Python.backtester.executor&quot;: &quot;Run&quot;,
-    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.bollingerBands.executor&quot;: &quot;Run&quot;,
-    &quot;Python.constants.executor&quot;: &quot;Run&quot;,
-    &quot;Python.csvHandler.executor&quot;: &quot;Run&quot;,
-    &quot;Python.csvWriter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataAnalyse.executor&quot;: &quot;Run&quot;,
-    &quot;Python.fitter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.kiansVision.executor&quot;: &quot;Run&quot;,
-    &quot;Python.loggingManager.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.navidDOGE.executor&quot;: &quot;Run&quot;,
-    &quot;Python.nd.executor&quot;: &quot;Run&quot;,
-    &quot;Python.orders.executor&quot;: &quot;Run&quot;,
-    &quot;Python.plotter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.s2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratchBacktester.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratch_1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.stochastic.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last.edited.regexp&quot;: &quot;{}&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kians/PycharmProjects/miniOracleV1.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;promo.remoteSsh&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python tests.Doctests in common.executor": "Debug",
+    "Python.BB_RSI_Lines.executor": "Run",
+    "Python.NobitexApi.executor": "Run",
+    "Python.RSI_Lines.executor": "Run",
+    "Python.SEPWallet.executor": "Debug",
+    "Python.analysis.executor": "Run",
+    "Python.backtestMain.executor": "Run",
+    "Python.backtester.executor": "Run",
+    "Python.binanceApi.executor": "Run",
+    "Python.bollingerBands.executor": "Run",
+    "Python.constants.executor": "Run",
+    "Python.csvHandler.executor": "Run",
+    "Python.csvWriter.executor": "Run",
+    "Python.dataAnalyse.executor": "Run",
+    "Python.fitter.executor": "Run",
+    "Python.geneticAlgorithm.executor": "Run",
+    "Python.kiansVision.executor": "Run",
+    "Python.loggingManager.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.navidDOGE.executor": "Run",
+    "Python.nd.executor": "Run",
+    "Python.orders.executor": "Run",
+    "Python.plotter.executor": "Run",
+    "Python.s2.executor": "Run",
+    "Python.scratch.executor": "Run",
+    "Python.scratchBacktester.executor": "Run",
+    "Python.scratch_1.executor": "Run",
+    "Python.stochastic.executor": "Run",
+    "Python.test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last.edited.regexp": "{}",
+    "last_opened_file_path": "C:/Users/kians/PycharmProjects/miniOracleV1.0",
+    "settings.editor.selected.configurable": "promo.remoteSsh"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0" />
@@ -590,7 +588,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739111785421</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs with lock removal.&#10;&#10;- Remove unnecessary lock for shared variable updates.&#10;- Improve execution time with multiprocessing.&#10;- Reduce overall computation time.">
+      <option name="closed" value="true" />
+      <created>1739111861363</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1739111861363</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -617,7 +623,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(core): initialize project structure&#10;&#10;• Create essential files and directories&#10;• Add placeholder class and basic config&#10;• Update project sdk and module settings" />
     <MESSAGE value="Updated analysis.py" />
     <MESSAGE value="Added Std, Sharpe Ratio, fixed graph issues with liquidity and rpcie, added sold and bought lines" />
     <MESSAGE value="fixed sharpe ratio, added stochastic.py indicator" />
@@ -642,7 +647,8 @@
     <MESSAGE value="chore(repo): add gitignore file&#10;&#10;Add a .gitignore file to exclude common files.&#10;&#10;- Prevent tracking of IDE, system, and Python specific files.&#10;- Improve repository cleanliness.&#10;- Avoid committing sensitive information." />
     <MESSAGE value="perf(geneticAlgorithm): enable multiprocessing for speed&#10;&#10;Enable multiprocessing to improve execution time.&#10;&#10;- Use multiprocessing for faster GA runs&#10;- Reduce overall computation time" />
     <MESSAGE value="perf(geneticAlgorithm): enable multiprocessing&#10;&#10;Enable multiprocessing for faster GA runs.&#10;&#10;- Use multiprocessing to improve execution time&#10;- Reduce overall computation time" />
-    <option name="LAST_COMMIT_MESSAGE" value="perf(geneticAlgorithm): enable multiprocessing&#10;&#10;Enable multiprocessing for faster GA runs.&#10;&#10;- Use multiprocessing to improve execution time&#10;- Reduce overall computation time" />
+    <MESSAGE value="perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs with lock removal.&#10;&#10;- Remove unnecessary lock for shared variable updates.&#10;- Improve execution time with multiprocessing.&#10;- Reduce overall computation time." />
+    <option name="LAST_COMMIT_MESSAGE" value="perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs with lock removal.&#10;&#10;- Remove unnecessary lock for shared variable updates.&#10;- Improve execution time with multiprocessing.&#10;- Reduce overall computation time." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -712,7 +718,19 @@
           <line>70</line>
           <option name="timeStamp" value="213" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
+          <line>603</line>
+          <option name="timeStamp" value="216" />
+        </line-breakpoint>
       </breakpoints>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
     </breakpoint-manager>
   </component>
 </project>
