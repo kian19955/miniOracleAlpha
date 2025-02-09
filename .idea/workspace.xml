@@ -596,7 +596,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739111861363</updated>
     </task>
-    <option name="localTasksCounter" value="46" />
+    <task id="LOCAL-00046" summary="perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs with lock removal.&#10;&#10;- Remove unnecessary lock for shared variable updates.&#10;- Improve execution time with multiprocessing.&#10;- Reduce overall computation time.">
+      <option name="closed" value="true" />
+      <created>1739118687218</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1739118687218</updated>
+    </task>
+    <option name="localTasksCounter" value="47" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -720,7 +728,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>603</line>
+          <line>600</line>
           <option name="timeStamp" value="216" />
         </line-breakpoint>
       </breakpoints>

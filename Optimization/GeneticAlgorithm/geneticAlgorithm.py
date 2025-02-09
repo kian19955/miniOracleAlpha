@@ -6,7 +6,7 @@ from types import MappingProxyType
 from inspect import signature
 import random
 from time import sleep
-from multiprocessing import Pool, Value, Lock
+from multiprocessing import Pool, Queue
 from enum import EnumMeta
 import atexit
 from copy import deepcopy
@@ -140,10 +140,6 @@ class GeneticAlgorithm:
 
         self.toolbox = toolbox
 
-        # TEST
-        self.indis_processed: Value = Value('i', 0)
-        self.lock = Lock()
-
     def _validate_genome_settings(self):
         for param_name, annotation in self.genome_types.items():
             if annotation is int or annotation is float:
@@ -218,6 +214,7 @@ class GeneticAlgorithm:
         logger.debug("Creating Pool")
         if use_multiprocessing:
             pool_context = Pool()
+            progress_queue = Queue()
         else:
             # Create a dummy pool that runs sequentially
             logger.warning("Multiprocessing is disabled, the operation will take longer.")
@@ -253,8 +250,6 @@ class GeneticAlgorithm:
             for ind, fit in zip(population, fitnesses):
                 ind.fitness.values = fit
 
-            self.indis_processed.value = 0
-
             if hof is not None:
                 hof.update(population)
 
@@ -282,8 +277,6 @@ class GeneticAlgorithm:
                 fitnesses = pool.map(self.toolbox.evaluate, invalid_ind)
                 for ind, fit in zip(survivors, fitnesses):
                     ind.fitness.values = fit
-
-                self.indis_processed.value = 0
 
                 if self.elite_injection is not None:
                     population = survivors + list(map(self.toolbox.clone, hof.items[:5]))
@@ -381,10 +374,10 @@ class GeneticAlgorithm:
             logger.error(f"Error evaluating individual: {e}, with Genomes:{(genome | self.base_params)}")
             values: tuple[float | int] = tuple(-100 * weight for weight in self.objectives.values())
 
-        with self.lock:
+        """with self.lock:
             self.indis_processed.value += 1
 
-        print(f"Fitness: {values} individual: {genome} | {self.indis_processed.value}", end="\r")
+        print(f"Fitness: {values} individual: {genome} | {self.indis_processed.value}", end="\r")"""
 
         return tuple(values)
 
