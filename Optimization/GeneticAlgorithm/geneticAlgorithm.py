@@ -211,7 +211,8 @@ class GeneticAlgorithm:
         def on_exit():
             if pop:
                 for i, indi in enumerate(pop):
-                    logger.info(f"RANK: {i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
+                    if indi.fitness.valid:
+                        pass #logger.info(f"RANK: {i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
             else:
                 logger.info("No indi found.")
 
@@ -830,7 +831,7 @@ if __name__ == '__main__':
 
     finals = ga.run(
         generations=500,
-        population_size=100,
+        population_size=4,
         use_multiprocessing=True
     )
 
