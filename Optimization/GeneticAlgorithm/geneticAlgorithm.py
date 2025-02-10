@@ -20,6 +20,7 @@ from rich.table import Table
 
 from api.binanceApi import fetch_klines
 from backtester import backtest
+from constants import ga_his_dir_path
 from oracleMaths import randfloat
 from Optimization.GeneticAlgorithm.gaTypes import MateTypeProbabilities, MutateTypeProbabilities
 from Optimization.GeneticAlgorithm.operators import gauss_clamp
@@ -209,12 +210,20 @@ class GeneticAlgorithm:
         random.seed(seed)
 
         def on_exit():
-            if pop:
-                for i, indi in enumerate(pop):
-                    if indi.fitness.valid:
-                        logger.info(f"RANK: {i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
-            else:
+            if not pop:
                 logger.info("No indi found.")
+                return
+
+            for i, indi in enumerate(pop):
+                if indi.fitness.valid:
+                    logger.info(f"RANK: {i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
+
+            with open(f"{ga_his_dir_path}/G{generations}_PS{population_size}_{time.strftime('%Y%m%d_%H%M%S')}", "w") as file:
+                file.write("Generation, Evaluations, Avg, Min, Max, Std\n")
+
+                for record in logbook:
+                    file.write(
+                        f"{record['gen']},{record['evals']},{record['avg']},{record['min']},{record['max']},{record['std']}\n")
 
         atexit.register(on_exit)
 
@@ -845,7 +854,7 @@ if __name__ == '__main__':
 
     finals = ga.run(
         generations=500,
-        population_size=4,
+        population_size=100,
         use_multiprocessing=True
     )
 
