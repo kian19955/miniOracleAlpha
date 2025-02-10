@@ -278,7 +278,8 @@ class GeneticAlgorithm:
                     fitnesses = []
                     for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
                         fitnesses.append(fit)
-                        progress.advance(task, description=f"Fitness: {fit}")
+                        progress.update(description=f"Fitness: {fit}")
+                        progress.advance(task)
 
                 for ind, fit in zip(invalid_ind, fitnesses):
                     ind.fitness.values = fit
@@ -831,7 +832,7 @@ if __name__ == '__main__':
 
     finals = ga.run(
         generations=500,
-        population_size=4,
+        population_size=100,
         use_multiprocessing=True
     )
 

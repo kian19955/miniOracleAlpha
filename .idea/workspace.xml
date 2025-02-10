@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```">
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -231,14 +233,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1735803041423</updated>
-    </task>
-    <task id="LOCAL-00013" summary="ea">
-      <option name="closed" value="true" />
-      <created>1736587437208</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1736587437208</updated>
     </task>
     <task id="LOCAL-00014" summary="ea2">
       <option name="closed" value="true" />
@@ -624,7 +618,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739200081258</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```">
+      <option name="closed" value="true" />
+      <created>1739200401022</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1739200401022</updated>
+    </task>
+    <option name="localTasksCounter" value="63" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -651,7 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75 for better exploration.&#10;• Added stop limits&#10;• Minor code cleaning&#10;&#10;This change increases the population size of the genetic algorithm to improve the exploration of the search space, potentially leading to better solutions. Also includes a few code cleanups." />
     <MESSAGE value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability." />
     <MESSAGE value="feat(ga): Enhance GA performance &amp; stability&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability. Adjusts backtester stop loss value." />
     <MESSAGE value="feat(ga): enhance GA with multi-ticker support&#10;&#10;- Enable multi-ticker backtesting for robust optimization.&#10;- Randomize ticker selection per evaluation.&#10;- Improve genetic algorithm performance and stability.&#10;&#10;This change enhances the genetic algorithm's performance by increasing the population, stability, and adding multi-ticker backtesting support." />
@@ -676,7 +677,8 @@
     <MESSAGE value="feat(geneticAlgorithm): remove initial_start parameter&#10;&#10;body:&#10;- Remove the unused `initial_start` parameter from the `_eval_individuals` calls.&#10;- This simplifies the function signature and reduces code clutter.&#10;- The parameter was not being used within the `_eval_individuals` function." />
     <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;body:&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
     <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
+    <MESSAGE value="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```" />
+    <option name="LAST_COMMIT_MESSAGE" value="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
