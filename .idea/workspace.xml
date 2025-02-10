@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(geneticAlgorithm): remove initial_start parameter&#10;&#10;body:&#10;- Remove the unused `initial_start` parameter from the `_eval_individuals` calls.&#10;- This simplifies the function signature and reduces code clutter.&#10;- The parameter was not being used within the `_eval_individuals` function.">
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-    </list>
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;body:&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -233,14 +231,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1735803041423</updated>
-    </task>
-    <task id="LOCAL-00011" summary="9">
-      <option name="closed" value="true" />
-      <created>1736530107589</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1736530107589</updated>
     </task>
     <task id="LOCAL-00012" summary="10">
       <option name="closed" value="true" />
@@ -626,7 +616,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739199482326</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;body:&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.">
+      <option name="closed" value="true" />
+      <created>1739199897999</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1739199898000</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -653,7 +651,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix(ga): refine ga logic&#10;&#10;• Correctly retrieve genome values from backtest stats&#10;• Fix issues when genome_value returned None&#10;• Adjust mutation to prevent out-of-bounds values&#10;• Remove unused extra logger information&#10;• Add hall of fame and statistics tracking" />
     <MESSAGE value="pumped pop size to 75" />
     <MESSAGE value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75 for better exploration.&#10;• Added stop limits&#10;• Minor code cleaning&#10;&#10;This change increases the population size of the genetic algorithm to improve the exploration of the search space, potentially leading to better solutions. Also includes a few code cleanups." />
     <MESSAGE value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability." />
@@ -678,7 +675,8 @@
     <MESSAGE value="```&#10;refactor(genetic_algorithm): improve evaluation and logging&#10;&#10;- Refactor individual evaluation for progress tracking.&#10;- Add elapsed time and estimated remaining time during evaluation.&#10;- Include generation duration in logs for performance analysis.&#10;```" />
     <MESSAGE value="refactor(genetic_algorithm): improve evaluation and logging&#10;&#10;- Refactor individual evaluation for progress tracking.&#10;- Add elapsed time and estimated remaining time during evaluation.&#10;- Include generation duration in logs for performance analysis." />
     <MESSAGE value="feat(geneticAlgorithm): remove initial_start parameter&#10;&#10;body:&#10;- Remove the unused `initial_start` parameter from the `_eval_individuals` calls.&#10;- This simplifies the function signature and reduces code clutter.&#10;- The parameter was not being used within the `_eval_individuals` function." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): remove initial_start parameter&#10;&#10;body:&#10;- Remove the unused `initial_start` parameter from the `_eval_individuals` calls.&#10;- This simplifies the function signature and reduces code clutter.&#10;- The parameter was not being used within the `_eval_individuals` function." />
+    <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;body:&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;body:&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

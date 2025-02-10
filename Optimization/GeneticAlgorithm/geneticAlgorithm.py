@@ -277,7 +277,7 @@ class GeneticAlgorithm:
                     fitnesses = []
                     for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
                         fitnesses.append(fit)
-                        progress.advance(task)
+                        progress.advance(task, description=f"Fitness: {fit}")
 
                 for ind, fit in zip(invalid_ind, fitnesses):
                     ind.fitness.values = fit
