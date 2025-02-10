@@ -214,9 +214,9 @@ class GeneticAlgorithm:
                 logger.info("No indi found.")
                 return
 
-            for i, indi in enumerate(pop):
+            for i, indi in enumerate(pop[::-1]):
                 if indi.fitness.valid:
-                    logger.info(f"RANK: {i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
+                    logger.info(f"RANK: {len(pop) - i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
 
             with open(f"{ga_his_dir_path}/G{generations}_PS{population_size}_{time.strftime('%Y%m%d_%H%M%S')}", "w") as file:
                 file.write("Generation, Evaluations, Avg, Min, Max, Std\n")
@@ -308,7 +308,7 @@ class GeneticAlgorithm:
 
             # ----------------- Initialization -----------------
             logger.debug("Creating Initial Population")
-            pop = self.toolbox.population(n=population_size)
+            pop: list[dict] = self.toolbox.population(n=population_size)
 
             logger.info("Evaluating Initial Population")
             initial_start = time.time()
@@ -858,8 +858,5 @@ if __name__ == '__main__':
         use_multiprocessing=True
     )
 
-    for i, final in enumerate(finals):
-        logger.info(f"RANK: {i}, FITNESS: {final.fitness.values}, INDI: {final}")
-
-    for i, top5 in enumerate(finals[:5]):
-        print(f"RANK: {i}, FITNESS: {top5.fitness.values}, INDI: {top5}")
+    for i, final in enumerate(finals[::-1]):
+        logger.info(f"RANK: {len(finals) - i}, FITNESS: {final.fitness.values}, INDI: {final}")
