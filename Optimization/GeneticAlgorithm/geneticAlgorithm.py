@@ -287,7 +287,7 @@ class GeneticAlgorithm:
 
             logger.info("Evaluating Initial Population")
             initial_start = time.time()
-            _eval_individuals(pop, initial_start)
+            _eval_individuals(pop)
             pop = self.toolbox.select(pop, len(pop))
 
             # Setup statistics and logbook
@@ -326,7 +326,7 @@ class GeneticAlgorithm:
                         del ind.fitness.values
 
                 logger.debug("Evaluating Offspring")
-                _eval_individuals(offspring, generation_start)
+                _eval_individuals(offspring)
 
                 # Select the next generation from the current population and offspring.
                 combined = pop + offspring
