@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -231,14 +231,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1735803041423</updated>
-    </task>
-    <task id="LOCAL-00015" summary="ea3">
-      <option name="closed" value="true" />
-      <created>1736593240310</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1736593240310</updated>
     </task>
     <task id="LOCAL-00016" summary="feat(core): initialize project structure&#10;&#10;• create essential files and directories&#10;• add placeholder class and basic config&#10;• update project sdk and module settings">
       <option name="closed" value="true" />
@@ -624,7 +616,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739200531367</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.">
+      <option name="closed" value="true" />
+      <created>1739200619760</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1739200619760</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -651,7 +651,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability." />
     <MESSAGE value="feat(ga): Enhance GA performance &amp; stability&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability. Adjusts backtester stop loss value." />
     <MESSAGE value="feat(ga): enhance GA with multi-ticker support&#10;&#10;- Enable multi-ticker backtesting for robust optimization.&#10;- Randomize ticker selection per evaluation.&#10;- Improve genetic algorithm performance and stability.&#10;&#10;This change enhances the genetic algorithm's performance by increasing the population, stability, and adding multi-ticker backtesting support." />
     <MESSAGE value="feat(ga): enable multi-ticker support&#10;&#10;- Enable multi-ticker backtesting.&#10;- Randomize ticker selection per evaluation.&#10;- Improve GA stability.&#10;&#10;This change enhances the genetic algorithm's performance by adding multi-ticker backtesting support for more robust optimization." />
@@ -676,7 +675,8 @@
     <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;body:&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
     <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
     <MESSAGE value="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```" />
-    <option name="LAST_COMMIT_MESSAGE" value="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```" />
+    <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
