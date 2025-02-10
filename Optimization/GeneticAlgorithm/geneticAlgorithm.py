@@ -197,8 +197,8 @@ class GeneticAlgorithm:
 
         def on_exit():
             if pop:
-                for indi in pop:
-                    logger.info(f"Best with Fitness: {indi.fitness.values}, Indi: {indi}")
+                for i, indi in enumerate(pop):
+                    logger.info(f"RANK: {i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
             else:
                 logger.info("No indi in found.")
 
@@ -819,5 +819,5 @@ if __name__ == '__main__':
         use_multiprocessing=True
     )
 
-    for final in finals:
-        logger.info(f"Best with Fitness: {final.fitness.values}, Final: {final}")
+    for i, final in enumerate(finals):
+        logger.info(f"RANK: {i}, FITNESS: {final.fitness.values}, INDI: {final}")
