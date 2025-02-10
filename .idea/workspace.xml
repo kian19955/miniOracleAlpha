@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix it by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix by removing redundant call.&#10;&#10;- Delete repeated logger.warning call.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/gaTypes/typeProbabilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/gaTypes/typeProbabilities.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -231,14 +235,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1735803041423</updated>
-    </task>
-    <task id="LOCAL-00002" summary="first push">
-      <option name="closed" value="true" />
-      <created>1736516504519</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1736516504519</updated>
     </task>
     <task id="LOCAL-00003" summary="1">
       <option name="closed" value="true" />
@@ -624,7 +620,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739135508184</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix by removing redundant call.&#10;&#10;- Delete repeated logger.warning call.">
+      <option name="closed" value="true" />
+      <created>1739135693868</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1739135693870</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -651,7 +655,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance." />
     <MESSAGE value="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate" />
     <MESSAGE value="finished ga" />
     <MESSAGE value="tried implementing backtrader into our project" />
@@ -676,7 +679,8 @@
     <MESSAGE value="perf(geneticAlgorithm): improve multiprocessing&#10;&#10;Enable faster GA runs by removing lock.&#10;&#10;- Remove lock for shared variable updates.&#10;- Use Queue for inter-process communication.&#10;- Improve overall execution time." />
     <MESSAGE value="fix(geneticAlgorithm): Improve logging of best individual&#10;&#10;Log best individuals fitness and representation&#10;&#10;- Update logging to include both fitness and representation of elites&#10;- Provide more context in the logs" />
     <MESSAGE value="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix it by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix it by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
+    <MESSAGE value="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -748,7 +752,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>615</line>
+          <line>630</line>
           <option name="timeStamp" value="216" />
         </line-breakpoint>
       </breakpoints>

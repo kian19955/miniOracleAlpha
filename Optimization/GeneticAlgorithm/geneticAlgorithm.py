@@ -140,8 +140,6 @@ class GeneticAlgorithm:
 
         self.toolbox = toolbox
 
-        self.eval_counter = 0
-
     def _validate_genome_settings(self):
         for param_name, annotation in self.genome_types.items():
             if annotation is int or annotation is float:
@@ -202,25 +200,25 @@ class GeneticAlgorithm:
 
         return species_types
 
-    def run(self, generations: int = 40, population_size: int = 50, use_multiprocessing: bool = True):
-        self.eval_counter = 0
+    def run(self, generations: int = 40, population_size: int = 50,
+            use_multiprocessing: bool = True, seed: int = 0):
+        random.seed(seed)
 
         def on_exit():
             if hof and len(hof) > 0:
                 for elite in hof:
-                    logger.info(f"Best with Fitness: {elite.fitness.values}, Elite: {elite} ")
+                    logger.info(f"Best with Fitness: {elite.fitness.values}, Elite: {elite}")
             else:
                 logger.info("No Elites in the Hall of Fame found.")
 
         atexit.register(on_exit)
 
-        # Create a pool context manager if using multiprocessing
+        # Create a pool context manager for parallel evaluation
         logger.debug("Creating Pool")
         if use_multiprocessing:
             pool_context = Pool()
         else:
-            # Create a dummy pool that runs sequentially
-            logger.warning("Multiprocessing is disabled, the operation will take longer.")
+            logger.warning("Multiprocessing is disabled; the operation will take longer.")
 
             class DummyPool:
                 @staticmethod
@@ -240,11 +238,21 @@ class GeneticAlgorithm:
             pool_context = DummyPool()
 
         with pool_context as pool:
+            def log_generation(g):
+                """Log statistics for the current generation."""
+                record = stats.compile(pop)
+                logbook.record(gen=g + 1, evals=len(pop), **record)
+                best_fitness = tools.selNSGA2(pop, k=1)[0].fitness.values
+                logger.info(f"\n{logbook.stream}\n"
+                            f"Generation {g + 1}/{generations}: Best Fitness of Gen= {best_fitness}")
+
             def _eval_individuals(individuals):
+                """Evaluate individuals that have an invalid fitness."""
                 invalid_ind = [ind for ind in individuals if not ind.fitness.valid]
                 total_to_evaluate = len(invalid_ind)
                 fitnesses = []
                 counter = 0
+
                 for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
                     fitnesses.append(fit)
                     counter += 1
@@ -253,66 +261,71 @@ class GeneticAlgorithm:
                 for ind, fit in zip(invalid_ind, fitnesses):
                     ind.fitness.values = fit
 
+            # ----------------- Initialization -----------------
             logger.debug("Creating Initial Population")
+            pop = self.toolbox.population(n=population_size)
+
+            logger.info("Evaluating Initial Population")
+            _eval_individuals(pop)
+
+            pop = self.toolbox.select(pop, len(pop))
+
+            # Setup miscellanea like the Hall of Fame, logbook, etc.
             hof = tools.HallOfFame(self.hall_of_fame_size) if self.hall_of_fame_size else None
 
             stats = tools.Statistics(lambda ind: ind.fitness.values)
-            stats.register("avg", lambda pop: np.mean([ind.fitness.values for ind in pop], axis=0))
-            stats.register("std", lambda pop: np.std([ind.fitness.values for ind in pop], axis=0))
-            stats.register("min", lambda pop: np.min([ind.fitness.values for ind in pop], axis=0))
-            stats.register("max", lambda pop: np.max([ind.fitness.values for ind in pop], axis=0))
+            stats.register("avg", np.mean, axis=0)
+            stats.register("std", np.std, axis=0)
+            stats.register("min", np.min, axis=0)
+            stats.register("max", np.max, axis=0)
 
-            logger.info("Creating Initial Population")
-            population = self.toolbox.population(n=population_size)
+            logbook = tools.Logbook()
+            logbook.header = ["gen", "evals"] + stats.fields
 
-            logger.info("Evaluating Initial Population")
-            _eval_individuals(population)
-
-            self.eval_counter = 0
-
+            log_generation(gen=0)
             if hof is not None:
-                hof.update(population)
+                hof.update(pop)
 
+            # ----------------- Evolutionary Loop -----------------
             for gen in range(generations):
                 logger.debug(f"Running Generation {gen + 1}")
-                survivors = self.toolbox.select(population, len(population))
-                survivors = list(map(self.toolbox.clone, survivors))
 
-                logger.debug("Mating Survivers")
-                for survivor1, survivor2 in zip(survivors[::2], survivors[1::2]):
-                    survivor1_changed, survivor2_changed = self.toolbox.mate(survivor1, survivor2)
+                offspring = tools.selTournamentDCD(pop, len(pop))
+                offspring = [self.toolbox.clone(ind) for ind in offspring]
 
-                    if survivor1_changed:
-                        del survivor1.fitness.values
-                    if survivor2_changed:
-                        del survivor2.fitness.values
+                logger.debug("Mating Offspring")
+                for ind1, ind2 in zip(offspring[::2], offspring[1::2]):
+                    changed1, changed2 = self.toolbox.mate(ind1, ind2)
+                    if changed1:
+                        del ind1.fitness.values
+                    if changed2:
+                        del ind2.fitness.values
 
                 logger.debug("Mutating Offspring")
-                for survivor in survivors:
-                    if self.toolbox.mutate(survivor):
-                        del survivor.fitness.values
+                for ind in offspring:
+                    if self.toolbox.mutate(ind):
+                        del ind.fitness.values
 
                 logger.debug("Evaluating Offspring")
-                _eval_individuals(survivors)
+                _eval_individuals(offspring)
+
+                # Combine the current population and offspring, then select the next generation
+                combined = pop + offspring
+                pop = self.toolbox.select(combined, population_size)
 
                 if self.elite_injection is not None:
-                    population = survivors + list(map(self.toolbox.clone, hof.items[:5]))
-                else:
-                    population[:] = survivors
+                    elites = [self.toolbox.clone(ind) for ind in hof.items[:self.elite_injection]]
+                    pop = self.toolbox.select(offspring + elites, population_size)
 
                 if hof is not None:
-                    pareto_front = tools.selNSGA2(population, k=self.hall_of_fame_size)
+                    pareto_front = tools.selNSGA2(pop, k=self.hall_of_fame_size)
                     hof.clear()
                     hof.items.extend(pareto_front)
 
-                gen_stats = stats.compile(population)
+                log_generation(gen)
 
-                logger.info(
-                    f"Generation {gen + 1}/{generations}: Best Fitness = {tools.selBest(population, k=1)[0].fitness.values} "
-                    f"| Stats: {gen_stats}"
-                )
         if hof and len(hof) > 0:
-            return hof[0]
+            return hof
         else:
             logger.warning("No valid individual found.")
             return None
@@ -401,6 +414,8 @@ class GeneticAlgorithm:
         return tuple(values)
 
     def mate(self, ind1, ind2) -> tuple[bool, bool]:
+        if random.random() > self.mate_tp.MATING_PROP:
+            return False, False
         # REMAKE stopS
         # ["dna"]
         initial_indi1 = deepcopy(ind1)
@@ -669,6 +684,7 @@ if __name__ == '__main__':
         OTHER=0.1
     )
     mate_tp = MateTypeProbabilities(
+        MATING_PROP=0.9,
         FLOAT=0.5,
         INT=0.5,
         ENUM=0.5,

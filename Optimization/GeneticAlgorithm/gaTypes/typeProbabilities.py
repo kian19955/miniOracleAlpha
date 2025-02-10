@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 @dataclass
 class MateTypeProbabilities:
+    MATING_PROP: float = 0.9,
     FLOAT: float = 0.5,
     INT: float = 0.5,
     BOOL: float = 0.5
