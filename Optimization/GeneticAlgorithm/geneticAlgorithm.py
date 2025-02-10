@@ -200,14 +200,21 @@ class GeneticAlgorithm:
 
         return species_types
 
+    @staticmethod
+    def _save_logbook(logbook: tools.Logbook, generations: int, population_size: int):
+        with open(f"{ga_his_dir_path}/G{generations}_PS{population_size}_{time.strftime('%Y%m%d_%H%M%S')}", "w") as file:
+            file.write("Generation, Evaluations, Avg, Min, Max, Std\n")
+
+            for record in logbook:
+                file.write(
+                    f"{record['gen']},{record['evals']},{record['avg']},{record['min']},{record['max']},{record['std']}\n")
+
     def run(self, generations: int = 40, population_size: int = 50,
             use_multiprocessing: bool = True, seed: int = 0):
         if population_size % 4 != 0:
             raise ValueError(
                 f"Population size must be divisible by 4 when using selTournamentDCD, but got {population_size}"
             )
-
-        random.seed(seed)
 
         def on_exit():
             if not pop:
@@ -218,12 +225,9 @@ class GeneticAlgorithm:
                 if indi.fitness.valid:
                     logger.info(f"RANK: {len(pop) - i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
 
-            with open(f"{ga_his_dir_path}/G{generations}_PS{population_size}_{time.strftime('%Y%m%d_%H%M%S')}", "w") as file:
-                file.write("Generation, Evaluations, Avg, Min, Max, Std\n")
+            self._save_logbook(logbook, generations, population_size)
 
-                for record in logbook:
-                    file.write(
-                        f"{record['gen']},{record['evals']},{record['avg']},{record['min']},{record['max']},{record['std']}\n")
+        random.seed(seed)
 
         atexit.register(on_exit)
 
@@ -360,6 +364,7 @@ class GeneticAlgorithm:
                 generation_duration = time.time() - generation_start
                 log_generation(gen, generation_duration)
 
+        self._save_logbook(logbook, generations, population_size)
         return pop
 
     def create_individual(self):
