@@ -57,8 +57,6 @@ class GeneticAlgorithm:
             mate_tp: MateTypeProbabilities = MateTypeProbabilities,
             mutate_tp: MutateTypeProbabilities = MutateTypeProbabilities,
             mutation_strength: float = 0.1,
-
-            hall_of_fame_size: Optional[int] = None,
     ):
         """
         :param species: The type of the individual
@@ -100,8 +98,6 @@ class GeneticAlgorithm:
         self.mutate_tp = mutate_tp
 
         self.mutation_strength = mutation_strength
-
-        self.hall_of_fame_size = hall_of_fame_size
 
         self.base_params = base_params or {}
         c_params: MappingProxyType[str, any] = signature(species).parameters
@@ -200,11 +196,11 @@ class GeneticAlgorithm:
         random.seed(seed)
 
         def on_exit():
-            if hof and len(hof) > 0:
-                for elite in hof:
-                    logger.info(f"Best with Fitness: {elite.fitness.values}, Elite: {elite}")
+            if pop:
+                for indi in pop:
+                    logger.info(f"Best with Fitness: {indi.fitness.values}, Indi: {indi}")
             else:
-                logger.info("No Elites in the Hall of Fame found.")
+                logger.info("No indi in found.")
 
         atexit.register(on_exit)
 
@@ -265,8 +261,7 @@ class GeneticAlgorithm:
 
             pop = self.toolbox.select(pop, len(pop))
 
-            # Setup miscellanea like the Hall of Fame, logbook, etc.
-            hof = tools.HallOfFame(self.hall_of_fame_size) if self.hall_of_fame_size else None
+            # Setup miscellanea like the stats, logbook, etc.
 
             stats = tools.Statistics(lambda ind: ind.fitness.values)
             stats.register("avg", np.mean, axis=0)
@@ -277,10 +272,7 @@ class GeneticAlgorithm:
             logbook = tools.Logbook()
             logbook.header = ["gen", "evals"] + stats.fields
 
-            log_generation(gen=0)
-            if hof is not None:
-                hof.update(pop)
-
+            log_generation(g=0)
             # ----------------- Evolutionary Loop -----------------
             for gen in range(generations):
                 logger.debug(f"Running Generation {gen + 1}")
@@ -308,18 +300,9 @@ class GeneticAlgorithm:
                 combined = pop + offspring
                 pop = self.toolbox.select(combined, population_size)
 
-                if hof is not None:
-                    pareto_front = tools.selNSGA2(pop, k=self.hall_of_fame_size)
-                    hof.clear()
-                    hof.items.extend(pareto_front)
-
                 log_generation(gen)
 
-        if hof and len(hof) > 0:
-            return hof
-        else:
-            logger.warning("No valid individual found.")
-            return None
+        return pop
 
     def create_individual(self):
         dna: dict[str, any] = {}
@@ -827,13 +810,14 @@ if __name__ == '__main__':
         mutate_tp=mutate_tp,
         mate_tp=mate_tp,
         mutation_strength=0.1,
-        tournament_size=2,
-        hall_of_fame_size=5,
     )
     logger.info("Running Genetic Algorithm...")
 
-    print(ga.run(
+    finals = ga.run(
         generations=250,
         population_size=75,
         use_multiprocessing=True
-    ))
+    )
+
+    for final in finals:
+        logger.info(f"Best with Fitness: {final.fitness.values}, Final: {final}")

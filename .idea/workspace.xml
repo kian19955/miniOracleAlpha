@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix by removing redundant call.&#10;&#10;- Delete repeated logger.warning call.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/gaTypes/typeProbabilities.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/gaTypes/typeProbabilities.py" afterDir="false" />
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="refactor(genetic_algorithm): remove unused parameters&#10;&#10;Remove `tournament_size` and `elite_injection` parameters from the genetic algorithm.&#10;&#10;- Simplify the algorithm's configuration by removing unnecessary options.&#10;- The selection process now relies solely on the toolbox.select method.&#10;- Improve code readability by reducing the number of parameters in the constructor.">
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -235,22 +233,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1735803041423</updated>
-    </task>
-    <task id="LOCAL-00003" summary="1">
-      <option name="closed" value="true" />
-      <created>1736517980939</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1736517980939</updated>
-    </task>
-    <task id="LOCAL-00004" summary="2">
-      <option name="closed" value="true" />
-      <created>1736519296878</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1736519296878</updated>
     </task>
     <task id="LOCAL-00005" summary="3">
       <option name="closed" value="true" />
@@ -628,7 +610,23 @@
       <option name="project" value="LOCAL" />
       <updated>1739135693870</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="fix(geneticAlgorithm): revamp GA workflow &amp; logging&#10;&#10;The previous GA workflow had issues with population management and logging.&#10;&#10;- Refactor the evaluation process for improved efficiency.&#10;- Enhance logging to include generation statistics and best fitness.&#10;- Correctly select population after mating and mutation.">
+      <option name="closed" value="true" />
+      <created>1739195606680</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1739195606680</updated>
+    </task>
+    <task id="LOCAL-00053" summary="refactor(genetic_algorithm): remove unused parameters&#10;&#10;Remove `tournament_size` and `elite_injection` parameters from the genetic algorithm.&#10;&#10;- Simplify the algorithm's configuration by removing unnecessary options.&#10;- The selection process now relies solely on the toolbox.select method.&#10;- Improve code readability by reducing the number of parameters in the constructor.">
+      <option name="closed" value="true" />
+      <created>1739195848250</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1739195848250</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -655,8 +653,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate" />
-    <MESSAGE value="finished ga" />
     <MESSAGE value="tried implementing backtrader into our project" />
     <MESSAGE value="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing" />
     <MESSAGE value="No file selected" />
@@ -680,7 +676,9 @@
     <MESSAGE value="fix(geneticAlgorithm): Improve logging of best individual&#10;&#10;Log best individuals fitness and representation&#10;&#10;- Update logging to include both fitness and representation of elites&#10;- Provide more context in the logs" />
     <MESSAGE value="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix it by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
     <MESSAGE value="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
+    <MESSAGE value="fix(geneticAlgorithm): revamp GA workflow &amp; logging&#10;&#10;The previous GA workflow had issues with population management and logging.&#10;&#10;- Refactor the evaluation process for improved efficiency.&#10;- Enhance logging to include generation statistics and best fitness.&#10;- Correctly select population after mating and mutation." />
+    <MESSAGE value="refactor(genetic_algorithm): remove unused parameters&#10;&#10;Remove `tournament_size` and `elite_injection` parameters from the genetic algorithm.&#10;&#10;- Simplify the algorithm's configuration by removing unnecessary options.&#10;- The selection process now relies solely on the toolbox.select method.&#10;- Improve code readability by reducing the number of parameters in the constructor." />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(genetic_algorithm): remove unused parameters&#10;&#10;Remove `tournament_size` and `elite_injection` parameters from the genetic algorithm.&#10;&#10;- Simplify the algorithm's configuration by removing unnecessary options.&#10;- The selection process now relies solely on the toolbox.select method.&#10;- Improve code readability by reducing the number of parameters in the constructor." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -752,7 +750,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>630</line>
+          <line>621</line>
           <option name="timeStamp" value="216" />
         </line-breakpoint>
       </breakpoints>
