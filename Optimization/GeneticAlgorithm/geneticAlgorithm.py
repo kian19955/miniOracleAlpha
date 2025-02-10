@@ -14,6 +14,9 @@ import time
 
 from deap import base, creator, tools
 import numpy as np
+from rich.console import Console
+from rich.progress import Progress, TimeElapsedColumn, TimeRemainingColumn
+from rich.table import Table
 
 from api.binanceApi import fetch_klines
 from backtester import backtest
@@ -22,6 +25,8 @@ from Optimization.GeneticAlgorithm.gaTypes import MateTypeProbabilities, MutateT
 from Optimization.GeneticAlgorithm.operators import gauss_clamp
 
 # TODO: support for list
+console = Console()
+
 logger = logging.getLogger("oracle.analysis")
 
 SAFE_BUILTINS = {
@@ -239,37 +244,39 @@ class GeneticAlgorithm:
         with pool_context as pool:
 
             def log_generation(g, generation_duration):
-                """Log statistics for the current generation, including the time taken."""
+                """Log statistics for the current generation using a Rich table."""
                 record = stats.compile(pop)
                 logbook.record(gen=g + 1, evals=len(pop), **record)
                 best_fitness = tools.selNSGA2(pop, k=1)[0].fitness.values
-                logger.info(
-                    f"\n{logbook.stream}\n"
-                    f"Generation {g + 1}/{generations}: Best Fitness = {best_fitness} | Gen Time: {generation_duration:.2f}s"
-                )
+                table = Table(title=f"Generation {g + 1}/{generations}")
+                table.add_column("Best Fitness", justify="center", style="cyan")
+                table.add_column("Generation Time (s)", justify="center", style="magenta")
+                table.add_row(str(best_fitness), f"{generation_duration:.2f}")
+                console.print("\n" + logbook.stream)
+                console.print(table)
 
-            def _eval_individuals(individuals, eval_start_time):
-                """Evaluate individuals that have an invalid fitness,
-                printing progress with elapsed time and estimated remaining time."""
+            def _eval_individuals(individuals):
+                """Evaluate individuals that have an invalid fitness, showing progress with Rich."""
                 invalid_ind = [ind for ind in individuals if not ind.fitness.valid]
                 total_to_evaluate = len(invalid_ind)
-                fitnesses = []
-                counter = 0
 
-                for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
-                    fitnesses.append(fit)
-                    counter += 1
+                if total_to_evaluate == 0:
+                    return
 
-                    elapsed = time.time() - eval_start_time
-                    avg_time = elapsed / counter if counter > 0 else 0
-                    remaining = (total_to_evaluate - counter) * avg_time
+                # Initialize Progress with additional columns for elapsed and remaining time
+                with Progress(
+                        "[progress.description]{task.description}",
+                        "[progress.percentage]{task.percentage:>3.0f}%",
+                        "•", TimeElapsedColumn(), "•", TimeRemainingColumn(), "•",
+                        "[progress.bar]{task.completed}/{task.total}",
+                        transient=True,
+                ) as progress:
+                    task = progress.add_task("Evaluating individuals...", total=total_to_evaluate)
+                    fitnesses = []
 
-                    print(
-                        f"Evaluated {counter}/{total_to_evaluate} individuals with Fitness: {fit} | "
-                        f"Elapsed: {elapsed:.2f}s | Remaining: {remaining:.2f}s",
-                        end="\r"
-                    )
-                print()
+                    for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
+                        fitnesses.append(fit)
+                        progress.advance(task)
 
                 for ind, fit in zip(invalid_ind, fitnesses):
                     ind.fitness.values = fit
@@ -340,41 +347,22 @@ class GeneticAlgorithm:
                 annotation = random.choice(possible_types)
 
             if annotation is float:
-                dna[param_name] = randfloat(
-                    *self._resolve_genome(
-                        param_name,
-                        annotation,
-                        dna
-                    )
-                )
-
+                dna[param_name] = randfloat(*self._resolve_genome(param_name, annotation, dna))
             elif annotation is int:
-                dna[param_name] = random.randrange(
-                    *self._resolve_genome(
-                        param_name,
-                        annotation,
-                        {"dna": dna}
-                    )
-                )
-
+                dna[param_name] = random.randrange(*self._resolve_genome(param_name, annotation, {"dna": dna}))
             elif annotation is bool:
                 dna[param_name] = random.choice([True, False])
-
             elif isinstance(annotation, EnumMeta):
                 dna[param_name] = self._retrieve_random_enum(param_name, annotation)
-
             elif annotation is type(None):
                 dna[param_name] = None
-
             else:
                 raise ValueError(f"Unsupported type {annotation} for parameter {param_name}")
 
         # REMAKE STOPS
         stops: dict[str, float] = {}
         for stop_name, settings in self.stop_settings.items():
-            stops[stop_name] = randfloat(
-                **settings
-            )
+            stops[stop_name] = randfloat(**settings)
         # ------------------
 
         return {"dna": dna, "stops": stops}
