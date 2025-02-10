@@ -15,7 +15,7 @@ import time
 from deap import base, creator, tools
 import numpy as np
 from rich.console import Console
-from rich.progress import Progress, TimeElapsedColumn, TimeRemainingColumn
+from rich.progress import Progress, BarColumn, TimeElapsedColumn, TimeRemainingColumn, TextColumn
 from rich.table import Table
 
 from api.binanceApi import fetch_klines
@@ -263,17 +263,17 @@ class GeneticAlgorithm:
                 if total_to_evaluate == 0:
                     return
 
-                # Initialize Progress with additional columns for elapsed and remaining time
-                with Progress(
-                        "[progress.description]{task.description}",
-                        "[progress.percentage]{task.percentage:>3.0f}%",
-                        "•", TimeElapsedColumn(), "•", TimeRemainingColumn(), "•",
-                        "[progress.bar]{task.completed}/{task.total}",
-                        transient=True,
-                ) as progress:
+                progress_columns = [
+                    TextColumn("[progress.description]{task.description}"),
+                    BarColumn(),
+                    "[progress.percentage]{task.percentage:>3.0f}%",
+                    TimeElapsedColumn(),
+                    TimeRemainingColumn(),
+                ]
+                with Progress(*progress_columns) as progress:
                     task = progress.add_task("Evaluating individuals...", total=total_to_evaluate)
-                    fitnesses = []
 
+                    fitnesses = []
                     for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
                         fitnesses.append(fit)
                         progress.advance(task)
