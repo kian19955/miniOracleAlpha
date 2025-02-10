@@ -6,10 +6,11 @@ from types import MappingProxyType
 from inspect import signature
 import random
 from time import sleep
-from multiprocessing import Pool, Queue
+from multiprocessing import Pool
 from enum import EnumMeta
 import atexit
 from copy import deepcopy
+import time
 
 from deap import base, creator, tools
 import numpy as np
@@ -117,6 +118,8 @@ class GeneticAlgorithm:
 
         self._validate_genome_settings()
 
+        fetch_klines(ticker=bt_settings["ticker"], interval=bt_settings["interval"], days=bt_settings["days"])
+
         creator.create("FitnessMax", base.Fitness, weights=tuple(objectives.values()))
         creator.create("Individual", dict, fitness=creator.FitnessMax)
 
@@ -193,6 +196,11 @@ class GeneticAlgorithm:
 
     def run(self, generations: int = 40, population_size: int = 50,
             use_multiprocessing: bool = True, seed: int = 0):
+        if population_size % 4 != 0:
+            raise ValueError(
+                f"Population size must be divisible by 4 when using selTournamentDCD, but got {population_size}"
+            )
+
         random.seed(seed)
 
         def on_exit():
@@ -200,7 +208,7 @@ class GeneticAlgorithm:
                 for i, indi in enumerate(pop):
                     logger.info(f"RANK: {i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
             else:
-                logger.info("No indi in found.")
+                logger.info("No indi found.")
 
         atexit.register(on_exit)
 
@@ -229,16 +237,20 @@ class GeneticAlgorithm:
             pool_context = DummyPool()
 
         with pool_context as pool:
-            def log_generation(g):
-                """Log statistics for the current generation."""
+
+            def log_generation(g, generation_duration):
+                """Log statistics for the current generation, including the time taken."""
                 record = stats.compile(pop)
                 logbook.record(gen=g + 1, evals=len(pop), **record)
                 best_fitness = tools.selNSGA2(pop, k=1)[0].fitness.values
-                logger.info(f"\n{logbook.stream}\n"
-                            f"Generation {g + 1}/{generations}: Best Fitness of Gen= {best_fitness}")
+                logger.info(
+                    f"\n{logbook.stream}\n"
+                    f"Generation {g + 1}/{generations}: Best Fitness = {best_fitness} | Gen Time: {generation_duration:.2f}s"
+                )
 
-            def _eval_individuals(individuals):
-                """Evaluate individuals that have an invalid fitness."""
+            def _eval_individuals(individuals, eval_start_time):
+                """Evaluate individuals that have an invalid fitness,
+                printing progress with elapsed time and estimated remaining time."""
                 invalid_ind = [ind for ind in individuals if not ind.fitness.valid]
                 total_to_evaluate = len(invalid_ind)
                 fitnesses = []
@@ -247,7 +259,17 @@ class GeneticAlgorithm:
                 for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
                     fitnesses.append(fit)
                     counter += 1
-                    print(f"Evaluated {counter}/{total_to_evaluate} individuals with Fitness: {fit}", end="\r")
+
+                    elapsed = time.time() - eval_start_time
+                    avg_time = elapsed / counter if counter > 0 else 0
+                    remaining = (total_to_evaluate - counter) * avg_time
+
+                    print(
+                        f"Evaluated {counter}/{total_to_evaluate} individuals with Fitness: {fit} | "
+                        f"Elapsed: {elapsed:.2f}s | Remaining: {remaining:.2f}s",
+                        end="\r"
+                    )
+                print()
 
                 for ind, fit in zip(invalid_ind, fitnesses):
                     ind.fitness.values = fit
@@ -257,12 +279,11 @@ class GeneticAlgorithm:
             pop = self.toolbox.population(n=population_size)
 
             logger.info("Evaluating Initial Population")
-            _eval_individuals(pop)
-
+            initial_start = time.time()
+            _eval_individuals(pop, initial_start)
             pop = self.toolbox.select(pop, len(pop))
 
-            # Setup miscellanea like the stats, logbook, etc.
-
+            # Setup statistics and logbook
             stats = tools.Statistics(lambda ind: ind.fitness.values)
             stats.register("avg", np.mean, axis=0)
             stats.register("std", np.std, axis=0)
@@ -272,11 +293,15 @@ class GeneticAlgorithm:
             logbook = tools.Logbook()
             logbook.header = ["gen", "evals"] + stats.fields
 
-            log_generation(g=0)
+            gen_duration = time.time() - initial_start
+            log_generation(g=0, generation_duration=gen_duration)
+
             # ----------------- Evolutionary Loop -----------------
             for gen in range(generations):
+                generation_start = time.time()
                 logger.debug(f"Running Generation {gen + 1}")
 
+                # Variation: selection (DCD), cloning, mating, mutation.
                 offspring = tools.selTournamentDCD(pop, len(pop))
                 offspring = [self.toolbox.clone(ind) for ind in offspring]
 
@@ -294,13 +319,14 @@ class GeneticAlgorithm:
                         del ind.fitness.values
 
                 logger.debug("Evaluating Offspring")
-                _eval_individuals(offspring)
+                _eval_individuals(offspring, generation_start)
 
-                # Combine the current population and offspring, then select the next generation
+                # Select the next generation from the current population and offspring.
                 combined = pop + offspring
                 pop = self.toolbox.select(combined, population_size)
 
-                log_generation(gen)
+                generation_duration = time.time() - generation_start
+                log_generation(gen, generation_duration)
 
         return pop
 
@@ -650,12 +676,12 @@ if __name__ == '__main__':
     setup_logger('oracle.analysis', INFO, '../../logs/analysis.jsonl', log_in_json=True, stream_in_color=True)
 
     mutate_tp = MutateTypeProbabilities(
-        FLOAT=0.1,
-        INT=0.1,
-        ENUM=0.1,
-        UNION=0.1,
-        BOOL=0.1,
-        OTHER=0.1
+        FLOAT=0.05,
+        INT=0.05,
+        ENUM=0.05,
+        UNION=0.05,
+        BOOL=0.05,
+        OTHER=0.05
     )
     mate_tp = MateTypeProbabilities(
         MATING_PROP=0.9,
@@ -809,13 +835,13 @@ if __name__ == '__main__':
         int_blend=True,
         mutate_tp=mutate_tp,
         mate_tp=mate_tp,
-        mutation_strength=0.1,
+        mutation_strength=0.2,
     )
     logger.info("Running Genetic Algorithm...")
 
     finals = ga.run(
-        generations=250,
-        population_size=75,
+        generations=500,
+        population_size=100,
         use_multiprocessing=True
     )
 

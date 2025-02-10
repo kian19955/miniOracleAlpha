@@ -5,7 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="refactor(genetic_algorithm): remove unused params&#10;&#10;Remove `tournament_size` and `elite_injection`.&#10;&#10;- Simplify config by removing unnecessary options.&#10;- Selection relies solely on toolbox.select.&#10;- Improve readability by reducing constructor params.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/analysis.jsonl" beforeDir="false" afterPath="$PROJECT_DIR$/logs/analysis.jsonl" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -233,14 +235,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1735803041423</updated>
-    </task>
-    <task id="LOCAL-00006" summary="4">
-      <option name="closed" value="true" />
-      <created>1736526981748</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1736526981748</updated>
     </task>
     <task id="LOCAL-00007" summary="5">
       <option name="closed" value="true" />
@@ -626,7 +620,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739196240818</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="refactor(genetic_algorithm): remove unused params&#10;&#10;Remove `tournament_size` and `elite_injection`.&#10;&#10;- Simplify config by removing unnecessary options.&#10;- Selection relies solely on toolbox.select.&#10;- Improve readability by reducing constructor params.">
+      <option name="closed" value="true" />
+      <created>1739196501678</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1739196501678</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -747,11 +749,6 @@
           <url>file://$PROJECT_DIR$/main.py</url>
           <line>70</line>
           <option name="timeStamp" value="213" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py</url>
-          <line>604</line>
-          <option name="timeStamp" value="216" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
