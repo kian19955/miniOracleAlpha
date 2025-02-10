@@ -846,3 +846,6 @@ if __name__ == '__main__':
 
     for i, final in enumerate(finals):
         logger.info(f"RANK: {i}, FITNESS: {final.fitness.values}, INDI: {final}")
+
+    for i, top5 in enumerate(finals[:5]):
+        print(f"RANK: {i}, FITNESS: {top5.fitness.values}, INDI: {top5}")

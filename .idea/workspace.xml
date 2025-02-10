@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-    </list>
+    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -234,14 +231,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1735803041423</updated>
-    </task>
-    <task id="LOCAL-00017" summary="feat(core): initialize project structure&#10;&#10;• Create essential files and directories&#10;• Add placeholder class and basic config&#10;• Update project sdk and module settings">
-      <option name="closed" value="true" />
-      <created>1737205842434</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1737205842434</updated>
     </task>
     <task id="LOCAL-00018" summary="Updated analysis.py">
       <option name="closed" value="true" />
@@ -627,7 +616,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739200673767</updated>
     </task>
-    <option name="localTasksCounter" value="66" />
+    <task id="LOCAL-00066" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.">
+      <option name="closed" value="true" />
+      <created>1739203700900</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1739203700900</updated>
+    </task>
+    <option name="localTasksCounter" value="67" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
