@@ -212,7 +212,7 @@ class GeneticAlgorithm:
             if pop:
                 for i, indi in enumerate(pop):
                     if indi.fitness.valid:
-                        pass #logger.info(f"RANK: {i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
+                        logger.info(f"RANK: {i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
             else:
                 logger.info("No indi found.")
 
