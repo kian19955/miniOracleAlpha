@@ -15,7 +15,7 @@ import time
 from deap import base, creator, tools
 import numpy as np
 from rich.console import Console
-from rich.progress import Progress, BarColumn, TimeElapsedColumn, TimeRemainingColumn, TextColumn
+from rich.progress import Progress, BarColumn, TimeElapsedColumn, TimeRemainingColumn, TextColumn, MofNCompleteColumn
 from rich.table import Table
 
 from api.binanceApi import fetch_klines
@@ -243,7 +243,7 @@ class GeneticAlgorithm:
 
         with pool_context as pool:
 
-            def log_generation(g, generation_duration):
+            def log_generation(g, gen_dur):
                 """Log statistics for the current generation using a Rich table."""
                 record = stats.compile(pop)
                 logbook.record(gen=g + 1, evals=len(pop), **record)
@@ -251,7 +251,7 @@ class GeneticAlgorithm:
                 table = Table(title=f"Generation {g + 1}/{generations}")
                 table.add_column("Best Fitness", justify="center", style="cyan")
                 table.add_column("Generation Time (s)", justify="center", style="magenta")
-                table.add_row(str(best_fitness), f"{generation_duration:.2f}")
+                table.add_row(str(best_fitness), f"{gen_dur:.2f}")
                 console.print("\n" + logbook.stream)
                 console.print(table)
 
@@ -266,6 +266,7 @@ class GeneticAlgorithm:
                 progress_columns = [
                     TextColumn("[progress.description]{task.description}"),
                     BarColumn(),
+                    MofNCompleteColumn(),
                     "[progress.percentage]{task.percentage:>3.0f}%",
                     TimeElapsedColumn(),
                     TimeRemainingColumn(),
@@ -301,7 +302,7 @@ class GeneticAlgorithm:
             logbook.header = ["gen", "evals"] + stats.fields
 
             gen_duration = time.time() - initial_start
-            log_generation(g=0, generation_duration=gen_duration)
+            log_generation(g=0, gen_dur=gen_duration)
 
             # ----------------- Evolutionary Loop -----------------
             for gen in range(generations):
