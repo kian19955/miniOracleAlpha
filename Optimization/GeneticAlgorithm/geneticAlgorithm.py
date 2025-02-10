@@ -1,4 +1,5 @@
 import logging
+import pickle
 import re
 from typing import Type, Optional, get_args, get_origin, Union, Any
 from collections import OrderedDict, defaultdict
@@ -202,12 +203,8 @@ class GeneticAlgorithm:
 
     @staticmethod
     def _save_logbook(logbook: tools.Logbook, generations: int, population_size: int):
-        with open(f"{ga_his_dir_path}/G{generations}_PS{population_size}_{time.strftime('%Y%m%d_%H%M%S')}", "w") as file:
-            file.write("Generation, Evaluations, Avg, Min, Max, Std\n")
-
-            for record in logbook:
-                file.write(
-                    f"{record['gen']},{record['evals']},{record['avg']},{record['min']},{record['max']},{record['std']}\n")
+        with open(f"{ga_his_dir_path}/G{generations}_PS{population_size}_{time.strftime('%Y%m%d_%H%M%S')}", "wb") as lb_file:
+            pickle.dump(logbook, lb_file)
 
     def run(self, generations: int = 40, population_size: int = 50,
             use_multiprocessing: bool = True, seed: int = 0):
