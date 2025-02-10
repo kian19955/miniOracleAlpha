@@ -17,7 +17,6 @@ import numpy as np
 from rich.console import Console
 from rich.progress import Progress, BarColumn, TimeElapsedColumn, TimeRemainingColumn, TextColumn, MofNCompleteColumn
 from rich.table import Table
-from rich.live import Live
 
 from api.binanceApi import fetch_klines
 from backtester import backtest
@@ -254,15 +253,21 @@ class GeneticAlgorithm:
                 table = Table(title=f"Generation {g + 1}/{generations}")
                 table.add_column("Best Fitness", justify="center", style="cyan")
                 table.add_column("Generation Time (s)", justify="center", style="magenta")
-                table.add_column("Logbook", justify="left", style="green")
+                table.add_column("AVG", justify="center", style="green")
+                table.add_column("STD", justify="center", style="yellow")
+                table.add_column("MIN", justify="center", style="red")
+                table.add_column("MAX", justify="center", style="blue")
 
-                table.add_row(str(best_fitness), f"{gen_dur:.2f}", str(logbook.stream))
+                table.add_row(
+                    str(best_fitness),
+                    f"{gen_dur:.2f}",
+                    str(record["avg"]),
+                    str(record["std"]),
+                    str(record["min"]),
+                    str(record["max"])
+                )
 
-                console = Console()
-
-                # Use Live to display the table with transient effect
-                with Live(table, console=console, transient=True):
-                    console.print(table)
+                console.print(table)
 
             def _eval_individuals(individuals):
                 """Evaluate individuals that have an invalid fitness, showing progress with Rich."""
@@ -840,7 +845,7 @@ if __name__ == '__main__':
 
     finals = ga.run(
         generations=500,
-        population_size=100,
+        population_size=4,
         use_multiprocessing=True
     )
 
