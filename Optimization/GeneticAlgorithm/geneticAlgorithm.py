@@ -17,6 +17,7 @@ import numpy as np
 from rich.console import Console
 from rich.progress import Progress, BarColumn, TimeElapsedColumn, TimeRemainingColumn, TextColumn, MofNCompleteColumn
 from rich.table import Table
+from rich.live import Live
 
 from api.binanceApi import fetch_klines
 from backtester import backtest
@@ -249,12 +250,19 @@ class GeneticAlgorithm:
                 record = stats.compile(pop)
                 logbook.record(gen=g + 1, evals=len(pop), **record)
                 best_fitness = tools.selNSGA2(pop, k=1)[0].fitness.values
+
                 table = Table(title=f"Generation {g + 1}/{generations}")
                 table.add_column("Best Fitness", justify="center", style="cyan")
                 table.add_column("Generation Time (s)", justify="center", style="magenta")
-                table.add_row(str(best_fitness), f"{gen_dur:.2f}")
-                console.print("\n" + logbook.stream)
-                console.print(table)
+                table.add_column("Logbook", justify="left", style="green")
+
+                table.add_row(str(best_fitness), f"{gen_dur:.2f}", str(logbook.stream))
+
+                console = Console()
+
+                # Use Live to display the table with transient effect
+                with Live(table, console=console, transient=True):
+                    console.print(table)
 
             def _eval_individuals(individuals):
                 """Evaluate individuals that have an invalid fitness, showing progress with Rich."""
