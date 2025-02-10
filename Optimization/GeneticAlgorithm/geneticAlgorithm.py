@@ -58,10 +58,7 @@ class GeneticAlgorithm:
             mutate_tp: MutateTypeProbabilities = MutateTypeProbabilities,
             mutation_strength: float = 0.1,
 
-            tournament_size: int = 2,
             hall_of_fame_size: Optional[int] = None,
-
-            elite_injection: Optional[float] = None,
     ):
         """
         :param species: The type of the individual
@@ -85,7 +82,6 @@ class GeneticAlgorithm:
         :param mate_tp: The probability for each type to be influenced in the mating two individuals.
         :param mutate_tp: The probability for each type to be influenced in the mutation of an individual.
         :param mutation_strength: The strength of the mutation.
-        :param tournament_size: The size of the tournament from which one individual will be selected.
         """
         if blacklist_genes is not None and whitelist_genes is not None:
             raise ValueError("blacklist_genes and whitelist_genes cannot be used together.")
@@ -106,7 +102,6 @@ class GeneticAlgorithm:
         self.mutation_strength = mutation_strength
 
         self.hall_of_fame_size = hall_of_fame_size
-        self.elite_injection = elite_injection
 
         self.base_params = base_params or {}
         c_params: MappingProxyType[str, any] = signature(species).parameters
@@ -312,10 +307,6 @@ class GeneticAlgorithm:
                 # Combine the current population and offspring, then select the next generation
                 combined = pop + offspring
                 pop = self.toolbox.select(combined, population_size)
-
-                if self.elite_injection is not None:
-                    elites = [self.toolbox.clone(ind) for ind in hof.items[:self.elite_injection]]
-                    pop = self.toolbox.select(offspring + elites, population_size)
 
                 if hof is not None:
                     pareto_front = tools.selNSGA2(pop, k=self.hall_of_fame_size)
@@ -838,7 +829,6 @@ if __name__ == '__main__':
         mutation_strength=0.1,
         tournament_size=2,
         hall_of_fame_size=5,
-        elite_injection=4
     )
     logger.info("Running Genetic Algorithm...")
 
