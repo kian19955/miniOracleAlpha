@@ -867,9 +867,6 @@ if __name__ == '__main__':
     ga = GeneticAlgorithm(
         species=MovingAverageConvergenceDivergence,
         bt_settings={
-            'days': 93,
-            'interval': '5m',
-            'ticker': "DOGEUSDT",
             'trade_long': True,
             'trade_short': True,
             'leverage': 5,
