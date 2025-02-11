@@ -103,8 +103,7 @@ class Backtester(Strategy):
 
 def backtest(
     eval_func,
-    ticker,
-    days, interval,
+    fetch_kwargs,
     commission = 0.00075,
     sell_limit = -0.75, buy_limit = 0.75,
     trade_long = True, trade_short = True,
@@ -113,7 +112,7 @@ def backtest(
     micro_factor: Optional[int] = None,
     use_csv = True,
 ) -> tuple[pd.Series, Backtest]:
-    df = fetch_klines(ticker, interval, days=days, use_csv=use_csv)
+    df = fetch_klines(**fetch_kwargs, use_csv=use_csv)
 
     if micro_factor is not None:
         df = (df / micro_factor).assign(Volume=df.Volume * micro_factor)
@@ -162,9 +161,11 @@ if __name__ == "__main__":
 
     stats, bt = backtest(
         tc.evaluate,
-        ticker="DOGEUSDT",
-        days=93,
-        interval="5m",
+        {
+            "ticker": "DOGEUSDT",
+            "days": 93,
+            "interval": "5m",
+        },
         sell_limit=-0.75,
         buy_limit=0.75,
         stop_loss=None,

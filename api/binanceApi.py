@@ -42,7 +42,7 @@ def fetch_ticker_price(ticker) -> float:
     return float(data["price"])
 
 
-def fetch_exchange_info(tickers: Optional[list[str]] = None) -> dict:
+def fetch_exchange_info() -> dict:
     response: Response = get(url_fetch_exchange_info)
 
     data: dict = response.json()
@@ -55,8 +55,8 @@ def fetch_exchange_info(tickers: Optional[list[str]] = None) -> dict:
 def fetch_klines(
         ticker: str,
         interval: str,
-        start: Optional[str] = None,
-        end: Optional[str] = None,
+        start: str = None,
+        end: str = None,
         years: int = 0,
         months: int = 0,
         weeks: int = 0,
@@ -65,82 +65,76 @@ def fetch_klines(
         minutes: int = 0,
         seconds: int = 0,
         use_csv: bool = True
-):
+) -> DataFrame:
     """
-    Retrieves klines from Binance
+    Retrieves klines from Binance.
 
-    :param ticker: The ticker of the asset
-    :param interval: The interval of the klines ['1m', '3m', '5m', '15m', '30m', '1h', '2h', '4h', '6h', '8h', '12h', '1d', '3d', '1w', '1M']
-    :param start: The start time in the format 'YYYY-MM-DD HH:MM:SS'
-    :param end: The end time in the format 'YYYY-MM-DD HH:MM:SS'
-    :param years: The number of years to go back
-    :param months: The number of months to go back
-    :param weeks: The number of weeks to go back
-    :param days: The number of days to go back
-    :param hours: The number of hours to go back
-    :param minutes: The number of minutes to go back
-    :param seconds: The number of seconds to go back
-    :param use_csv: Whether to load data from saved csv if available, else it will overwrite if such file exists
-    :return: DataFrame
+    The time interval is determined as follows:
+      - If both start and end are provided, the data from start to end is returned.
+      - If end is provided and time interval values (years, months, etc.) are given,
+        then start is set to (end - interval).
+      - If start is provided and time interval values are given, then end is set to (start + interval).
+      - If only start is provided (and no interval values), then end is assumed to be now.
+      - If only time interval values are provided (and no start or end), then end is now and
+        start is (now - interval).
+
+    :return: DataFrame containing the fetched klines.
     """
-    if end is not None and start is None:
-        raise ValueError("start_time cannot be specified without start_time")
-
-    if end is None and all(v == 0 for v in [years, months, days, weeks, hours, minutes, seconds]):
-        raise ValueError(
-            "end_time must be specified or any of years, months, days, hours, or minutes should be provided to calculate it")
-
-    if end is not None and start is None and all(v == 0 for v in [years, months, weeks, days, hours, minutes, seconds]):
-        raise ValueError(
-            "If end_time is provided, either end_time or a time difference (years, months, etc.) must be provided")
-
-    file_path = f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv"
-    if not os.path.isfile(file_path):
-        print(f"{file_path} does not exist. Fetching data from Binance API...")
-        use_csv = False
-
-    if use_csv:
-        df: DataFrame = read_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
-        df['timestamp'] = to_datetime(df['timestamp'])
-        df.set_index('timestamp', inplace=True)
-
-        return df
-
     time_format = "%Y-%m-%d %H:%M:%S"
 
-    if end is not None:
-        end_timestamp: datetime = datetime.strptime(end, time_format)
-        end_timestamp = end_timestamp.replace(tzinfo=timezone.utc)
-    else:
-        end_timestamp: datetime = datetime.now(timezone.utc)
+    # Parse provided start and end if any
+    start_timestamp = datetime.strptime(start, time_format).replace(tzinfo=timezone.utc) if start else None
+    end_timestamp = datetime.strptime(end, time_format).replace(tzinfo=timezone.utc) if end else None
 
-    if start is not None:
-        start_timestamp: datetime = datetime.strptime(start, time_format)
-        start_timestamp = start_timestamp.replace(tzinfo=timezone.utc)
+    # Create the time interval (delta) from provided values, if any are nonzero
+    if any([years, months, weeks, days, hours, minutes, seconds]):
+        delta = relativedelta(years=years, months=months, weeks=weeks,
+                              days=days, hours=hours, minutes=minutes, seconds=seconds)
     else:
-        start_timestamp: datetime = end_timestamp - relativedelta(
-            years=years,
-            months=months,
-            weeks=weeks,
-            days=days,
-            hours=hours,
-            minutes=minutes,
-            seconds=seconds
-        )
+        delta = None
 
-    # Convert to UNIX timestamp
-    start_timestamp_unix: int = int(time.mktime(start_timestamp.timetuple())) * 1000
-    end_timestamp_unix: int = int(time.mktime(end_timestamp.timetuple())) * 1000
+    if start_timestamp and end_timestamp:
+        # Case 1: both provided; ignore delta.
+        pass
+    elif end_timestamp and not start_timestamp:
+        # Case 2: end is provided; use delta to calculate start.
+        if delta:
+            start_timestamp = end_timestamp - delta
+        else:
+            raise ValueError("If only end is provided, time intervals must be provided to compute start.")
+    elif start_timestamp and not end_timestamp:
+        # Case 3: start is provided; use delta to compute end, otherwise end is now.
+        if delta:
+            end_timestamp = start_timestamp + delta
+        else:
+            end_timestamp = datetime.now(timezone.utc)
+    elif not start_timestamp and not end_timestamp:
+        # Case 5: neither provided; must supply delta.
+        if delta:
+            end_timestamp = datetime.now(timezone.utc)
+            start_timestamp = end_timestamp - delta
+        else:
+            raise ValueError("Either start/end or time interval values must be provided.")
+
+    start_timestamp_unix = int(time.mktime(start_timestamp.timetuple())) * 1000
+    end_timestamp_unix = int(time.mktime(end_timestamp.timetuple())) * 1000
+
+    file_path = f"{market_his_dir_path}/{ticker}_{interval}_{start or 'None'}_{end or 'None'}_{years}Y_{months}M_{weeks}W_{days}D_{hours}h_{minutes}m_{seconds}s.csv"
+    if use_csv and os.path.isfile(file_path):
+        df: DataFrame = read_csv(file_path)
+        df['timestamp'] = to_datetime(df['timestamp'])
+        df.set_index('timestamp', inplace=True)
+        return df
+
+    print(f"{file_path} does not exist. Fetching data from Binance API...")
 
     df: DataFrame = DataFrame(columns=columns)
-
     total_time = end_timestamp_unix - start_timestamp_unix
     current_time = start_timestamp_unix
 
     while current_time < end_timestamp_unix:
-        # Calculate progress percentage
         progress = ((current_time - start_timestamp_unix) / total_time) * 100
-        print(f"Fetching data... {progress:.2f}% complete")
+        print(f"Fetching data... {progress:.2f}% complete", end="\r")
 
         params: dict = {
             'symbol': ticker,
@@ -150,17 +144,14 @@ def fetch_klines(
             'limit': 1000
         }
 
-        response: Response = get(url_fetch_klines, params=params)
-
+        response = get(url_fetch_klines, params=params)
         data = response.json()
-
         handle_binance_status(response.status_code, data)
 
         if len(data) == 0:
             break
 
         new_df: DataFrame = DataFrame(data, columns=columns)
-
         new_df["timestamp"] = to_datetime(new_df["OpenTime"], unit="ms", utc=True)
         new_df.set_index("timestamp", inplace=True)
 
@@ -169,17 +160,13 @@ def fetch_klines(
         else:
             df = concat([df, new_df])
 
-        # Update current_time to the end of the current batch
         current_time = data[-1][6] + 1
 
     df.drop("unused", axis=1, inplace=True)
-
     for column in df.columns:
         df[column] = df[column].astype(float)
+    df.to_csv(file_path)
 
-    df.to_csv(f"{market_his_dir_path}/{ticker}_{days}_{interval}.csv")
-
-    print("Data fetching complete!")
     return df
 
 
@@ -189,5 +176,5 @@ if __name__ == '__main__':
     tickers = ["BTCUSDT", "DOGEUSDT"]
 
     for i, ticker in enumerate(tickers):
-        print(f"{i+1}/{len(tickers)}, Fetching {ticker}")
-        fetch_klines(ticker, intervals, days = days, use_csv=True)
+        print(f"{i + 1}/{len(tickers)}, Fetching {ticker}")
+        fetch_klines(ticker, intervals, days=days, use_csv=True)

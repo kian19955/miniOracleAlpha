@@ -4,216 +4,47 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="feat(geneticAlgorithm): persist ga history data&#10;&#10;- Save ga run stats to file after completion.&#10;- Create `gaHistoryData` directory if not exists.&#10;- Increase population size to 100.">
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/constants.py" beforeDir="false" afterPath="$PROJECT_DIR$/constants.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ChangesViewManager" show_ignored="true" />
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Python Script" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="main" />
-      </map>
-    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;,
-    &quot;assignee&quot;: &quot;kian19955&quot;
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "MrCode200"
   }
-}</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/kian19955/miniOracleAlpha.git&quot;,
-    &quot;accountId&quot;: &quot;96e72a4d-0d29-4920-942f-c0faf49d958e&quot;
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/kian19955/miniOracleAlpha.git",
+    "accountId": "96e72a4d-0d29-4920-942f-c0faf49d958e"
   }
-}</component>
-  <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 2
-}</component>
-  <component name="ProjectId" id="2r40SnUHvCFjC3vRqX2VpL7iTFL" />
+}]]></component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 5
+}]]></component>
+  <component name="ProjectId" id="2srYjOgvcTrlqDRalERgOnW9eLt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python tests.Doctests in common.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.BB_RSI_Lines.executor&quot;: &quot;Run&quot;,
-    &quot;Python.NobitexApi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.RSI_Lines.executor&quot;: &quot;Run&quot;,
-    &quot;Python.SEPWallet.executor&quot;: &quot;Debug&quot;,
-    &quot;Python.analysis.executor&quot;: &quot;Run&quot;,
-    &quot;Python.backtestMain.executor&quot;: &quot;Run&quot;,
-    &quot;Python.backtester.executor&quot;: &quot;Run&quot;,
-    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.bollingerBands.executor&quot;: &quot;Run&quot;,
-    &quot;Python.constants.executor&quot;: &quot;Run&quot;,
-    &quot;Python.csvHandler.executor&quot;: &quot;Run&quot;,
-    &quot;Python.csvWriter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.dataAnalyse.executor&quot;: &quot;Run&quot;,
-    &quot;Python.fitter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.kiansVision.executor&quot;: &quot;Run&quot;,
-    &quot;Python.loggingManager.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.navidDOGE.executor&quot;: &quot;Run&quot;,
-    &quot;Python.nd.executor&quot;: &quot;Run&quot;,
-    &quot;Python.orders.executor&quot;: &quot;Run&quot;,
-    &quot;Python.plotter.executor&quot;: &quot;Run&quot;,
-    &quot;Python.s2.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratchBacktester.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratch_1.executor&quot;: &quot;Run&quot;,
-    &quot;Python.stochastic.executor&quot;: &quot;Run&quot;,
-    &quot;Python.test.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last.edited.regexp&quot;: &quot;{}&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/kians/PycharmProjects/miniOracleV1.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;promo.remoteSsh&quot;
-  },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
-    ]
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\kians\PycharmProjects\miniOracleV1.0" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\kianIsGod" />
-      <recent name="C:\Users\Navid\AppData\Roaming\JetBrains\PyCharmCE2024.3\scratches" />
-      <recent name="D:\MyFolders\Code\miniOracleAlpha" />
-      <recent name="C:\Users\navid_yaghmaei\PycharmProjects\miniOracleAlpha" />
-      <recent name="C:\Users\navid_yaghmaei\PycharmProjects\miniOracleAlpha\kianIsGod" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
-      <module name="miniOracleAlpha" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="Tox" factoryName="Tox">
-      <module name="miniOracleAlpha" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="docs" factoryName="Docutils task">
-      <module name="miniOracleAlpha" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="docutils_input_file" value="" />
-      <option name="docutils_output_file" value="" />
-      <option name="docutils_params" value="" />
-      <option name="docutils_task" value="" />
-      <option name="docutils_open_in_browser" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="docs" factoryName="Sphinx task">
-      <module name="miniOracleAlpha" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="docutils_input_file" value="" />
-      <option name="docutils_output_file" value="" />
-      <option name="docutils_params" value="" />
-      <option name="docutils_task" value="" />
-      <option name="docutils_open_in_browser" value="false" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Autodetect">
-      <module name="miniOracleAlpha" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="tests" factoryName="Doctests">
-      <module name="miniOracleAlpha" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="FOLDER_NAME" value="" />
-      <option name="TEST_TYPE" value="TEST_SCRIPT" />
-      <option name="PATTERN" value="" />
-      <option name="USE_PATTERN" value="false" />
-      <method v="2" />
-    </configuration>
-  </component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -222,542 +53,37 @@
     </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
-  <component name="SvnConfiguration">
-    <configuration>C:\Users\Navid\AppData\Roaming\Subversion</configuration>
-    <option name="sshConnectionType" value="PASSWORD" />
-    <option name="sshExecutablePath" value="ssh root@188.245.72.118" />
-    <option name="sshUserName" value="root" />
-  </component>
   <component name="TaskManager">
+    <task id="LOCAL-00001" summary="feat(geneticAlgorithm): Save logbook to file&#10;&#10;The logbook saving logic was duplicated.&#10;&#10;- Introduce a static method `_save_logbook` to save the logbook.&#10;- Remove duplicated code in the `run` method.&#10;- Call the `_save_logbook` method at the end of `run`.">
+      <option name="closed" value="true" />
+      <created>1739211721554</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1739211721554</updated>
+    </task>
     <task active="true" id="Default" summary="Default task">
-      <changelist id="eb84f7f9-a599-4cb8-981a-1092bae90358" name="Changes" comment="" />
-      <created>1735803041423</created>
+      <changelist id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(geneticAlgorithm): Save logbook to file&#10;&#10;The logbook saving logic was duplicated.&#10;&#10;- Introduce a static method `_save_logbook` to save the logbook.&#10;- Remove duplicated code in the `run` method.&#10;- Call the `_save_logbook` method at the end of `run`." />
+      <created>1739215295581</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1735803041423</updated>
+      <updated>1739215295581</updated>
     </task>
-    <task id="LOCAL-00021" summary="fixed backtester, saving file location, and kiansVision.py indicator added, (not finished yet)">
+    <task id="LOCAL-00002" summary="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process.">
       <option name="closed" value="true" />
-      <created>1737632209408</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
+      <created>1739215483288</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1737632209408</updated>
+      <updated>1739215483288</updated>
     </task>
-    <task id="LOCAL-00022" summary="feat(kiansVision): enhance price trend analysis&#10;&#10;- Refactor filtering logic for `kiansVision` indicator to allow disabling filters.&#10;- Improve price occurrence plotting for enhanced visualization.&#10;- Update dependencies and configurations for better performance.">
-      <option name="closed" value="true" />
-      <created>1737646433044</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1737646433044</updated>
-    </task>
-    <task id="LOCAL-00023" summary="readded lost code&#10;- added gaussionOperator.py for mutation&#10;- added randfloat and math directory&#10;- added typeProbabilities.py dataclasses for mutate and mate">
-      <option name="closed" value="true" />
-      <created>1738055057231</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1738055057231</updated>
-    </task>
-    <task id="LOCAL-00024" summary="finished ga">
-      <option name="closed" value="true" />
-      <created>1738073423156</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1738073423156</updated>
-    </task>
-    <task id="LOCAL-00025" summary="tried implementing backtrader into our project">
-      <option name="closed" value="true" />
-      <created>1738245419425</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1738245419425</updated>
-    </task>
-    <task id="LOCAL-00026" summary="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing">
-      <option name="closed" value="true" />
-      <created>1738425615213</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1738425615213</updated>
-    </task>
-    <task id="LOCAL-00027" summary="feat(backtest): integrate backtesting lib&#10;&#10;• Add backtesting library and strategy class&#10;• Refactor backtesting logic&#10;• Introduce stop loss and take profit&#10;&#10;add backtesting functionality and streamline signal processing">
-      <option name="closed" value="true" />
-      <created>1738519985552</created>
-      <option name="number" value="00027" />
-      <option name="presentableId" value="LOCAL-00027" />
-      <option name="project" value="LOCAL" />
-      <updated>1738519985552</updated>
-    </task>
-    <task id="LOCAL-00028" summary="No file selected">
-      <option name="closed" value="true" />
-      <created>1738519999896</created>
-      <option name="number" value="00028" />
-      <option name="presentableId" value="LOCAL-00028" />
-      <option name="project" value="LOCAL" />
-      <updated>1738519999896</updated>
-    </task>
-    <task id="LOCAL-00029" summary="fix(ga): correct genome value evaluation&#10;&#10;• Ensure genome values are retrieved from backtest stats&#10;• Fixes issues when genome_value returned None&#10;• Adjusts mutation logic to prevent out-of-bound values">
-      <option name="closed" value="true" />
-      <created>1738521313986</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1738521313986</updated>
-    </task>
-    <task id="LOCAL-00030" summary="fix(ga): correct genome value evaluation&#10;&#10;• Ensure genome values are retrieved from backtest stats&#10;• Fixes issues when genome_value returned None&#10;• Adjusts mutation logic to prevent out-of-bound values">
-      <option name="closed" value="true" />
-      <created>1738522714660</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1738522714660</updated>
-    </task>
-    <task id="LOCAL-00031" summary="fix(ga): refine ga logic&#10;&#10;• Correctly retrieve genome values from backtest stats&#10;• Fix issues when genome_value returned None&#10;• Adjust mutation to prevent out-of-bounds values&#10;• Remove unused extra logger information&#10;• Add hall of fame and statistics tracking">
-      <option name="closed" value="true" />
-      <created>1738581116618</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1738581116618</updated>
-    </task>
-    <task id="LOCAL-00032" summary="fix(ga): refine ga logic&#10;&#10;• Correctly retrieve genome values from backtest stats&#10;• Fix issues when genome_value returned None&#10;• Adjust mutation to prevent out-of-bounds values&#10;• Remove unused extra logger information&#10;• Add hall of fame and statistics tracking">
-      <option name="closed" value="true" />
-      <created>1738595811231</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1738595811231</updated>
-    </task>
-    <task id="LOCAL-00033" summary="pumped pop size to 75">
-      <option name="closed" value="true" />
-      <created>1738609239730</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1738609239730</updated>
-    </task>
-    <task id="LOCAL-00034" summary="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75 for better exploration.&#10;• Added stop limits&#10;• Minor code cleaning&#10;&#10;This change increases the population size of the genetic algorithm to improve the exploration of the search space, potentially leading to better solutions. Also includes a few code cleanups.">
-      <option name="closed" value="true" />
-      <created>1738668173766</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1738668173766</updated>
-    </task>
-    <task id="LOCAL-00035" summary="feat(ga): improve genetic algorithm performance&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability.">
-      <option name="closed" value="true" />
-      <created>1738668207442</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1738668207442</updated>
-    </task>
-    <task id="LOCAL-00036" summary="feat(ga): Enhance GA performance &amp; stability&#10;&#10;• Increase population size to 75.&#10;• Implement stop limits for optimization.&#10;• Minor code cleaning and refactoring.&#10;&#10;This change enhances the genetic algorithm's performance by increasing population and stability. Adjusts backtester stop loss value.">
-      <option name="closed" value="true" />
-      <created>1738668810335</created>
-      <option name="number" value="00036" />
-      <option name="presentableId" value="LOCAL-00036" />
-      <option name="project" value="LOCAL" />
-      <updated>1738668810335</updated>
-    </task>
-    <task id="LOCAL-00037" summary="feat(ga): enhance GA with multi-ticker support&#10;&#10;- Enable multi-ticker backtesting for robust optimization.&#10;- Randomize ticker selection per evaluation.&#10;- Improve genetic algorithm performance and stability.&#10;&#10;This change enhances the genetic algorithm's performance by increasing the population, stability, and adding multi-ticker backtesting support.">
-      <option name="closed" value="true" />
-      <created>1738669321645</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1738669321645</updated>
-    </task>
-    <task id="LOCAL-00038" summary="feat(ga): enable multi-ticker support&#10;&#10;- Enable multi-ticker backtesting.&#10;- Randomize ticker selection per evaluation.&#10;- Improve GA stability.&#10;&#10;This change enhances the genetic algorithm's performance by adding multi-ticker backtesting support for more robust optimization.">
-      <option name="closed" value="true" />
-      <created>1738669623617</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1738669623617</updated>
-    </task>
-    <task id="LOCAL-00039" summary="shorter text for server">
-      <option name="closed" value="true" />
-      <created>1738669731961</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1738669731961</updated>
-    </task>
-    <task id="LOCAL-00040" summary="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility">
-      <option name="closed" value="true" />
-      <created>1739010685204</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1739010685204</updated>
-    </task>
-    <task id="LOCAL-00041" summary="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility">
-      <option name="closed" value="true" />
-      <created>1739010818062</created>
-      <option name="number" value="00041" />
-      <option name="presentableId" value="LOCAL-00041" />
-      <option name="project" value="LOCAL" />
-      <updated>1739010818062</updated>
-    </task>
-    <task id="LOCAL-00042" summary="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility">
-      <option name="closed" value="true" />
-      <created>1739013513927</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1739013513927</updated>
-    </task>
-    <task id="LOCAL-00043" summary="perf(geneticAlgorithm): enable multiprocessing for speed&#10;&#10;Enable multiprocessing to improve execution time.&#10;&#10;- Use multiprocessing for faster GA runs&#10;- Reduce overall computation time">
-      <option name="closed" value="true" />
-      <created>1739041414676</created>
-      <option name="number" value="00043" />
-      <option name="presentableId" value="LOCAL-00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1739041414677</updated>
-    </task>
-    <task id="LOCAL-00044" summary="perf(geneticAlgorithm): enable multiprocessing&#10;&#10;Enable multiprocessing for faster GA runs.&#10;&#10;- Use multiprocessing to improve execution time&#10;- Reduce overall computation time">
-      <option name="closed" value="true" />
-      <created>1739111785421</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1739111785421</updated>
-    </task>
-    <task id="LOCAL-00045" summary="perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs with lock removal.&#10;&#10;- Remove unnecessary lock for shared variable updates.&#10;- Improve execution time with multiprocessing.&#10;- Reduce overall computation time.">
-      <option name="closed" value="true" />
-      <created>1739111861363</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1739111861363</updated>
-    </task>
-    <task id="LOCAL-00046" summary="perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs with lock removal.&#10;&#10;- Remove unnecessary lock for shared variable updates.&#10;- Improve execution time with multiprocessing.&#10;- Reduce overall computation time.">
-      <option name="closed" value="true" />
-      <created>1739118687218</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1739118687218</updated>
-    </task>
-    <task id="LOCAL-00047" summary="```&#10;perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs by removing unnecessary lock.&#10;&#10;- Remove lock for shared variable updates.&#10;- Use Queue for inter-process communication.&#10;- Improve overall execution time.&#10;&#10;```">
-      <option name="closed" value="true" />
-      <created>1739120176284</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1739120176284</updated>
-    </task>
-    <task id="LOCAL-00048" summary="perf(geneticAlgorithm): improve multiprocessing&#10;&#10;Enable faster GA runs by removing lock.&#10;&#10;- Remove lock for shared variable updates.&#10;- Use Queue for inter-process communication.&#10;- Improve overall execution time.">
-      <option name="closed" value="true" />
-      <created>1739135440530</created>
-      <option name="number" value="00048" />
-      <option name="presentableId" value="LOCAL-00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1739135440530</updated>
-    </task>
-    <task id="LOCAL-00049" summary="fix(geneticAlgorithm): Improve logging of best individual&#10;&#10;Log best individuals fitness and representation&#10;&#10;- Update logging to include both fitness and representation of elites&#10;- Provide more context in the logs">
-      <option name="closed" value="true" />
-      <created>1739135496419</created>
-      <option name="number" value="00049" />
-      <option name="presentableId" value="LOCAL-00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1739135496419</updated>
-    </task>
-    <task id="LOCAL-00050" summary="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix it by removing redundant call.&#10;&#10;- Delete repeated logger.warning call.">
-      <option name="closed" value="true" />
-      <created>1739135508184</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1739135508184</updated>
-    </task>
-    <task id="LOCAL-00051" summary="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix by removing redundant call.&#10;&#10;- Delete repeated logger.warning call.">
-      <option name="closed" value="true" />
-      <created>1739135693868</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1739135693870</updated>
-    </task>
-    <task id="LOCAL-00052" summary="fix(geneticAlgorithm): revamp GA workflow &amp; logging&#10;&#10;The previous GA workflow had issues with population management and logging.&#10;&#10;- Refactor the evaluation process for improved efficiency.&#10;- Enhance logging to include generation statistics and best fitness.&#10;- Correctly select population after mating and mutation.">
-      <option name="closed" value="true" />
-      <created>1739195606680</created>
-      <option name="number" value="00052" />
-      <option name="presentableId" value="LOCAL-00052" />
-      <option name="project" value="LOCAL" />
-      <updated>1739195606680</updated>
-    </task>
-    <task id="LOCAL-00053" summary="refactor(genetic_algorithm): remove unused parameters&#10;&#10;Remove `tournament_size` and `elite_injection` parameters from the genetic algorithm.&#10;&#10;- Simplify the algorithm's configuration by removing unnecessary options.&#10;- The selection process now relies solely on the toolbox.select method.&#10;- Improve code readability by reducing the number of parameters in the constructor.">
-      <option name="closed" value="true" />
-      <created>1739195848250</created>
-      <option name="number" value="00053" />
-      <option name="presentableId" value="LOCAL-00053" />
-      <option name="project" value="LOCAL" />
-      <updated>1739195848250</updated>
-    </task>
-    <task id="LOCAL-00054" summary="refactor(genetic_algorithm): remove unused params&#10;&#10;Remove `tournament_size` and `elite_injection`.&#10;&#10;- Simplify config by removing unnecessary options.&#10;- Selection relies solely on toolbox.select.&#10;- Improve readability by reducing constructor params.">
-      <option name="closed" value="true" />
-      <created>1739196240818</created>
-      <option name="number" value="00054" />
-      <option name="presentableId" value="LOCAL-00054" />
-      <option name="project" value="LOCAL" />
-      <updated>1739196240818</updated>
-    </task>
-    <task id="LOCAL-00055" summary="refactor(genetic_algorithm): remove unused params&#10;&#10;Remove `tournament_size` and `elite_injection`.&#10;&#10;- Simplify config by removing unnecessary options.&#10;- Selection relies solely on toolbox.select.&#10;- Improve readability by reducing constructor params.">
-      <option name="closed" value="true" />
-      <created>1739196501678</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1739196501678</updated>
-    </task>
-    <task id="LOCAL-00056" summary="```&#10;refactor(genetic_algorithm): improve evaluation and logging&#10;&#10;- Refactor individual evaluation for progress tracking.&#10;- Add elapsed time and estimated remaining time during evaluation.&#10;- Include generation duration in logs for performance analysis.&#10;```">
-      <option name="closed" value="true" />
-      <created>1739198664610</created>
-      <option name="number" value="00056" />
-      <option name="presentableId" value="LOCAL-00056" />
-      <option name="project" value="LOCAL" />
-      <updated>1739198664610</updated>
-    </task>
-    <task id="LOCAL-00057" summary="refactor(genetic_algorithm): improve evaluation and logging&#10;&#10;- Refactor individual evaluation for progress tracking.&#10;- Add elapsed time and estimated remaining time during evaluation.&#10;- Include generation duration in logs for performance analysis.">
-      <option name="closed" value="true" />
-      <created>1739199211911</created>
-      <option name="number" value="00057" />
-      <option name="presentableId" value="LOCAL-00057" />
-      <option name="project" value="LOCAL" />
-      <updated>1739199211911</updated>
-    </task>
-    <task id="LOCAL-00058" summary="feat(geneticAlgorithm): remove initial_start parameter&#10;&#10;body:&#10;- Remove the unused `initial_start` parameter from the `_eval_individuals` calls.&#10;- This simplifies the function signature and reduces code clutter.&#10;- The parameter was not being used within the `_eval_individuals` function.">
-      <option name="closed" value="true" />
-      <created>1739199344577</created>
-      <option name="number" value="00058" />
-      <option name="presentableId" value="LOCAL-00058" />
-      <option name="project" value="LOCAL" />
-      <updated>1739199344578</updated>
-    </task>
-    <task id="LOCAL-00059" summary="feat(geneticAlgorithm): remove initial_start parameter&#10;&#10;body:&#10;- Remove the unused `initial_start` parameter from the `_eval_individuals` calls.&#10;- This simplifies the function signature and reduces code clutter.&#10;- The parameter was not being used within the `_eval_individuals` function.">
-      <option name="closed" value="true" />
-      <created>1739199482326</created>
-      <option name="number" value="00059" />
-      <option name="presentableId" value="LOCAL-00059" />
-      <option name="project" value="LOCAL" />
-      <updated>1739199482326</updated>
-    </task>
-    <task id="LOCAL-00060" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;body:&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.">
-      <option name="closed" value="true" />
-      <created>1739199897999</created>
-      <option name="number" value="00060" />
-      <option name="presentableId" value="LOCAL-00060" />
-      <option name="project" value="LOCAL" />
-      <updated>1739199898000</updated>
-    </task>
-    <task id="LOCAL-00061" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.">
-      <option name="closed" value="true" />
-      <created>1739200081258</created>
-      <option name="number" value="00061" />
-      <option name="presentableId" value="LOCAL-00061" />
-      <option name="project" value="LOCAL" />
-      <updated>1739200081258</updated>
-    </task>
-    <task id="LOCAL-00062" summary="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```">
-      <option name="closed" value="true" />
-      <created>1739200401022</created>
-      <option name="number" value="00062" />
-      <option name="presentableId" value="LOCAL-00062" />
-      <option name="project" value="LOCAL" />
-      <updated>1739200401022</updated>
-    </task>
-    <task id="LOCAL-00063" summary="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```">
-      <option name="closed" value="true" />
-      <created>1739200531367</created>
-      <option name="number" value="00063" />
-      <option name="presentableId" value="LOCAL-00063" />
-      <option name="project" value="LOCAL" />
-      <updated>1739200531367</updated>
-    </task>
-    <task id="LOCAL-00064" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.">
-      <option name="closed" value="true" />
-      <created>1739200619760</created>
-      <option name="number" value="00064" />
-      <option name="presentableId" value="LOCAL-00064" />
-      <option name="project" value="LOCAL" />
-      <updated>1739200619760</updated>
-    </task>
-    <task id="LOCAL-00065" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.">
-      <option name="closed" value="true" />
-      <created>1739200673767</created>
-      <option name="number" value="00065" />
-      <option name="presentableId" value="LOCAL-00065" />
-      <option name="project" value="LOCAL" />
-      <updated>1739200673767</updated>
-    </task>
-    <task id="LOCAL-00066" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.">
-      <option name="closed" value="true" />
-      <created>1739203700900</created>
-      <option name="number" value="00066" />
-      <option name="presentableId" value="LOCAL-00066" />
-      <option name="project" value="LOCAL" />
-      <updated>1739203700900</updated>
-    </task>
-    <task id="LOCAL-00067" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature.&#10;- Reduces code clutter.">
-      <option name="closed" value="true" />
-      <created>1739203831837</created>
-      <option name="number" value="00067" />
-      <option name="presentableId" value="LOCAL-00067" />
-      <option name="project" value="LOCAL" />
-      <updated>1739203831838</updated>
-    </task>
-    <task id="LOCAL-00068" summary="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature.&#10;- Reduces code clutter.">
-      <option name="closed" value="true" />
-      <created>1739210564399</created>
-      <option name="number" value="00068" />
-      <option name="presentableId" value="LOCAL-00068" />
-      <option name="project" value="LOCAL" />
-      <updated>1739210564399</updated>
-    </task>
-    <task id="LOCAL-00069" summary="feat(geneticAlgorithm): persist ga history data&#10;&#10;- Save ga run stats to file after completion.&#10;- Create `gaHistoryData` directory if not exists.&#10;- Increase population size to 100.">
-      <option name="closed" value="true" />
-      <created>1739211090599</created>
-      <option name="number" value="00069" />
-      <option name="presentableId" value="LOCAL-00069" />
-      <option name="project" value="LOCAL" />
-      <updated>1739211090601</updated>
-    </task>
-    <option name="localTasksCounter" value="70" />
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="main" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(ga): enable multi-ticker support&#10;&#10;- Enable multi-ticker backtesting.&#10;- Randomize ticker selection per evaluation.&#10;- Improve GA stability.&#10;&#10;This change enhances the genetic algorithm's performance by adding multi-ticker backtesting support for more robust optimization." />
-    <MESSAGE value="feat(ga): Refactor genomes &amp; species&#10;&#10;- Rename and move genome files for clarity.&#10;- Implement BoolGenome, EnumGenome, and UnionGenome.&#10;- Build dependency graph for parameter resolution." />
-    <MESSAGE value="shorter text for server" />
-    <MESSAGE value="feat(ga): refactor genome structure&#10;&#10;- Rename and reorganize genome files&#10;- Implement BoolGenome, EnumGenome and UnionGenome classes&#10;- Improve genetic algorithm flexibility" />
-    <MESSAGE value="chore(repo): add gitignore file&#10;&#10;Add a .gitignore file to exclude common files.&#10;&#10;- Prevent tracking of IDE, system, and Python specific files.&#10;- Improve repository cleanliness.&#10;- Avoid committing sensitive information." />
-    <MESSAGE value="perf(geneticAlgorithm): enable multiprocessing for speed&#10;&#10;Enable multiprocessing to improve execution time.&#10;&#10;- Use multiprocessing for faster GA runs&#10;- Reduce overall computation time" />
-    <MESSAGE value="perf(geneticAlgorithm): enable multiprocessing&#10;&#10;Enable multiprocessing for faster GA runs.&#10;&#10;- Use multiprocessing to improve execution time&#10;- Reduce overall computation time" />
-    <MESSAGE value="perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs with lock removal.&#10;&#10;- Remove unnecessary lock for shared variable updates.&#10;- Improve execution time with multiprocessing.&#10;- Reduce overall computation time." />
-    <MESSAGE value="```&#10;perf(geneticAlgorithm): improve multiprocessing efficiency&#10;&#10;Enable multiprocessing for faster GA runs by removing unnecessary lock.&#10;&#10;- Remove lock for shared variable updates.&#10;- Use Queue for inter-process communication.&#10;- Improve overall execution time.&#10;&#10;```" />
-    <MESSAGE value="perf(geneticAlgorithm): improve multiprocessing&#10;&#10;Enable faster GA runs by removing lock.&#10;&#10;- Remove lock for shared variable updates.&#10;- Use Queue for inter-process communication.&#10;- Improve overall execution time." />
-    <MESSAGE value="fix(geneticAlgorithm): Improve logging of best individual&#10;&#10;Log best individuals fitness and representation&#10;&#10;- Update logging to include both fitness and representation of elites&#10;- Provide more context in the logs" />
-    <MESSAGE value="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix it by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
-    <MESSAGE value="fix(geneticAlgorithm): remove duplicate logging&#10;&#10;Log same warning message twice. Fix by removing redundant call.&#10;&#10;- Delete repeated logger.warning call." />
-    <MESSAGE value="fix(geneticAlgorithm): revamp GA workflow &amp; logging&#10;&#10;The previous GA workflow had issues with population management and logging.&#10;&#10;- Refactor the evaluation process for improved efficiency.&#10;- Enhance logging to include generation statistics and best fitness.&#10;- Correctly select population after mating and mutation." />
-    <MESSAGE value="refactor(genetic_algorithm): remove unused parameters&#10;&#10;Remove `tournament_size` and `elite_injection` parameters from the genetic algorithm.&#10;&#10;- Simplify the algorithm's configuration by removing unnecessary options.&#10;- The selection process now relies solely on the toolbox.select method.&#10;- Improve code readability by reducing the number of parameters in the constructor." />
-    <MESSAGE value="refactor(genetic_algorithm): remove unused params&#10;&#10;Remove `tournament_size` and `elite_injection`.&#10;&#10;- Simplify config by removing unnecessary options.&#10;- Selection relies solely on toolbox.select.&#10;- Improve readability by reducing constructor params." />
-    <MESSAGE value="```&#10;refactor(genetic_algorithm): improve evaluation and logging&#10;&#10;- Refactor individual evaluation for progress tracking.&#10;- Add elapsed time and estimated remaining time during evaluation.&#10;- Include generation duration in logs for performance analysis.&#10;```" />
-    <MESSAGE value="refactor(genetic_algorithm): improve evaluation and logging&#10;&#10;- Refactor individual evaluation for progress tracking.&#10;- Add elapsed time and estimated remaining time during evaluation.&#10;- Include generation duration in logs for performance analysis." />
-    <MESSAGE value="feat(geneticAlgorithm): remove initial_start parameter&#10;&#10;body:&#10;- Remove the unused `initial_start` parameter from the `_eval_individuals` calls.&#10;- This simplifies the function signature and reduces code clutter.&#10;- The parameter was not being used within the `_eval_individuals` function." />
-    <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;body:&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
-    <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals` calls.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
-    <MESSAGE value="```&#10;feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function.&#10;```" />
-    <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature and reduces code clutter.&#10;- Parameter was unused within `_eval_individuals` function." />
-    <MESSAGE value="feat(geneticAlgorithm): remove unused initial_start&#10;&#10;- Remove `initial_start` parameter from `_eval_individuals`.&#10;- Simplifies function signature.&#10;- Reduces code clutter." />
-    <MESSAGE value="feat(geneticAlgorithm): persist ga history data&#10;&#10;- Save ga run stats to file after completion.&#10;- Create `gaHistoryData` directory if not exists.&#10;- Increase population size to 100." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): persist ga history data&#10;&#10;- Save ga run stats to file after completion.&#10;- Create `gaHistoryData` directory if not exists.&#10;- Increase population size to 100." />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/kianIsGod/livetrade/orders.py</url>
-          <line>11</line>
-          <option name="timeStamp" value="22" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/kianIsGod/livetrade/orders.py</url>
-          <line>14</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/kianIsGod/livetrade/orders.py</url>
-          <line>33</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/kianIsGod/livetrade/main.py</url>
-          <line>48</line>
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tradingComponents/strategies/BB_RSI_Lines.py</url>
-          <line>29</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/tradingComponents/strategies/BB_RSI_Lines.py</url>
-          <line>55</line>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dataAnalyse.py</url>
-          <line>11</line>
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dataAnalysis/plotter.py</url>
-          <line>72</line>
-          <option name="timeStamp" value="154" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dataAnalysis/plotter.py</url>
-          <line>70</line>
-          <option name="timeStamp" value="155" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dataAnalysis/plotter.py</url>
-          <line>76</line>
-          <option name="timeStamp" value="156" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dataAnalysis/plotter.py</url>
-          <line>79</line>
-          <option name="timeStamp" value="159" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/dataAnalysis/analysis.py</url>
-          <line>121</line>
-          <option name="timeStamp" value="211" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/main.py</url>
-          <line>70</line>
-          <option name="timeStamp" value="213" />
-        </line-breakpoint>
-      </breakpoints>
-      <default-breakpoints>
-        <breakpoint type="python-exception">
-          <properties notifyOnTerminate="true" exception="BaseException">
-            <option name="notifyOnTerminate" value="true" />
-          </properties>
-        </breakpoint>
-      </default-breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="fix(geneticAlgorithm): persist GA history data&#10;&#10;- Save GA run stats to file after completion.&#10;- Create `gaHistoryData` directory if not exists.&#10;- Increase population size to 100." />
+    <MESSAGE value="feat(geneticAlgorithm): Save logbook to file&#10;&#10;The logbook saving logic was duplicated.&#10;&#10;- Introduce a static method `_save_logbook` to save the logbook.&#10;- Remove duplicated code in the `run` method.&#10;- Call the `_save_logbook` method at the end of `run`." />
+    <MESSAGE value="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process." />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process." />
   </component>
 </project>

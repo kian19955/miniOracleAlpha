@@ -1,5 +1,7 @@
+import csv
+import json
 import logging
-import pickle
+import os
 import re
 from typing import Type, Optional, get_args, get_origin, Union, Any
 from collections import OrderedDict, defaultdict
@@ -12,6 +14,7 @@ from enum import EnumMeta
 import atexit
 from copy import deepcopy
 import time
+import warnings
 
 from deap import base, creator, tools
 import numpy as np
@@ -51,6 +54,9 @@ class GeneticAlgorithm:
             species: Type,
             bt_settings: dict[str, any],
             objectives: dict[str, any],
+            datasets: dict[int, dict[str, any]],
+
+            dataset_rotation_freq: int = 10,
 
             genome_settings: dict[str, dict[type, dict[str | type, any]]] = None,
             stop_settings: dict[str, dict[str, float]] = None,
@@ -96,6 +102,10 @@ class GeneticAlgorithm:
         self.bt_settings: dict = bt_settings
         self.objectives: OrderedDict = OrderedDict(objectives)
 
+        self.datasets: dict = datasets
+        self.dataset_rotation_freq: int = dataset_rotation_freq
+        self.active_dataset_index: int = 0
+
         self.genome_settings: dict[str, dict[type, dict[str | type, any]]] = genome_settings or {}
         self.stop_settings: dict[str, dict[str, float]] = stop_settings or {}
 
@@ -125,7 +135,8 @@ class GeneticAlgorithm:
 
         self._validate_genome_settings()
 
-        fetch_klines(ticker=bt_settings["ticker"], interval=bt_settings["interval"], days=bt_settings["days"])
+        for fetch_params in self.datasets.values():
+            fetch_klines(**fetch_params)
 
         creator.create("FitnessMax", base.Fitness, weights=tuple(objectives.values()))
         creator.create("Individual", dict, fitness=creator.FitnessMax)
@@ -202,9 +213,37 @@ class GeneticAlgorithm:
         return species_types
 
     @staticmethod
-    def _save_logbook(logbook: tools.Logbook, generations: int, population_size: int):
-        with open(f"{ga_his_dir_path}/G{generations}_PS{population_size}_{time.strftime('%Y%m%d_%H%M%S')}", "wb") as lb_file:
-            pickle.dump(logbook, lb_file)
+    def _save_logbook_and_population(
+            logbook: tools.Logbook,
+            pop: list,
+            generations: int,
+            population_size: int,
+    ):
+
+        # Create a timestamp string.
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+
+        logbook_filename = os.path.join(ga_his_dir_path, f"G{generations}_PS{population_size}_{timestamp}_logbook.csv")
+        with open(logbook_filename, "w", newline="") as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=logbook.header)
+            writer.writeheader()
+            for record in logbook:
+                writer.writerow(record)
+        print(f"Logbook saved to: {logbook_filename}")
+
+        sorted_pop = tools.selNSGA2(pop, k=len(pop))
+        population_data = {}
+        for rank, individual in enumerate(sorted_pop, start=1):
+            population_data[str(rank)] = {
+                "fitness": individual.fitness.values,
+                "individual": individual  # assumes individual is JSON-serializable (e.g., a dict)
+            }
+
+        # Save the final population as a JSON file.
+        pop_filename = os.path.join(ga_his_dir_path, f"G{generations}_PS{population_size}_{timestamp}_population.json")
+        with open(pop_filename, "w") as json_file:
+            json.dump(population_data, json_file, indent=4, default=str)
+        print(f"Population saved to: {pop_filename}")
 
     def run(self, generations: int = 40, population_size: int = 50,
             use_multiprocessing: bool = True, seed: int = 0):
@@ -212,6 +251,8 @@ class GeneticAlgorithm:
             raise ValueError(
                 f"Population size must be divisible by 4 when using selTournamentDCD, but got {population_size}"
             )
+
+        warnings.simplefilter("ignore", RuntimeWarning)
 
         def on_exit():
             if not pop:
@@ -222,11 +263,23 @@ class GeneticAlgorithm:
                 if indi.fitness.valid:
                     logger.info(f"RANK: {len(pop) - i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
 
-            self._save_logbook(logbook, generations, population_size)
+            self._save_logbook_and_population(logbook, pop, generations, population_size)
 
         random.seed(seed)
 
         atexit.register(on_exit)
+
+        # Setup statistics and logbook
+        stats = tools.Statistics(lambda ind: ind.fitness.values)
+        stats.register("avg", np.mean, axis=0)
+        stats.register("std", np.std, axis=0)
+        stats.register("min", np.min, axis=0)
+        stats.register("max", np.max, axis=0)
+
+        logbook = tools.Logbook()
+        logbook.header = ["gen", "evals"] + stats.fields
+
+        self.active_dataset_index = 0
 
         # Create a pool context manager for parallel evaluation
         logger.debug("Creating Pool")
@@ -316,16 +369,6 @@ class GeneticAlgorithm:
             _eval_individuals(pop)
             pop = self.toolbox.select(pop, len(pop))
 
-            # Setup statistics and logbook
-            stats = tools.Statistics(lambda ind: ind.fitness.values)
-            stats.register("avg", np.mean, axis=0)
-            stats.register("std", np.std, axis=0)
-            stats.register("min", np.min, axis=0)
-            stats.register("max", np.max, axis=0)
-
-            logbook = tools.Logbook()
-            logbook.header = ["gen", "evals"] + stats.fields
-
             gen_duration = time.time() - initial_start
             log_generation(g=0, gen_dur=gen_duration)
 
@@ -333,6 +376,10 @@ class GeneticAlgorithm:
             for gen in range(generations):
                 generation_start = time.time()
                 logger.debug(f"Running Generation {gen + 1}")
+
+                if gen % self.dataset_rotation_freq == 0:
+                    logger.debug("Rotating Datasets")
+                    self.active_dataset_index = (self.active_dataset_index + 1) % len(self.datasets)
 
                 # Variation: selection (DCD), cloning, mating, mutation.
                 offspring = tools.selTournamentDCD(pop, len(pop))
@@ -361,7 +408,8 @@ class GeneticAlgorithm:
                 generation_duration = time.time() - generation_start
                 log_generation(gen, generation_duration)
 
-        self._save_logbook(logbook, generations, population_size)
+        self._save_logbook_and_population(logbook, pop, generations, population_size)
+        warnings.resetwarnings()
         return pop
 
     def create_individual(self):
@@ -402,6 +450,7 @@ class GeneticAlgorithm:
 
             stats, _ = backtest(
                 eval_func=individual.evaluate,
+                fetch_kwargs=self.datasets[self.active_dataset_index],
                 **self.bt_settings,
                 **genome["stops"],
                 use_csv=True
@@ -825,12 +874,33 @@ if __name__ == '__main__':
             'trade_short': True,
             'leverage': 5,
             'micro_factor': 100000,
-
         },
+
         objectives={
             'Sharpe Ratio': 1,
             'Return [%]': 1
         },
+        datasets={
+            0: {
+                'days': 93,
+                'interval': '5m',
+                'ticker': "DOGEUSDT",
+                'start': '2024-09-30 00:00:00',
+            },
+            1: {
+                'days': 93,
+                'ticker': "DOGEUSDT",
+                'interval': '5m',
+                'start': '2024-07-02 00:00:00',
+            },
+            2: {
+                'days': 93,
+                'ticker': "DOGEUSDT",
+                'interval': '5m',
+                'start': '2024-04-03 00:00:00',
+            }
+        },
+        dataset_rotation_freq=3,
         genome_settings=g_set,
         stop_settings={
             'stop_loss': {
@@ -855,6 +925,7 @@ if __name__ == '__main__':
     logger.info("Running Genetic Algorithm...")
 
     finals = ga.run(
+        seed=911,
         generations=500,
         population_size=100,
         use_multiprocessing=True
