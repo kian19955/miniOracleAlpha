@@ -277,7 +277,7 @@ class GeneticAlgorithm:
         stats.register("max", np.max, axis=0)
 
         logbook = tools.Logbook()
-        logbook.header = ["gen", "evals"] + stats.fields
+        logbook.header = ["gen", "evals", "dataset_i"] + stats.fields
 
         self.active_dataset_index = 0
 
@@ -310,7 +310,7 @@ class GeneticAlgorithm:
             def log_generation(g, gen_dur):
                 """Log statistics for the current generation using a Rich table."""
                 record = stats.compile(pop)
-                logbook.record(gen=g + 1, evals=len(pop), **record)
+                logbook.record(gen=g + 1, evals=len(pop), dataset_i=self.active_dataset_index, **record)
                 best_fitness = tools.selNSGA2(pop, k=1)[0].fitness.values
 
                 table = Table(title=f"Generation {g + 1}/{generations}")
@@ -380,6 +380,7 @@ class GeneticAlgorithm:
                 if gen % self.dataset_rotation_freq == 0:
                     logger.debug("Rotating Datasets")
                     self.active_dataset_index = (self.active_dataset_index + 1) % len(self.datasets)
+                    print("Rotating Datasets to", self.active_dataset_index)
 
                 # Variation: selection (DCD), cloning, mating, mutation.
                 offspring = tools.selTournamentDCD(pop, len(pop))
