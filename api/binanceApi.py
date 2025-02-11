@@ -138,7 +138,7 @@ def fetch_klines(
 
     while current_time < end_timestamp_unix:
         progress = ((current_time - start_timestamp_unix) / total_time) * 100
-        print(f"Fetching data... {progress:.2f}% complete", end="\n")
+        print(f"Fetching data... {progress:.2f}% complete", end="\r")
 
         params: dict = {
             'symbol': ticker,
