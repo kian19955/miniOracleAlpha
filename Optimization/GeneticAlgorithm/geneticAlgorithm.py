@@ -898,7 +898,7 @@ if __name__ == '__main__':
                 'start': '2024-04-03 00:00:00',
             }
         },
-        dataset_rotation_freq=3,
+        dataset_rotation_freq=10,
         genome_settings=g_set,
         stop_settings={
             'stop_loss': {
