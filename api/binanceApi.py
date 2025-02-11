@@ -119,7 +119,11 @@ def fetch_klines(
     start_timestamp_unix = int(time.mktime(start_timestamp.timetuple())) * 1000
     end_timestamp_unix = int(time.mktime(end_timestamp.timetuple())) * 1000
 
-    file_path = f"{market_his_dir_path}/{ticker}_{interval}_{start or 'None'}_{end or 'None'}_{years}Y_{months}M_{weeks}W_{days}D_{hours}h_{minutes}m_{seconds}s.csv"
+    # Create the file path
+    safe_start = start.replace(" ", "_").replace(":", "-") if start else 'None'
+    safe_end = end.replace(" ", "_").replace(":", "-") if end else 'None'
+    file_path = f"{market_his_dir_path}/{ticker}_{interval}_{safe_start}_{safe_end}_{years}Y_{months}M_{weeks}W_{days}D_{hours}h_{minutes}m_{seconds}s.csv"
+
     if use_csv and os.path.isfile(file_path):
         df: DataFrame = read_csv(file_path)
         df['timestamp'] = to_datetime(df['timestamp'])
@@ -134,7 +138,7 @@ def fetch_klines(
 
     while current_time < end_timestamp_unix:
         progress = ((current_time - start_timestamp_unix) / total_time) * 100
-        print(f"Fetching data... {progress:.2f}% complete", end="\r")
+        print(f"Fetching data... {progress:.2f}% complete", end="\n")
 
         params: dict = {
             'symbol': ticker,
@@ -171,7 +175,7 @@ def fetch_klines(
 
 
 if __name__ == '__main__':
-    intervals = "1s"
+    intervals = "1h"
     days = 7
     tickers = ["BTCUSDT", "DOGEUSDT"]
 
