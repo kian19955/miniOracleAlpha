@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process.">
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -15,21 +15,21 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "MrCode200"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;MrCode200&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/kian19955/miniOracleAlpha.git",
-    "accountId": "96e72a4d-0d29-4920-942f-c0faf49d958e"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/kian19955/miniOracleAlpha.git&quot;,
+    &quot;accountId&quot;: &quot;96e72a4d-0d29-4920-942f-c0faf49d958e&quot;
   }
-}]]></component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 5
-}]]></component>
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
   <component name="ProjectId" id="2srYjOgvcTrlqDRalERgOnW9eLt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -37,14 +37,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -77,13 +79,66 @@
       <option name="project" value="LOCAL" />
       <updated>1739215483288</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process.">
+      <option name="closed" value="true" />
+      <created>1739288132048</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1739288132048</updated>
+    </task>
+    <task id="LOCAL-00004" summary="feat(binanceApi): enhance historical data fetching&#10;&#10;- Fix: Correctly format start and end times for file paths to avoid errors.&#10;- Change: Modify the end parameter of print from &quot;\r&quot; to &quot;\n&quot; to enable progress display in IDEs.&#10;- Update: Change the default interval to &quot;1h&quot;&#10;&#10;Improves data retrieval and progress reporting.">
+      <option name="closed" value="true" />
+      <created>1739288513935</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739288513935</updated>
+    </task>
+    <task id="LOCAL-00005" summary="fix(binanceApi): improve data fetching progress display&#10;&#10;Refactor print statement to use carriage return.&#10;&#10;- Update print to overwrite the previous line.&#10;- Improves user experience.">
+      <option name="closed" value="true" />
+      <created>1739288526014</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1739288526014</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat(geneticAlgorithm): remove hardcoded parameters&#10;&#10;- Remove hardcoded bt_settings from GeneticAlgorithm init&#10;- Add extensive logging of GA runs and top individuals for analysis&#10;- Improve code readability&#10;&#10;The hardcoded parameters limited the flexibility of the GeneticAlgorithm. The logs will aid in understanding and improving algorithm performance.">
+      <option name="closed" value="true" />
+      <created>1739288660932</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1739288660932</updated>
+    </task>
+    <task id="LOCAL-00007" summary="feat(geneticAlgorithm): add dataset index to log&#10;&#10;Add the active dataset index to the logbook and table.&#10;&#10;- Include dataset index to track dataset rotation.&#10;- Add print statement to debug dataset rotation.&#10;- Update logbook header to display dataset index.">
+      <option name="closed" value="true" />
+      <created>1739288848559</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1739288848559</updated>
+    </task>
+    <task id="LOCAL-00008" summary="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration.">
+      <option name="closed" value="true" />
+      <created>1739289041170</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1739289041170</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix(geneticAlgorithm): persist GA history data&#10;&#10;- Save GA run stats to file after completion.&#10;- Create `gaHistoryData` directory if not exists.&#10;- Increase population size to 100." />
     <MESSAGE value="feat(geneticAlgorithm): Save logbook to file&#10;&#10;The logbook saving logic was duplicated.&#10;&#10;- Introduce a static method `_save_logbook` to save the logbook.&#10;- Remove duplicated code in the `run` method.&#10;- Call the `_save_logbook` method at the end of `run`." />
     <MESSAGE value="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process." />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process." />
+    <MESSAGE value="feat(binanceApi): enhance historical data fetching&#10;&#10;- Fix: Correctly format start and end times for file paths to avoid errors.&#10;- Change: Modify the end parameter of print from &quot;\r&quot; to &quot;\n&quot; to enable progress display in IDEs.&#10;- Update: Change the default interval to &quot;1h&quot;&#10;&#10;Improves data retrieval and progress reporting." />
+    <MESSAGE value="fix(binanceApi): improve data fetching progress display&#10;&#10;Refactor print statement to" />
+    <MESSAGE value="feat(geneticAlgorithm): remove hardcoded parameters&#10;&#10;- Remove hardcoded bt_settings from GeneticAlgorithm init&#10;- Add extensive logging of GA runs and top individuals for analysis&#10;- Improve code readability&#10;&#10;The hardcoded parameters limited the flexibility of the GeneticAlgorithm. The logs will aid in understanding and improving algorithm performance." />
+    <MESSAGE value="feat(geneticAlgorithm): add dataset index to log&#10;&#10;Add the active dataset index to the logbook and table.&#10;&#10;- Include dataset index to track dataset rotation.&#10;- Add print statement to debug dataset rotation.&#10;- Update logbook header to display dataset index." />
+    <MESSAGE value="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration." />
+    <option name="LAST_COMMIT_MESSAGE" value="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration." />
   </component>
 </project>

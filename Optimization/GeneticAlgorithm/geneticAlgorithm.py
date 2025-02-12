@@ -334,8 +334,7 @@ class GeneticAlgorithm:
 
             def _eval_individuals(individuals):
                 """Evaluate individuals that have an invalid fitness, showing progress with Rich."""
-                invalid_ind = [ind for ind in individuals if not ind.fitness.valid]
-                total_to_evaluate = len(invalid_ind)
+                total_to_evaluate = len(individuals)
 
                 if total_to_evaluate == 0:
                     return
@@ -352,12 +351,12 @@ class GeneticAlgorithm:
                     task = progress.add_task("Evaluating individuals...", total=total_to_evaluate)
 
                     fitnesses = []
-                    for fit in pool.imap(self.toolbox.evaluate, invalid_ind):
+                    for fit in pool.imap(self.toolbox.evaluate, individuals):
                         fitnesses.append(fit)
                         progress.update(task, description=f"Fitness: {fit}")
                         progress.advance(task)
 
-                for ind, fit in zip(invalid_ind, fitnesses):
+                for ind, fit in zip(individuals, fitnesses):
                     ind.fitness.values = fit
 
             # ----------------- Initialization -----------------
@@ -374,13 +373,14 @@ class GeneticAlgorithm:
 
             # ----------------- Evolutionary Loop -----------------
             for gen in range(generations):
-                generation_start = time.time()
-                logger.debug(f"Running Generation {gen + 1}")
-
                 if gen % self.dataset_rotation_freq == 0:
                     logger.debug("Rotating Datasets")
                     self.active_dataset_index = (self.active_dataset_index + 1) % len(self.datasets)
+                    _eval_individuals(pop)
                     print("Rotating Datasets to", self.active_dataset_index)
+
+                generation_start = time.time()
+                logger.debug(f"Running Generation {gen + 1}")
 
                 # Variation: selection (DCD), cloning, mating, mutation.
                 offspring = tools.selTournamentDCD(pop, len(pop))
@@ -400,7 +400,8 @@ class GeneticAlgorithm:
                         del ind.fitness.values
 
                 logger.debug("Evaluating Offspring")
-                _eval_individuals(offspring)
+                invalid_ind = [ind for ind in offspring if not ind.fitness.valid]
+                _eval_individuals(invalid_ind)
 
                 # Select the next generation from the current population and offspring.
                 combined = pop + offspring
