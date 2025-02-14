@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(geneticAlgorithm): improve logging and error handling&#10;&#10;- Enhance generation logging with invalid individual count&#10;- Add try-except to `ga.run` to catch and raise exceptions&#10;- Fixes logging of number of individuals evaluated&#10;&#10;The commit improves the robustness and monitoring of the genetic algorithm by providing more detailed logging information and ensuring exceptions are properly handled. The logging now includes the number of invalid individuals, and error handling is improved by re-raising exceptions caught during the `ga.run` execution.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-    </list>
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(geneticAlgorithm): improve logging and error handling&#10;&#10;- Enhance generation logging with invalid individual count&#10;- Add try-except to `ga.run` to catch and raise exceptions&#10;- Fixes logging of number of individuals evaluated&#10;&#10;The commit improves the robustness and monitoring of the genetic algorithm by providing more detailed logging information and ensuring exceptions are properly handled. The logging now includes the number of invalid individuals, and error handling is improved by re-raising exceptions caught during the `ga.run` execution." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -207,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739561712879</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="feat(geneticAlgorithm): improve logging and error handling&#10;&#10;- Enhance generation logging with invalid individual count&#10;- Add try-except to `ga.run` to catch and raise exceptions&#10;- Fixes logging of number of individuals evaluated&#10;&#10;The commit improves the robustness and monitoring of the genetic algorithm by providing more detailed logging information and ensuring exceptions are properly handled. The logging now includes the number of invalid individuals, and error handling is improved by re-raising exceptions caught during the `ga.run` execution.">
+      <option name="closed" value="true" />
+      <created>1739565022121</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1739565022121</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
