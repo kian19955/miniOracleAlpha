@@ -882,23 +882,23 @@ if __name__ == '__main__':
         },
         datasets={
             0: {
-                'days': 93,
-                'interval': '15m',
-                'ticker': "DOGEUSDT",
-                'start': '2024-09-30 00:00:00',
+                "days": 270,
+                "interval": "15m",
+                "ticker": "DOGEUSDT",
+                "start": "2024-09-30 00:00:00",
             },
             1: {
-                'days': 93,
-                'ticker': "DOGEUSDT",
-                'interval': '15m',
-                'start': '2024-07-02 00:00:00',
+                "days": 270,
+                "ticker": "DOGEUSDT",
+                "interval": "15m",
+                "start": "2024-01-03 00:00:00",  # 9 months before dataset 0 starts
             },
             2: {
-                'days': 93,
-                'ticker': "DOGEUSDT",
-                'interval': '15m',
-                'start': '2024-04-03 00:00:00',
-            }
+                "days": 270,
+                "ticker": "DOGEUSDT",
+                "interval": "15m",
+                "start": "2023-04-07 00:00:00",  # 9 months before dataset 1 starts
+            },
         },
         dataset_rotation_freq=8,
         genome_settings=g_set,
