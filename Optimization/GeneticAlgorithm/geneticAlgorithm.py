@@ -21,6 +21,7 @@ import numpy as np
 from rich.console import Console
 from rich.progress import Progress, BarColumn, TimeElapsedColumn, TimeRemainingColumn, TextColumn, MofNCompleteColumn
 from rich.table import Table
+from numpy import nan
 
 from api.binanceApi import fetch_klines
 from backtester import backtest
@@ -310,7 +311,7 @@ class GeneticAlgorithm:
             def log_generation(g, gen_dur):
                 """Log statistics for the current generation using a Rich table."""
                 record = stats.compile(pop)
-                logbook.record(gen=g + 1, evals=len(pop), dataset_i=self.active_dataset_index, **record)
+                logbook.record(gen=g + 1, evals=len(invalid_ind), dataset_i=self.active_dataset_index, **record)
                 best_fitness = tools.selNSGA2(pop, k=1)[0].fitness.values
 
                 table = Table(title=f"Generation {g + 1}/{generations}")
@@ -373,7 +374,7 @@ class GeneticAlgorithm:
 
             # ----------------- Evolutionary Loop -----------------
             for gen in range(generations):
-                if gen % self.dataset_rotation_freq == 0:
+                if (gen > 1 and self.dataset_rotation_freq != 1 or gen > 0 and self.dataset_rotation_freq == 1) and gen % self.dataset_rotation_freq == 0:
                     logger.debug("Rotating Datasets")
                     self.active_dataset_index = (self.active_dataset_index + 1) % len(self.datasets)
                     _eval_individuals(pop)
@@ -461,7 +462,7 @@ class GeneticAlgorithm:
             values: list[float | int] = []
             for genome_name, weight in self.objectives.items():
                 # Get the value, defaulting to -100 * weight if the key is missing
-                value = stats.get(genome_name, -100 * weight)
+                value = stats.get(genome_name, nan)
 
                 if np.isnan(value):
                     value = -100 * weight
@@ -882,24 +883,24 @@ if __name__ == '__main__':
         datasets={
             0: {
                 'days': 93,
-                'interval': '5m',
+                'interval': '15m',
                 'ticker': "DOGEUSDT",
                 'start': '2024-09-30 00:00:00',
             },
             1: {
                 'days': 93,
                 'ticker': "DOGEUSDT",
-                'interval': '5m',
+                'interval': '15m',
                 'start': '2024-07-02 00:00:00',
             },
             2: {
                 'days': 93,
                 'ticker': "DOGEUSDT",
-                'interval': '5m',
+                'interval': '15m',
                 'start': '2024-04-03 00:00:00',
             }
         },
-        dataset_rotation_freq=10,
+        dataset_rotation_freq=8,
         genome_settings=g_set,
         stop_settings={
             'stop_loss': {
