@@ -3,3 +3,26 @@
 {"timestamp": "2025-02-14 14:52:02,475", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 285, "function": "run", "message": "Creating Pool", "exc_info": null}
 {"timestamp": "2025-02-14 14:52:02,919", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 363, "function": "run", "message": "Creating Initial Population", "exc_info": null}
 {"timestamp": "2025-02-14 14:52:02,926", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 366, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-14 21:27:35,644", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 166, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-14 21:27:56,946", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 926, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-14 21:27:56,946", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 287, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-14 21:27:57,347", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 365, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-14 21:27:57,348", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 368, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:14,745", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 385, "function": "run", "message": "Running Generation 1", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:14,745", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 391, "function": "run", "message": "Mating Offspring", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:14,745", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 399, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:14,746", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 404, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:27,119", "level": "ERROR", "file": "geneticAlgorithm.py", "line_number": 936, "function": "<module>", "message": "GeneticAlgorithm.run.<locals>.log_generation() takes 2 positional arguments but 3 were given", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:40,026", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 166, "function": "_build_dependency_graph", "message": "Building Dependency Graph", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:40,185", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 926, "function": "<module>", "message": "Running Genetic Algorithm...", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:40,185", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 287, "function": "run", "message": "Creating Pool", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:40,699", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 365, "function": "run", "message": "Creating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:40,700", "level": "INFO", "file": "geneticAlgorithm.py", "line_number": 368, "function": "run", "message": "Evaluating Initial Population", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:56,668", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 385, "function": "run", "message": "Running Generation 1", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:56,668", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 391, "function": "run", "message": "Mating Offspring", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:56,669", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 399, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-14 21:28:56,669", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 404, "function": "run", "message": "Evaluating Offspring", "exc_info": null}
+{"timestamp": "2025-02-14 21:29:10,739", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 385, "function": "run", "message": "Running Generation 2", "exc_info": null}
+{"timestamp": "2025-02-14 21:29:10,740", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 391, "function": "run", "message": "Mating Offspring", "exc_info": null}
+{"timestamp": "2025-02-14 21:29:10,740", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 399, "function": "run", "message": "Mutating Offspring", "exc_info": null}
+{"timestamp": "2025-02-14 21:29:10,740", "level": "DEBUG", "file": "geneticAlgorithm.py", "line_number": 404, "function": "run", "message": "Evaluating Offspring", "exc_info": null}

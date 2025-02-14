@@ -281,6 +281,7 @@ class GeneticAlgorithm:
         logbook.header = ["gen", "evals", "dataset_i"] + stats.fields
 
         self.active_dataset_index = 0
+        invalid_ind = []
 
         # Create a pool context manager for parallel evaluation
         logger.debug("Creating Pool")
@@ -308,10 +309,10 @@ class GeneticAlgorithm:
 
         with pool_context as pool:
 
-            def log_generation(g, gen_dur, invalid_ind_len: int = 100):
+            def log_generation(g, gen_dur):
                 """Log statistics for the current generation using a Rich table."""
                 record = stats.compile(pop)
-                logbook.record(gen=g + 1, evals=len(invalid_ind_len), dataset_i=self.active_dataset_index, **record)
+                logbook.record(gen=g + 1, evals=len(invalid_ind), dataset_i=self.active_dataset_index, **record)
                 best_fitness = tools.selNSGA2(pop, k=1)[0].fitness.values
 
                 table = Table(title=f"Generation {g + 1}/{generations}")
@@ -409,7 +410,7 @@ class GeneticAlgorithm:
                 pop = self.toolbox.select(combined, population_size)
 
                 generation_duration = time.time() - generation_start
-                log_generation(gen, generation_duration, len(invalid_ind))
+                log_generation(gen, generation_duration)
 
         self._save_logbook_and_population(logbook, pop, generations, population_size)
         warnings.resetwarnings()
@@ -928,12 +929,14 @@ if __name__ == '__main__':
         finals = ga.run(
             seed=911,
             generations=500,
-            population_size=100,
+            population_size=4,
             use_multiprocessing=True
         )
     except Exception as e:
         logger.error(e)
         raise
 
-    for i, final in enumerate(finals[::-1]):
+    finals.reverse()
+
+    for i, final in enumerate(finals):
         logger.info(f"RANK: {len(finals) - i}, FITNESS: {final.fitness.values}, INDI: {final}")
