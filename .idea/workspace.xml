@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(geneticAlgorithm): Increase dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increases the `days` parameter from 93 to 270 for each dataset.&#10;- Shifts the `start` dates to provide a continuous historical window.&#10;- Improves the model training with expanded data range.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-    </list>
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -173,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739547534392</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values.">
+      <option name="closed" value="true" />
+      <created>1739558306609</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1739558306609</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -187,6 +192,7 @@
     <MESSAGE value="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration." />
     <MESSAGE value="```text&#10;feat(geneticAlgorithm): add plotting and improve evaluation&#10;&#10;- Add `mplcursors` for interactive plots&#10;- Implement `plotEvo.py` for visualizing GA performance&#10;- Fix dataset rotation and objective evaluation&#10;```" />
     <MESSAGE value="feat(geneticAlgorithm): Increase dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increases the `days` parameter from 93 to 270 for each dataset.&#10;- Shifts the `start` dates to provide a continuous historical window.&#10;- Improves the model training with expanded data range." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): Increase dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increases the `days` parameter from 93 to 270 for each dataset.&#10;- Shifts the `start` dates to provide a continuous historical window.&#10;- Improves the model training with expanded data range." />
+    <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values." />
   </component>
 </project>

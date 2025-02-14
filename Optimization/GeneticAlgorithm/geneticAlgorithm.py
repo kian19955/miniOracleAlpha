@@ -928,7 +928,7 @@ if __name__ == '__main__':
         finals = ga.run(
             seed=911,
             generations=500,
-            population_size=100,
+            population_size=4,
             use_multiprocessing=True
         )
     except Exception as e:
