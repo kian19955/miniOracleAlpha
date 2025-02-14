@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values." />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,24 +45,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.plotEvo.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.binanceApi.executor": "Run",
+    "Python.geneticAlgorithm.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.plotEvo.executor": "Run",
+    "Python.scratch.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\MyFolders\Code\miniOracleAlpha\data\gaHistoryData" />
@@ -178,7 +183,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739558306609</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.">
+      <option name="closed" value="true" />
+      <created>1739559614808</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1739559614808</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -193,6 +206,7 @@
     <MESSAGE value="```text&#10;feat(geneticAlgorithm): add plotting and improve evaluation&#10;&#10;- Add `mplcursors` for interactive plots&#10;- Implement `plotEvo.py` for visualizing GA performance&#10;- Fix dataset rotation and objective evaluation&#10;```" />
     <MESSAGE value="feat(geneticAlgorithm): Increase dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increases the `days` parameter from 93 to 270 for each dataset.&#10;- Shifts the `start` dates to provide a continuous historical window.&#10;- Improves the model training with expanded data range." />
     <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values." />
+    <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run." />
   </component>
 </project>

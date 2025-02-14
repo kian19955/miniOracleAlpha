@@ -308,10 +308,10 @@ class GeneticAlgorithm:
 
         with pool_context as pool:
 
-            def log_generation(g, gen_dur):
+            def log_generation(g, gen_dur, invalid_ind_len: int = 100):
                 """Log statistics for the current generation using a Rich table."""
                 record = stats.compile(pop)
-                logbook.record(gen=g + 1, evals=len(invalid_ind), dataset_i=self.active_dataset_index, **record)
+                logbook.record(gen=g + 1, evals=len(invalid_ind_len), dataset_i=self.active_dataset_index, **record)
                 best_fitness = tools.selNSGA2(pop, k=1)[0].fitness.values
 
                 table = Table(title=f"Generation {g + 1}/{generations}")
@@ -409,7 +409,7 @@ class GeneticAlgorithm:
                 pop = self.toolbox.select(combined, population_size)
 
                 generation_duration = time.time() - generation_start
-                log_generation(gen, generation_duration)
+                log_generation(gen, generation_duration, len(invalid_ind))
 
         self._save_logbook_and_population(logbook, pop, generations, population_size)
         warnings.resetwarnings()
@@ -933,6 +933,7 @@ if __name__ == '__main__':
         )
     except Exception as e:
         logger.error(e)
+        raise
 
     for i, final in enumerate(finals[::-1]):
         logger.info(f"RANK: {len(finals) - i}, FITNESS: {final.fitness.values}, INDI: {final}")
