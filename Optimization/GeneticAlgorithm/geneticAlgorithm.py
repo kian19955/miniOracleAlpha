@@ -262,7 +262,7 @@ class GeneticAlgorithm:
 
             for i, indi in enumerate(pop[::-1]):
                 if indi.fitness.valid:
-                    logger.info(f"RANK: {len(pop) - i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
+                    print(f"RANK: {len(pop) - i}, FITNESS: {indi.fitness.values}, INDI: {indi}")
 
             self._save_logbook_and_population(logbook, pop, generations, population_size)
 
@@ -924,12 +924,15 @@ if __name__ == '__main__':
     )
     logger.info("Running Genetic Algorithm...")
 
-    finals = ga.run(
-        seed=911,
-        generations=500,
-        population_size=100,
-        use_multiprocessing=True
-    )
+    try:
+        finals = ga.run(
+            seed=911,
+            generations=500,
+            population_size=100,
+            use_multiprocessing=True
+        )
+    except Exception as e:
+        logger.error(e)
 
     for i, final in enumerate(finals[::-1]):
         logger.info(f"RANK: {len(finals) - i}, FITNESS: {final.fitness.values}, INDI: {final}")
