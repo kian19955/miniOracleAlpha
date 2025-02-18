@@ -4,7 +4,7 @@ from backtesting import Backtest, Strategy
 import pandas as pd
 from backtesting.backtesting import Trade
 
-from api.binanceApi import fetch_klines
+from api.binance.fetching import fetch_klines
 
 
 class Backtester(Strategy):
@@ -141,7 +141,7 @@ def backtest(
 
 
 if __name__ == "__main__":
-    from tradingComponents.indicators import RelativeStrengthIndex, MovingAverageConvergenceDivergence
+    from tradingComponents.indicators import RelativeStrengthIndex
 
     settings = {'fast_period': 42, 'slow_period': 90, 'signal_line_period': 24, 'momentum_max_lookback': 51,
                 'momentum_signal_weight': 0.5578000000000001, 'crossover_return_weight': True,

@@ -112,7 +112,7 @@ class KiansVision:
 
 
 if __name__ == '__main__':
-    from api.binanceApi import fetch_klines
+    from api.binance.fetching import fetch_klines
     df = fetch_klines("DOGEUSDT", "1s", minutes=15)
     import matplotlib.pyplot as plt
     from pandas import cut

@@ -23,7 +23,7 @@ from rich.progress import Progress, BarColumn, TimeElapsedColumn, TimeRemainingC
 from rich.table import Table
 from numpy import nan
 
-from api.binanceApi import fetch_klines
+from api.binance.fetching import fetch_klines
 from backtester import backtest
 from constants import ga_his_dir_path
 from oracleMaths import randfloat
@@ -736,9 +736,9 @@ class GeneticAlgorithm:
 
 
 if __name__ == '__main__':
-    from tradingComponents.indicators import RelativeStrengthIndex, MovingAverageConvergenceDivergence
+    from tradingComponents.indicators import MovingAverageConvergenceDivergence
     from Optimization.GeneticAlgorithm.gaTypes import MateTypeProbabilities, MutateTypeProbabilities
-    from logging import DEBUG, INFO
+    from logging import INFO
     from custom_logger import setup_logger
 
     setup_logger('oracle.analysis', INFO, '../../logs/analysis.jsonl', log_in_json=True, stream_in_color=True)
