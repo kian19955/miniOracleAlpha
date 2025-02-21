@@ -14,7 +14,6 @@ if input("Use testnet? (y/n): ").lower().strip() == "y":
 else:
     import os
     from dotenv import load_dotenv
-
     load_dotenv()
     API_KEY = os.getenv("BINANCE_KEY")
     API_SECRET = os.getenv("BINANCE_SECRET")
@@ -25,32 +24,28 @@ client = Client(API_KEY, API_SECRET, testnet=is_testnet)
 active_balance: Optional[float] = None
 symbol = input("Enter the trading symbol (e.g., BTCUSDT): ").upper().strip()
 
-
 # ----------Helper Functions----------
 def get_available_balance():
-    """Retrieve available USDT balance from your Binance Futures account."""
     try:
         balances = client.futures_account_balance()
         for b in balances:
             if b['asset'] == 'USDT':
                 return float(b['balance'])
+        print("USDT balance not found.")
+        return None
     except Exception as e:
         print("Error retrieving account balance:", e)
-    return None
-
+        return None
 
 def get_current_price():
-    """Fetch the current last price for the given symbol."""
     try:
         ticker = client.futures_symbol_ticker(symbol=symbol)
         return float(ticker['price'])
     except Exception as e:
         print("Error retrieving current price:", e)
-    return None
-
+        return None
 
 def get_current_position():
-    """Get current position info for the symbol."""
     try:
         positions = client.futures_position_information(symbol=symbol)
         for pos in positions:
@@ -61,17 +56,13 @@ def get_current_position():
         print("Error retrieving current position:", e)
         return None
 
-
 def is_position_open():
-    """Returns a tuple (True, position) if an open position exists, or (False, None) if no position is open."""
     pos = get_current_position()
     if pos and float(pos.get("positionAmt", 0)) != 0:
         return True, pos
     return False, None
 
-
 def get_symbol_info(symbol):
-    """Fetch symbol details (including filters) from Binance Futures."""
     try:
         exchange_info = client.futures_exchange_info()
         for s in exchange_info["symbols"]:
@@ -83,33 +74,29 @@ def get_symbol_info(symbol):
         print("Error retrieving exchange info:", e)
         return None
 
-
 def get_precision_from_step_size(step_size):
-    """Determine the number of decimal places allowed from the step size."""
     s = format(step_size, 'f').rstrip('0')
     if '.' in s:
         return len(s.split('.')[1])
     return 0
 
-
 def clamp_quantity(quantity):
-    """Clamp quantity to min/max limits and round to step size, without exceeding active balance."""
     precision = get_precision_from_step_size(step_size)
     getcontext().prec = 12
     quantizer = Decimal('1') if precision == 0 else Decimal(f'1e-{precision}')
-    # Use ROUND_DOWN to avoid exceeding the balance
     clamped = float(Decimal(str(quantity)).quantize(quantizer, rounding=ROUND_DOWN))
     clamped = max(min_qty, min(max_qty, clamped))
     return clamped
 
-
 def set_active_balance():
     global active_balance
+    print("Setting active balance...")
     current_available_balance = get_available_balance()
     new_balance = 0
     try:
         new_balance = float(input(
-            f"Enter the Active Balance (investment amount in USDT) for each trade (Current Active Balance: {active_balance}): "))
+            f"Enter the Active Balance (investment amount in USDT) for each trade (Current Active Balance: {active_balance}): "
+        ).lstrip("asdbq").strip())
         if new_balance <= 0:
             print("Active Balance must be greater than 0.")
         elif current_available_balance is not None and new_balance > current_available_balance:
@@ -122,7 +109,7 @@ def set_active_balance():
     except ValueError as e:
         print(e)
         print(f"Please enter a valid number. Not {type(new_balance)}: {new_balance}")
-
+    print("Active balance setting complete.")
 
 # ----------Setup----------
 symbol_info = get_symbol_info(symbol)
@@ -143,12 +130,10 @@ else:
 while active_balance is None:
     set_active_balance()
 
-
 # ----------Main Functions----------
 def validate_order(func):
-    """Decorator to calculate quantity and place order immediately, skipping if below step size."""
-
     def wrapper(*args, **kwargs):
+        print(f"Validating {func.__name__} order...")
         open_status, _ = is_position_open()
         if open_status:
             print("Position already open, cannot open a new one.")
@@ -168,10 +153,7 @@ def validate_order(func):
         if current_price is None:
             return
 
-        # Calculate raw quantity
         raw_quantity = trade_balance / current_price
-
-        # Check if raw quantity is less than step_size
         if raw_quantity < step_size:
             precision = get_precision_from_step_size(step_size)
             print(
@@ -180,20 +162,18 @@ def validate_order(func):
             )
             return
 
-        # Clamp quantity without exceeding balance
         trade_quantity = clamp_quantity(raw_quantity)
-
         precision = get_precision_from_step_size(step_size)
         print(
             f"Calculated order quantity: {trade_quantity:.{precision}f} for {trade_balance} USDT at price {current_price:.2f} (Step size: {step_size})")
-        return func(*args, trade_quantity=trade_quantity, **kwargs)
+        result = func(*args, trade_quantity=trade_quantity, **kwargs)
+        print(f"{func.__name__} validation complete.")
+        return result
 
     return wrapper
 
-
 @validate_order
 def open_long(trade_quantity):
-    print()
     print("Attempting to open long position...")
     try:
         order = client.futures_create_order(
@@ -206,10 +186,8 @@ def open_long(trade_quantity):
     except Exception as e:
         print("Error opening long position:", e)
 
-
 @validate_order
 def open_short(trade_quantity):
-    print()
     print("Attempting to open short position...")
     try:
         order = client.futures_create_order(
@@ -222,9 +200,7 @@ def open_short(trade_quantity):
     except Exception as e:
         print("Error opening short position:", e)
 
-
 def close_position():
-    print()
     print("Attempting to close position...")
     open_status, pos = is_position_open()
     if not open_status:
@@ -253,15 +229,15 @@ def close_position():
         print("Close order executed:", order)
     except Exception as e:
         print("Error closing position:", e)
-
+    print("Close position attempt complete.")
 
 # ----------Main Loop----------
-keyboard.add_hotkey('d', open_long, suppress=True)
-keyboard.add_hotkey('s', open_short, suppress=True)
-keyboard.add_hotkey('a', close_position, suppress=True)
-keyboard.add_hotkey('b', set_active_balance, suppress=True)
+keyboard.add_hotkey('d', open_long)
+keyboard.add_hotkey('a', open_short)
+keyboard.add_hotkey('s', close_position)
+keyboard.add_hotkey('b', set_active_balance)
 
-print("Hotkeys registered: Right Arrow for Long, Left Arrow for Short, Down Arrow to Close, S to Set Active Balance.")
+print("Hotkeys registered: d for Long, a for Short, s to Close, b to Set Active Balance.")
 print("----------Info----------")
 print(f"Symbol: {symbol}")
 print(f"Active Balance: {active_balance}")

@@ -4,8 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(hotkeys): remap keyboard shortcuts&#10;&#10;The default keyboard shortcuts were awkward.&#10;&#10;- Update hotkeys to be more ergonomic.&#10;- Update corresponding print statements.">
       <change beforePath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -245,7 +244,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740152838545</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="feat(hotkeys): remap keyboard shortcuts&#10;&#10;The default keyboard shortcuts were awkward.&#10;&#10;- Update hotkeys to be more ergonomic.&#10;- Update corresponding print statements.">
+      <option name="closed" value="true" />
+      <created>1740153590717</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1740153590717</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -275,7 +282,8 @@
     <MESSAGE value="feat(geneticAlgorithm): improve logging and error handling&#10;&#10;- Enhance generation logging with invalid individual count&#10;- Add try-except to `ga.run` to catch and raise exceptions&#10;- Fixes logging of number of individuals evaluated&#10;&#10;The commit improves the robustness and monitoring of the genetic algorithm by providing more detailed logging information and ensuring exceptions are properly handled. The logging now includes the number of invalid individuals, and error handling is improved by re-raising exceptions caught during the `ga.run` execution." />
     <MESSAGE value="feat(geneticAlgorithm): increase population size&#10;&#10;The population size was too small.&#10;- Increase population size from 4 to 100.&#10;- Improve performance." />
     <MESSAGE value="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data." />
+    <MESSAGE value="feat(hotkeys): remap keyboard shortcuts&#10;&#10;The default keyboard shortcuts were awkward.&#10;&#10;- Update hotkeys to be more ergonomic.&#10;- Update corresponding print statements." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(hotkeys): remap keyboard shortcuts&#10;&#10;The default keyboard shortcuts were awkward.&#10;&#10;- Update hotkeys to be more ergonomic.&#10;- Update corresponding print statements." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
