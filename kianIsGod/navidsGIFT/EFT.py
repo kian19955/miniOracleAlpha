@@ -256,10 +256,10 @@ def close_position():
 
 
 # ----------Main Loop----------
-keyboard.add_hotkey('right', open_long, suppress=True)
-keyboard.add_hotkey('left', open_short, suppress=True)
-keyboard.add_hotkey('down', close_position, suppress=True)
-keyboard.add_hotkey('s', set_active_balance, suppress=True)
+keyboard.add_hotkey('d', open_long, suppress=True)
+keyboard.add_hotkey('s', open_short, suppress=True)
+keyboard.add_hotkey('a', close_position, suppress=True)
+keyboard.add_hotkey('b', set_active_balance, suppress=True)
 
 print("Hotkeys registered: Right Arrow for Long, Left Arrow for Short, Down Arrow to Close, S to Set Active Balance.")
 print("----------Info----------")
@@ -267,10 +267,10 @@ print(f"Symbol: {symbol}")
 print(f"Active Balance: {active_balance}")
 print()
 print("Keyboard Shortcuts:")
-print("- Right Arrow: Open Long")
-print("- Left Arrow: Open Short")
-print("- Down Arrow: Close Position")
-print("- S: Set Active Balance")
+print("- d: Open Long")
+print("- a: Open Short")
+print("- s: Close Position")
+print("- b: Set Active Balance")
 print("Press 'Q' to exit.")
 
 atexit.register(close_position)

@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/binanceAPI/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceAPI/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/binanceAPI/trading.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceAPI/trading.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -239,7 +237,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739888812422</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data.">
+      <option name="closed" value="true" />
+      <created>1740152838545</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1740152838545</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
