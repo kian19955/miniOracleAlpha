@@ -4,27 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(geneticAlgorithm): increase population size&#10;&#10;The population size was too small.&#10;- Increase population size from 4 to 100.&#10;- Improve performance.">
-      <change afterPath="$PROJECT_DIR$/api/binanceAPI/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/binanceAPI/enums.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/binanceAPI/orders.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/binanceAPI/positions.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/binanceAPI/trading.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/binanceAPI/websockets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/api/utils/binanceStrUtils.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/apiTests/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/apiTests/ordersTest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/apiTests/trading.py" afterDir="false" />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/geneticAlgorithm.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/binanceApi.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceAPI/fetching.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/poetry.lock" beforeDir="false" afterPath="$PROJECT_DIR$/poetry.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tradingComponents/indicators/kiansVision.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/indicators/kiansVision.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tradingComponents/strategies/BB_RSI_Lines.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/strategies/BB_RSI_Lines.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/binanceAPI/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceAPI/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/binanceAPI/trading.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceAPI/trading.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,31 +47,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.EFT.executor": "Run",
-    "Python.__init__.executor": "Run",
-    "Python.binanceApi.executor": "Run",
-    "Python.geneticAlgorithm.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.ordersTest.executor": "Run",
-    "Python.plotEvo.executor": "Run",
-    "Python.scratch.executor": "Run",
-    "Python.trading.executor": "Run",
-    "Python.websockets.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.EFT.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ordersTest.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plotEvo.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trading.executor&quot;: &quot;Run&quot;,
+    &quot;Python.websockets.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\MyFolders\Code\miniOracleAlpha\api\binance" />
@@ -247,8 +231,27 @@
       <option name="project" value="LOCAL" />
       <updated>1739565049671</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data.">
+      <option name="closed" value="true" />
+      <created>1739888812422</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1739888812422</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="fix(geneticAlgorithm): persist GA history data&#10;&#10;- Save GA run stats to file after completion.&#10;- Create `gaHistoryData` directory if not exists.&#10;- Increase population size to 100." />
@@ -265,6 +268,18 @@
     <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run." />
     <MESSAGE value="feat(geneticAlgorithm): improve logging and error handling&#10;&#10;- Enhance generation logging with invalid individual count&#10;- Add try-except to `ga.run` to catch and raise exceptions&#10;- Fixes logging of number of individuals evaluated&#10;&#10;The commit improves the robustness and monitoring of the genetic algorithm by providing more detailed logging information and ensuring exceptions are properly handled. The logging now includes the number of invalid individuals, and error handling is improved by re-raising exceptions caught during the `ga.run` execution." />
     <MESSAGE value="feat(geneticAlgorithm): increase population size&#10;&#10;The population size was too small.&#10;- Increase population size from 4 to 100.&#10;- Improve performance." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(geneticAlgorithm): increase population size&#10;&#10;The population size was too small.&#10;- Increase population size from 4 to 100.&#10;- Improve performance." />
+    <MESSAGE value="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py</url>
+          <line>91</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

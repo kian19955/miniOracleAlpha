@@ -14,7 +14,7 @@ from binance.client import Client
 client = Client(key, secret)
 
 # -------TestNet---------------------
-if True:
+if False:
     test_key = os.getenv("BINANCE_TEST_KEY")
     test_secret = os.getenv("BINANCE_TEST_SECRET")
     test_client = Client(test_key, test_secret, testnet=True)

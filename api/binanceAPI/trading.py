@@ -6,11 +6,11 @@ from binance import SIDE_BUY, SIDE_SELL, ORDER_TYPE_MARKET, ORDER_TYPE_LIMIT
 from . import client
 
 
-def place_future_order(side, ticker, amount=None, price=ORDER_TYPE_MARKET):
+def place_future_order(side, ticker, amount=None, price=None):
     if side not in [SIDE_BUY, SIDE_SELL]:
         raise ValueError("Invalid order side. Must be 'BUY' or 'SELL'.")
 
-    is_market_order = (price == ORDER_TYPE_MARKET)
+    is_market_order = (price is None)
 
     # Fetch symbol information
     symbol_info = client.futures_exchange_info()
@@ -21,6 +21,7 @@ def place_future_order(side, ticker, amount=None, price=ORDER_TYPE_MARKET):
     filters = {f['filterType']: f for f in symbol_data['filters']}
     price_filter = filters.get('PRICE_FILTER')
     lot_size_filter = filters.get('LOT_SIZE')
+    percent_price_filter = filters.get('PERCENT_PRICE')
 
     if not price_filter or not lot_size_filter:
         raise ValueError("Necessary filters not found for symbol.")
@@ -30,15 +31,32 @@ def place_future_order(side, ticker, amount=None, price=ORDER_TYPE_MARKET):
     min_price = float(price_filter['minPrice'])
     max_price = float(price_filter['maxPrice'])
 
+    # PERCENT_PRICE filter: limits price movements relative to the market price
+    if percent_price_filter:
+        multiplier_up = float(percent_price_filter['multiplierUp'])
+        multiplier_down = float(percent_price_filter['multiplierDown'])
+    else:
+        multiplier_up = 1
+        multiplier_down = 1
+
     # Determine price
     if is_market_order:
         price = float(client.futures_symbol_ticker(symbol=ticker)["price"])
         print(f"Using current market price: {price}")
     else:
         if not isinstance(price, (float, int)):
-            raise ValueError("Price must be a number.")
+            raise ValueError(f"Price must be a number not {type(price)}")
         if price < min_price or price > max_price:
             raise ValueError(f"Price must be between {min_price} and {max_price}.")
+
+        # Check if price is within PERCENT_PRICE filter
+        market_price = float(client.futures_symbol_ticker(symbol=ticker)["price"])
+        upper_limit = market_price * multiplier_up
+        lower_limit = market_price * multiplier_down
+
+        if price < lower_limit or price > upper_limit:
+            raise ValueError(f"Price must be within the range of {lower_limit} and {upper_limit} based on market price.")
+
         # Adjust price to the nearest tick size
         price = round(math.floor(price / tick_size) * tick_size, int(-math.log10(tick_size)))
         print(f"Adjusted price to nearest tick size: {price}")
@@ -107,6 +125,7 @@ def close_open_position(ticker: str, position_side: Optional[str] = None):
             side=order_side,
             type=ORDER_TYPE_MARKET,
             quantity=abs(position_amt),
+            timeInForce="IOC",
             reduceOnly=True
         )
         closed_orders.append(order)
