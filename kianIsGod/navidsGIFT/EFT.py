@@ -113,7 +113,7 @@ def set_active_balance():
 
 def set_ticker():
     global symbol
-    symbol = symbol.upper().strip()
+    symbol = input("Enter the trading symbol (e.g., BTCUSDT): ").upper().strip()
     print(f"Ticker set to {symbol}")
 
 # ----------Main Functions----------
