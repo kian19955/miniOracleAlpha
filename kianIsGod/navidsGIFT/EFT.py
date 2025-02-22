@@ -111,6 +111,11 @@ def set_active_balance():
         print(f"Please enter a valid number. Not {type(new_balance)}: {new_balance}")
     print("Active balance setting complete.")
 
+def set_ticker():
+    global symbol
+    symbol = symbol.upper().strip()
+    print(f"Ticker set to {symbol}")
+
 # ----------Main Functions----------
 def validate_order(func):
     def wrapper(*args, **kwargs):
@@ -234,23 +239,25 @@ while active_balance is None:
     set_active_balance()
 
 # ----------Main Loop----------
+print()
 print("----------Info----------")
 print(f"Symbol: {symbol}")
 print(f"Active Balance: {active_balance}")
 print()
+print("Commands:")
+print("- d: Open Long")
+print("- a: Open Short")
+print("- s: Close Position")
+print("- b: Set Active Balance")
+print("- v: Set Ticker")
+print("Press 'q' to exit.")
 
 if input("Use keyboard shortcuts? (y/n): ").lower().strip() == "y":
     keyboard.add_hotkey('d', open_long)
     keyboard.add_hotkey('a', open_short)
     keyboard.add_hotkey('s', close_position)
     keyboard.add_hotkey('b', set_active_balance)
-
-    print("Keyboard Shortcuts:")
-    print("- d: Open Long")
-    print("- a: Open Short")
-    print("- s: Close Position")
-    print("- b: Set Active Balance")
-    print("Press 'Q' to exit.")
+    keyboard.add_hotkey('v', set_ticker)
 
     keyboard.add_hotkey('q', lambda: exit() if get_current_position() is None else print(
         "Cannot exit while a position is open."), suppress=True)
@@ -259,23 +266,19 @@ if input("Use keyboard shortcuts? (y/n): ").lower().strip() == "y":
     print("Exiting program.")
 else:
     while True:
-        print("Options:")
-        print("- 1: Open Long")
-        print("- 2: Open Short")
-        print("- 3: Close Position")
-        print("- 4: Set Active Balance")
-        print("- 5: Exit")
-        choice = input("Enter your choice (1-5): ").strip()
+        choice = input("Enter your choice: ").strip()
         match choice:
-            case "1":
+            case "d":
                 open_long()
-            case "2":
+            case "a":
                 open_short()
-            case "3":
+            case "s":
                 close_position()
-            case "4":
+            case "b":
                 set_active_balance()
-            case "5":
+            case "v":
+                set_ticker()
+            case "q":
                 exit() if get_current_position() is None else print("Cannot exit while a position is open.")
             case _:
                 print("Invalid choice. Please try again.")
