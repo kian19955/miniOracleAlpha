@@ -111,25 +111,6 @@ def set_active_balance():
         print(f"Please enter a valid number. Not {type(new_balance)}: {new_balance}")
     print("Active balance setting complete.")
 
-# ----------Setup----------
-symbol_info = get_symbol_info(symbol)
-if symbol_info:
-    step_size = None
-    min_qty = None
-    max_qty = None
-    for f in symbol_info["filters"]:
-        if f["filterType"] == "LOT_SIZE":
-            step_size = float(f["stepSize"])
-            min_qty = float(f["minQty"])
-            max_qty = float(f["maxQty"])
-    if step_size is None or min_qty is None or max_qty is None:
-        raise ValueError(f"Necessary filters not found for symbol. {step_size=}, {min_qty=}, {max_qty=}")
-else:
-    raise ValueError(f"Symbol {symbol} not found in exchange info.")
-
-while active_balance is None:
-    set_active_balance()
-
 # ----------Main Functions----------
 def validate_order(func):
     def wrapper(*args, **kwargs):
@@ -231,27 +212,70 @@ def close_position():
         print("Error closing position:", e)
     print("Close position attempt complete.")
 
-# ----------Main Loop----------
-keyboard.add_hotkey('d', open_long)
-keyboard.add_hotkey('a', open_short)
-keyboard.add_hotkey('s', close_position)
-keyboard.add_hotkey('b', set_active_balance)
+# ----------Setup----------
+atexit.register(close_position)
 
-print("Hotkeys registered: d for Long, a for Short, s to Close, b to Set Active Balance.")
+symbol_info = get_symbol_info(symbol)
+if symbol_info:
+    step_size = None
+    min_qty = None
+    max_qty = None
+    for f in symbol_info["filters"]:
+        if f["filterType"] == "LOT_SIZE":
+            step_size = float(f["stepSize"])
+            min_qty = float(f["minQty"])
+            max_qty = float(f["maxQty"])
+    if step_size is None or min_qty is None or max_qty is None:
+        raise ValueError(f"Necessary filters not found for symbol. {step_size=}, {min_qty=}, {max_qty=}")
+else:
+    raise ValueError(f"Symbol {symbol} not found in exchange info.")
+
+while active_balance is None:
+    set_active_balance()
+
+# ----------Main Loop----------
 print("----------Info----------")
 print(f"Symbol: {symbol}")
 print(f"Active Balance: {active_balance}")
 print()
-print("Keyboard Shortcuts:")
-print("- d: Open Long")
-print("- a: Open Short")
-print("- s: Close Position")
-print("- b: Set Active Balance")
-print("Press 'Q' to exit.")
 
-atexit.register(close_position)
-keyboard.add_hotkey('q', lambda: exit() if get_current_position() is None else print(
-    "Cannot exit while a position is open."), suppress=True)
+if input("Use keyboard shortcuts? (y/n): ").lower().strip() == "y":
+    keyboard.add_hotkey('d', open_long)
+    keyboard.add_hotkey('a', open_short)
+    keyboard.add_hotkey('s', close_position)
+    keyboard.add_hotkey('b', set_active_balance)
 
-keyboard.wait('e')
-print("Exiting program.")
+    print("Keyboard Shortcuts:")
+    print("- d: Open Long")
+    print("- a: Open Short")
+    print("- s: Close Position")
+    print("- b: Set Active Balance")
+    print("Press 'Q' to exit.")
+
+    keyboard.add_hotkey('q', lambda: exit() if get_current_position() is None else print(
+        "Cannot exit while a position is open."), suppress=True)
+
+    keyboard.wait('e')
+    print("Exiting program.")
+else:
+    while True:
+        print("Options:")
+        print("- 1: Open Long")
+        print("- 2: Open Short")
+        print("- 3: Close Position")
+        print("- 4: Set Active Balance")
+        print("- 5: Exit")
+        choice = input("Enter your choice (1-5): ").strip()
+        match choice:
+            case "1":
+                open_long()
+            case "2":
+                open_short()
+            case "3":
+                close_position()
+            case "4":
+                set_active_balance()
+            case "5":
+                exit() if get_current_position() is None else print("Cannot exit while a position is open.")
+            case _:
+                print("Invalid choice. Please try again.")

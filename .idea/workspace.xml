@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(hotkeys): remap keyboard shortcuts&#10;&#10;The default keyboard shortcuts were awkward.&#10;&#10;- Update hotkeys to be more ergonomic.&#10;- Update corresponding print statements.">
-      <change beforePath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -252,7 +252,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740153590717</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="feat(hotkeys): remap keyboard shortcuts&#10;&#10;The default keyboard shortcuts were awkward.&#10;&#10;- Update hotkeys to be more ergonomic.&#10;- Update corresponding print statements.">
+      <option name="closed" value="true" />
+      <created>1740154225299</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1740154225299</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
