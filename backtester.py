@@ -4,7 +4,7 @@ from backtesting import Backtest, Strategy
 import pandas as pd
 from backtesting.backtesting import Trade
 
-from api.binance.fetching import fetch_klines
+from api.binanceAPI.fetching import fetch_klines
 
 
 class Backtester(Strategy):

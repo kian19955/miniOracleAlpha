@@ -1,0 +1,3102 @@
+{
+    "1": {
+        "fitness": [
+            1.7954811006734093,
+            209.48532942617183
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 25.72682242872742,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.33062400559960325,
+                "zero_line_crossover_weight": 0.9987157290164548,
+                "zero_line_pullback_lookback": 2,
+                "zero_line_pullback_tolerance_percent": 0.3276036034958676,
+                "zero_line_pullback_weight": 1.766904365264866e-08,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7190869384548095,
+                "rate_of_change_weight": 0.5458,
+                "weight_impact": 0.6975590678566683,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.76577,
+                "take_profit": 0.009859563078608649
+            }
+        }
+    },
+    "2": {
+        "fitness": [
+            0.1917051780114906,
+            1476.8882779976175
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.6962999999999999,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 45.77353644332885,
+                "crossover_gradient_signal_weight": 0.270642375304896,
+                "crossover_weight_impact": 0.26663868571245114,
+                "zero_line_crossover_weight": 0.9497266798446908,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5390117815940713,
+                "zero_line_pullback_weight": 5.622696885074202e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.7479994246090337,
+                "rate_of_change_weight": 0.9947647775826962,
+                "weight_impact": 0.6956102586514689,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.7858259804589542,
+                "take_profit": 0.0
+            }
+        }
+    },
+    "3": {
+        "fitness": [
+            1.7064938635583502,
+            337.8214418383242
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7149314807103531,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 65.33452954648996,
+                "crossover_gradient_signal_weight": 0.1907,
+                "crossover_weight_impact": 0.0503612026755792,
+                "zero_line_crossover_weight": 0.9786643527209358,
+                "zero_line_pullback_lookback": 6,
+                "zero_line_pullback_tolerance_percent": 0.7798214014156196,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5682991645557665,
+                "rate_of_change_weight": 0.9192199562021899,
+                "weight_impact": 0.6997113193153955,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.6319849516865127,
+                "take_profit": 0.01256347136996413
+            }
+        }
+    },
+    "4": {
+        "fitness": [
+            1.1643003267288425,
+            494.8086474999259
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7241825117538278,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 55.95,
+                "crossover_gradient_signal_weight": 0.08082669473563985,
+                "crossover_weight_impact": 0.018193357381299118,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 6,
+                "zero_line_pullback_tolerance_percent": 0.4029290711234844,
+                "zero_line_pullback_weight": 8.566396672524493e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7592729264559049,
+                "rate_of_change_weight": 0.9989139119322117,
+                "weight_impact": 0.6951999257230337,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.896517881007181,
+                "take_profit": 0.013853749944791296
+            }
+        }
+    },
+    "5": {
+        "fitness": [
+            2.9417693010336046,
+            65.15973412256638
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.70092900506548,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 49.78380795213744,
+                "crossover_gradient_signal_weight": 0.2569293905827128,
+                "crossover_weight_impact": 0.045357171430764356,
+                "zero_line_crossover_weight": 0.9631651966744521,
+                "zero_line_pullback_lookback": 6,
+                "zero_line_pullback_tolerance_percent": 0.6540648659890256,
+                "zero_line_pullback_weight": 1.2495306345718359e-08,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.9216734627609835,
+                "weight_impact": 0.6980639468591975,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.794935,
+                "take_profit": 0.004564213659701627
+            }
+        }
+    },
+    "6": {
+        "fitness": [
+            3.551040469257976,
+            59.58472534500514
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 25,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7235953678414998,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 78.7,
+                "crossover_gradient_signal_weight": 0.27982649656756514,
+                "crossover_weight_impact": 0.15721858000369326,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.49805022886018785,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.600998224110609,
+                "rate_of_change_weight": 0.7383,
+                "weight_impact": 0.6831485146913513,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.38401533397595483,
+                "take_profit": 0.0031697434818933525
+            }
+        }
+    },
+    "7": {
+        "fitness": [
+            1.7026836522477078,
+            363.9454989457563
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7025832269530554,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 41.20504314982887,
+                "crossover_gradient_signal_weight": 0.1907,
+                "crossover_weight_impact": 0.0503612026755792,
+                "zero_line_crossover_weight": 0.976330419731898,
+                "zero_line_pullback_lookback": 9,
+                "zero_line_pullback_tolerance_percent": 0.7085568410858695,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5804482104451615,
+                "rate_of_change_weight": 0.9192199562021899,
+                "weight_impact": 0.7044747451733051,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.9755501013459641,
+                "take_profit": 0.01256347136996413
+            }
+        }
+    },
+    "8": {
+        "fitness": [
+            0.4728588682455742,
+            641.2296215074798
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 13,
+                "momentum_signal_weight": 0.7015187716659766,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 40.64163046638845,
+                "crossover_gradient_signal_weight": 0.6191769382397599,
+                "crossover_weight_impact": 0.04954326802691439,
+                "zero_line_crossover_weight": 0.9638663403790477,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5904,
+                "zero_line_pullback_weight": 2.116959931729404e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7777570288665749,
+                "rate_of_change_weight": 0.3647614493129716,
+                "weight_impact": 0.6931294347993031,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.273385,
+                "take_profit": 0.017124630820978738
+            }
+        }
+    },
+    "9": {
+        "fitness": [
+            0.4728588682455742,
+            641.2296215074798
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 13,
+                "momentum_signal_weight": 0.7015187716659766,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 40.64163046638845,
+                "crossover_gradient_signal_weight": 0.5688000000000001,
+                "crossover_weight_impact": 0.04954326802691439,
+                "zero_line_crossover_weight": 0.9638663403790477,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6166415639744957,
+                "zero_line_pullback_weight": 2.116959931729404e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.9600206288791663,
+                "rate_of_change_weight": 0.4461487288052165,
+                "weight_impact": 0.6931294347993031,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.3551225617175918,
+                "take_profit": 0.017124630820978738
+            }
+        }
+    },
+    "10": {
+        "fitness": [
+            1.7694784210218877,
+            217.6763136149846
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7043427138774059,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 45.80265399498576,
+                "crossover_gradient_signal_weight": 0.6270592398504347,
+                "crossover_weight_impact": 0.0066827506705015235,
+                "zero_line_crossover_weight": 0.9789136041928901,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.7214957069596084,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.3421671483914157,
+                "rate_of_change_weight": 0.8073193611115266,
+                "weight_impact": 0.7038433285333672,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8887030521504411,
+                "take_profit": 0.010434078241610887
+            }
+        }
+    },
+    "11": {
+        "fitness": [
+            3.1184574908026894,
+            63.175584495896786
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.696920055562286,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 78.0,
+                "crossover_gradient_signal_weight": 0.49190775528222125,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 0.9861860790402912,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.6423628960939403,
+                "zero_line_pullback_weight": 6.123765891721627e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5144567622397067,
+                "rate_of_change_weight": 0.8248070429273539,
+                "weight_impact": 0.8068000000000001,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.46779534709916115,
+                "take_profit": 0.005523999673883223
+            }
+        }
+    },
+    "12": {
+        "fitness": [
+            0.5850459076076759,
+            514.7424872789823
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7029445967817123,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 32.11489844959842,
+                "crossover_gradient_signal_weight": 0.2401918199468014,
+                "crossover_weight_impact": 0.039169017058278764,
+                "zero_line_crossover_weight": 0.997,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.617469332333028,
+                "zero_line_pullback_weight": 4.4901133848760126e-08,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.9600206288791663,
+                "rate_of_change_weight": 0.9924236853186585,
+                "weight_impact": 0.6984331682681252,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.20600000000000002,
+                "take_profit": 0.017124630820978738
+            }
+        }
+    },
+    "13": {
+        "fitness": [
+            0.5850459076076759,
+            514.7424872789823
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7029445967817123,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 32.11489844959842,
+                "crossover_gradient_signal_weight": 0.2401918199468014,
+                "crossover_weight_impact": 0.039169017058278764,
+                "zero_line_crossover_weight": 0.997,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.617469332333028,
+                "zero_line_pullback_weight": 4.4901133848760126e-08,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.9600206288791663,
+                "rate_of_change_weight": 0.9924236853186585,
+                "weight_impact": 0.6984331682681252,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.20600000000000002,
+                "take_profit": 0.017124630820978738
+            }
+        }
+    },
+    "14": {
+        "fitness": [
+            2.89050214455621,
+            100.31493861873066
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.731917817388903,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 39.82575291280645,
+                "crossover_gradient_signal_weight": 0.16438848672684708,
+                "crossover_weight_impact": 0.01757172593932999,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.525635137046976,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.6786737099959103,
+                "rate_of_change_weight": 0.8922204742743991,
+                "weight_impact": 0.6971644944802902,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.288665,
+                "take_profit": 0.005879544330035129
+            }
+        }
+    },
+    "15": {
+        "fitness": [
+            3.9740465532421574,
+            35.64618363984417
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6880447686769104,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 84.89358395286848,
+                "crossover_gradient_signal_weight": 0.13522212737139172,
+                "crossover_weight_impact": 0.030134474304760846,
+                "zero_line_crossover_weight": 0.9457204614202874,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.5090241646869775,
+                "zero_line_pullback_weight": 7.604651930981386e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7100147059418986,
+                "rate_of_change_weight": 0.598,
+                "weight_impact": 0.7294073458331689,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.0,
+                "take_profit": 0.002685898423820416
+            }
+        }
+    },
+    "16": {
+        "fitness": [
+            1.9581861459558076,
+            173.50822701240608
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7012255905563805,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 52.40954683007468,
+                "crossover_gradient_signal_weight": 0.0791,
+                "crossover_weight_impact": 0.22727048843032888,
+                "zero_line_crossover_weight": 0.9544829682936405,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5459027846384346,
+                "zero_line_pullback_weight": 5.806780170268687e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6124635749692322,
+                "rate_of_change_weight": 0.7116299066943348,
+                "weight_impact": 0.694110024322393,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8105313082373479,
+                "take_profit": 0.008281379768170904
+            }
+        }
+    },
+    "17": {
+        "fitness": [
+            2.892718349283206,
+            97.97192584902136
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 50.23072959561408,
+                "crossover_gradient_signal_weight": 0.5805873793843053,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.46546394284968057,
+                "zero_line_pullback_weight": 1.2594805004688159e-08,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.7996422365308307,
+                "weight_impact": 0.6916535111178721,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.6933020001136616,
+                "take_profit": 0.005799107982121454
+            }
+        }
+    },
+    "18": {
+        "fitness": [
+            3.793272675878661,
+            59.324993779633694
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 25,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7238435073559796,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 45.19853305931517,
+                "crossover_gradient_signal_weight": 0.24569482633754225,
+                "crossover_weight_impact": 0.15721858000369326,
+                "zero_line_crossover_weight": 0.9626649656713476,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.49805022886018785,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.600998224110609,
+                "rate_of_change_weight": 0.7383,
+                "weight_impact": 0.6831485146913513,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.38401533397595483,
+                "take_profit": 0.0031697434818933525
+            }
+        }
+    },
+    "19": {
+        "fitness": [
+            2.81994651757603,
+            132.02847875699382
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7048261473647879,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 37.20759973447976,
+                "crossover_gradient_signal_weight": 0.6890238537749649,
+                "crossover_weight_impact": 0.005822875119462396,
+                "zero_line_crossover_weight": 0.9228199951771809,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.48181153978730756,
+                "zero_line_pullback_weight": 8.440908836177076e-08,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.907910991995124,
+                "rate_of_change_weight": 0.7163866903240458,
+                "weight_impact": 0.6959371747033274,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.6812671408992492,
+                "take_profit": 0.007868331152913667
+            }
+        }
+    },
+    "20": {
+        "fitness": [
+            1.728928194334637,
+            311.2475078844072
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.6484000000000001,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 43.41377529006542,
+                "crossover_gradient_signal_weight": 0.5564047858999763,
+                "crossover_weight_impact": 0.09960000000000001,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5724242256725187,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6984702556181959,
+                "rate_of_change_weight": 0.6720160301494578,
+                "weight_impact": 0.7519645785048139,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.288665,
+                "take_profit": 0.012072840025687034
+            }
+        }
+    },
+    "21": {
+        "fitness": [
+            0.24651921256866127,
+            801.1725039476751
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7256903879598883,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 26.347141868505542,
+                "crossover_gradient_signal_weight": 0.270642375304896,
+                "crossover_weight_impact": 0.26663868571245114,
+                "zero_line_crossover_weight": 0.9994196400384016,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5819879211228519,
+                "zero_line_pullback_weight": 3.0206790485556333e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.7479994246090337,
+                "rate_of_change_weight": 1.0,
+                "weight_impact": 0.6768428698031317,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.7482502083870785,
+                "take_profit": 0.18807
+            }
+        }
+    },
+    "22": {
+        "fitness": [
+            1.565061874667275,
+            415.83699829597236
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7380546190196899,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 45.4,
+                "crossover_gradient_signal_weight": 0.08082669473563985,
+                "crossover_weight_impact": 0.018193357381299118,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 6,
+                "zero_line_pullback_tolerance_percent": 0.4533639185468961,
+                "zero_line_pullback_weight": 8.566396672524493e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7592729264559049,
+                "rate_of_change_weight": 0.6046,
+                "weight_impact": 0.6951999257230337,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.896517881007181,
+                "take_profit": 0.013853749944791296
+            }
+        }
+    },
+    "23": {
+        "fitness": [
+            1.565061874667275,
+            415.83699829597236
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7012255905563805,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 51.92993869018764,
+                "crossover_gradient_signal_weight": 0.08082669473563985,
+                "crossover_weight_impact": 0.0482796103357546,
+                "zero_line_crossover_weight": 0.9324,
+                "zero_line_pullback_lookback": 6,
+                "zero_line_pullback_tolerance_percent": 0.4533639185468961,
+                "zero_line_pullback_weight": 8.566396672524493e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5537597706040382,
+                "rate_of_change_weight": 0.6144,
+                "weight_impact": 0.6913750101939605,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.511651916489201,
+                "take_profit": 0.013853749944791296
+            }
+        }
+    },
+    "24": {
+        "fitness": [
+            1.7371389816930207,
+            301.2779627094398
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.732489075779432,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 70.14782419564943,
+                "crossover_gradient_signal_weight": 0.2692761822122001,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.607956814666294,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5846602657651279,
+                "rate_of_change_weight": 0.8023477976311557,
+                "weight_impact": 0.6990298471632241,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5205107297954839,
+                "take_profit": 0.011880858406675725
+            }
+        }
+    },
+    "25": {
+        "fitness": [
+            1.7371389816930207,
+            301.2779627094398
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.732489075779432,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 70.14782419564943,
+                "crossover_gradient_signal_weight": 0.2692761822122001,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.607956814666294,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6585126489142175,
+                "rate_of_change_weight": 0.8023477976311557,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.0,
+                "take_profit": 0.011880858406675725
+            }
+        }
+    },
+    "26": {
+        "fitness": [
+            2.9366213371646315,
+            89.37700957498517
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 49.85,
+                "crossover_gradient_signal_weight": 0.21889151801304976,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5553981214210263,
+                "zero_line_pullback_weight": 1.2594805004688159e-08,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.7996422365308307,
+                "weight_impact": 0.6980639468591975,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.6933020001136616,
+                "take_profit": 0.005665892003616906
+            }
+        }
+    },
+    "27": {
+        "fitness": [
+            1.7268377405181456,
+            333.85278812165734
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.731917817388903,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 39.82575291280645,
+                "crossover_gradient_signal_weight": 0.5564047858999763,
+                "crossover_weight_impact": 0.019990637801991538,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.525635137046976,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.6786737099959103,
+                "rate_of_change_weight": 0.8854871823061238,
+                "weight_impact": 0.6971644944802902,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.288665,
+                "take_profit": 0.012056767712304396
+            }
+        }
+    },
+    "28": {
+        "fitness": [
+            6.278798461861372,
+            10.751949463408964
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6956536450973541,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 63.79202267170792,
+                "crossover_gradient_signal_weight": 0.25024988235890544,
+                "crossover_weight_impact": 0.07401224543389934,
+                "zero_line_crossover_weight": 0.8364,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.09970000000000001,
+                "zero_line_pullback_weight": 9.461214536516874e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5619956629748557,
+                "rate_of_change_weight": 0.8140817533695619,
+                "weight_impact": 0.6135983981475609,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 1.0,
+                "take_profit": 0.0011174823591779564
+            }
+        }
+    },
+    "29": {
+        "fitness": [
+            6.278798461861372,
+            10.751949463408964
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6956536450973541,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 63.79202267170792,
+                "crossover_gradient_signal_weight": 0.25024988235890544,
+                "crossover_weight_impact": 0.07401224543389934,
+                "zero_line_crossover_weight": 0.8364,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.09970000000000001,
+                "zero_line_pullback_weight": 9.461214536516874e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6021,
+                "rate_of_change_weight": 0.8140817533695619,
+                "weight_impact": 0.6135983981475609,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 1.0,
+                "take_profit": 0.0011174823591779564
+            }
+        }
+    },
+    "30": {
+        "fitness": [
+            6.278798461861372,
+            10.751949463408964
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6956536450973541,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 63.79202267170792,
+                "crossover_gradient_signal_weight": 0.25024988235890544,
+                "crossover_weight_impact": 0.07401224543389934,
+                "zero_line_crossover_weight": 0.8364,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.09970000000000001,
+                "zero_line_pullback_weight": 9.461214536516874e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5619956629748557,
+                "rate_of_change_weight": 0.8140817533695619,
+                "weight_impact": 0.6135983981475609,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 1.0,
+                "take_profit": 0.0011174823591779564
+            }
+        }
+    },
+    "31": {
+        "fitness": [
+            1.547993842922827,
+            470.4091515559992
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7019864766530942,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 40.311019007856295,
+                "crossover_gradient_signal_weight": 0.5085117447913668,
+                "crossover_weight_impact": 0.0678541737112022,
+                "zero_line_crossover_weight": 0.9470628465639895,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6656578724109432,
+                "zero_line_pullback_weight": 1.0310041902425857e-06,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.5222633400623872,
+                "rate_of_change_weight": 0.909615684295094,
+                "weight_impact": 0.6892105809304814,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5981584607200444,
+                "take_profit": 0.014132043554803804
+            }
+        }
+    },
+    "32": {
+        "fitness": [
+            1.547993842922827,
+            470.4091515559992
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7019864766530942,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 40.311019007856295,
+                "crossover_gradient_signal_weight": 0.5085117447913668,
+                "crossover_weight_impact": 0.0678541737112022,
+                "zero_line_crossover_weight": 0.9470628465639895,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6656578724109432,
+                "zero_line_pullback_weight": 1.0310041902425857e-06,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.5222633400623872,
+                "rate_of_change_weight": 0.909615684295094,
+                "weight_impact": 0.6892105809304814,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5981584607200444,
+                "take_profit": 0.014132043554803804
+            }
+        }
+    },
+    "33": {
+        "fitness": [
+            1.547993842922827,
+            470.4091515559992
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7200749269619144,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 40.311019007856295,
+                "crossover_gradient_signal_weight": 0.0900257106732312,
+                "crossover_weight_impact": 0.033571234727356646,
+                "zero_line_crossover_weight": 0.9729094692260936,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5011296340252758,
+                "zero_line_pullback_weight": 5.56574165215305e-08,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6449717300590116,
+                "rate_of_change_weight": 0.9140661341310359,
+                "weight_impact": 0.6901819350112792,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.523875,
+                "take_profit": 0.014132043554803804
+            }
+        }
+    },
+    "34": {
+        "fitness": [
+            1.7607373181261068,
+            289.313312469478
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7037321623993549,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 52.08047630741825,
+                "crossover_gradient_signal_weight": 0.1,
+                "crossover_weight_impact": 0.25327265064905957,
+                "zero_line_crossover_weight": 0.9753000822086448,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5764600379156132,
+                "zero_line_pullback_weight": 9.64787566975688e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.8235,
+                "rate_of_change_weight": 0.9826106886583759,
+                "weight_impact": 0.6992348828820056,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.636539,
+                "take_profit": 0.011240879259686679
+            }
+        }
+    },
+    "35": {
+        "fitness": [
+            1.7607373181261068,
+            289.313312469478
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7037321623993549,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 52.08047630741825,
+                "crossover_gradient_signal_weight": 0.17497985712896624,
+                "crossover_weight_impact": 0.25327265064905957,
+                "zero_line_crossover_weight": 0.9753000822086448,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5764600379156132,
+                "zero_line_pullback_weight": 9.64787566975688e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.8235,
+                "rate_of_change_weight": 0.9826106886583759,
+                "weight_impact": 0.6992348828820056,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.636539,
+                "take_profit": 0.011240879259686679
+            }
+        }
+    },
+    "36": {
+        "fitness": [
+            1.7607373181261068,
+            289.313312469478
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7037321623993549,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 44.86686565370381,
+                "crossover_gradient_signal_weight": 0.17497985712896624,
+                "crossover_weight_impact": 0.2546360327898247,
+                "zero_line_crossover_weight": 0.9753000822086448,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.48910939760262917,
+                "zero_line_pullback_weight": 9.64787566975688e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.3411678879548439,
+                "rate_of_change_weight": 0.9765245671539607,
+                "weight_impact": 0.6992348828820056,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.636539,
+                "take_profit": 0.011240879259686679
+            }
+        }
+    },
+    "37": {
+        "fitness": [
+            1.960347747466902,
+            167.7740859608197
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6920786332749808,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 55.16750952104821,
+                "crossover_gradient_signal_weight": 0.1561734888238862,
+                "crossover_weight_impact": 0.23004705713227028,
+                "zero_line_crossover_weight": 0.9531008636469931,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5280068165287244,
+                "zero_line_pullback_weight": 9.638257915322343e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.718,
+                "rate_of_change_weight": 0.9757090437421205,
+                "weight_impact": 0.7031767576441519,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.7982502363329186,
+                "take_profit": 0.008402737866257833
+            }
+        }
+    },
+    "38": {
+        "fitness": [
+            1.5385247113193317,
+            485.73632617250803
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7012255905563805,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 61.63847467548448,
+                "crossover_gradient_signal_weight": 0.20460682384021234,
+                "crossover_weight_impact": 0.04374279585086171,
+                "zero_line_crossover_weight": 0.9500758418186179,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5594615028966424,
+                "zero_line_pullback_weight": 6.142067678004936e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.556504759172336,
+                "rate_of_change_weight": 0.7468104791684864,
+                "weight_impact": 0.6913750101939605,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.9831420000000001,
+                "take_profit": 0.014334212176169151
+            }
+        }
+    },
+    "39": {
+        "fitness": [
+            1.5385247113193317,
+            485.73632617250803
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7012255905563805,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 61.63847467548448,
+                "crossover_gradient_signal_weight": 0.18574257924292922,
+                "crossover_weight_impact": 0.05969807767873503,
+                "zero_line_crossover_weight": 0.9500758418186179,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.4533639185468961,
+                "zero_line_pullback_weight": 6.142067678004936e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.556504759172336,
+                "rate_of_change_weight": 0.6144,
+                "weight_impact": 0.6913750101939605,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.9831420000000001,
+                "take_profit": 0.014334212176169151
+            }
+        }
+    },
+    "40": {
+        "fitness": [
+            1.5385247113193317,
+            485.73632617250803
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6900139130030198,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 61.121978047364465,
+                "crossover_gradient_signal_weight": 0.22486578256819148,
+                "crossover_weight_impact": 0.1528986764363298,
+                "zero_line_crossover_weight": 0.9500758418186179,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.5094582145823983,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.5374408443091399,
+                "rate_of_change_weight": 0.6206860972144339,
+                "weight_impact": 0.6973983987870034,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8105313082373479,
+                "take_profit": 0.014334212176169151
+            }
+        }
+    },
+    "41": {
+        "fitness": [
+            1.5385247113193317,
+            485.73632617250803
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7012255905563805,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 61.121978047364465,
+                "crossover_gradient_signal_weight": 0.1912715185419676,
+                "crossover_weight_impact": 0.1528986764363298,
+                "zero_line_crossover_weight": 0.9500758418186179,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.4533639185468961,
+                "zero_line_pullback_weight": 8.922167235672727e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.529510612060997,
+                "rate_of_change_weight": 0.6144,
+                "weight_impact": 0.6907220688962474,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8105313082373479,
+                "take_profit": 0.014334212176169151
+            }
+        }
+    },
+    "42": {
+        "fitness": [
+            1.5385247113193317,
+            485.73632617250803
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7012255905563805,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 61.63847467548448,
+                "crossover_gradient_signal_weight": 0.18574257924292922,
+                "crossover_weight_impact": 0.060945746908652114,
+                "zero_line_crossover_weight": 0.9500758418186179,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.4533639185468961,
+                "zero_line_pullback_weight": 6.142067678004936e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.556674223950674,
+                "rate_of_change_weight": 0.6144,
+                "weight_impact": 0.6913750101939605,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8105313082373479,
+                "take_profit": 0.014334212176169151
+            }
+        }
+    },
+    "43": {
+        "fitness": [
+            1.8019647697863692,
+            207.77198614942006
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7298565856372374,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 90.0,
+                "crossover_gradient_signal_weight": 0.2843,
+                "crossover_weight_impact": 0.2259162066327592,
+                "zero_line_crossover_weight": 0.9629372767700688,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5408456678453728,
+                "zero_line_pullback_weight": 9.590266986589219e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.4568909780339548,
+                "rate_of_change_weight": 1.0,
+                "weight_impact": 0.6827657602600654,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5234582036124038,
+                "take_profit": 0.009481450885458596
+            }
+        }
+    },
+    "44": {
+        "fitness": [
+            1.8019647697863692,
+            207.77198614942006
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7298565856372374,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 90.0,
+                "crossover_gradient_signal_weight": 0.2843,
+                "crossover_weight_impact": 0.2259162066327592,
+                "zero_line_crossover_weight": 0.9629372767700688,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5408456678453728,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.4568909780339548,
+                "rate_of_change_weight": 0.903557123298693,
+                "weight_impact": 0.6825869456376257,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.9092612981445808,
+                "take_profit": 0.009481450885458596
+            }
+        }
+    },
+    "45": {
+        "fitness": [
+            1.8019647697863692,
+            207.77198614942006
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7298565856372374,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 90.0,
+                "crossover_gradient_signal_weight": 0.510059853340573,
+                "crossover_weight_impact": 0.2259162066327592,
+                "zero_line_crossover_weight": 0.9629372767700688,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5408456678453728,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.4568909780339548,
+                "rate_of_change_weight": 0.9979952399093563,
+                "weight_impact": 0.6825869456376257,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.20241900000000002,
+                "take_profit": 0.009481450885458596
+            }
+        }
+    },
+    "46": {
+        "fitness": [
+            1.8019647697863692,
+            207.77198614942006
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7232252639487253,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 37.82706184416651,
+                "crossover_gradient_signal_weight": 0.510059853340573,
+                "crossover_weight_impact": 0.2259162066327592,
+                "zero_line_crossover_weight": 0.9629372767700688,
+                "zero_line_pullback_lookback": 6,
+                "zero_line_pullback_tolerance_percent": 0.5408456678453728,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.3170110130237846,
+                "rate_of_change_weight": 0.9979952399093563,
+                "weight_impact": 0.6825869456376257,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.20241900000000002,
+                "take_profit": 0.009481450885458596
+            }
+        }
+    },
+    "47": {
+        "fitness": [
+            1.5336869634091888,
+            493.625691432334
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6976267887656662,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 49.51432444675524,
+                "crossover_gradient_signal_weight": 0.18815691656412364,
+                "crossover_weight_impact": 0.018088607692388427,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.6213107268973694,
+                "zero_line_pullback_weight": 1.194237068434282e-06,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.536081186464754,
+                "rate_of_change_weight": 0.7933561393163967,
+                "weight_impact": 0.6940120695737009,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8428219525810434,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "48": {
+        "fitness": [
+            1.5336869634091888,
+            493.625691432334
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7190500551984615,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 57.65,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.0009828691144165437,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.4532467588229902,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8049376405551255,
+                "weight_impact": 0.698795401954237,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5842388545844511,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "49": {
+        "fitness": [
+            1.5336869634091888,
+            493.625691432334
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6976267887656662,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 49.51432444675524,
+                "crossover_gradient_signal_weight": 0.18815691656412364,
+                "crossover_weight_impact": 0.018088607692388427,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.6213107268973694,
+                "zero_line_pullback_weight": 1.194237068434282e-06,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.536081186464754,
+                "rate_of_change_weight": 0.7933561393163967,
+                "weight_impact": 0.6940120695737009,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8428219525810434,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "50": {
+        "fitness": [
+            1.5336869634091888,
+            493.625691432334
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.6864151112123057,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 49.51432444675524,
+                "crossover_gradient_signal_weight": 0.2217511805903475,
+                "crossover_weight_impact": 0.018088607692388427,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.6774050229328716,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.5440114187128969,
+                "rate_of_change_weight": 0.7996422365308307,
+                "weight_impact": 0.7006883994644568,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8428219525810434,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "51": {
+        "fitness": [
+            1.5336869634091888,
+            493.625691432334
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7190500551984615,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 57.65,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.0009828691144165437,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.4532467588229902,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8049376405551255,
+                "weight_impact": 0.698795401954237,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5842388545844511,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "52": {
+        "fitness": [
+            0.08194938792445326,
+            842.0900135644065
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.6962713055147117,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 49.77829568339193,
+                "crossover_gradient_signal_weight": 0.30578559343214073,
+                "crossover_weight_impact": 0.011099879581594689,
+                "zero_line_crossover_weight": 0.9823057898103947,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6761050990263224,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6672384772962123,
+                "rate_of_change_weight": 0.8815200972695676,
+                "weight_impact": 0.7065629958833403,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.3114955261951671,
+                "take_profit": 0.0
+            }
+        }
+    },
+    "53": {
+        "fitness": [
+            1.700144392992417,
+            345.24478156580443
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6955427250414301,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 39.9038841729433,
+                "crossover_gradient_signal_weight": 0.2047090022278649,
+                "crossover_weight_impact": 0.033571234727356646,
+                "zero_line_crossover_weight": 0.9727714056332456,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.49525084893436067,
+                "zero_line_pullback_weight": 5.56574165215305e-08,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6449717300590116,
+                "rate_of_change_weight": 0.9177345476432186,
+                "weight_impact": 0.7084642061149327,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5906814505689452,
+                "take_profit": 0.012695405009615135
+            }
+        }
+    },
+    "54": {
+        "fitness": [
+            1.6029683390797977,
+            358.5944151108454
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6920786332749808,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 33.37936142216256,
+                "crossover_gradient_signal_weight": 0.19481188496734506,
+                "crossover_weight_impact": 0.05073196689574691,
+                "zero_line_crossover_weight": 0.9627316407435247,
+                "zero_line_pullback_lookback": 9,
+                "zero_line_pullback_tolerance_percent": 0.4964061999532271,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6619080617579722,
+                "rate_of_change_weight": 0.9192199562021899,
+                "weight_impact": 0.7059284511438283,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.9826274416081777,
+                "take_profit": 0.012927423091328615
+            }
+        }
+    },
+    "55": {
+        "fitness": [
+            1.6029683390797977,
+            358.5944151108454
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6920786332749808,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 33.37936142216256,
+                "crossover_gradient_signal_weight": 0.10938517638808343,
+                "crossover_weight_impact": 0.05073196689574691,
+                "zero_line_crossover_weight": 0.9627316407435247,
+                "zero_line_pullback_lookback": 9,
+                "zero_line_pullback_tolerance_percent": 0.49780818357254997,
+                "zero_line_pullback_weight": 1.3109423656244643e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5538271933272844,
+                "rate_of_change_weight": 0.9192199562021899,
+                "weight_impact": 0.7059284511438283,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.96630695527683,
+                "take_profit": 0.012927423091328615
+            }
+        }
+    },
+    "56": {
+        "fitness": [
+            1.6029683390797977,
+            358.5944151108454
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6920786332749808,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 49.698387455519224,
+                "crossover_gradient_signal_weight": 0.10938517638808343,
+                "crossover_weight_impact": 0.05073196689574691,
+                "zero_line_crossover_weight": 0.9627316407435247,
+                "zero_line_pullback_lookback": 9,
+                "zero_line_pullback_tolerance_percent": 0.49780818357254997,
+                "zero_line_pullback_weight": 1.0901209352213682e-06,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5538271933272844,
+                "rate_of_change_weight": 0.9192199562021899,
+                "weight_impact": 0.706107265766268,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5805038607446529,
+                "take_profit": 0.012927423091328615
+            }
+        }
+    },
+    "57": {
+        "fitness": [
+            1.6029683390797977,
+            358.5944151108454
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6920786332749808,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 49.698387455519224,
+                "crossover_gradient_signal_weight": 0.10938517638808343,
+                "crossover_weight_impact": 0.05073196689574691,
+                "zero_line_crossover_weight": 0.9627316407435247,
+                "zero_line_pullback_lookback": 9,
+                "zero_line_pullback_tolerance_percent": 0.49780818357254997,
+                "zero_line_pullback_weight": 1.0901209352213682e-06,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5538271933272844,
+                "rate_of_change_weight": 0.9192199562021899,
+                "weight_impact": 0.706107265766268,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5805038607446529,
+                "take_profit": 0.012927423091328615
+            }
+        }
+    },
+    "58": {
+        "fitness": [
+            2.9382184257982007,
+            62.10908186945908
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7048261473647879,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 37.20759973447976,
+                "crossover_gradient_signal_weight": 0.6890238537749649,
+                "crossover_weight_impact": 0.010276638082452435,
+                "zero_line_crossover_weight": 0.9228199951771809,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.48181153978730756,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.746446880304475,
+                "rate_of_change_weight": 0.7163866903240458,
+                "weight_impact": 0.7011310941621551,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.4120341820326352,
+                "take_profit": 0.005031751443447674
+            }
+        }
+    },
+    "59": {
+        "fitness": [
+            0.4914353097056675,
+            508.142148664473
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 26,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 13,
+                "momentum_signal_weight": 0.7015187716659766,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 40.64163046638845,
+                "crossover_gradient_signal_weight": 0.5688000000000001,
+                "crossover_weight_impact": 0.04954326802691439,
+                "zero_line_crossover_weight": 0.9638663403790477,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6166415639744957,
+                "zero_line_pullback_weight": 2.116959931729404e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.9600206288791663,
+                "rate_of_change_weight": 0.41630000000000006,
+                "weight_impact": 0.6931294347993031,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.3551225617175918,
+                "take_profit": 0.017124630820978738
+            }
+        }
+    },
+    "60": {
+        "fitness": [
+            2.885399096581049,
+            92.99616879065962
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 32.6,
+                "crossover_gradient_signal_weight": 0.2615216094953427,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 1,
+                "zero_line_pullback_tolerance_percent": 0.5353738533729073,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7502248895253883,
+                "rate_of_change_weight": 0.7486269704457716,
+                "weight_impact": 0.7028700359076925,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.43818212807803897,
+                "take_profit": 0.005987534238843748
+            }
+        }
+    },
+    "61": {
+        "fitness": [
+            2.9902940471300936,
+            47.02522237529168
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.9247,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 19.75,
+                "crossover_gradient_signal_weight": 0.2615216094953427,
+                "crossover_weight_impact": 0.6017,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 7,
+                "zero_line_pullback_tolerance_percent": 0.5353738533729073,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7379681123977152,
+                "rate_of_change_weight": 0.7393000000000001,
+                "weight_impact": 0.7439072823989358,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.498244,
+                "take_profit": 0.005987534238843748
+            }
+        }
+    },
+    "62": {
+        "fitness": [
+            2.9902940471300936,
+            47.02522237529168
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.9247,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 19.75,
+                "crossover_gradient_signal_weight": 0.24265736489805959,
+                "crossover_weight_impact": 0.28888089039142534,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.42927626902316096,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.7379681123977152,
+                "rate_of_change_weight": 0.7390430725618303,
+                "weight_impact": 0.7439072823989358,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.7150427040151293,
+                "take_profit": 0.005987534238843748
+            }
+        }
+    },
+    "63": {
+        "fitness": [
+            2.9902940471300936,
+            47.02522237529168
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.9247,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 19.75,
+                "crossover_gradient_signal_weight": 0.24265736489805959,
+                "crossover_weight_impact": 0.6176552818278733,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.42927626902316096,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.7379681123977152,
+                "rate_of_change_weight": 0.6068895208315135,
+                "weight_impact": 0.7439072823989358,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.498244,
+                "take_profit": 0.005987534238843748
+            }
+        }
+    },
+    "64": {
+        "fitness": [
+            2.9902940471300936,
+            47.02522237529168
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.9247,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 19.75,
+                "crossover_gradient_signal_weight": 0.2615216094953427,
+                "crossover_weight_impact": 0.6017,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 7,
+                "zero_line_pullback_tolerance_percent": 0.5353738533729073,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7379681123977152,
+                "rate_of_change_weight": 0.7393000000000001,
+                "weight_impact": 0.7439072823989358,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.498244,
+                "take_profit": 0.005987534238843748
+            }
+        }
+    },
+    "65": {
+        "fitness": [
+            3.4713225443483795,
+            29.86880319476757
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.9646673817806461,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 19.75,
+                "crossover_gradient_signal_weight": 0.2615216094953427,
+                "crossover_weight_impact": 0.6017,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 7,
+                "zero_line_pullback_tolerance_percent": 0.5235518895846685,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7379681123977152,
+                "rate_of_change_weight": 0.7393000000000001,
+                "weight_impact": 0.7439072823989358,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.49241232510230093,
+                "take_profit": 0.004296909395296184
+            }
+        }
+    },
+    "66": {
+        "fitness": [
+            3.400857385610085,
+            37.5953355468892
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 25,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7238435073559796,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 43.66135441952767,
+                "crossover_gradient_signal_weight": 0.27899977109100577,
+                "crossover_weight_impact": 0.16792814094979153,
+                "zero_line_crossover_weight": 0.9626649656713476,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.49805022886018785,
+                "zero_line_pullback_weight": 3.0551365455159856e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5534385023015933,
+                "rate_of_change_weight": 0.7383,
+                "weight_impact": 0.7460806518946328,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.38401533397595483,
+                "take_profit": 0.003326748479928893
+            }
+        }
+    },
+    "67": {
+        "fitness": [
+            3.730592801563223,
+            26.813002981906536
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6950593901764497,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 40.0,
+                "crossover_gradient_signal_weight": 0.5637361054065435,
+                "crossover_weight_impact": 0.1382233954364915,
+                "zero_line_crossover_weight": 0.9870691080994849,
+                "zero_line_pullback_lookback": 7,
+                "zero_line_pullback_tolerance_percent": 0.59236067024299,
+                "zero_line_pullback_weight": 1.2095175013672486e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.5256052905581232,
+                "rate_of_change_weight": 0.6287,
+                "weight_impact": 0.806652925528044,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.0,
+                "take_profit": 0.002685898423820416
+            }
+        }
+    },
+    "68": {
+        "fitness": [
+            3.730592801563223,
+            26.813002981906536
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6950593901764497,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 40.0,
+                "crossover_gradient_signal_weight": 0.5637361054065435,
+                "crossover_weight_impact": 0.1382233954364915,
+                "zero_line_crossover_weight": 0.9870691080994849,
+                "zero_line_pullback_lookback": 7,
+                "zero_line_pullback_tolerance_percent": 0.59236067024299,
+                "zero_line_pullback_weight": 1.2095175013672486e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.5256052905581232,
+                "rate_of_change_weight": 0.8248070429273539,
+                "weight_impact": 0.806652925528044,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.0,
+                "take_profit": 0.002685898423820416
+            }
+        }
+    },
+    "69": {
+        "fitness": [
+            3.730592801563223,
+            26.813002981906536
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6934981214901036,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 90.0,
+                "crossover_gradient_signal_weight": 0.49190775528222125,
+                "crossover_weight_impact": 0.12575786974125236,
+                "zero_line_crossover_weight": 0.9870691080994849,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.5784287529744352,
+                "zero_line_pullback_weight": 6.123765891721627e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5256052905581232,
+                "rate_of_change_weight": 0.8248070429273539,
+                "weight_impact": 0.806652925528044,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.0,
+                "take_profit": 0.002685898423820416
+            }
+        }
+    },
+    "70": {
+        "fitness": [
+            3.730592801563223,
+            26.813002981906536
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.6934981214901036,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 90.0,
+                "crossover_gradient_signal_weight": 0.49190775528222125,
+                "crossover_weight_impact": 0.12575786974125236,
+                "zero_line_crossover_weight": 0.9870691080994849,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.5784287529744352,
+                "zero_line_pullback_weight": 6.123765891721627e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5256052905581232,
+                "rate_of_change_weight": 0.8248070429273539,
+                "weight_impact": 0.806652925528044,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.15538,
+                "take_profit": 0.002685898423820416
+            }
+        }
+    },
+    "71": {
+        "fitness": [
+            2.7993811359892757,
+            131.6982662955939
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7573000000000001,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 40.311019007856295,
+                "crossover_gradient_signal_weight": 0.0900257106732312,
+                "crossover_weight_impact": 0.033571234727356646,
+                "zero_line_crossover_weight": 0.9829659093179929,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.49547548238288047,
+                "zero_line_pullback_weight": 5.56574165215305e-08,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6449717300590116,
+                "rate_of_change_weight": 0.9444694614980161,
+                "weight_impact": 0.6901819350112792,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.523875,
+                "take_profit": 0.0077038696387686165
+            }
+        }
+    },
+    "72": {
+        "fitness": [
+            2.802756388673106,
+            102.28883301261654
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7046,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 45.1,
+                "crossover_gradient_signal_weight": 0.17430639844032209,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 0.8566455455216344,
+                "zero_line_pullback_lookback": 2,
+                "zero_line_pullback_tolerance_percent": 0.4763307093999793,
+                "zero_line_pullback_weight": 1.7786745343401456e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7385905049749051,
+                "rate_of_change_weight": 0.8875132329083628,
+                "weight_impact": 0.685804982692867,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5702335196239048,
+                "take_profit": 0.006545912173424335
+            }
+        }
+    },
+    "73": {
+        "fitness": [
+            0.1679485118893826,
+            642.2735370424858
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 28,
+                "momentum_signal_weight": 0.7256903879598883,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 37.12016797663842,
+                "crossover_gradient_signal_weight": 0.2489799501737279,
+                "crossover_weight_impact": 0.26663868571245114,
+                "zero_line_crossover_weight": 0.9992678336782403,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.632247749857819,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.7479994246090337,
+                "rate_of_change_weight": 1.0,
+                "weight_impact": 0.6762089901016038,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.7482502083870785,
+                "take_profit": 0.11616501811720148
+            }
+        }
+    },
+    "74": {
+        "fitness": [
+            1.551064385102306,
+            400.50071067240225
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7275819173246905,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 43.60291884007578,
+                "crossover_gradient_signal_weight": 0.5000019218776416,
+                "crossover_weight_impact": 0.0678541737112022,
+                "zero_line_crossover_weight": 0.9470628465639895,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.654139699714185,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.6824,
+                "rate_of_change_weight": 0.9030952418498969,
+                "weight_impact": 0.6892105809304814,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5981584607200444,
+                "take_profit": 0.014132043554803804
+            }
+        }
+    },
+    "75": {
+        "fitness": [
+            1.551064385102306,
+            400.50071067240225
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7275819173246905,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 43.60291884007578,
+                "crossover_gradient_signal_weight": 0.5000019218776416,
+                "crossover_weight_impact": 0.0678541737112022,
+                "zero_line_crossover_weight": 0.9470628465639895,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.654139699714185,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.6824,
+                "rate_of_change_weight": 0.9030952418498969,
+                "weight_impact": 0.6892105809304814,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.5981584607200444,
+                "take_profit": 0.014132043554803804
+            }
+        }
+    },
+    "76": {
+        "fitness": [
+            1.7003288291214125,
+            313.12924077165087
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7349,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 50.285213307835136,
+                "crossover_gradient_signal_weight": 0.1931281352909101,
+                "crossover_weight_impact": 0.0503612026755792,
+                "zero_line_crossover_weight": 0.976330419731898,
+                "zero_line_pullback_lookback": 6,
+                "zero_line_pullback_tolerance_percent": 0.7085568410858695,
+                "zero_line_pullback_weight": 4.7154926334967805e-08,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.6341140197737978,
+                "rate_of_change_weight": 0.811909035766375,
+                "weight_impact": 0.7044747451733051,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.906853,
+                "take_profit": 0.01256347136996413
+            }
+        }
+    },
+    "77": {
+        "fitness": [
+            5.496677029218405,
+            5.829650787693936
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7049136301835297,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 21.952448822391567,
+                "crossover_gradient_signal_weight": 0.2588023902873617,
+                "crossover_weight_impact": 0.07401224543389934,
+                "zero_line_crossover_weight": 0.8364,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5767069543692456,
+                "zero_line_pullback_weight": 9.461214536516874e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.47531950928998046,
+                "rate_of_change_weight": 0.9162232276882452,
+                "weight_impact": 0.6767113727744686,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.550107,
+                "take_profit": 0.0011174823591779564
+            }
+        }
+    },
+    "78": {
+        "fitness": [
+            1.5459772813078783,
+            407.96497933981726
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 33.6,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.26663868571245114,
+                "zero_line_crossover_weight": 0.9987157290164548,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.10210000000000001,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7190869384548095,
+                "rate_of_change_weight": 0.5458,
+                "weight_impact": 0.710691814751621,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.76577,
+                "take_profit": 0.014253559986726207
+            }
+        }
+    },
+    "79": {
+        "fitness": [
+            1.5436757249675646,
+            448.17715294306527
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7013082714365436,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 53.11174265869445,
+                "crossover_gradient_signal_weight": 0.18574257924292922,
+                "crossover_weight_impact": 0.060945746908652114,
+                "zero_line_crossover_weight": 0.9500758418186179,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.4533639185468961,
+                "zero_line_pullback_weight": 6.142067678004936e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.556674223950674,
+                "rate_of_change_weight": 1.0,
+                "weight_impact": 0.6966787436627826,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8105313082373479,
+                "take_profit": 0.014334212176169151
+            }
+        }
+    },
+    "80": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 57.65,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.0009828691144165437,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6861,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8049376405551255,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "81": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 48.36753552772458,
+                "crossover_gradient_signal_weight": 0.6839230617602402,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 2,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.9307899179335094,
+                "rate_of_change_weight": 0.8837350771234006,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "82": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 48.36753552772458,
+                "crossover_gradient_signal_weight": 0.7343000000000001,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 1.0,
+                "zero_line_pullback_lookback": 2,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8023477976311557,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "83": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 48.36753552772458,
+                "crossover_gradient_signal_weight": 0.7343000000000001,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 2,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8023477976311557,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "84": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 57.65,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.0009828691144165437,
+                "zero_line_crossover_weight": 0.999149673997769,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8049376405551255,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "85": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 57.65,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.0009828691144165437,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8049376405551255,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "86": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 48.36753552772458,
+                "crossover_gradient_signal_weight": 0.2152909959851782,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 2,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8023477976311557,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "87": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 57.65,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.0009828691144165437,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8049376405551255,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "88": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 49.85,
+                "crossover_gradient_signal_weight": 0.2217511805903475,
+                "crossover_weight_impact": 0.0,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.7996422365308307,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "89": {
+        "fitness": [
+            1.5390110288833703,
+            455.2955390832973
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 57.65,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.0009828691144165437,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8049376405551255,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "90": {
+        "fitness": [
+            1.705883532354484,
+            246.98598603590298
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 33.6,
+                "crossover_gradient_signal_weight": 0.2696294522819386,
+                "crossover_weight_impact": 0.26663868571245114,
+                "zero_line_crossover_weight": 0.9994196400384016,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5290186703407422,
+                "zero_line_pullback_weight": 3.0206790485556333e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7479994246090337,
+                "rate_of_change_weight": 1.0,
+                "weight_impact": 0.7390000000000001,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.7661669673354403,
+                "take_profit": 0.012048258080378613
+            }
+        }
+    },
+    "91": {
+        "fitness": [
+            1.7473029354773748,
+            241.5471707011303
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7042142852756232,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 54.640655142499924,
+                "crossover_gradient_signal_weight": 0.143687528460337,
+                "crossover_weight_impact": 0.23004705713227028,
+                "zero_line_crossover_weight": 0.9555672511016963,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5280068165287244,
+                "zero_line_pullback_weight": 5.954093036065597e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.718,
+                "rate_of_change_weight": 0.9182169361432798,
+                "weight_impact": 0.7031767576441519,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8069904524137921,
+                "take_profit": 0.01101566294894728
+            }
+        }
+    },
+    "92": {
+        "fitness": [
+            1.867019964248463,
+            149.76586015167297
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7045544501084107,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 50.39846071023564,
+                "crossover_gradient_signal_weight": 0.326995630725146,
+                "crossover_weight_impact": 0.017,
+                "zero_line_crossover_weight": 0.9450228143772119,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.5431062066960001,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5318492714626102,
+                "rate_of_change_weight": 0.8959184584619586,
+                "weight_impact": 0.6907680474255626,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.6949703802061662,
+                "take_profit": 0.008905858756777987
+            }
+        }
+    },
+    "93": {
+        "fitness": [
+            1.867019964248463,
+            149.76586015167297
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7092027046676461,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 48.842606034817464,
+                "crossover_gradient_signal_weight": 0.326995630725146,
+                "crossover_weight_impact": 0.017,
+                "zero_line_crossover_weight": 0.9450228143772119,
+                "zero_line_pullback_lookback": 3,
+                "zero_line_pullback_tolerance_percent": 0.5194170077493385,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5580410959575454,
+                "rate_of_change_weight": 0.8959184584619586,
+                "weight_impact": 0.6907680474255626,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.6949703802061662,
+                "take_profit": 0.008905858756777987
+            }
+        }
+    },
+    "94": {
+        "fitness": [
+            1.798863288448923,
+            205.80654842142002
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7220565021663395,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 40.0411989241329,
+                "crossover_gradient_signal_weight": 0.23410270846295184,
+                "crossover_weight_impact": 0.23846426858080563,
+                "zero_line_crossover_weight": 0.9626649656713476,
+                "zero_line_pullback_lookback": 6,
+                "zero_line_pullback_tolerance_percent": 0.5282230437865951,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": true,
+                "magnitude_weight": 1.0,
+                "rate_of_change_weight": 1.0,
+                "weight_impact": 0.6831485146913513,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.16275941393689758,
+                "take_profit": 0.00943369751324256
+            }
+        }
+    },
+    "95": {
+        "fitness": [
+            1.8001495207149172,
+            194.60506536982507
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7238435073559796,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 40.0411989241329,
+                "crossover_gradient_signal_weight": 0.24569482633754225,
+                "crossover_weight_impact": 0.23846426858080563,
+                "zero_line_crossover_weight": 0.9626649656713476,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5282230437865951,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.600998224110609,
+                "rate_of_change_weight": 1.0,
+                "weight_impact": 0.6831485146913513,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.16275941393689758,
+                "take_profit": 0.009155757413103057
+            }
+        }
+    },
+    "96": {
+        "fitness": [
+            1.8001495207149172,
+            194.60506536982507
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7238435073559796,
+                "crossover_return_weight": false,
+                "crossover_max_gradient_degree": 40.0411989241329,
+                "crossover_gradient_signal_weight": 0.24569482633754225,
+                "crossover_weight_impact": 0.23846426858080563,
+                "zero_line_crossover_weight": 0.9626649656713476,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.5282230437865951,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.600998224110609,
+                "rate_of_change_weight": 1.0,
+                "weight_impact": 0.6831485146913513,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.16275941393689758,
+                "take_profit": 0.009155757413103057
+            }
+        }
+    },
+    "97": {
+        "fitness": [
+            1.319229099440714,
+            468.6226171271972
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.734374324982434,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 57.65,
+                "crossover_gradient_signal_weight": 0.2399,
+                "crossover_weight_impact": 0.0009828691144165437,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.6151910933225173,
+                "zero_line_pullback_weight": 0.0,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.8049376405551255,
+                "weight_impact": 0.6981026327245102,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.8703420519708788,
+                "take_profit": 0.0144362942476137
+            }
+        }
+    },
+    "98": {
+        "fitness": [
+            0.07770860892433168,
+            700.1148807461495
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 30,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7357693475242563,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 49.18526397928258,
+                "crossover_gradient_signal_weight": 0.5854,
+                "crossover_weight_impact": 0.007232992966376967,
+                "zero_line_crossover_weight": 0.9991496739977689,
+                "zero_line_pullback_lookback": 16,
+                "zero_line_pullback_tolerance_percent": 0.563576065698963,
+                "zero_line_pullback_weight": 8.558239506650989e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.7485263179209181,
+                "rate_of_change_weight": 0.9110300227560326,
+                "weight_impact": 0.689290994632468,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.594144,
+                "take_profit": 0.0
+            }
+        }
+    },
+    "99": {
+        "fitness": [
+            5.398610626678361,
+            5.691663860539575
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 27,
+                "signal_line_period": 28,
+                "momentum_max_lookback": 16,
+                "momentum_signal_weight": 0.7049136301835297,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 67.8863485437498,
+                "crossover_gradient_signal_weight": 0.25024988235890544,
+                "crossover_weight_impact": 0.07401224543389934,
+                "zero_line_crossover_weight": 0.8364,
+                "zero_line_pullback_lookback": 4,
+                "zero_line_pullback_tolerance_percent": 0.5833234094550547,
+                "zero_line_pullback_weight": 9.461214536516874e-07,
+                "return_pullback_strength": false,
+                "magnitude_weight": 0.5619956629748557,
+                "rate_of_change_weight": 1.0,
+                "weight_impact": 0.6135983981475609,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.550107,
+                "take_profit": 0.0011174823591779564
+            }
+        }
+    },
+    "100": {
+        "fitness": [
+            0.5772135643626036,
+            425.21909368297753
+        ],
+        "individual": {
+            "dna": {
+                "fast_period": 28,
+                "signal_line_period": 29,
+                "momentum_max_lookback": 17,
+                "momentum_signal_weight": 0.7016014525461398,
+                "crossover_return_weight": true,
+                "crossover_max_gradient_degree": 32.11489844959842,
+                "crossover_gradient_signal_weight": 0.2401918199468014,
+                "crossover_weight_impact": 0.04954326802691439,
+                "zero_line_crossover_weight": 0.9638663403790477,
+                "zero_line_pullback_lookback": 5,
+                "zero_line_pullback_tolerance_percent": 0.6166415639744957,
+                "zero_line_pullback_weight": 2.116959931729404e-07,
+                "return_pullback_strength": true,
+                "magnitude_weight": 0.9600206288791663,
+                "rate_of_change_weight": 0.9924236853186585,
+                "weight_impact": 0.6984331682681252,
+                "slow_period": 63
+            },
+            "stops": {
+                "stop_loss": 0.3551225617175918,
+                "take_profit": 0.017124630820978738
+            }
+        }
+    }
+}
