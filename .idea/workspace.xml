@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(ui): add CLI option and rework hotkeys&#10;&#10;Improves user experience by adding a CLI option and reorganizing hotkeys.&#10;&#10;- Adds option to use CLI instead">
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(cli): prompt for ticker symbol&#10;&#10;Adds CLI prompt for trading symbol.&#10;&#10;- Prompts user for symbol input.&#10;- Improves user experience.">
+      <change afterPath="$PROJECT_DIR$/data/gaHistoryData/G500_PS100_20250222_171747_logbook.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/data/gaHistoryData/G500_PS100_20250222_171747_population.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" beforeDir="false" afterPath="$PROJECT_DIR$/kianIsGod/navidsGIFT/EFT.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/plotter/plotEvo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Optimization/GeneticAlgorithm/plotter/plotEvo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/binanceAPI/fetching.py" beforeDir="false" afterPath="$PROJECT_DIR$/api/binanceAPI/fetching.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,35 +50,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.EFT.executor&quot;: &quot;Run&quot;,
-    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
-    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ordersTest.executor&quot;: &quot;Run&quot;,
-    &quot;Python.plotEvo.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.trading.executor&quot;: &quot;Run&quot;,
-    &quot;Python.websockets.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.EFT.executor": "Run",
+    "Python.__init__.executor": "Run",
+    "Python.binanceApi.executor": "Run",
+    "Python.geneticAlgorithm.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.ordersTest.executor": "Run",
+    "Python.plotEvo.executor": "Run",
+    "Python.scratch.executor": "Run",
+    "Python.trading.executor": "Run",
+    "Python.websockets.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/MyFolders/Code/miniOracleAlpha/Optimization/GeneticAlgorithm/plotter",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\Optimization\GeneticAlgorithm\plotter" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\api\binance" />
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\Optimization\GeneticAlgorithm\plotter" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\data\gaHistoryData" />
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\api\binance" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\data\gaHistory" />
     </key>
   </component>
@@ -277,7 +287,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740243402364</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="feat(cli): prompt for ticker symbol&#10;&#10;Adds CLI prompt for trading symbol.&#10;&#10;- Prompts user for symbol input.&#10;- Improves user experience.">
+      <option name="closed" value="true" />
+      <created>1740243554357</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1740243554357</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -309,6 +327,7 @@
     <MESSAGE value="feat(binanceAPI): implement binance futures trading&#10;&#10;- Add `python-binance` dependency.&#10;- Create modules for fetching, trading, orders, positions, and websockets.&#10;- Implement functions for placing/canceling orders and fetching data." />
     <MESSAGE value="feat(hotkeys): remap keyboard shortcuts&#10;&#10;The default keyboard shortcuts were awkward.&#10;&#10;- Update hotkeys to be more ergonomic.&#10;- Update corresponding print statements." />
     <MESSAGE value="feat(ui): add CLI option and rework hotkeys&#10;&#10;Improves user experience by adding a CLI option and reorganizing hotkeys.&#10;&#10;- Adds option to use CLI instead" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(ui): add CLI option and rework hotkeys&#10;&#10;Improves user experience by adding a CLI option and reorganizing hotkeys.&#10;&#10;- Adds option to use CLI instead" />
+    <MESSAGE value="feat(cli): prompt for ticker symbol&#10;&#10;Adds CLI prompt for trading symbol.&#10;&#10;- Prompts user for symbol input.&#10;- Improves user experience." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(cli): prompt for ticker symbol&#10;&#10;Adds CLI prompt for trading symbol.&#10;&#10;- Prompts user for symbol input.&#10;- Improves user experience." />
   </component>
 </project>

@@ -185,6 +185,6 @@ def plot_population(filename_id: str, params: list[str] = None):
 
 
 if __name__ == '__main__':
-    evo_id = "G500_PS100_20250213_211636"
-    plot_logbook(evo_id)
-    plot_population(evo_id, ["weight_impact", "slow_period"])
+    evo_id = "G500_PS100_20250222_171747"
+    #plot_logbook(evo_id)
+    plot_population(evo_id, ["stop_loss", "slow_period", "fast_period", "zero_line_pullback_weight"])
