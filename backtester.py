@@ -46,12 +46,17 @@ class Backtester(Strategy):
         return confs
 
     def create_sl(self, position_long: bool):
-        if self.stop_loss is None:
+        bullish_candle = self.data.Close[-1] > self.data.Open[-1]
+        if bullish_candle:
+            return self.data.Close[-1] - (self.data.Close[-1] - self.data.Low[-1])
+        else:
+            return self.data.Close[-1] - (self.data.High[-1] - self.data.Close[-1])
+        """if self.stop_loss is None:
             return None
         if position_long:
             return self.data.Close[-1] * (1 - self.stop_loss)
         else:
-            return self.data.Close[-1] * (1 + self.stop_loss)
+            return self.data.Close[-1] * (1 + self.stop_loss)"""
 
     def create_tp(self, position_long: bool):
         if self.take_profit is None:
