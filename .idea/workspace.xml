@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(trading): add shadows trending touch strategy&#10;&#10;- Implements a trading strategy based on shadow sizes and SMA&#10;- Evaluates candlestick patterns relative to SMA trends&#10;- Determines potential entry signals based on shadow ratios">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backtester.py" beforeDir="false" afterPath="$PROJECT_DIR$/backtester.py" afterDir="false" />
-    </list>
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(trading): integrate shadows strategy&#10;&#10;Implements candlestick pattern-based strategy.&#10;&#10;- Adds a Shadows Trending Touch strategy.&#10;- Modifies backtester to support the new strategy.&#10;- Updates stop loss calculation in backtester." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -314,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1744275839734</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="feat(trading): integrate shadows strategy&#10;&#10;Implements candlestick pattern-based strategy.&#10;&#10;- Adds a Shadows Trending Touch strategy.&#10;- Modifies backtester to support the new strategy.&#10;- Updates stop loss calculation in backtester.">
+      <option name="closed" value="true" />
+      <created>1744278636241</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1744278636241</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -350,6 +355,7 @@
     <MESSAGE value="```&#10;feat(macd): add moving average convergence divergence&#10;&#10;- Implements the SMA indicator as a trading component&#10;- Includes crossover and zero-line pullback logic&#10;- Adds genetic algorithm settings for optimization&#10;```" />
     <MESSAGE value="```&#10;feat(macd): add moving average convergence divergence&#10;&#10;- Implements the MACD indicator as a trading component&#10;- Includes crossover and zero-line pullback logic&#10;- Adds genetic algorithm settings for optimization&#10;```" />
     <MESSAGE value="feat(trading): add shadows trending touch strategy&#10;&#10;- Implements a trading strategy based on shadow sizes and SMA&#10;- Evaluates candlestick patterns relative to SMA trends&#10;- Determines potential entry signals based on shadow ratios" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(trading): add shadows trending touch strategy&#10;&#10;- Implements a trading strategy based on shadow sizes and SMA&#10;- Evaluates candlestick patterns relative to SMA trends&#10;- Determines potential entry signals based on shadow ratios" />
+    <MESSAGE value="feat(trading): integrate shadows strategy&#10;&#10;Implements candlestick pattern-based strategy.&#10;&#10;- Adds a Shadows Trending Touch strategy.&#10;- Modifies backtester to support the new strategy.&#10;- Updates stop loss calculation in backtester." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(trading): integrate shadows strategy&#10;&#10;Implements candlestick pattern-based strategy.&#10;&#10;- Adds a Shadows Trending Touch strategy.&#10;- Modifies backtester to support the new strategy.&#10;- Updates stop loss calculation in backtester." />
   </component>
 </project>

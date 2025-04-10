@@ -38,7 +38,7 @@ class ShadowsTrendingTouch:
             opposite_shadow_size = last_candle.High - last_candle.Close
         else:
             shadows_touch_size = last_candle.High - last_candle.Close
-            opposite_shadow_size = last_candle.High - last_candle.Close
+            opposite_shadow_size = last_candle.Open - last_candle.Low
 
         # Shadow to Body Ratio is big enough
         body_size = abs(last_candle.Open - last_candle.Close)
