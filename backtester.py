@@ -48,9 +48,15 @@ class Backtester(Strategy):
     def create_sl(self, position_long: bool):
         bullish_candle = self.data.Close[-1] > self.data.Open[-1]
         if bullish_candle:
-            return self.data.Close[-1] - (self.data.Close[-1] - self.data.Low[-1])
+            if position_long:
+                return self.data.Close[-1] - (self.data.Close[-1] - self.data.Low[-1])
+            else:
+                return self.data.Close[-1] + (self.data.Close[-1] - self.data.Low[-1])
         else:
-            return self.data.Close[-1] - (self.data.High[-1] - self.data.Close[-1])
+            if position_long:
+                return self.data.Close[-1] - (self.data.High[-1] - self.data.Close[-1])
+            else:
+                return self.data.Close[-1] + (self.data.High[-1] - self.data.Close[-1])
         """if self.stop_loss is None:
             return None
         if position_long:

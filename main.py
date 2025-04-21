@@ -1,7 +1,8 @@
 from backtester import backtest
-from tradingComponents.indicators import RelativeStrengthIndex, Stochastic, MovingAverageConvergenceDivergence
+from tradingComponents.indicators import   MovingAverageConvergenceDivergence
+from tradingComponents.strategies import ShadowsTrendingTouch
 from custom_logger import setup_logger
-from logging import DEBUG, getLogger
+from logging import DEBUG
 
 setup_logger('oracle.analysis', DEBUG, './logs/analysis.jsonl', log_in_json=True, stream_in_color=True)
 
@@ -47,7 +48,7 @@ datasets={
             0: {
                 'days': 1018,
                 'interval': '15m',
-                'ticker': "DOGEUSDT",
+                'ticker': "BTCUSDT",
                 'start': "2020-01-01 00:00:00"
             },
             1: {
@@ -73,7 +74,12 @@ datasets={
 tc = MovingAverageConvergenceDivergence(
     **ta["dna"]
 )
-
+tc = ShadowsTrendingTouch(
+    sma_period=7,
+    shadow_to_body_ratio=2,
+    shadow_padding_price=0,
+    opposite_shadow_to_body_ratio=0.25
+)
 
 def main():
     stats, bt = backtest(
@@ -86,7 +92,7 @@ def main():
         trade_short=trade_short,
         leverage=leverage,
         use_csv=True,
-        micro_factor=100000,
+        micro_factor=1000000,
         **ta["stops"]
     )
     print(stats)

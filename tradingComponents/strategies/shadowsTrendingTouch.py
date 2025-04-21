@@ -3,13 +3,12 @@ from pandas_ta import sma as create_sma
 
 ### Return stop based on shadow size
 
-
 class ShadowsTrendingTouch:
     def __init__(self, sma_period: int = 7, shadow_to_body_ratio: float = 1.25,
-                 shadow_padding_pips: int = 2, opposite_shadow_to_body_ratio: float = 0.25):
+                 shadow_padding_price: int = 2, opposite_shadow_to_body_ratio: float = 0.25):
         self.sma_period = sma_period
         self.shadow_to_body_ratio = shadow_to_body_ratio
-        self.shadow_padding_pips = shadow_padding_pips
+        self.shadow_padding_price = shadow_padding_price
         self.opposite_shadow_to_body_ratio = opposite_shadow_to_body_ratio
 
     def evaluate(self, df: DataFrame) -> float:
@@ -51,14 +50,10 @@ class ShadowsTrendingTouch:
 
         # Check candles touching
         if bullish_candle:
-            if last_candle.Low - self.shadow_padding_pips <= sma.iloc[-1]:
+            if last_candle.Low - self.shadow_padding_price <= sma.iloc[-1]:
                 return 1
         else:
-            if last_candle.High + self.shadow_padding_pips >= sma.iloc[-1]:
+            if last_candle.High + self.shadow_padding_price >= sma.iloc[-1]:
                 return -1
 
         return 0
-
-
-
-
