@@ -12,11 +12,7 @@ sell_limit = -0.75
 buy_limit = 0.75
 
 leverage = 5
-microfactor = 100000
 commission = 0.00075
-
-trade_long = True
-trade_short = True
 
 ta = {
     "dna": {
@@ -52,16 +48,15 @@ datasets={
                 'start': "2020-01-01 00:00:00"
             },
             1: {
-                'days': 93,
+                'days': 365,
                 'ticker': "SOLUSDT",
                 'interval': '5m',
                 'start': '2024-07-02 00:00:00',
             },
             2: {
-                'days': 93,
-                'ticker': "SOLUSDT",
-                'interval': '5m',
-                'start': '2024-04-03 00:00:00',
+                'days': 365,
+                'ticker': "DOGEUSDT",
+                'interval': '1h',
             },
             3: {
                 'days': 31,
@@ -76,7 +71,7 @@ tc = MovingAverageConvergenceDivergence(
 )
 tc = ShadowsTrendingTouch(
     sma_period=7,
-    shadow_to_body_ratio=2,
+    shadow_to_body_ratio=1.25,
     shadow_padding_price=0,
     opposite_shadow_to_body_ratio=0.25
 )
@@ -84,16 +79,17 @@ tc = ShadowsTrendingTouch(
 def main():
     stats, bt = backtest(
         tc.evaluate,
-        fetch_kwargs=datasets[0],
+        fetch_kwargs=datasets[1],
         sell_limit=sell_limit,
         buy_limit=buy_limit,
         commission=commission,
-        trade_long=trade_long,
-        trade_short=trade_short,
+        trade_long=True,
+        trade_short=True,
+        stop_loss=0.5,
+        take_profit=2,
         leverage=leverage,
         use_csv=True,
-        micro_factor=1000000,
-        **ta["stops"]
+        micro_factor=None,
     )
     print(stats)
     bt.plot(open_browser=False)

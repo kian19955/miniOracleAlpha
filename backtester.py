@@ -31,6 +31,7 @@ class Backtester(Strategy):
 
         self.position_opened: bool = False
         self.confs = self.I(self.compute_confs, self.data.df)
+        self.num_of_candles = len(self.data.df)
 
     def compute_confs(self, df):
         """
@@ -46,7 +47,7 @@ class Backtester(Strategy):
         return confs
 
     def create_sl(self, position_long: bool):
-        bullish_candle = self.data.Close[-1] > self.data.Open[-1]
+        """bullish_candle = self.data.Close[-1] > self.data.Open[-1]
         if bullish_candle:
             if position_long:
                 return self.data.Close[-1] - (self.data.Close[-1] - self.data.Low[-1])
@@ -56,13 +57,13 @@ class Backtester(Strategy):
             if position_long:
                 return self.data.Close[-1] - (self.data.High[-1] - self.data.Close[-1])
             else:
-                return self.data.Close[-1] + (self.data.High[-1] - self.data.Close[-1])
-        """if self.stop_loss is None:
+                return self.data.Close[-1] + (self.data.High[-1] - self.data.Close[-1])"""
+        if self.stop_loss is None:
             return None
         if position_long:
             return self.data.Close[-1] * (1 - self.stop_loss)
         else:
-            return self.data.Close[-1] * (1 + self.stop_loss)"""
+            return self.data.Close[-1] * (1 + self.stop_loss)
 
     def create_tp(self, position_long: bool):
         if self.take_profit is None:
@@ -70,10 +71,12 @@ class Backtester(Strategy):
         if position_long:
             return self.data.Close[-1] * (1 + self.take_profit)
         else:
-            return self.data.Close[-1] * (1 - self.take_profit)
+            return self.data.Close[-1] / (1 + self.take_profit)
 
     def next(self):
         conf = self.confs[-1]
+
+        print(f"Progress: {len(self.data.df) / self.num_of_candles}. Confidence: {conf}", end="\n")
 
         if self.position_opened and not self.position:
             self.on_close()
