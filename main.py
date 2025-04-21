@@ -86,7 +86,7 @@ def main():
         trade_long=True,
         trade_short=True,
         stop_loss=0.5,
-        take_profit=2,
+        take_profit=3,
         leverage=leverage,
         use_csv=True,
         micro_factor=None,

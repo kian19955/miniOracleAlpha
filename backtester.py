@@ -76,8 +76,6 @@ class Backtester(Strategy):
     def next(self):
         conf = self.confs[-1]
 
-        print(f"Progress: {len(self.data.df) / self.num_of_candles}. Confidence: {conf}", end="\n")
-
         if self.position_opened and not self.position:
             self.on_close()
 
