@@ -24,7 +24,7 @@ strat = MovingAverageConvergenceDivergence(
 
 def main():
     setup_logger(
-        'oracle.link',
+        'oracle.analysis',
         DEBUG,
         './logs/paperTrade.jsonl',
         log_in_json=False,
@@ -48,7 +48,7 @@ def main():
         take_profit= 4, # float(input('Enter take profit (% 0-1): ')),
 
         buy_conf_threshold= 0.8, #float(input('Enter buy confidence threshold (0 to 1): ')),
-        sell_conf_threshold= 0.8, #float(input('Enter sell confidence threshold (-1 to 0): ')),
+        sell_conf_threshold= -0.8, #float(input('Enter sell confidence threshold (-1 to 0): ')),
 
         strat = strat,
         save_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),

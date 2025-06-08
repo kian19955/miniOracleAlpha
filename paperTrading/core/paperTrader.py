@@ -15,7 +15,7 @@ from utils import parse_interval, seconds_to_next_boundry
 
 import logging
 
-logger = logging.getLogger("oracle.link")
+logger = logging.getLogger("oracle.analysis")
 
 
 
@@ -103,10 +103,10 @@ class PaperTrader:
         new_df = fetch_klines(symbol=self.symbol, interval=self.interval, limit=2)
 
         if self.df.iloc[-1]["Close Time"] == new_df.iloc[-1]["Close Time"]:
-            logger.info(f"Updating df, new price {new_df.iloc[-1]['Close']}...")
+            logger.debug(f"Updating df, new price {new_df.iloc[-1]['Close']}...")
             self.df.iloc[-1] = new_df.iloc[-1]
         elif self.df.iloc[-1]["Close Time"] < new_df.iloc[-1]["Close Time"]:
-            logger.info("Updating df, new candle formed. Adding new candle...")
+            logger.info(f"Updating df, new candle formed. Adding new candle {new_df.iloc[-1]['Close']}...")
             self.df.iloc[-1] = new_df.iloc[-2]
             self.df = (
                 pd.concat([self.df, new_df.iloc[[-1]]])
