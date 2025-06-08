@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trading): Refactor API and improve order logic&#10;&#10;- Introduce simple Binance API for fetching klines.&#10;- Update paper trader to use new API and calculate stop loss/take profit based on percentage.&#10;- Improve logging and configuration for paper trading script.">
-      <change beforePath="$PROJECT_DIR$/mainPaperTrade.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainPaperTrade.py" afterDir="false" />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script">
+      <change afterPath="$PROJECT_DIR$/tradingComponents/strategies/kianStrat.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -45,35 +46,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.EFT.executor": "Run",
-    "Python.__init__.executor": "Run",
-    "Python.binanceApi.executor": "Run",
-    "Python.geneticAlgorithm.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.mainPaperTrade.executor": "Run",
-    "Python.ordersTest.executor": "Run",
-    "Python.paperTrader.executor": "Run",
-    "Python.plotEvo.executor": "Run",
-    "Python.scratch.executor": "Run",
-    "Python.shadowsTrendingTouch.executor": "Run",
-    "Python.trading.executor": "Run",
-    "Python.websockets.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/MyFolders/Code/miniOracleAlpha",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.EFT.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mainPaperTrade.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ordersTest.executor&quot;: &quot;Run&quot;,
+    &quot;Python.paperTrader.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plotEvo.executor&quot;: &quot;Run&quot;,
+    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.shadowsTrendingTouch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trading.executor&quot;: &quot;Run&quot;,
+    &quot;Python.websockets.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/MyFolders/Code/miniOracleAlpha&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\MyFolders\Code\miniOracleAlpha" />
@@ -83,11 +84,11 @@
       <recent name="D:\MyFolders\Code\miniOracleAlpha\Optimization\GeneticAlgorithm\plotter" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents\strategies" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\api\simpleBinanceApi" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\Optimization\GeneticAlgorithm\plotter" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\data\gaHistoryData" />
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\api\binance" />
     </key>
   </component>
   <component name="SharedIndexes">
@@ -378,7 +379,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749383590048</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script">
+      <option name="closed" value="true" />
+      <created>1749393201440</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1749393201440</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -393,7 +402,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(binanceApi): enhance historical data fetching&#10;&#10;- Fix: Correctly format start and end times for file paths to avoid errors.&#10;- Change: Modify the end parameter of print from &quot;\r&quot; to &quot;\n&quot; to enable progress display in IDEs.&#10;- Update: Change the default interval to &quot;1h&quot;&#10;&#10;Improves data retrieval and progress reporting." />
     <MESSAGE value="fix(binanceApi): improve data fetching progress display&#10;&#10;Refactor print statement to" />
     <MESSAGE value="feat(geneticAlgorithm): remove hardcoded parameters&#10;&#10;- Remove hardcoded bt_settings from GeneticAlgorithm init&#10;- Add extensive logging of GA runs and top individuals for analysis&#10;- Improve code readability&#10;&#10;The hardcoded parameters limited the flexibility of the GeneticAlgorithm. The logs will aid in understanding and improving algorithm performance." />
     <MESSAGE value="feat(geneticAlgorithm): add dataset index to log&#10;&#10;Add the active dataset index to the logbook and table.&#10;&#10;- Include dataset index to track dataset rotation.&#10;- Add print statement to debug dataset rotation.&#10;- Update logbook header to display dataset index." />
@@ -418,6 +426,7 @@
     <MESSAGE value="feat(backtester): add stop loss and take profit&#10;&#10;Implements stop loss and take profit to backtester&#10;&#10;- Add stop loss and take profit functionality.&#10;- Improves plotting backtester.&#10;- Modifies backtester for new trading strategy." />
     <MESSAGE value="feat(paperTrading): Implement paper trading environment&#10;&#10;Implement paper trading environment with core trading functionalities&#10;&#10;- Add paper trading core classes and models&#10;- Implement basic trading logic (open/close positions)&#10;- Implement XML saving and loading" />
     <MESSAGE value="feat(paper-trading): Refactor API and improve order logic&#10;&#10;- Introduce simple Binance API for fetching klines.&#10;- Update paper trader to use new API and calculate stop loss/take profit based on percentage.&#10;- Improve logging and configuration for paper trading script." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trading): Refactor API and improve order logic&#10;&#10;- Introduce simple Binance API for fetching klines.&#10;- Update paper trader to use new API and calculate stop loss/take profit based on percentage.&#10;- Improve logging and configuration for paper trading script." />
+    <MESSAGE value="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script" />
   </component>
 </project>

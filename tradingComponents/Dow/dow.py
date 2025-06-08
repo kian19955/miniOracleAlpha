@@ -1,6 +1,8 @@
 import pandas as pd
 from scipy.signal import find_peaks
 
+from tradingComponents.Dow.utils.dowEnums import Trend, Phase
+
 # Initialize global variables
 last_trend = None
 last_trend_time = None
@@ -12,6 +14,8 @@ def detect_dow_trend(df: pd.DataFrame):
 
     Analyzes price series to identify swing highs and lows, then determines
     if the market is in an uptrend, downtrend, or moving sideways.
+
+    :return: A tuple containing the trend ('TrendInfo: dict', 'Peaks: list', 'Valleys: list'),
     """
     global last_trend, last_trend_time
 
@@ -48,31 +52,30 @@ def detect_dow_trend(df: pd.DataFrame):
     lower_low = lows[1] < lows[0]
 
     if higher_high and higher_low:
-        direction = 'Uptrend'
-        phase = 'Accumulation Phase' if higher_low > higher_high else 'Participation Phase'
+        trend = Trend.UPTREND
+        phase = Phase.ACCUMULATION if higher_low > higher_high else Phase.PARTICIPATION
     elif lower_high and lower_low:
-        direction = 'Downtrend'
-        phase = 'Distribution Phase' if lower_high > lower_low else 'Markdown Phase'
+        trend = Trend.DOWNTREND
+        phase = Phase.DISTRIBUTION if lower_high > lower_low else Phase.MARKDOWN
     else:
         # Mixed signals
+        trend = Trend.SIDEWAYS
+
         if higher_high and lower_low:
-            direction = 'Sideways'
-            phase = 'Consolidation - Increased Volatility'
+            phase = Phase.CONSOLIDATION_INCREASED_VOLATILITY
         elif lower_high and higher_low:
-            direction = 'Sideways'
-            phase = 'Consolidation - Decreased Volatility'
+            phase = Phase.CONSOLIDATION_DECREASED_VOLATILITY
         else:
-            direction = 'Sideways'
-            phase = 'Accumulation Phase'
+            phase = Phase.ACCUMULATION
 
     # Check if trend has changed significantly
     current_time = df.index[-1]
-    if last_trend != direction:
+    if last_trend != trend:
         # Require minimum time between trend changes to avoid whipsaws
         if last_trend_time is None or (current_time - last_trend_time).total_seconds() > 3 * 60 * 15:
-            last_trend = direction
+            last_trend = trend
             last_trend_time = current_time
-            print(f"🔔 Trend changed to {direction} ({phase}) at {current_time} | Power: {round(swing_strength, 6)}")
+            print(f"🔔 Trend changed to {trend} ({phase}) at {current_time} | Power: {round(swing_strength, 6)}")
 
     # Volume confirmation check
     recent_vol = df['Volume'].iloc[-1]
@@ -83,31 +86,34 @@ def detect_dow_trend(df: pd.DataFrame):
         print("⚠️ Volume too low. Ignoring signal.")
         return None, peaks, valleys
 
-        # Return trend information
-    return {
-        'direction': direction,
+    # Return trend information
+    trend_info: dict = {
+        'trend': trend,
         'phase': phase,
         'strength': swing_strength,
         'time': current_time,
         'price': df['Close'].iloc[-1]
-    }, peaks, valleys
+    }
+
+    return trend_info, peaks, valleys
 
 if __name__ == '__main__':
     """Main function to run the trend detection and plotting"""
-    from apis.binanceApi import fetch_data
+    from apis.binanceApi import fetch_klines
     from tradingComponents.Dow.utils import plot_candle_chart
 
     symbol = 'BTCUSDT'
     # Fetch market data
-    df = fetch_data(
+    df = fetch_klines(
         symbol=symbol,
         interval='1m',
-        lookback_minutes=30
+        limit=60
     )
     print(f"Fetched {len(df)} data points for {symbol}")
 
     # Detect trend
     result, peaks, valleys = detect_dow_trend(df)
+    print(peaks)
 
     # Plot results
     plot_candle_chart(df, peaks, valleys, result, sma=7)

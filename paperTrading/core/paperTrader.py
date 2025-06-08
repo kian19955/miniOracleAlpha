@@ -25,7 +25,7 @@ class PaperTrader:
         seconds_to_sleep: int, save_data_path: str,
         initial_balance: float, risk_per_position: float, leverage: float,
         strat: object, buy_conf_threshold: float = 1, sell_conf_threshold: float = -1,
-        max_positions: Optional[int] = None,
+        max_positions: Optional[int] = None, block_reentry_until_signal_reset: bool = False,
         stop_loss: Optional[float] = None, take_profit: Optional[float] = None,
     ):
         """
@@ -36,6 +36,7 @@ class PaperTrader:
         :param seconds_to_sleep: How many seconds to sleep between each iteration
         :param save_data_path: Path to save data
         :param max_positions: Maximum number of positions, if exceeded the oldest position will be closed
+        :param block_reentry_until_signal_reset: Only enter on signal switch from inactive to active. Prevents multiple entries while the signal stays above the threshold.
         :param initial_balance:
         :param leverage:
         :param risk_per_position: How much of your total balance to risk per position in percentage
@@ -48,6 +49,7 @@ class PaperTrader:
         self.seconds_to_sleep = seconds_to_sleep
         self.save_data_path = save_data_path
         self.max_positions = max_positions
+        self.block_reentry_until_signal_reset = block_reentry_until_signal_reset
 
         self.leverage = leverage # TODO: add leverage
         self.risk_per_position = risk_per_position
@@ -263,17 +265,22 @@ class PaperTrader:
 
     def run(self) -> None:
         time.sleep(seconds_to_next_boundry(parse_interval(self.interval)))
+        position_entered: bool = False
 
         while True:
             self._update_df()
 
             conf: float | OrderRequest = self.strat.evaluate(self.df)
             if type(conf) != OrderRequest:
-                order_request: OrderRequest = self._create_order_request(conf)
+                order_request: OrderRequest | None = self._create_order_request(conf)
             else:
                 order_request = conf
 
-            if order_request is not None:
+            if order_request is None:
+                position_entered = False
+
+            elif order_request is not None and (not self.block_reentry_until_signal_reset or not position_entered):
+                position_entered = True
                 self.portfolio.add_order_request(order_request)
 
             self._handle_order_requests()

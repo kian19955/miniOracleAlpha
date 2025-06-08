@@ -4,22 +4,10 @@ from logging import DEBUG
 from custom_logger import setup_logger
 from paperTrading import PaperTrader
 
-from tradingComponents.indicators import MovingAverageConvergenceDivergence
+from tradingComponents.strategies.kianStrat import KianStrat
 
-strat = MovingAverageConvergenceDivergence(
-    fast_period=28,
-    slow_period=90,
-    signal_line_period=30,
-    momentum_max_lookback=17,
-    momentum_signal_weight=0.734374324982434,
-    crossover_return_weight=False,
-    crossover_max_gradient_degree=25.72682242872742,
-    crossover_gradient_signal_weight=0.2399,
-    crossover_weight_impact=0.33062400559960325,
-    zero_line_crossover_weight=0.9987157290164548,
-    zero_line_pullback_lookback=2,
-    zero_line_pullback_tolerance_percent=0.3276036034958676,
-    zero_line_pullback_weight=1.766904365264866e-08
+strat = KianStrat(
+    check_trend=True
 )
 
 def main():
@@ -39,6 +27,7 @@ def main():
 
         max_positions = 1, #int(input('Enter max positions: ')),
         seconds_to_sleep=5,  # int(input('Enter sleep interval: ')),
+        block_reentry_until_signal_reset=True,
 
         initial_balance=10000,  # float(input('Enter initial balance: ')),
         risk_per_position = 0.01, #float(input('Enter risk per position (% 0-1): ')),

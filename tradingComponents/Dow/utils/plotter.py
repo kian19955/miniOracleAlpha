@@ -2,6 +2,7 @@ from datetime import datetime
 import os
 from io import BytesIO
 from typing import Optional
+import logging
 
 import mplfinance as mpf
 import pandas as pd
@@ -12,6 +13,14 @@ root_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..',
 def plot_candle_chart(df: pd.DataFrame, peaks: list[int] = None, valleys: list[int] = None, trend_info=None, sma: Optional[int] = None, symbol="NOT_PASSED",
                       return_img_buffer: bool = False, show_candles: Optional[int] = None, breakout_info: dict[str, float | str] = None):
     """Plot a candlestick chart with optional trend info, peaks, valleys."""
+    # Check if DataFrame is empty or invalid
+    if df.empty:
+        raise ValueError("Cannot plot: DataFrame is empty")
+
+    # Ensure we have valid data to plot
+    if len(df) < 2:  # Need at least 2 candles to plot
+        raise ValueError("Cannot plot: Insufficient data points")
+
     if peaks is None:
         peaks = []
     if valleys is None:
@@ -47,12 +56,12 @@ def plot_candle_chart(df: pd.DataFrame, peaks: list[int] = None, valleys: list[i
         )
 
     # Add support and resistance lines if breakout info is provided
-    if breakout_info.get('support') is not None:
+    if getattr(breakout_info, 'support', None) is not None:
         print(breakout_info['support'])
         support_line = pd.Series([breakout_info['support']] * len(df), index=df.index)
         apds.append(mpf.make_addplot(support_line, color='green', linestyle='--', label='Support'))
 
-    if breakout_info.get('resistance') is not None:
+    if getattr(breakout_info, 'resistance', None) is not None:
         resistance_line = pd.Series([breakout_info['resistance']] * len(df), index=df.index)
         apds.append(mpf.make_addplot(resistance_line, color='red', linestyle='--', label='Resistance'))
 
@@ -67,12 +76,20 @@ def plot_candle_chart(df: pd.DataFrame, peaks: list[int] = None, valleys: list[i
 
     # Plot
     if return_img_buffer:
-        buf = BytesIO()
-        mpf.plot(df, type='candle', addplot=apds, title=trend_title,
-                 ylabel=f'Price ({symbol})', style=style, volume=True,
-                 savefig=dict(fname=buf, dpi=150, format='png'))
-        buf.seek(0)
-        return buf
+        try:
+            buf = BytesIO()
+            mpf.plot(df, type='candle', addplot=apds, title=trend_title,
+                     ylabel=f'Price ({symbol})', style=style, volume=True,
+                     savefig=dict(fname=buf, dpi=150, format='png'))
+            buf.seek(0)
+            return buf
+        except ValueError as e:
+            logging.error(f"Error plotting chart: {str(e)}")
+            raise ValueError(f"Failed to plot chart: {str(e)}")
     else:
-        mpf.plot(df, type='candle', addplot=apds, title=trend_title,
-                 ylabel=f'Price ({symbol})', style=style, volume=True)
+        try:
+            mpf.plot(df, type='candle', addplot=apds, title=trend_title,
+                     ylabel=f'Price ({symbol})', style=style, volume=True)
+        except ValueError as e:
+            logging.error(f"Error plotting chart: {str(e)}")
+            raise ValueError(f"Failed to plot chart: {str(e)}")
