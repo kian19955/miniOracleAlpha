@@ -29,23 +29,29 @@ def main():
         './logs/paperTrade.jsonl',
         log_in_json=False,
         stream_in_color=True,
-        extra_log_args=["open_timestamp"],
+        extra_log_args=[],
     )
 
     pt = PaperTrader(
         symbol = "DOGEUSDT", #input('Enter symbol: '),
         interval = "1m", #input('Enter interval: '),
         limit = 100, #int(input('Enter limit: ')),
+
+        max_positions = 1, #int(input('Enter max positions: ')),
+        seconds_to_sleep=5,  # int(input('Enter sleep interval: ')),
+
+        initial_balance=10000,  # float(input('Enter initial balance: ')),
         risk_per_position = 0.01, #float(input('Enter risk per position (% 0-1): ')),
-        seconds_to_sleep= 5, #int(input('Enter sleep interval: ')),
-        initial_balance = 10000, #float(input('Enter initial balance: ')),
         leverage = 1, #float(input('Enter leverage: ')), #NOT IMPLEMENTED
+
         stop_loss= 2, #float(input('Enter stop loss (% 0-1): ')),
         take_profit= 4, # float(input('Enter take profit (% 0-1): ')),
+
         buy_conf_threshold= 0.8, #float(input('Enter buy confidence threshold (0 to 1): ')),
         sell_conf_threshold= 0.8, #float(input('Enter sell confidence threshold (-1 to 0): ')),
+
         strat = strat,
-        save_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data/paperTradeData'),
+        save_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),
     )
     pt.run()
 

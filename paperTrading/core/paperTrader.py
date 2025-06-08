@@ -10,7 +10,7 @@ from pandas import DataFrame
 
 from paperTrading.models import Portfolio, OrderRequest, Position, TradeRecord
 from paperTrading.enums import Side, Action
-from api.binanceAPI.fetching import fetch_klines
+from api.simpleBinanceApi.fetcher import fetch_klines
 from utils import parse_interval, seconds_to_next_boundry
 
 import logging
@@ -103,8 +103,10 @@ class PaperTrader:
         new_df = fetch_klines(symbol=self.symbol, interval=self.interval, limit=2)
 
         if self.df.iloc[-1]["Close Time"] == new_df.iloc[-1]["Close Time"]:
+            logger.info(f"Updating df, new price {new_df.iloc[-1]['Close']}...")
             self.df.iloc[-1] = new_df.iloc[-1]
         elif self.df.iloc[-1]["Close Time"] < new_df.iloc[-1]["Close Time"]:
+            logger.info("Updating df, new candle formed. Adding new candle...")
             self.df.iloc[-1] = new_df.iloc[-2]
             self.df = (
                 pd.concat([self.df, new_df.iloc[[-1]]])
@@ -122,6 +124,8 @@ class PaperTrader:
         else:
             return None
 
+
+        curr_close_price = self.df.iloc[-1]["Close"]
         return OrderRequest(
             symbol=self.symbol,
             timestamp=datetime.now().timestamp(),
@@ -130,8 +134,8 @@ class PaperTrader:
             action=action,
             entry_price=None,
             qty=None,
-            stop_loss=self.stop_loss,
-            take_profit=self.take_profit
+            stop_loss=curr_close_price - self.stop_loss * curr_close_price,
+            take_profit=curr_close_price + self.take_profit * curr_close_price
         )
 
     def _check_price_reached(self, price: float) -> bool:

@@ -55,6 +55,7 @@ def fetch_exchange_info() -> dict:
 def fetch_klines(
         symbol: str,
         interval: str,
+        limit: Optional[int] = None,
         start: str = None,
         end: str = None,
         years: int = 0,
@@ -145,7 +146,7 @@ def fetch_klines(
             'interval': interval,
             'startTime': current_time,
             'endTime': end_timestamp_unix,
-            'limit': 1000
+            'limit': 1000 if limit is None else limit
         }
 
         response = get(url_fetch_klines, params=params)
