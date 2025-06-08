@@ -13,8 +13,9 @@ LOG_COLORS: dict[str: str] = {
 }
 BOLD: str = '\033[1m'
 UNDERLINE: str = '\033[4m'
-RESET_UNDERLINE: str = '\033[24m'  # Resets underline only
+RESET_UNDERLINE: str = '\033[24m'  # Resets underline onl
 
+extra_args: list[str] = []
 
 class ColoredFormatter(Formatter):
     def format(self, record) -> str:
@@ -28,6 +29,13 @@ class ColoredFormatter(Formatter):
             f"{log_color}{BOLD}[{record.levelname} | {record.filename} | "
             f"lineno({record.lineno}) | {record.funcName}]{reset}\n"
         )
+
+        # Append extra information if available, with labels underlined
+        if extra_args:
+            formatted_extras = " | ".join(
+                f"{UNDERLINE}{arg}: {RESET_UNDERLINE}{getattr(record, arg, 'None')}" for arg in extra_args
+            )
+            formatted_message += f"{BOLD}{formatted_extras}\n"
 
         # Append the main log message
         formatted_message += f"{white}Message: {record.getMessage()}{reset}"
@@ -47,4 +55,9 @@ class JsonFormatter(Formatter):
             "exc_info": record.exc_info
         }
 
-        return json.dumps(log_record)
+        extra_log_record = {
+            arg: getattr(record, arg, 'None') for arg in extra_args
+        }
+
+        final_log_record = log_record | extra_log_record
+        return json.dumps(final_log_record)

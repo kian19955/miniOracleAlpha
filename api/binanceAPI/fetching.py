@@ -53,7 +53,7 @@ def fetch_exchange_info() -> dict:
 
 
 def fetch_klines(
-        ticker: str,
+        symbol: str,
         interval: str,
         start: str = None,
         end: str = None,
@@ -122,7 +122,7 @@ def fetch_klines(
     # Create the file path
     safe_start = start.replace(" ", "_").replace(":", "-") if start else 'None'
     safe_end = end.replace(" ", "_").replace(":", "-") if end else 'None'
-    file_path = f"{market_his_dir_path}/{ticker}_{interval}_{safe_start}_{safe_end}_{years}Y_{months}M_{weeks}W_{days}D_{hours}h_{minutes}m_{seconds}s.csv"
+    file_path = f"{market_his_dir_path}/{symbol}_{interval}_{safe_start}_{safe_end}_{years}Y_{months}M_{weeks}W_{days}D_{hours}h_{minutes}m_{seconds}s.csv"
 
     if use_csv and os.path.isfile(file_path):
         df: DataFrame = read_csv(file_path)
@@ -141,7 +141,7 @@ def fetch_klines(
         print(f"Fetching data... {progress:.2f}% complete", end="")
 
         params: dict = {
-            'symbol': ticker,
+            'symbol': symbol,
             'interval': interval,
             'startTime': current_time,
             'endTime': end_timestamp_unix,
