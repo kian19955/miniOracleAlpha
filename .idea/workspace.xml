@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script">
-      <change afterPath="$PROJECT_DIR$/tradingComponents/strategies/kianStrat.py" afterDir="false" />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +64,7 @@
     &quot;com.codeium.enabled&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/MyFolders/Code/miniOracleAlpha&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/MyFolders/Code/miniOracleAlpha/tradingComponents&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -77,11 +75,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents" />
+      <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents\Dow" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents\patterns" />
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents" />
       <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents\strategies" />
-      <recent name="D:\MyFolders\Code\miniOracleAlpha\Optimization\GeneticAlgorithm\plotter" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents\strategies" />
@@ -387,7 +385,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749393201440</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines.">
+      <option name="closed" value="true" />
+      <created>1749395295774</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1749395295774</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -402,7 +408,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="fix(binanceApi): improve data fetching progress display&#10;&#10;Refactor print statement to" />
     <MESSAGE value="feat(geneticAlgorithm): remove hardcoded parameters&#10;&#10;- Remove hardcoded bt_settings from GeneticAlgorithm init&#10;- Add extensive logging of GA runs and top individuals for analysis&#10;- Improve code readability&#10;&#10;The hardcoded parameters limited the flexibility of the GeneticAlgorithm. The logs will aid in understanding and improving algorithm performance." />
     <MESSAGE value="feat(geneticAlgorithm): add dataset index to log&#10;&#10;Add the active dataset index to the logbook and table.&#10;&#10;- Include dataset index to track dataset rotation.&#10;- Add print statement to debug dataset rotation.&#10;- Update logbook header to display dataset index." />
     <MESSAGE value="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration." />
@@ -427,6 +432,7 @@
     <MESSAGE value="feat(paperTrading): Implement paper trading environment&#10;&#10;Implement paper trading environment with core trading functionalities&#10;&#10;- Add paper trading core classes and models&#10;- Implement basic trading logic (open/close positions)&#10;- Implement XML saving and loading" />
     <MESSAGE value="feat(paper-trading): Refactor API and improve order logic&#10;&#10;- Introduce simple Binance API for fetching klines.&#10;- Update paper trader to use new API and calculate stop loss/take profit based on percentage.&#10;- Improve logging and configuration for paper trading script." />
     <MESSAGE value="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script" />
+    <MESSAGE value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines." />
   </component>
 </project>
