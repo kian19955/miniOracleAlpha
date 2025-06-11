@@ -4,6 +4,8 @@ from pandas import DataFrame
 
 from tradingComponents.Dow import detect_dow_trend
 from tradingComponents.Dow.utils.dowEnums import Trend
+from paperTrading.models import OrderRequest
+from paperTrading.enums import Side, Action
 
 
 class KianStrat:
@@ -15,7 +17,7 @@ class KianStrat:
             trend_info: Optional[dict[str, any]] = None,
             peaks: Optional[list[int]] = None,
             valleys: Optional[list[int]] = None
-    ) -> float:
+    ) -> float | OrderRequest:
         """
         ...
 
@@ -33,19 +35,30 @@ class KianStrat:
         if peaks is None or valleys is None:
             return 0
 
-        peak_and_low_candle_distance_delta = abs(peaks[-1] - valleys[-1]) # <-- The difference between the last peak and the last valley ###KIAN
+        peak_and_low_candle_distance_delta = abs(peaks[-1] - valleys[-1])
 
         # Buy
         if (peaks[-1] < valleys[-1] and
-            (not self.check_trend or trend_info['trend'] == Trend.UPTREND) and
-            df.get('Close').iloc[-1] > df.iloc[peaks[-1]]['Close']): # <-- Under what price it should buy ###KIAN
-            return 1
+                (not self.check_trend or trend_info['trend'] == Trend.UPTREND) and
+                df.get('Close').iloc[-1] > df.iloc[peaks[-1]]['Close']):
+            return OrderRequest(
+                confidence=1,
+                side=Side.LONG,
+                action=Action.OPEN,
+                stop_loss=...,
+                take_profit=...,
+            )
 
         # Sell
         elif (valleys[-1] < peaks[-1] and
               (not self.check_trend or trend_info['trend'] == Trend.DOWNTREND) and
-              df.get('Close').iloc[-1] < df.iloc[valleys[-1]]['Close']): # <-- Under what price it should sell ###KIAN
-            return -1
+              df.get('Close').iloc[-1] < df.iloc[valleys[-1]]['Close']):
+            return OrderRequest(
+            confidence=-1,
+            side=Side.SHORT,
+            action=Action.OPEN,
+            stop_loss=...,
+            take_profit=...,
+        )
 
         return 0
-

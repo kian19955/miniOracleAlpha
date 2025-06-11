@@ -8,7 +8,7 @@ from paperTrading.models import BaseTradingData
 class OrderRequest(BaseTradingData):
     """
     :param uuid: universally unique identifier (uuid.uuid4())
-    :param symbol: e.g. "BTCUSDT"
+    :param symbol: e.g. "BTCUSDT" if None MAY be handled by the simulator
     :param timestamp: unix timestamp, timezone is UTC
 
     :param confidence: confidence level (-1.0 to 1.0) where -1 = max sell, 0 = neutral, +1 = max buy, can be of type float

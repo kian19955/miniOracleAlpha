@@ -8,15 +8,14 @@ from paperTrading.enums import Side, Action
 
 @dataclass
 class BaseTradingData:
-    symbol: str
-
     confidence: float
 
-    entry_price: Optional[float]
     side: Side
     action: Action
-    qty: Optional[float]
+    entry_price: Optional[float] = None
+    qty: Optional[float] = None
 
+    symbol: Optional[str] = None
     timestamp: float = field(default_factory=datetime.now(timezone.utc).timestamp)
 
     uuid: UUID = field(default_factory=uuid4, init=False)

@@ -21,7 +21,7 @@ logger = logging.getLogger("oracle.analysis")
 
 class PaperTrader:
     def __init__(
-        self, symbol: str, interval: str, limit: int,
+        self, symbol: Optional[str], interval: str, limit: int,
         seconds_to_sleep: int, save_data_path: str,
         initial_balance: float, risk_per_position: float, leverage: float,
         strat: object, buy_conf_threshold: float = 1, sell_conf_threshold: float = -1,
@@ -30,7 +30,7 @@ class PaperTrader:
     ):
         """
 
-        :param symbol:
+        :param symbol: If None the OrderRequest will need to return the symbol. If not None the OrderRequest symbols will be overwritten
         :param interval:
         :param limit:
         :param seconds_to_sleep: How many seconds to sleep between each iteration
@@ -275,6 +275,13 @@ class PaperTrader:
                 order_request: OrderRequest | None = self._create_order_request(conf)
             else:
                 order_request = conf
+
+                if order_request.symbol is None:
+                    if self.symbol is None:
+                        logger.warning("Symbol is not set and order request has no symbol set, order request will be ignored.")
+                        order_request = None
+                    else:
+                        order_request.symbol = self.symbol
 
             if order_request is None:
                 position_entered = False
