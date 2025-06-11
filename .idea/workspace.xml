@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend trading&#10;- Block reentry until signal resets&#10;- Improve plotter robustness&#10;&#10;This commit introduces KianStrat, leveraging Dow trend analysis for paper trading. Prevents multiple entries, improves chart plotting and trendline addition." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -393,7 +391,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749395295774</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend trading&#10;- Block reentry until signal resets&#10;- Improve plotter robustness&#10;&#10;This commit introduces KianStrat, leveraging Dow trend analysis for paper trading. Prevents multiple entries, improves chart plotting and trendline addition.">
+      <option name="closed" value="true" />
+      <created>1749657990712</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1749657990712</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -408,7 +414,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(geneticAlgorithm): remove hardcoded parameters&#10;&#10;- Remove hardcoded bt_settings from GeneticAlgorithm init&#10;- Add extensive logging of GA runs and top individuals for analysis&#10;- Improve code readability&#10;&#10;The hardcoded parameters limited the flexibility of the GeneticAlgorithm. The logs will aid in understanding and improving algorithm performance." />
     <MESSAGE value="feat(geneticAlgorithm): add dataset index to log&#10;&#10;Add the active dataset index to the logbook and table.&#10;&#10;- Include dataset index to track dataset rotation.&#10;- Add print statement to debug dataset rotation.&#10;- Update logbook header to display dataset index." />
     <MESSAGE value="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration." />
     <MESSAGE value="```text&#10;feat(geneticAlgorithm): add plotting and improve evaluation&#10;&#10;- Add `mplcursors` for interactive plots&#10;- Implement `plotEvo.py` for visualizing GA performance&#10;- Fix dataset rotation and objective evaluation&#10;```" />
@@ -433,6 +438,7 @@
     <MESSAGE value="feat(paper-trading): Refactor API and improve order logic&#10;&#10;- Introduce simple Binance API for fetching klines.&#10;- Update paper trader to use new API and calculate stop loss/take profit based on percentage.&#10;- Improve logging and configuration for paper trading script." />
     <MESSAGE value="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script" />
     <MESSAGE value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines." />
+    <MESSAGE value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend trading&#10;- Block reentry until signal resets&#10;- Improve plotter robustness&#10;&#10;This commit introduces KianStrat, leveraging Dow trend analysis for paper trading. Prevents multiple entries, improves chart plotting and trendline addition." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend trading&#10;- Block reentry until signal resets&#10;- Improve plotter robustness&#10;&#10;This commit introduces KianStrat, leveraging Dow trend analysis for paper trading. Prevents multiple entries, improves chart plotting and trendline addition." />
   </component>
 </project>
