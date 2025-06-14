@@ -58,8 +58,8 @@ class PaperTrader:
         self.strat = strat
         self.buy_conf_threshold = buy_conf_threshold
         self.sell_conf_threshold = sell_conf_threshold
-        self.stop_loss_pct = stop_loss_pct
-        self.take_profit_pct = take_profit_pct
+        self.stop_loss_ratio = stop_loss_pct / 100
+        self.take_profit_ratio = take_profit_pct / 100
         self.portfolio = Portfolio(balance=initial_balance)  # TODO: allow_dept support
 
         self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
@@ -104,12 +104,12 @@ class PaperTrader:
             else:
                 entry_price = ord_req.entry_price
 
-            stop_loss_pct = abs(ord_req.stop_loss - entry_price) / entry_price
+            stop_loss_ratio = abs(ord_req.stop_loss - entry_price) / entry_price
         else:
-            stop_loss_pct = self.stop_loss_pct
+            stop_loss_ratio = self.stop_loss_ratio
 
         risk_amount = self.portfolio.balance * self.risk_per_trade
-        loss_per_unit = abs(stop_loss_pct - self.df.iloc[-1]["Close"])
+        loss_per_unit = abs(stop_loss_ratio - self.df.iloc[-1]["Close"])
         return (risk_amount / loss_per_unit) * self.leverage
 
     def _update_df(self):
@@ -149,8 +149,8 @@ class PaperTrader:
             action=action,
             entry_price=None,
             qty=None,
-            stop_loss=curr_close_price - self.stop_loss_pct * curr_close_price,
-            take_profit=curr_close_price + self.take_profit_pct * curr_close_price
+            stop_loss=curr_close_price - self.stop_loss_ratio * curr_close_price,
+            take_profit=curr_close_price + self.take_profit_ratio * curr_close_price
         )
 
     def _price_reached(self, price: float) -> bool:
@@ -300,7 +300,7 @@ class PaperTrader:
 
         elif order_request is not None and (not self.block_reentry_until_signal_reset or not self.signal_active):
             # Check if qty can be calculated
-            if order_request.stop_loss is None and self.stop_loss_pct is None and order_request.qty is None:
+            if order_request.stop_loss is None and self.stop_loss_ratio is None and order_request.qty is None:
                 logger.warning(
                     "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
                 return

@@ -31,6 +31,6 @@ class Position(BaseTradingData):
             side=order_request.side,
             action=order_request.action,
             qty=order_request.qty,
-            stop_loss=order_request.stop_loss_pct,
-            take_profit=order_request.take_profit_pct
+            stop_loss=order_request.stop_loss_ratio,
+            take_profit=order_request.take_profit_ratio
         )

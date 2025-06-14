@@ -40,13 +40,13 @@ def main():
         risk_per_trade= 0.01, #float(input('Enter risk per position (% 0-1): ')),
         leverage = 1, #float(input('Enter leverage: ')), #NOT IMPLEMENTED
 
-        stop_loss_pct= 2, #float(input('Enter stop loss (% 0-1): ')),
-        take_profit_pct= 4, # float(input('Enter take profit (% 0-1): ')),
+        stop_loss_pct = 2, #float(input('Enter stop loss (% 0-1): ')),
+        take_profit_pct = 4, # float(input('Enter take profit (% 0-1): ')),
 
         buy_conf_threshold= 0.8, #float(input('Enter buy confidence threshold (0 to 1): ')),
         sell_conf_threshold= -0.8, #float(input('Enter sell confidence threshold (-1 to 0): ')),
 
-        strat = TestStrat(),
+        strat = strat,
         save_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),
     )
     pt.run(
