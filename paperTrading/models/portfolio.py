@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from typing import Optional
 from uuid import UUID
 import copy
-from xml.etree.ElementTree import Element, ElementTree
+import csv
 
 from paperTrading.models import TradeRecord, Position, OrderRequest
 
@@ -120,19 +120,21 @@ class Portfolio:
         """
         return sum(pos.qty for pos in self.positions if pos.symbol == symbol or symbol is None)
 
-    def save_to_xml(self, path: str) -> None:
+    def save_to_csv(self, path: str) -> None:
         """
         Save all trade records to an XML file.
 
         :param path: The destination file path.
         """
-        root = Element("trade_records")
-
+        data = []
         for trade_record in self.trade_records:
-            trade_record.save_to_xml(root)
+            data.append(trade_record.to_dict_for_csv())
 
-        tree = ElementTree(root)
-        tree.write(path, encoding="utf-8", xml_declaration=True)
+        with open(path, "w", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=data[0].keys())
+            writer.writeheader()
+            writer.writerows(data)
+
 
     def __repr__(self) -> str:
         return (

@@ -72,28 +72,24 @@ class TradeRecord(BaseTradingData):
             take_profit=position.take_profit
         )
 
-    def save_to_xml(self, root: Element) -> None:
-        trade_record_element = SubElement(root, "trade_record", {"uuid": str(self.uuid)})
+    def to_dict_for_csv(self) -> dict[str, str]:
+        return {
+            "uuid": self.uuid,
+            "root_uuid": self.root_uuid,
 
-        # Basic Fields
-        SubElement(trade_record_element, "root_uuid").text = str(self.root_uuid)
-        SubElement(trade_record_element, "symbol").text = self.symbol
+            "symbol": self.symbol,
 
-        SubElement(trade_record_element, "confidence").text = str(self.confidence)
+            "confidence": self.confidence,
 
-        SubElement(trade_record_element, "entry_price").text = str(self.entry_price)
-        SubElement(trade_record_element, "side").text = self.side.name
-        SubElement(trade_record_element, "action").text = self.action.name
-        SubElement(trade_record_element, "qty").text = str(self.qty)
-        SubElement(trade_record_element, "pnl").text = str(self.pnl)
+            "side": self.side.name,
+            "action": self.action.name,
+            "qty": self.qty,
+            "pnl": self.pnl,
 
-        # Timestamps, converting to ISO format for readability
-        entry_ts = datetime.fromtimestamp(self.entry_timestamp, tz=timezone.utc).isoformat()
-        exit_ts = datetime.fromtimestamp(self.exit_timestamp, tz=timezone.utc).isoformat()
-        SubElement(trade_record_element, "entry_timestamp").text = entry_ts
-        SubElement(trade_record_element, "exit_timestamp").text = exit_ts
+            "entry_price": self.entry_price,
+            "entry_timestamp": self.entry_timestamp,
+            "exit_timestamp": self.exit_timestamp,
 
-        if self.stop_loss is not None:
-            SubElement(trade_record_element, "stop_loss").text = str(self.stop_loss)
-        if self.take_profit is not None:
-            SubElement(trade_record_element, "take_profit").text = str(self.take_profit)
+            "stop_loss": self.stop_loss,
+            "take_profit": self.take_profit
+        }

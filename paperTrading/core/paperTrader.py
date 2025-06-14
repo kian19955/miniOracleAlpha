@@ -78,7 +78,7 @@ class PaperTrader:
         # Create dir and filename
         folder_name = "paperTradingData"
         timestamp_str: str = datetime.now(timezone.utc).strftime('%Y-%m-%d_%H-%M-%S')
-        filename = f"{self.strat.__class__.__name__}_{self.symbol}_{self.interval}_{timestamp_str}.xml"
+        filename = f"{self.strat.__class__.__name__}_{self.symbol}_{self.interval}_{timestamp_str}.csv"
 
         save_dir = os.path.join(self.save_data_path, folder_name)
         save_path = os.path.join(save_dir, filename)
@@ -86,7 +86,7 @@ class PaperTrader:
         os.makedirs(save_dir, exist_ok=True)
 
         # Save data
-        self.portfolio.save_to_xml(save_path)
+        self.portfolio.save_to_csv(save_path)
 
         logger.info(f"Successfully saved data to {save_path}")
 
@@ -248,6 +248,12 @@ class PaperTrader:
                 new_pos: Position | None = self._validate_and_open_position(ord_req)
 
                 if new_pos is not None:
+                    # Close oldest position if reached max positions
+                    if self.max_positions is not None and len(self.portfolio.positions) > self.max_positions:
+                        logger.info(f"Closing oldest position: {self.portfolio.positions[0]}")
+                        self.portfolio.close_position(self.portfolio.positions[0].uuid,
+                                                      closed_at_price=self.df.iloc[-1]["Close"])
+
                     logger.info(f"Opening position: {new_pos}")
                     self.portfolio.add_position(new_pos)
                 else:
@@ -262,10 +268,6 @@ class PaperTrader:
                     self.portfolio.rmv_order_request(ord_req.uuid)
 
     def _handle_positions(self) -> None:
-        if self.max_positions is not None and len(self.portfolio.positions) > self.max_positions:
-            logger.info(f"Closing oldest position: {self.portfolio.positions[0]}")
-            self.portfolio.close_position(self.portfolio.positions[0].uuid)
-
         for pos in self.portfolio.positions:
 
             curr_close_price: float = self.df.iloc[-1]["Close"]
@@ -284,7 +286,7 @@ class PaperTrader:
             order_request: OrderRequest | None = self._build_order_request(conf)
         else:
             order_request = conf
-
+            # Check if symbol is set or can be set
             if order_request.symbol is None:
                 if self.symbol is None:
                     logger.warning(
@@ -293,15 +295,16 @@ class PaperTrader:
                 else:
                     order_request.symbol = self.symbol
 
-        if order_request.stop_loss is None and self.stop_loss_pct is None and order_request.qty is None:
-            logger.warning(
-                "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
-            return
-
         if order_request is None:
             self.signal_active = False
 
         elif order_request is not None and (not self.block_reentry_until_signal_reset or not self.signal_active):
+            # Check if qty can be calculated
+            if order_request.stop_loss is None and self.stop_loss_pct is None and order_request.qty is None:
+                logger.warning(
+                    "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
+                return
+
             self.signal_active = True
             self.portfolio.add_order_request(order_request)
 

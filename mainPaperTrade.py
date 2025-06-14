@@ -1,6 +1,6 @@
 import os
 from logging import DEBUG
-
+import random
 from custom_logger import setup_logger
 from paperTrading import PaperTrader
 
@@ -9,6 +9,13 @@ from tradingComponents.strategies.kianStrat import KianStrat
 strat = KianStrat(
     check_trend=True
 )
+
+class TestStrat:
+    def __init__(self):
+        pass
+
+    def evaluate(self, *args, **kwargs):
+        return random.choice([1, -1])
 
 def main():
     setup_logger(
@@ -39,7 +46,7 @@ def main():
         buy_conf_threshold= 0.8, #float(input('Enter buy confidence threshold (0 to 1): ')),
         sell_conf_threshold= -0.8, #float(input('Enter sell confidence threshold (-1 to 0): ')),
 
-        strat = strat,
+        strat = TestStrat(),
         save_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),
     )
     pt.run(

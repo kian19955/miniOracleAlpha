@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(trade-record): add root UUID to trade records&#10;&#10;- Include root UUID in trade record XML serialization.&#10;- Facilitate trade record tracing and lineage tracking.&#10;&#10;fix(paper-trade): immediate execution&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately.&#10;- Avoid initial delay.&#10;&#10;fix(paper-trade): remove confidence print&#10;&#10;Remove debugging print statement for confidence.">
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trade): enhance order size calc&#10;&#10;Add stop loss to position size calculation.&#10;&#10;- Refactor position size calculation to support stop loss.&#10;- Calculate stop loss percentage relative to entry price.&#10;- Add order request validation for missing stop loss.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainPaperTrade.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainPaperTrade.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paperTrading/models/portfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/models/portfolio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paperTrading/models/tradeRecord.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/models/tradeRecord.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -490,7 +494,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749910286440</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="feat(paper-trade): enhance order size calc&#10;&#10;Add stop loss to position size calculation.&#10;&#10;- Refactor position size calculation to support stop loss.&#10;- Calculate stop loss percentage relative to entry price.&#10;- Add order request validation for missing stop loss.">
+      <option name="closed" value="true" />
+      <created>1749914886813</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1749914886813</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -505,7 +517,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(cli): prompt for ticker symbol&#10;&#10;Adds CLI prompt for trading symbol.&#10;&#10;- Prompts user for symbol input.&#10;- Improves user experience." />
     <MESSAGE value="```&#10;feat(macd): add moving average convergence divergence&#10;&#10;- Implements the SMA indicator as a trading component&#10;- Includes crossover and zero-line pullback logic&#10;- Adds genetic algorithm settings for optimization&#10;```" />
     <MESSAGE value="```&#10;feat(macd): add moving average convergence divergence&#10;&#10;- Implements the MACD indicator as a trading component&#10;- Includes crossover and zero-line pullback logic&#10;- Adds genetic algorithm settings for optimization&#10;```" />
     <MESSAGE value="feat(trading): add shadows trending touch strategy&#10;&#10;- Implements a trading strategy based on shadow sizes and SMA&#10;- Evaluates candlestick patterns relative to SMA trends&#10;- Determines potential entry signals based on shadow ratios" />
@@ -530,6 +541,7 @@
     <MESSAGE value="feat(paperTrader): Log confidence value&#10;&#10;Log the confidence value during order evaluation for debugging.&#10;&#10;- Add a print statement for the 'conf' variable.&#10;- Helps monitor strategy evaluation output.&#10;&#10;&lt;footer&gt;&#10;Fixes issue related to strategy evaluation monitoring." />
     <MESSAGE value="fix(paper-trade): disable start on new candle&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately upon script execution.&#10;- Avoid delay waiting for the next candle.&#10;&#10;This change provides a better user experience for backtesting scenarios." />
     <MESSAGE value="feat(trade-record): add root UUID to trade records&#10;&#10;- Include root UUID in trade record XML serialization.&#10;- Facilitate trade record tracing and lineage tracking.&#10;&#10;fix(paper-trade): immediate execution&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately.&#10;- Avoid initial delay.&#10;&#10;fix(paper-trade): remove confidence print&#10;&#10;Remove debugging print statement for confidence." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(trade-record): add root UUID to trade records&#10;&#10;- Include root UUID in trade record XML serialization.&#10;- Facilitate trade record tracing and lineage tracking.&#10;&#10;fix(paper-trade): immediate execution&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately.&#10;- Avoid initial delay.&#10;&#10;fix(paper-trade): remove confidence print&#10;&#10;Remove debugging print statement for confidence." />
+    <MESSAGE value="feat(paper-trade): enhance order size calc&#10;&#10;Add stop loss to position size calculation.&#10;&#10;- Refactor position size calculation to support stop loss.&#10;- Calculate stop loss percentage relative to entry price.&#10;- Add order request validation for missing stop loss." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trade): enhance order size calc&#10;&#10;Add stop loss to position size calculation.&#10;&#10;- Refactor position size calculation to support stop loss.&#10;- Calculate stop loss percentage relative to entry price.&#10;- Add order request validation for missing stop loss." />
   </component>
 </project>
