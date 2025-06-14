@@ -269,7 +269,6 @@ class PaperTrader:
 
     def _evaluate_and_create_order_request(self):
         conf: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self.portfolio)
-        print("Conf:", conf, end="\r")
         if type(conf) != OrderRequest:
             order_request: OrderRequest | None = self._build_order_request(conf)
         else:

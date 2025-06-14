@@ -76,6 +76,7 @@ class TradeRecord(BaseTradingData):
         trade_record_element = SubElement(root, "trade_record", {"uuid": str(self.uuid)})
 
         # Basic Fields
+        SubElement(trade_record_element, "root_uuid").text = str(self.root_uuid)
         SubElement(trade_record_element, "symbol").text = self.symbol
 
         SubElement(trade_record_element, "confidence").text = str(self.confidence)
