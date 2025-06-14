@@ -112,7 +112,7 @@ class PaperTrader:
         last_new = new.iloc[-1]
 
         if last_old["Close Time"] == last_new["Close Time"]:
-            print(f"Updating df, new candle formed. Adding new candle {new.iloc[-1]['Close']}...")
+            print(f"Updating df, new price: {new.iloc[-1]['Close']}.")
             self.df.iloc[-1] = last_new
         else:
             logger.info(f"Updating df, new candle formed. Adding new candle {new.iloc[-1]['Close']}...")

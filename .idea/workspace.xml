@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests.&#10;- Add symbol handling for order requests.&#10;- Update trading data model to include symbol." />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(dow): improve trend change time check&#10;&#10;The trend change logic in dow.py was not working as intended. This commit fixes a type comparison issue.&#10;&#10;- Corrects time delta comparison in trend detection.&#10;- Fixes `.idea/workspace.xml` to reflect recent changes.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,36 +45,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.EFT.executor": "Run",
-    "Python.__init__.executor": "Run",
-    "Python.binanceApi.executor": "Run",
-    "Python.geneticAlgorithm.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.mainPaperTrade.executor": "Run",
-    "Python.ordersTest.executor": "Run",
-    "Python.paperTrader.executor": "Run",
-    "Python.plotEvo.executor": "Run",
-    "Python.portfolio.executor": "Debug",
-    "Python.scratch.executor": "Run",
-    "Python.shadowsTrendingTouch.executor": "Run",
-    "Python.trading.executor": "Run",
-    "Python.websockets.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/MyFolders/Code/miniOracleAlpha/tradingComponents",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.EFT.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mainPaperTrade.executor&quot;: &quot;Run&quot;,
+    &quot;Python.ordersTest.executor&quot;: &quot;Run&quot;,
+    &quot;Python.paperTrader.executor&quot;: &quot;Run&quot;,
+    &quot;Python.plotEvo.executor&quot;: &quot;Run&quot;,
+    &quot;Python.portfolio.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.shadowsTrendingTouch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trading.executor&quot;: &quot;Run&quot;,
+    &quot;Python.websockets.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/MyFolders/Code/miniOracleAlpha/tradingComponents&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents" />
@@ -432,7 +435,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749905232904</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="feat(dow): improve trend change time check&#10;&#10;The trend change logic in dow.py was not working as intended. This commit fixes a type comparison issue.&#10;&#10;- Corrects time delta comparison in trend detection.&#10;- Fixes `.idea/workspace.xml` to reflect recent changes.">
+      <option name="closed" value="true" />
+      <created>1749906613650</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1749906613650</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -447,7 +458,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values." />
     <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run." />
     <MESSAGE value="feat(geneticAlgorithm): improve logging and error handling&#10;&#10;- Enhance generation logging with invalid individual count&#10;- Add try-except to `ga.run` to catch and raise exceptions&#10;- Fixes logging of number of individuals evaluated&#10;&#10;The commit improves the robustness and monitoring of the genetic algorithm by providing more detailed logging information and ensuring exceptions are properly handled. The logging now includes the number of invalid individuals, and error handling is improved by re-raising exceptions caught during the `ga.run` execution." />
     <MESSAGE value="feat(geneticAlgorithm): increase population size&#10;&#10;The population size was too small.&#10;- Increase population size from 4 to 100.&#10;- Improve performance." />
@@ -472,6 +482,7 @@
     <MESSAGE value="feat(kianStrat): add trend data to evaluate&#10;&#10;add trend info, peaks, and valleys as optional params&#10;to the evaluate function to prevent recomputation.&#10;&#10;- Allow passing pre-computed trend data&#10;- Improve performance by avoiding redundant calculations&#10;- Ensure backward compatibility" />
     <MESSAGE value="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests instead of confidence values.&#10;- Add symbol handling for order requests in the paper trader.&#10;- Update base trading data model to include optional symbol." />
     <MESSAGE value="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests.&#10;- Add symbol handling for order requests.&#10;- Update trading data model to include symbol." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests.&#10;- Add symbol handling for order requests.&#10;- Update trading data model to include symbol." />
+    <MESSAGE value="feat(dow): improve trend change time check&#10;&#10;The trend change logic in dow.py was not working as intended. This commit fixes a type comparison issue.&#10;&#10;- Corrects time delta comparison in trend detection.&#10;- Fixes `.idea/workspace.xml` to reflect recent changes." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(dow): improve trend change time check&#10;&#10;The trend change logic in dow.py was not working as intended. This commit fixes a type comparison issue.&#10;&#10;- Corrects time delta comparison in trend detection.&#10;- Fixes `.idea/workspace.xml` to reflect recent changes." />
   </component>
 </project>
