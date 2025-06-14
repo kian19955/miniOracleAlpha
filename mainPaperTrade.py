@@ -42,7 +42,9 @@ def main():
         strat = strat,
         save_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),
     )
-    pt.run(False)
+    pt.run(
+        start_on_new_candle=True,
+    )
 
 if __name__ == '__main__':
     main()

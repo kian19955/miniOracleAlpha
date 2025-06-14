@@ -72,7 +72,7 @@ def detect_dow_trend(df: pd.DataFrame, verbose: bool=False):
     current_time = df.index[-1]
     if last_trend != trend:
         # Require minimum time between trend changes to avoid whipsaws
-        if last_trend_time is None or (current_time - last_trend_time) > 3 * 60 * 15:
+        if last_trend_time is None or (current_time - last_trend_time).total_seconds() > 3 * 60 * 15:
             last_trend = trend
             last_trend_time = current_time
             print(f"🔔 Trend changed to {trend} ({phase}) at {current_time} | Power: {round(swing_strength, 6)}") if verbose else None
