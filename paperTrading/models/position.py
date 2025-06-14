@@ -20,12 +20,6 @@ class Position(BaseTradingData):
     :param take_profit: the price where the take profit is placed
     """
 
-    def __post_init__(self):
-        if self.stop_loss is not None and self.entry_price <= self.stop_loss:
-            raise ValueError("Stop loss must be less than to entry price.")
-        if self.take_profit is not None and self.entry_price >= self.take_profit:
-            raise ValueError("Take profit must be greater than to entry price.")
-
     @classmethod
     def from_order_request(cls, order_request: 'OrderRequest') -> 'Position':
         return Position(
@@ -37,6 +31,6 @@ class Position(BaseTradingData):
             side=order_request.side,
             action=order_request.action,
             qty=order_request.qty,
-            stop_loss=order_request.stop_loss,
-            take_profit=order_request.take_profit
+            stop_loss=order_request.stop_loss_pct,
+            take_profit=order_request.take_profit_pct
         )

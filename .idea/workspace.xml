@@ -4,7 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend trading&#10;- Block reentry until signal resets&#10;- Improve plotter robustness&#10;&#10;This commit introduces KianStrat, leveraging Dow trend analysis for paper trading. Prevents multiple entries, improves chart plotting and trendline addition." />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests instead of confidence values.&#10;- Add symbol handling for order requests in the paper trader.&#10;- Update base trading data model to include optional symbol.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainPaperTrade.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainPaperTrade.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paperTrading/models/orderRequest.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/models/orderRequest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paperTrading/models/portfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/models/portfolio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paperTrading/models/position.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/models/position.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradingComponents/Dow/dow.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/Dow/dow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tradingComponents/strategies/kianStrat.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/strategies/kianStrat.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,35 +51,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Python.EFT.executor&quot;: &quot;Run&quot;,
-    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
-    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
-    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
-    &quot;Python.main.executor&quot;: &quot;Run&quot;,
-    &quot;Python.mainPaperTrade.executor&quot;: &quot;Run&quot;,
-    &quot;Python.ordersTest.executor&quot;: &quot;Run&quot;,
-    &quot;Python.paperTrader.executor&quot;: &quot;Run&quot;,
-    &quot;Python.plotEvo.executor&quot;: &quot;Run&quot;,
-    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.shadowsTrendingTouch.executor&quot;: &quot;Run&quot;,
-    &quot;Python.trading.executor&quot;: &quot;Run&quot;,
-    &quot;Python.websockets.executor&quot;: &quot;Debug&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/MyFolders/Code/miniOracleAlpha/tradingComponents&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.EFT.executor": "Run",
+    "Python.__init__.executor": "Run",
+    "Python.binanceApi.executor": "Run",
+    "Python.geneticAlgorithm.executor": "Run",
+    "Python.main.executor": "Run",
+    "Python.mainPaperTrade.executor": "Run",
+    "Python.ordersTest.executor": "Run",
+    "Python.paperTrader.executor": "Run",
+    "Python.plotEvo.executor": "Run",
+    "Python.portfolio.executor": "Debug",
+    "Python.scratch.executor": "Run",
+    "Python.shadowsTrendingTouch.executor": "Run",
+    "Python.trading.executor": "Run",
+    "Python.websockets.executor": "Debug",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "com.codeium.enabled": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "D:/MyFolders/Code/miniOracleAlpha/tradingComponents",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
-      &quot;Python&quot;
+  "keyToStringList": {
+    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
+      "Python"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents" />
@@ -399,7 +409,31 @@
       <option name="project" value="LOCAL" />
       <updated>1749657990712</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="feat(kianStrat): refine entry conditions for Dow trend&#10;&#10;Refine buy/sell conditions based on peaks/valleys.&#10;&#10;- Modify buy condition: close price must exceed peak price.&#10;- Modify sell condition: close price must be below valley price.&#10;&#10;This improves the KianStrat's entry logic.">
+      <option name="closed" value="true" />
+      <created>1749658217984</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1749658217984</updated>
+    </task>
+    <task id="LOCAL-00039" summary="feat(kianStrat): add trend data to evaluate&#10;&#10;add trend info, peaks, and valleys as optional params&#10;to the evaluate function to prevent recomputation.&#10;&#10;- Allow passing pre-computed trend data&#10;- Improve performance by avoiding redundant calculations&#10;- Ensure backward compatibility">
+      <option name="closed" value="true" />
+      <created>1749658767077</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1749658767077</updated>
+    </task>
+    <task id="LOCAL-00040" summary="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests instead of confidence values.&#10;- Add symbol handling for order requests in the paper trader.&#10;- Update base trading data model to include optional symbol.">
+      <option name="closed" value="true" />
+      <created>1749659554601</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1749659554601</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -414,9 +448,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(geneticAlgorithm): add dataset index to log&#10;&#10;Add the active dataset index to the logbook and table.&#10;&#10;- Include dataset index to track dataset rotation.&#10;- Add print statement to debug dataset rotation.&#10;- Update logbook header to display dataset index." />
-    <MESSAGE value="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration." />
-    <MESSAGE value="```text&#10;feat(geneticAlgorithm): add plotting and improve evaluation&#10;&#10;- Add `mplcursors` for interactive plots&#10;- Implement `plotEvo.py` for visualizing GA performance&#10;- Fix dataset rotation and objective evaluation&#10;```" />
     <MESSAGE value="feat(geneticAlgorithm): Increase dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increases the `days` parameter from 93 to 270 for each dataset.&#10;- Shifts the `start` dates to provide a continuous historical window.&#10;- Improves the model training with expanded data range." />
     <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values." />
     <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run." />
@@ -439,6 +470,9 @@
     <MESSAGE value="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script" />
     <MESSAGE value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines." />
     <MESSAGE value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend trading&#10;- Block reentry until signal resets&#10;- Improve plotter robustness&#10;&#10;This commit introduces KianStrat, leveraging Dow trend analysis for paper trading. Prevents multiple entries, improves chart plotting and trendline addition." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend trading&#10;- Block reentry until signal resets&#10;- Improve plotter robustness&#10;&#10;This commit introduces KianStrat, leveraging Dow trend analysis for paper trading. Prevents multiple entries, improves chart plotting and trendline addition." />
+    <MESSAGE value="feat(kianStrat): refine entry conditions for Dow trend&#10;&#10;Refine buy/sell conditions based on peaks/valleys.&#10;&#10;- Modify buy condition: close price must exceed peak price.&#10;- Modify sell condition: close price must be below valley price.&#10;&#10;This improves the KianStrat's entry logic." />
+    <MESSAGE value="feat(kianStrat): add trend data to evaluate&#10;&#10;add trend info, peaks, and valleys as optional params&#10;to the evaluate function to prevent recomputation.&#10;&#10;- Allow passing pre-computed trend data&#10;- Improve performance by avoiding redundant calculations&#10;- Ensure backward compatibility" />
+    <MESSAGE value="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests instead of confidence values.&#10;- Add symbol handling for order requests in the paper trader.&#10;- Update base trading data model to include optional symbol." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests instead of confidence values.&#10;- Add symbol handling for order requests in the paper trader.&#10;- Update base trading data model to include optional symbol." />
   </component>
 </project>

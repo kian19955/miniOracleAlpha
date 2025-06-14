@@ -8,7 +8,7 @@ last_trend = None
 last_trend_time = None
 
 
-def detect_dow_trend(df: pd.DataFrame):
+def detect_dow_trend(df: pd.DataFrame, verbose: bool=False):
     """
     Detect market trend based on Dow Theory principles.
 
@@ -75,7 +75,7 @@ def detect_dow_trend(df: pd.DataFrame):
         if last_trend_time is None or (current_time - last_trend_time).total_seconds() > 3 * 60 * 15:
             last_trend = trend
             last_trend_time = current_time
-            print(f"🔔 Trend changed to {trend} ({phase}) at {current_time} | Power: {round(swing_strength, 6)}")
+            print(f"🔔 Trend changed to {trend} ({phase}) at {current_time} | Power: {round(swing_strength, 6)}") if verbose else None
 
     # Volume confirmation check
     recent_vol = df['Volume'].iloc[-1]
@@ -83,7 +83,7 @@ def detect_dow_trend(df: pd.DataFrame):
     vol_ok = recent_vol > avg_vol
 
     if not vol_ok:
-        print("⚠️ Volume too low. Ignoring signal.")
+        print("⚠️ Volume too low. Ignoring signal.") if verbose else None
         return None, peaks, valleys
 
     # Return trend information
@@ -99,7 +99,7 @@ def detect_dow_trend(df: pd.DataFrame):
 
 if __name__ == '__main__':
     """Main function to run the trend detection and plotting"""
-    from apis.binanceApi import fetch_klines
+    from api.simpleBinanceApi.fetcher import fetch_klines
     from tradingComponents.Dow.utils import plot_candle_chart
 
     symbol = 'BTCUSDT'

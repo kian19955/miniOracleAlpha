@@ -23,18 +23,18 @@ def main():
     pt = PaperTrader(
         symbol = "DOGEUSDT", #input('Enter symbol: '),
         interval = "1m", #input('Enter interval: '),
-        limit = 100, #int(input('Enter limit: ')),
+        lookback= 100, #int(input('Enter limit: ')),
 
         max_positions = 1, #int(input('Enter max positions: ')),
         seconds_to_sleep=5,  # int(input('Enter sleep interval: ')),
         block_reentry_until_signal_reset=True,
 
         initial_balance=10000,  # float(input('Enter initial balance: ')),
-        risk_per_position = 0.01, #float(input('Enter risk per position (% 0-1): ')),
+        risk_per_trade= 0.01, #float(input('Enter risk per position (% 0-1): ')),
         leverage = 1, #float(input('Enter leverage: ')), #NOT IMPLEMENTED
 
-        stop_loss= 2, #float(input('Enter stop loss (% 0-1): ')),
-        take_profit= 4, # float(input('Enter take profit (% 0-1): ')),
+        stop_loss_pct= 2, #float(input('Enter stop loss (% 0-1): ')),
+        take_profit_pct= 4, # float(input('Enter take profit (% 0-1): ')),
 
         buy_conf_threshold= 0.8, #float(input('Enter buy confidence threshold (0 to 1): ')),
         sell_conf_threshold= -0.8, #float(input('Enter sell confidence threshold (-1 to 0): ')),
@@ -42,7 +42,7 @@ def main():
         strat = strat,
         save_data_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),
     )
-    pt.run()
+    pt.run(False)
 
 if __name__ == '__main__':
     main()

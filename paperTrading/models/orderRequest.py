@@ -24,12 +24,3 @@ class OrderRequest(BaseTradingData):
 
     root_uuid: UUID = field(default_factory=uuid4, init=False)
 
-    def __post_init__(self):
-        if self.entry_price is None:
-            return
-
-        if self.stop_loss is not None and self.entry_price <= self.stop_loss:
-            raise ValueError("Stop loss must be less than to entry price.")
-        if self.take_profit is not None and self.entry_price >= self.take_profit:
-            raise ValueError("Take profit must be greater than to entry price.")
-

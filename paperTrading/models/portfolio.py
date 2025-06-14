@@ -1,98 +1,143 @@
-import copy
 from dataclasses import dataclass, field
 from typing import Optional
 from uuid import UUID
-from xml.dom.minidom import Element
-from xml.etree.ElementTree import ElementTree
+import copy
+from xml.etree.ElementTree import Element, ElementTree
 
 from paperTrading.models import TradeRecord, Position, OrderRequest
 
 
 @dataclass
 class Portfolio:
+    """
+    A class representing a user's trading portfolio, containing order requests,
+    open positions, and closed trade records.
+    """
     balance: float
+
+    allow_dept: bool = False
+
     order_requests: list[OrderRequest] = field(default_factory=list)
     positions: list[Position] = field(default_factory=list)
     trade_records: list[TradeRecord] = field(default_factory=list)
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         if self.balance < 0:
             raise ValueError("Initial balance must be non-negative")
 
     def add_order_request(self, order_request: OrderRequest) -> None:
+        """
+        Add a new order request to the portfolio.
+
+        :param order_request: The OrderRequest instance to add.
+        """
         self.order_requests.append(order_request)
 
     def rmv_order_request(self, uuid: UUID) -> None:
-        for ord_req in self.order_requests:
-            if ord_req.uuid == uuid:
-                self.order_requests.remove(ord_req)
-
-    def add_position(self, position) -> None:
         """
-        Add a position to the portfolio, and remove it from the order requests if it exists
+        Remove an order request from the portfolio by its UUID.
 
-        :param position: The position to add
+        :param uuid: The UUID of the order request to remove.
         """
-        for ord_req in self.order_requests:
-            if ord_req.uuid == position.uuid:
-                self.order_requests.remove(ord_req)
+        self.order_requests[:] = [o for o in self.order_requests if o.uuid != uuid]
 
+    def add_position(self, position: Position) -> None:
+        """
+        Add a new position to the portfolio. If it originated from an order request,
+        the corresponding request is removed.
+
+        :param position: The Position instance to add.
+        """
+        cost: float = position.entry_price * position.qty
+        if not self.allow_dept and cost > self.balance:
+            raise ValueError("Not enough balance")
+
+        self.balance -= cost
+        self.rmv_order_request(position.uuid)
         self.positions.append(position)
 
     def close_position(
-            self,
-            uuid: UUID,
-            closed_at_price: Optional[float] = None,
-            trade_record: Optional[TradeRecord] = None
+        self,
+        uuid: UUID,
+        closed_at_price: Optional[float] = None,
+        trade_record: Optional[TradeRecord] = None
     ) -> None:
         """
-        Close a position and create a trade record either by creating a trade record or by being passed one
-        :param uuid: The UUID of the position
-        :param closed_at_price: The price at which the asset was sold, must be provided if trade_record is not
-        :param trade_record: The trade record, if not provided it will be created using the closed_at_price
-        :raises ValueError: If neither trade_record nor closed_at_price is provided
+        Close an open position by UUID and record the trade.
+
+        :param uuid: The UUID of the position to close.
+        :param closed_at_price: Price at which the position is closed. Required if `trade_record` is not provided.
+        :param trade_record: A TradeRecord to use. If None, one will be created from the position.
+        :raises ValueError: If neither `closed_at_price` nor `trade_record` is provided.
         """
         if trade_record is None and closed_at_price is None:
             raise ValueError("Either trade_record or closed_at_price must be provided")
 
         for pos in self.positions:
             if pos.uuid == uuid:
-                tr = trade_record or TradeRecord.from_position(pos, closed_at_price=closed_at_price)
-                self.balance += tr.pnl
-
-                self.trade_records.append(tr)
+                record = trade_record or TradeRecord.from_position(pos, closed_at_price=closed_at_price)
+                self.balance += record.pnl
                 self.positions.remove(pos)
+                self.trade_records.append(record)
                 return
 
     @staticmethod
     def find_by_attributes(
-            objects: list[OrderRequest | Position | TradeRecord],
-            return_copy: bool = True,
-            **filters
+        objects: list[OrderRequest | Position | TradeRecord],
+        return_copy: bool = True,
+        **filters
     ) -> list[OrderRequest | Position | TradeRecord]:
         """
-        Find objects by their attributes
+        Find and return a list of portfolio objects that match all given attribute filters.
 
-        :param objects: pass the portfolios object. example: objects = portfolio.positions
-        :param return_copy: If True, return a copy of the object
-        :param filters: Key value pairs which the object must have
-
-        :return: A list of objects that match
-
-        :raise AttributeError: If the key is not an attribute of the object
+        :param objects: A list of OrderRequest, Position, or TradeRecord instances.
+        :param return_copy: If True, return copies of matched objects; else, return originals.
+        :param filters: Attribute-value pairs to match on.
+        :return: A list of matched objects.
+        :raises AttributeError: If an attribute doesn't exist on an object.
         """
-        result = []
+        results = []
 
         for item in objects:
             if all(getattr(item, key) == value for key, value in filters.items()):
-                result.append(copy.copy(item) if return_copy else item)
-        return result
+                results.append(copy.copy(item) if return_copy else item)
+
+        return results
+
+    def get_realized_pnl(self) -> float:
+        """
+        Calculate the total profit/loss across all trade records.
+        :return:
+        """
+        return sum(tr.pnl for tr in self.trade_records)
+
+    def get_qty(self, symbol: Optional[str] = None) -> float:
+        """
+        Return the total quantity of positions in the portfolio.
+
+        :param symbol: Filter by symbol
+        :return: Total quantity
+        """
+        return sum(pos.qty for pos in self.positions if pos.symbol == symbol or symbol is None)
 
     def save_to_xml(self, path: str) -> None:
-        root = Element(f"trade_records")
+        """
+        Save all trade records to an XML file.
+
+        :param path: The destination file path.
+        """
+        root = Element("trade_records")
 
         for trade_record in self.trade_records:
             trade_record.save_to_xml(root)
 
         tree = ElementTree(root)
         tree.write(path, encoding="utf-8", xml_declaration=True)
+
+    def __repr__(self) -> str:
+        return (
+            f"Portfolio(balance={self.balance}, "
+            f"order_requests={self.order_requests}, "
+            f"positions={self.positions}, "
+            f"trade_records={self.trade_records})"
+        )

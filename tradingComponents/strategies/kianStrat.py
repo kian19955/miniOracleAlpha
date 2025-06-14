@@ -4,19 +4,21 @@ from pandas import DataFrame
 
 from tradingComponents.Dow import detect_dow_trend
 from tradingComponents.Dow.utils.dowEnums import Trend
-from paperTrading.models import OrderRequest
+from paperTrading.models import OrderRequest, Portfolio
 from paperTrading.enums import Side, Action
 
 
 class KianStrat:
-    def __init__(self, check_trend: bool = True):
+    def __init__(self, check_trend: bool = True, risk_to_reward: float = 2):
         self.check_trend = check_trend
+        self.risk_to_reward = risk_to_reward
 
     def evaluate(
             self, df: DataFrame,
             trend_info: Optional[dict[str, any]] = None,
             peaks: Optional[list[int]] = None,
-            valleys: Optional[list[int]] = None
+            valleys: Optional[list[int]] = None,
+            portfolio: Portfolio = None
     ) -> float | OrderRequest:
         """
         ...
@@ -27,38 +29,43 @@ class KianStrat:
         :param trend_info: Dictionary of trend info
         :param peaks: Array of num of index candle for each peak
         :param valleys: Array of num of index candle for each valley
+        :param portfolio: Portfolio
         :return: -1 (Sell), 0 (Hold), 1 (Buy) Or a float indicating the probability of a successful order(-1 - 1)
         """
         if trend_info is None or peaks is None or valleys is None:
             trend_info, peaks, valleys = detect_dow_trend(df)
 
-        if peaks is None or valleys is None:
+        if trend_info is None:
             return 0
 
+        latest_peak_price: float = df.iloc[peaks[-1]]['Close']
+        latest_valley_price: float = df.iloc[valleys[-1]]['Close']
+
+        latest_price: float = df.iloc[-1]['Close']
         peak_and_low_candle_distance_delta = abs(peaks[-1] - valleys[-1])
 
         # Buy
         if (peaks[-1] < valleys[-1] and
                 (not self.check_trend or trend_info['trend'] == Trend.UPTREND) and
-                df.get('Close').iloc[-1] > df.iloc[peaks[-1]]['Close']):
+                latest_price > latest_peak_price):
             return OrderRequest(
                 confidence=1,
                 side=Side.LONG,
                 action=Action.OPEN,
-                stop_loss=...,
-                take_profit=...,
+                stop_loss=latest_valley_price,
+                take_profit=latest_price + self.risk_to_reward * (latest_peak_price - latest_valley_price),
             )
 
         # Sell
         elif (valleys[-1] < peaks[-1] and
               (not self.check_trend or trend_info['trend'] == Trend.DOWNTREND) and
-              df.get('Close').iloc[-1] < df.iloc[valleys[-1]]['Close']):
+              latest_price < latest_valley_price):
             return OrderRequest(
-            confidence=-1,
-            side=Side.SHORT,
-            action=Action.OPEN,
-            stop_loss=...,
-            take_profit=...,
-        )
+                confidence=-1,
+                side=Side.SHORT,
+                action=Action.OPEN,
+                stop_loss=latest_peak_price,
+                take_profit=latest_price - self.risk_to_reward * (latest_peak_price - latest_valley_price),
+            )
 
         return 0
