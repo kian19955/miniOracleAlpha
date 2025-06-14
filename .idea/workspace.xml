@@ -4,16 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests instead of confidence values.&#10;- Add symbol handling for order requests in the paper trader.&#10;- Update base trading data model to include optional symbol.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainPaperTrade.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainPaperTrade.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paperTrading/models/orderRequest.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/models/orderRequest.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paperTrading/models/portfolio.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/models/portfolio.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paperTrading/models/position.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/models/position.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tradingComponents/Dow/dow.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/Dow/dow.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tradingComponents/strategies/kianStrat.py" beforeDir="false" afterPath="$PROJECT_DIR$/tradingComponents/strategies/kianStrat.py" afterDir="false" />
-    </list>
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests.&#10;- Add symbol handling for order requests.&#10;- Update trading data model to include symbol." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -433,7 +424,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749659554601</updated>
     </task>
-    <option name="localTasksCounter" value="41" />
+    <task id="LOCAL-00041" summary="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests.&#10;- Add symbol handling for order requests.&#10;- Update trading data model to include symbol.">
+      <option name="closed" value="true" />
+      <created>1749905232904</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1749905232904</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -448,7 +447,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(geneticAlgorithm): Increase dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increases the `days` parameter from 93 to 270 for each dataset.&#10;- Shifts the `start` dates to provide a continuous historical window.&#10;- Improves the model training with expanded data range." />
     <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values." />
     <MESSAGE value="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run." />
     <MESSAGE value="feat(geneticAlgorithm): improve logging and error handling&#10;&#10;- Enhance generation logging with invalid individual count&#10;- Add try-except to `ga.run` to catch and raise exceptions&#10;- Fixes logging of number of individuals evaluated&#10;&#10;The commit improves the robustness and monitoring of the genetic algorithm by providing more detailed logging information and ensuring exceptions are properly handled. The logging now includes the number of invalid individuals, and error handling is improved by re-raising exceptions caught during the `ga.run` execution." />
@@ -473,6 +471,7 @@
     <MESSAGE value="feat(kianStrat): refine entry conditions for Dow trend&#10;&#10;Refine buy/sell conditions based on peaks/valleys.&#10;&#10;- Modify buy condition: close price must exceed peak price.&#10;- Modify sell condition: close price must be below valley price.&#10;&#10;This improves the KianStrat's entry logic." />
     <MESSAGE value="feat(kianStrat): add trend data to evaluate&#10;&#10;add trend info, peaks, and valleys as optional params&#10;to the evaluate function to prevent recomputation.&#10;&#10;- Allow passing pre-computed trend data&#10;- Improve performance by avoiding redundant calculations&#10;- Ensure backward compatibility" />
     <MESSAGE value="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests instead of confidence values.&#10;- Add symbol handling for order requests in the paper trader.&#10;- Update base trading data model to include optional symbol." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests instead of confidence values.&#10;- Add symbol handling for order requests in the paper trader.&#10;- Update base trading data model to include optional symbol." />
+    <MESSAGE value="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests.&#10;- Add symbol handling for order requests.&#10;- Update trading data model to include symbol." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(trading): enable order requests from strategies&#10;&#10;- Allow strategies to return order requests.&#10;- Add symbol handling for order requests.&#10;- Update trading data model to include symbol." />
   </component>
 </project>
