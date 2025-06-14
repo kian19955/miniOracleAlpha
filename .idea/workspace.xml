@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(paper-trade): disable start on new candle&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately upon script execution.&#10;- Avoid delay waiting for the next candle.&#10;&#10;This change provides a better user experience for backtesting scenarios.">
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(trade-record): add root UUID to trade records&#10;&#10;- Include root UUID in trade record XML serialization.&#10;- Facilitate trade record tracing and lineage tracking.&#10;&#10;fix(paper-trade): immediate execution&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately.&#10;- Avoid initial delay.&#10;&#10;fix(paper-trade): remove confidence print&#10;&#10;Remove debugging print statement for confidence.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -483,7 +482,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749909653588</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="feat(trade-record): add root UUID to trade records&#10;&#10;- Include root UUID in trade record XML serialization.&#10;- Facilitate trade record tracing and lineage tracking.&#10;&#10;fix(paper-trade): immediate execution&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately.&#10;- Avoid initial delay.&#10;&#10;fix(paper-trade): remove confidence print&#10;&#10;Remove debugging print statement for confidence.">
+      <option name="closed" value="true" />
+      <created>1749910286440</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1749910286440</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -498,7 +505,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(ui): add CLI option and rework hotkeys&#10;&#10;Improves user experience by adding a CLI option and reorganizing hotkeys.&#10;&#10;- Adds option to use CLI instead" />
     <MESSAGE value="feat(cli): prompt for ticker symbol&#10;&#10;Adds CLI prompt for trading symbol.&#10;&#10;- Prompts user for symbol input.&#10;- Improves user experience." />
     <MESSAGE value="```&#10;feat(macd): add moving average convergence divergence&#10;&#10;- Implements the SMA indicator as a trading component&#10;- Includes crossover and zero-line pullback logic&#10;- Adds genetic algorithm settings for optimization&#10;```" />
     <MESSAGE value="```&#10;feat(macd): add moving average convergence divergence&#10;&#10;- Implements the MACD indicator as a trading component&#10;- Includes crossover and zero-line pullback logic&#10;- Adds genetic algorithm settings for optimization&#10;```" />
@@ -523,6 +529,7 @@
     <MESSAGE value="fix(paperTrader): improve candle update logging&#10;&#10;- Update log message to show price and context&#10;- Fixes `.idea/workspace.xml` to reflect changes&#10;&#10;This commit improves the clarity of the candle update logging in `paperTrader.py` by including the current price, dataframe length, and balance. This helps in debugging and monitoring the paper trading process.&#10;The `.idea/workspace.xml` file was also updated." />
     <MESSAGE value="feat(paperTrader): Log confidence value&#10;&#10;Log the confidence value during order evaluation for debugging.&#10;&#10;- Add a print statement for the 'conf' variable.&#10;- Helps monitor strategy evaluation output.&#10;&#10;&lt;footer&gt;&#10;Fixes issue related to strategy evaluation monitoring." />
     <MESSAGE value="fix(paper-trade): disable start on new candle&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately upon script execution.&#10;- Avoid delay waiting for the next candle.&#10;&#10;This change provides a better user experience for backtesting scenarios." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(paper-trade): disable start on new candle&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately upon script execution.&#10;- Avoid delay waiting for the next candle.&#10;&#10;This change provides a better user experience for backtesting scenarios." />
+    <MESSAGE value="feat(trade-record): add root UUID to trade records&#10;&#10;- Include root UUID in trade record XML serialization.&#10;- Facilitate trade record tracing and lineage tracking.&#10;&#10;fix(paper-trade): immediate execution&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately.&#10;- Avoid initial delay.&#10;&#10;fix(paper-trade): remove confidence print&#10;&#10;Remove debugging print statement for confidence." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(trade-record): add root UUID to trade records&#10;&#10;- Include root UUID in trade record XML serialization.&#10;- Facilitate trade record tracing and lineage tracking.&#10;&#10;fix(paper-trade): immediate execution&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately.&#10;- Avoid initial delay.&#10;&#10;fix(paper-trade): remove confidence print&#10;&#10;Remove debugging print statement for confidence." />
   </component>
 </project>

@@ -18,16 +18,15 @@ import logging
 logger = logging.getLogger("oracle.analysis")
 
 
-
 class PaperTrader:
     def __init__(
-        self, symbol: Optional[str], interval: str, lookback: int,
-        seconds_to_sleep: int, save_data_path: str,
-        strat: object,
-        initial_balance: float, risk_per_trade: float, leverage: float = 1,
-        buy_conf_threshold: float = 1, sell_conf_threshold: float = -1,
-        max_positions: Optional[int] = None, block_reentry_until_signal_reset: bool = False,
-        stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
+            self, symbol: Optional[str], interval: str, lookback: int,
+            seconds_to_sleep: int, save_data_path: str,
+            strat: object,
+            initial_balance: float, risk_per_trade: float, leverage: float = 1,
+            buy_conf_threshold: float = 1, sell_conf_threshold: float = -1,
+            max_positions: Optional[int] = None, block_reentry_until_signal_reset: bool = False,
+            stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
     ):
         """
         The Portfolio object will be passed if the evaluate() method is containing a parameter named "portfolio"
@@ -53,7 +52,7 @@ class PaperTrader:
         self.max_positions = max_positions
         self.block_reentry_until_signal_reset = block_reentry_until_signal_reset
 
-        self.leverage = leverage # TODO: add leverage
+        self.leverage = leverage  # TODO: add leverage
         self.risk_per_trade = risk_per_trade
 
         self.strat = strat
@@ -61,11 +60,10 @@ class PaperTrader:
         self.sell_conf_threshold = sell_conf_threshold
         self.stop_loss_pct = stop_loss_pct
         self.take_profit_pct = take_profit_pct
-        self.portfolio = Portfolio(balance=initial_balance) # TODO: allow_dept support
+        self.portfolio = Portfolio(balance=initial_balance)  # TODO: allow_dept support
 
         self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
         self.signal_active: bool = False
-
 
         if parse_interval(self.interval) % self.seconds_to_sleep != 0:
             raise ValueError("sleep_interval must be divisible by interval")
@@ -92,15 +90,26 @@ class PaperTrader:
 
         logger.info(f"Successfully saved data to {save_path}")
 
-    def calculate_position_size(self, stop_loss: float) -> float:
+    def calculate_position_size(self, ord_req: OrderRequest) -> float:
         """
         Compute position size based on risk.
 
-        :param stop_loss: Absolute stop-loss price.
+        :param ord_req: OrderRequest instance
         :return: Quantity to trade.
         """
+        # Calculate stop loss from absolute to percentage
+        if ord_req.stop_loss is not None:
+            if ord_req.entry_price is None:
+                entry_price = self.df.iloc[-1]["Close"]
+            else:
+                entry_price = ord_req.entry_price
+
+            stop_loss_pct = abs(ord_req.stop_loss - entry_price) / entry_price
+        else:
+            stop_loss_pct = self.stop_loss_pct
+
         risk_amount = self.portfolio.balance * self.risk_per_trade
-        loss_per_unit = abs(stop_loss - self.df.iloc[-1]["Close"])
+        loss_per_unit = abs(stop_loss_pct - self.df.iloc[-1]["Close"])
         return (risk_amount / loss_per_unit) * self.leverage
 
     def _update_df(self):
@@ -112,7 +121,8 @@ class PaperTrader:
         last_new = new.iloc[-1]
 
         if last_old["Close Time"] == last_new["Close Time"]:
-            print(f"Updating df, new price: {new.iloc[-1]['Close']} - {len(self.df)} - {self.portfolio.balance}.", end="\r")
+            print(f"Updating df, new price: {new.iloc[-1]['Close']} - {len(self.df)} - {self.portfolio.balance}.",
+                  end="\r")
             self.df.iloc[-1] = last_new
         else:
             logger.info(f"Updating df, new candle formed. Adding new candle {new.iloc[-1]['Close']}...")
@@ -129,7 +139,6 @@ class PaperTrader:
             action = Action.OPEN
         else:
             return None
-
 
         curr_close_price = self.df.iloc[-1]["Close"]
         return OrderRequest(
@@ -159,10 +168,12 @@ class PaperTrader:
                 return None
 
         if order_request.qty is None:
-            pos_qty = self.calculate_position_size(order_request.stop_loss)
+            pos_qty = self.calculate_position_size(order_request)
+
         elif self.portfolio.balance < (order_request.qty * self.df.iloc[-1]["Close"]):
             logger.warning("Not enough balance to execute predefined order, creating order with maximum possible size.")
             pos_qty = self.portfolio.balance / self.df.iloc[-1]["Close"]
+
         else:
             pos_qty = order_request.qty
 
@@ -281,6 +292,11 @@ class PaperTrader:
                     order_request = None
                 else:
                     order_request.symbol = self.symbol
+
+        if order_request.stop_loss is None and self.stop_loss_pct is None and order_request.qty is None:
+            logger.warning(
+                "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
+            return
 
         if order_request is None:
             self.signal_active = False
