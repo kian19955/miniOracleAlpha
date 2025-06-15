@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trade): improve order management &amp; risk&#10;&#10;- Update risk calculation to use percentage&#10;- Fix stop loss / take profit calcs&#10;- Remove redundant order req handling&#10;&#10;Updates risk management calculations to be based on percentage of balance and fixes calculation errors with stop loss and take profit levels. Cleans up order request logic by removing redundant handling. Also allows TestStrat use.">
-      <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
-    </list>
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,22 +103,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739215295581</updated>
-    </task>
-    <task id="LOCAL-00004" summary="feat(binanceApi): enhance historical data fetching&#10;&#10;- Fix: Correctly format start and end times for file paths to avoid errors.&#10;- Change: Modify the end parameter of print from &quot;\r&quot; to &quot;\n&quot; to enable progress display in IDEs.&#10;- Update: Change the default interval to &quot;1h&quot;&#10;&#10;Improves data retrieval and progress reporting.">
-      <option name="closed" value="true" />
-      <created>1739288513935</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1739288513935</updated>
-    </task>
-    <task id="LOCAL-00005" summary="fix(binanceApi): improve data fetching progress display&#10;&#10;Refactor print statement to use carriage return.&#10;&#10;- Update print to overwrite the previous line.&#10;- Improves user experience.">
-      <option name="closed" value="true" />
-      <created>1739288526014</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1739288526014</updated>
     </task>
     <task id="LOCAL-00006" summary="feat(geneticAlgorithm): remove hardcoded parameters&#10;&#10;- Remove hardcoded bt_settings from GeneticAlgorithm init&#10;- Add extensive logging of GA runs and top individuals for analysis&#10;- Improve code readability&#10;&#10;The hardcoded parameters limited the flexibility of the GeneticAlgorithm. The logs will aid in understanding and improving algorithm performance.">
       <option name="closed" value="true" />
@@ -498,7 +480,23 @@
       <option name="project" value="LOCAL" />
       <updated>1749971184089</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="feat(paper-trade): improve logging and position closing&#10;&#10;- Enhance logging for new candle formation.&#10;- Log UUID when closing positions.&#10;- Change main log level to INFO&#10;&#10;The balance info was also moved into paper trade message for better context. Also allows TestStrat use.">
+      <option name="closed" value="true" />
+      <created>1749971407642</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1749971407642</updated>
+    </task>
+    <task id="LOCAL-00054" summary="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback">
+      <option name="closed" value="true" />
+      <created>1749971922605</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1749971922605</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -513,8 +511,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(trading): add shadows trending touch strategy&#10;&#10;- Implements a trading strategy based on shadow sizes and SMA&#10;- Evaluates candlestick patterns relative to SMA trends&#10;- Determines potential entry signals based on shadow ratios" />
-    <MESSAGE value="feat(trading): integrate shadows strategy&#10;&#10;Implements candlestick pattern-based strategy.&#10;&#10;- Adds a Shadows Trending Touch strategy.&#10;- Modifies backtester to support the new strategy.&#10;- Updates stop loss calculation in backtester." />
     <MESSAGE value="feat(trading): integrate shadows strategy&#10;&#10;Implements candlestick pattern-based strategy.&#10;&#10;- Adds Shadows Trending Touch strategy.&#10;- Modifies backtester for the new strategy.&#10;- Updates stop loss calculation." />
     <MESSAGE value="feat(trading): add Dow theory and breakouts&#10;&#10;Implement Dow theory trend detection&#10;&#10;- Add Dow trend component with peak/valley detection&#10;- Integrate breakout detection for support/resistance&#10;- Enhance plotting with trend/breakout information" />
     <MESSAGE value="feat(backtester): add stop loss and take profit&#10;&#10;Implements stop loss and take profit to backtester&#10;&#10;- Add stop loss and take profit&#10;- Improves plotting backtester&#10;- Modifies backtester for new trading strategy" />
@@ -538,6 +534,8 @@
     <MESSAGE value="feat(paper-trade): enhance order size calc&#10;&#10;Add stop loss to position size calculation.&#10;&#10;- Refactor position size calculation to support stop loss.&#10;- Calculate stop loss percentage relative to entry price.&#10;- Add order request validation for missing stop loss." />
     <MESSAGE value="feat(paper-trade): save data to CSV, enhance orders&#10;&#10;Refactor data saving to CSV for easier analysis.&#10;&#10;- Change XML saving to CSV for `Portfolio` and `TradeRecord`.&#10;- Add oldest position closing when max positions are reached.&#10;- Add `TestStrat` and make use of it" />
     <MESSAGE value="feat(paper-trade): improve order management &amp; risk&#10;&#10;- Update risk calculation to use percentage&#10;- Fix stop loss / take profit calcs&#10;- Remove redundant order req handling&#10;&#10;Updates risk management calculations to be based on percentage of balance and fixes calculation errors with stop loss and take profit levels. Cleans up order request logic by removing redundant handling. Also allows TestStrat use." />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trade): improve order management &amp; risk&#10;&#10;- Update risk calculation to use percentage&#10;- Fix stop loss / take profit calcs&#10;- Remove redundant order req handling&#10;&#10;Updates risk management calculations to be based on percentage of balance and fixes calculation errors with stop loss and take profit levels. Cleans up order request logic by removing redundant handling. Also allows TestStrat use." />
+    <MESSAGE value="feat(paper-trade): improve logging and position closing&#10;&#10;- Enhance logging for new candle formation.&#10;- Log UUID when closing positions.&#10;- Change main log level to INFO&#10;&#10;The balance info was also moved into paper trade message for better context. Also allows TestStrat use." />
+    <MESSAGE value="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback" />
   </component>
 </project>

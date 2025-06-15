@@ -313,7 +313,7 @@ class PaperTrader:
 
         while True:
             print(f"OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
-                  f"TR: {len(self.portfolio.trade_records)} | BAL: {self.portfolio.balance} | PRICE: {self.df.iloc[-1]['Close']}\r")
+                  f"TR: {len(self.portfolio.trade_records)} | BAL: {self.portfolio.balance} | PRICE: {self.df.iloc[-1]['Close']}", end="\r")
             if len(self.df) > self.lookback:
                 logger.error("Too many candles in df, resetting... ", len(self.df))
 
