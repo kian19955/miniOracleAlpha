@@ -248,7 +248,8 @@ class PaperTrader:
                 if new_pos is not None:
                     # Close oldest position if reached max positions
                     if self.max_positions is not None and (len(self.portfolio.positions) + 1) > self.max_positions:
-                        logger.info(f"Closing oldest position: {self.portfolio.positions[0].uuid}")
+                        logger.info(f"Closing oldest position: {self.portfolio.positions[0].uuid}. "
+                                    f"PNL: {self.portfolio.positions[0].pnl(self.df.iloc[-1]['Close'])}")
                         self.portfolio.close_position(self.portfolio.positions[0].uuid,
                                                       closed_at_price=self.df.iloc[-1]["Close"])
 
@@ -327,12 +328,12 @@ class PaperTrader:
             self._handle_positions()
 
             # --- VERBOSE ---
-            equity = self.portfolio.balance
+            net_worth = self.portfolio.balance
             for pos in self.portfolio.positions:
-                equity += pos.total_value(self.df.iloc[-1]["Close"])
+                net_worth += pos.total_value(self.df.iloc[-1]["Close"])
 
             print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
-                  f"TR: {len(self.portfolio.trade_records)} | BAL: {equity} | CONF: {conf if isinstance(conf, (float, int)) else conf.confidence} | "
+                  f"TR: {len(self.portfolio.trade_records)} | NETWORTH: {net_worth} | CONF: {conf if isinstance(conf, (float, int)) else conf.confidence} | "
                   f"PRICE: {self.df.iloc[-1]['Close']}", end="\r")
             # --- -------- ---
             time.sleep(seconds_to_next_boundry(self.seconds_to_sleep))

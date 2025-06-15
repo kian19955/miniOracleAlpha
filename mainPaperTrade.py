@@ -53,7 +53,7 @@ def main():
         save_data_path=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),
     )
     pt.run(
-        start_on_new_candle=True,
+        start_on_new_candle=False,
     )
 
 
