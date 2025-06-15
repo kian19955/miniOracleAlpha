@@ -23,7 +23,7 @@ class PaperTrader:
             self, symbol: Optional[str], interval: str, lookback: int,
             seconds_to_sleep: int, save_data_path: str,
             strat: object,
-            initial_balance: float, risk_per_trade: float, leverage: float = 1,
+            initial_balance: float, risk_per_trade_pct: float, leverage: float = 1,
             buy_conf_threshold: float = 1, sell_conf_threshold: float = -1,
             max_positions: Optional[int] = None, block_reentry_until_signal_reset: bool = False,
             stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
@@ -40,7 +40,7 @@ class PaperTrader:
         :param block_reentry_until_signal_reset: Only enter on signal switch from inactive to active. Prevents multiple entries while the signal stays above the threshold.
         :param initial_balance:
         :param leverage:
-        :param risk_per_trade: How much of your total balance to risk per position in percentage
+        :param risk_per_trade_pct: How much of your total balance to risk per position in percentage
         :param strat: A class containing an evaluate() -> float[-1.0, 1.0] method
         """
         self.symbol = symbol
@@ -53,13 +53,13 @@ class PaperTrader:
         self.block_reentry_until_signal_reset = block_reentry_until_signal_reset
 
         self.leverage = leverage  # TODO: add leverage
-        self.risk_per_trade = risk_per_trade
+        self.risk_per_trade = risk_per_trade_pct / 100
 
         self.strat = strat
         self.buy_conf_threshold = buy_conf_threshold
         self.sell_conf_threshold = sell_conf_threshold
-        self.stop_loss_ratio = stop_loss_pct / 100
-        self.take_profit_ratio = take_profit_pct / 100
+        self.stop_loss = stop_loss_pct / 100
+        self.take_profit = take_profit_pct / 100
         self.portfolio = Portfolio(balance=initial_balance)  # TODO: allow_dept support
 
         self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
@@ -106,7 +106,7 @@ class PaperTrader:
 
             stop_loss_ratio = abs(ord_req.stop_loss - entry_price) / entry_price
         else:
-            stop_loss_ratio = self.stop_loss_ratio
+            stop_loss_ratio = self.stop_loss
 
         risk_amount = self.portfolio.balance * self.risk_per_trade
         loss_per_unit = abs(stop_loss_ratio - self.df.iloc[-1]["Close"])
@@ -149,8 +149,8 @@ class PaperTrader:
             action=action,
             entry_price=None,
             qty=None,
-            stop_loss=curr_close_price - self.stop_loss_ratio * curr_close_price,
-            take_profit=curr_close_price + self.take_profit_ratio * curr_close_price
+            stop_loss=curr_close_price - self.stop_loss * curr_close_price,
+            take_profit=curr_close_price + self.take_profit * curr_close_price
         )
 
     def _price_reached(self, price: float) -> bool:
@@ -207,8 +207,8 @@ class PaperTrader:
             side=ord_req.side
         )
         if not open_pos:
-            logger.warning(f"No open positions to close for request {ord_req.uuid}; keeping it pending")
-            return
+            logger.warning(f"No open positions to close for request {ord_req.uuid}; closing request.")
+            return ord_req
 
         open_pos.sort(key=lambda p: p.timestamp)
         remaining_qty = ord_req.qty if ord_req.qty is not None else sum(p.qty for p in open_pos)
@@ -256,9 +256,7 @@ class PaperTrader:
 
                     logger.info(f"Opening position: {new_pos}")
                     self.portfolio.add_position(new_pos)
-                else:
-                    logger.info(f"Order request added to pending order requests: {ord_req}")
-                    self.portfolio.add_order_request(ord_req)
+                    self.portfolio.rmv_order_request(ord_req.uuid)
 
             else:
                 ord_req: OrderRequest | None = self._validate_and_close_position(ord_req)
@@ -300,7 +298,7 @@ class PaperTrader:
 
         elif order_request is not None and (not self.block_reentry_until_signal_reset or not self.signal_active):
             # Check if qty can be calculated
-            if order_request.stop_loss is None and self.stop_loss_ratio is None and order_request.qty is None:
+            if order_request.stop_loss is None and self.stop_loss is None and order_request.qty is None:
                 logger.warning(
                     "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
                 return

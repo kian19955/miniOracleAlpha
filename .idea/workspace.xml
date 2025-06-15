@@ -8,7 +8,6 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mainPaperTrade.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainPaperTrade.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paperTrading/models/position.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/models/position.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +55,7 @@
     "Python.main.executor": "Run",
     "Python.mainPaperTrade.executor": "Debug",
     "Python.ordersTest.executor": "Run",
-    "Python.paperTrader.executor": "Run",
+    "Python.paperTrader.executor": "Debug",
     "Python.plotEvo.executor": "Run",
     "Python.portfolio.executor": "Debug",
     "Python.scratch.executor": "Run",
@@ -108,14 +107,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739215295581</updated>
-    </task>
-    <task id="LOCAL-00002" summary="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process.">
-      <option name="closed" value="true" />
-      <created>1739215483288</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1739215483288</updated>
     </task>
     <task id="LOCAL-00003" summary="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process.">
       <option name="closed" value="true" />
@@ -501,7 +492,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749916548190</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="feat(paper-trade): save data to CSV, enhance orders&#10;&#10;Refactor data saving to CSV for easier analysis.&#10;&#10;- Change XML saving to CSV for `Portfolio` and `TradeRecord`.&#10;- Add oldest position closing when max positions are reached.&#10;- Add `TestStrat` and make use of it">
+      <option name="closed" value="true" />
+      <created>1749917068058</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1749917068058</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -542,21 +541,5 @@
     <MESSAGE value="feat(paper-trade): enhance order size calc&#10;&#10;Add stop loss to position size calculation.&#10;&#10;- Refactor position size calculation to support stop loss.&#10;- Calculate stop loss percentage relative to entry price.&#10;- Add order request validation for missing stop loss." />
     <MESSAGE value="feat(paper-trade): save data to CSV, enhance orders&#10;&#10;Refactor data saving to CSV for easier analysis.&#10;&#10;- Change XML saving to CSV for `Portfolio` and `TradeRecord`.&#10;- Add oldest position closing when max positions are reached.&#10;- Add `TestStrat` and make use of it" />
     <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trade): save data to CSV, enhance orders&#10;&#10;Refactor data saving to CSV for easier analysis.&#10;&#10;- Change XML saving to CSV for `Portfolio` and `TradeRecord`.&#10;- Add oldest position closing when max positions are reached.&#10;- Add `TestStrat` and make use of it" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/paperTrading/core/paperTrader.py</url>
-          <line>151</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/paperTrading/core/paperTrader.py</url>
-          <line>152</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
