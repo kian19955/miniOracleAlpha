@@ -333,6 +333,6 @@ class PaperTrader:
 
             print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
                   f"TR: {len(self.portfolio.trade_records)} | BAL: {equity} | CONF: {conf if isinstance(conf, (float, int)) else conf.confidence} | "
-                  f"PRICE: {self.df.iloc[-1]['Close']}", end="\n")
+                  f"PRICE: {self.df.iloc[-1]['Close']}", end="\r")
             # --- -------- ---
             time.sleep(seconds_to_next_boundry(self.seconds_to_sleep))
