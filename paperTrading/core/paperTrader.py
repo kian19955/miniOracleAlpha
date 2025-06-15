@@ -121,11 +121,11 @@ class PaperTrader:
         last_new = new.iloc[-1]
 
         if last_old["Close Time"] == last_new["Close Time"]:
-            print(f"Updating df, new price: {new.iloc[-1]['Close']} - {len(self.df)} - {self.portfolio.balance}.",
+            print(f"Updating df, new price: {new.iloc[-1]['Close']} - Balance: {self.portfolio.balance}.",
                   end="\r")
             self.df.iloc[-1] = last_new
         else:
-            logger.info(f"Updating df, new candle formed. Adding new candle {new.iloc[-1]['Close']}...")
+            logger.debug(f"Updating df, new candle formed. Adding new candle {new.iloc[-1]['Close']}...")
             self.df = (pd.concat([self.df, new.copy()])
                        .drop_duplicates(subset=["Close Time"], keep="last"))
             self.df = self.df.tail(self.lookback)
@@ -250,7 +250,7 @@ class PaperTrader:
                 if new_pos is not None:
                     # Close oldest position if reached max positions
                     if self.max_positions is not None and len(self.portfolio.positions) > self.max_positions:
-                        logger.info(f"Closing oldest position: {self.portfolio.positions[0]}")
+                        logger.info(f"Closing oldest position: {self.portfolio.positions[0].uuid}")
                         self.portfolio.close_position(self.portfolio.positions[0].uuid,
                                                       closed_at_price=self.df.iloc[-1]["Close"])
 

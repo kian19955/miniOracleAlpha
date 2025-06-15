@@ -1,5 +1,5 @@
 import os
-from logging import DEBUG
+from logging import DEBUG, INFO
 import random
 from custom_logger import setup_logger
 from paperTrading import PaperTrader
@@ -23,7 +23,7 @@ class TestStrat:
 def main():
     setup_logger(
         'oracle.analysis',
-        DEBUG,
+        INFO,
         './logs/paperTrade.jsonl',
         log_in_json=False,
         stream_in_color=True,

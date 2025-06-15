@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trade): save data to CSV, enhance orders&#10;&#10;Refactor data saving to CSV for easier analysis.&#10;&#10;- Change XML saving to CSV for `Portfolio` and `TradeRecord`.&#10;- Add oldest position closing when max positions are reached.&#10;- Add `TestStrat` and make use of it">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mainPaperTrade.py" beforeDir="false" afterPath="$PROJECT_DIR$/mainPaperTrade.py" afterDir="false" />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="feat(paper-trade): improve order management &amp; risk&#10;&#10;- Update risk calculation to use percentage&#10;- Fix stop loss / take profit calcs&#10;- Remove redundant order req handling&#10;&#10;Updates risk management calculations to be based on percentage of balance and fixes calculation errors with stop loss and take profit levels. Cleans up order request logic by removing redundant handling. Also allows TestStrat use.">
       <change beforePath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" beforeDir="false" afterPath="$PROJECT_DIR$/paperTrading/core/paperTrader.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,36 +44,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Python.EFT.executor": "Run",
-    "Python.__init__.executor": "Run",
-    "Python.binanceApi.executor": "Run",
-    "Python.geneticAlgorithm.executor": "Run",
-    "Python.main.executor": "Run",
-    "Python.mainPaperTrade.executor": "Debug",
-    "Python.ordersTest.executor": "Run",
-    "Python.paperTrader.executor": "Debug",
-    "Python.plotEvo.executor": "Run",
-    "Python.portfolio.executor": "Debug",
-    "Python.scratch.executor": "Run",
-    "Python.shadowsTrendingTouch.executor": "Run",
-    "Python.trading.executor": "Run",
-    "Python.websockets.executor": "Debug",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "com.codeium.enabled": "true",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "D:/MyFolders/Code/miniOracleAlpha/tradingComponents",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.EFT.executor&quot;: &quot;Run&quot;,
+    &quot;Python.__init__.executor&quot;: &quot;Run&quot;,
+    &quot;Python.binanceApi.executor&quot;: &quot;Run&quot;,
+    &quot;Python.geneticAlgorithm.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;Python.mainPaperTrade.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.ordersTest.executor&quot;: &quot;Run&quot;,
+    &quot;Python.paperTrader.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.plotEvo.executor&quot;: &quot;Run&quot;,
+    &quot;Python.portfolio.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.scratch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.shadowsTrendingTouch.executor&quot;: &quot;Run&quot;,
+    &quot;Python.trading.executor&quot;: &quot;Run&quot;,
+    &quot;Python.websockets.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;com.codeium.enabled&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/MyFolders/Code/miniOracleAlpha/tradingComponents&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   },
-  "keyToStringList": {
-    "com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File": [
-      "Python"
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;Python&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\MyFolders\Code\miniOracleAlpha\tradingComponents" />
@@ -107,14 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739215295581</updated>
-    </task>
-    <task id="LOCAL-00003" summary="refactor(geneticAlgorithm): use pickle to save logbook&#10;&#10;Use pickle for logbook saving for better data structure preservation.&#10;&#10;- Change logbook saving method to use pickle&#10;- Improve data integrity during saving/loading&#10;- Simplify logbook file handling&#10;&#10;This improves the reliability of the logbook saving process.">
-      <option name="closed" value="true" />
-      <created>1739288132048</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1739288132048</updated>
     </task>
     <task id="LOCAL-00004" summary="feat(binanceApi): enhance historical data fetching&#10;&#10;- Fix: Correctly format start and end times for file paths to avoid errors.&#10;- Change: Modify the end parameter of print from &quot;\r&quot; to &quot;\n&quot; to enable progress display in IDEs.&#10;- Update: Change the default interval to &quot;1h&quot;&#10;&#10;Improves data retrieval and progress reporting.">
       <option name="closed" value="true" />
@@ -500,7 +490,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749917068058</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="feat(paper-trade): improve order management &amp; risk&#10;&#10;- Update risk calculation to use percentage&#10;- Fix stop loss / take profit calcs&#10;- Remove redundant order req handling&#10;&#10;Updates risk management calculations to be based on percentage of balance and fixes calculation errors with stop loss and take profit levels. Cleans up order request logic by removing redundant handling. Also allows TestStrat use.">
+      <option name="closed" value="true" />
+      <created>1749971184089</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1749971184089</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -515,7 +513,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="```&#10;feat(macd): add moving average convergence divergence&#10;&#10;- Implements the MACD indicator as a trading component&#10;- Includes crossover and zero-line pullback logic&#10;- Adds genetic algorithm settings for optimization&#10;```" />
     <MESSAGE value="feat(trading): add shadows trending touch strategy&#10;&#10;- Implements a trading strategy based on shadow sizes and SMA&#10;- Evaluates candlestick patterns relative to SMA trends&#10;- Determines potential entry signals based on shadow ratios" />
     <MESSAGE value="feat(trading): integrate shadows strategy&#10;&#10;Implements candlestick pattern-based strategy.&#10;&#10;- Adds a Shadows Trending Touch strategy.&#10;- Modifies backtester to support the new strategy.&#10;- Updates stop loss calculation in backtester." />
     <MESSAGE value="feat(trading): integrate shadows strategy&#10;&#10;Implements candlestick pattern-based strategy.&#10;&#10;- Adds Shadows Trending Touch strategy.&#10;- Modifies backtester for the new strategy.&#10;- Updates stop loss calculation." />
@@ -540,6 +537,7 @@
     <MESSAGE value="feat(trade-record): add root UUID to trade records&#10;&#10;- Include root UUID in trade record XML serialization.&#10;- Facilitate trade record tracing and lineage tracking.&#10;&#10;fix(paper-trade): immediate execution&#10;&#10;Disable `start_on_new_candle` for immediate execution.&#10;&#10;- Allow paper trading to start immediately.&#10;- Avoid initial delay.&#10;&#10;fix(paper-trade): remove confidence print&#10;&#10;Remove debugging print statement for confidence." />
     <MESSAGE value="feat(paper-trade): enhance order size calc&#10;&#10;Add stop loss to position size calculation.&#10;&#10;- Refactor position size calculation to support stop loss.&#10;- Calculate stop loss percentage relative to entry price.&#10;- Add order request validation for missing stop loss." />
     <MESSAGE value="feat(paper-trade): save data to CSV, enhance orders&#10;&#10;Refactor data saving to CSV for easier analysis.&#10;&#10;- Change XML saving to CSV for `Portfolio` and `TradeRecord`.&#10;- Add oldest position closing when max positions are reached.&#10;- Add `TestStrat` and make use of it" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trade): save data to CSV, enhance orders&#10;&#10;Refactor data saving to CSV for easier analysis.&#10;&#10;- Change XML saving to CSV for `Portfolio` and `TradeRecord`.&#10;- Add oldest position closing when max positions are reached.&#10;- Add `TestStrat` and make use of it" />
+    <MESSAGE value="feat(paper-trade): improve order management &amp; risk&#10;&#10;- Update risk calculation to use percentage&#10;- Fix stop loss / take profit calcs&#10;- Remove redundant order req handling&#10;&#10;Updates risk management calculations to be based on percentage of balance and fixes calculation errors with stop loss and take profit levels. Cleans up order request logic by removing redundant handling. Also allows TestStrat use." />
+    <option name="LAST_COMMIT_MESSAGE" value="feat(paper-trade): improve order management &amp; risk&#10;&#10;- Update risk calculation to use percentage&#10;- Fix stop loss / take profit calcs&#10;- Remove redundant order req handling&#10;&#10;Updates risk management calculations to be based on percentage of balance and fixes calculation errors with stop loss and take profit levels. Cleans up order request logic by removing redundant handling. Also allows TestStrat use." />
   </component>
 </project>
