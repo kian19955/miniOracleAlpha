@@ -32,7 +32,7 @@ def main():
 
     pt = PaperTrader(
         symbol="DOGEUSDT",  # input('Enter symbol: '),
-        interval="1m",  # input('Enter interval: '),
+        interval="5m",  # input('Enter interval: '),
         lookback=100,  # int(input('Enter limit: ')),
 
         max_positions=1,  # int(input('Enter max positions: ')),
