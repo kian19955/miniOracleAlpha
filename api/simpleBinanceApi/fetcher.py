@@ -3,6 +3,8 @@ import pandas as pd
 from binance.client import Client
 from binance.exceptions import BinanceAPIException, BinanceRequestException
 
+client = Client()
+
 def fetch_klines(symbol: str, interval: str, limit: int, max_retries: int = 5, base_delay: float = 1.0) -> pd.DataFrame:
     """
     Fetches historical kline (candlestick) data from Binance with retry logic.
@@ -17,8 +19,6 @@ def fetch_klines(symbol: str, interval: str, limit: int, max_retries: int = 5, b
     Returns:
     - pd.DataFrame: DataFrame containing kline data.
     """
-    client = Client()
-
     error: Exception | None = None
     for attempt in range(max_retries):
         try:

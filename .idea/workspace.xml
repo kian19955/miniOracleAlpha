@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(fetcher): improve error handling in fetcher.py&#10;&#10;- Add exception handling for general errors.&#10;- Improve retry mechanism for unexpected errors.&#10;- Update IDE workspace." />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,30 +103,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739215295581</updated>
-    </task>
-    <task id="LOCAL-00009" summary="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration.">
-      <option name="closed" value="true" />
-      <created>1739372809620</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1739372809620</updated>
-    </task>
-    <task id="LOCAL-00010" summary="```text&#10;feat(geneticAlgorithm): add plotting and improve evaluation&#10;&#10;- Add `mplcursors` for interactive plots&#10;- Implement `plotEvo.py` for visualizing GA performance&#10;- Fix dataset rotation and objective evaluation&#10;```">
-      <option name="closed" value="true" />
-      <created>1739547404720</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1739547404720</updated>
-    </task>
-    <task id="LOCAL-00011" summary="feat(geneticAlgorithm): Increase dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increases the `days` parameter from 93 to 270 for each dataset.&#10;- Shifts the `start` dates to provide a continuous historical window.&#10;- Improves the model training with expanded data range.">
-      <option name="closed" value="true" />
-      <created>1739547534392</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1739547534392</updated>
     </task>
     <task id="LOCAL-00012" summary="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values.">
       <option name="closed" value="true" />
@@ -496,7 +472,31 @@
       <option name="project" value="LOCAL" />
       <updated>1749972802904</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="fix(paperTrader): improve order evaluation and debug output&#10;&#10;- Move strategy evaluation within the trading loop.&#10;- Pass strategy output to `_evaluate_and_create_order_request`.&#10;- Enable `start_on_new_candle` for main paper trade.">
+      <option name="closed" value="true" />
+      <created>1749975100137</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1749975100138</updated>
+    </task>
+    <task id="LOCAL-00059" summary="fix(paperTrader): add confidence to verbose output&#10;&#10;Add confidence level to the verbose output for debugging.&#10;&#10;- Include 'conf' value in the verbose output.&#10;- This provides insight into the model's certainty.&#10;&#10;This change helps monitor model confidence during paper trading.">
+      <option name="closed" value="true" />
+      <created>1749975221348</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1749975221348</updated>
+    </task>
+    <task id="LOCAL-00060" summary="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance">
+      <option name="closed" value="true" />
+      <created>1749975230887</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1749975230887</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -511,9 +511,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(backtester): add stop loss and take profit&#10;&#10;Implements stop loss and take profit to backtester&#10;&#10;- Add stop loss and take profit&#10;- Improves plotting backtester&#10;- Modifies backtester for new trading strategy" />
-    <MESSAGE value="feat(backtester): add stop loss and take profit&#10;&#10;Implements stop loss and take profit to backtester&#10;&#10;- Add stop loss and take profit functionality.&#10;- Improves plotting backtester.&#10;- Modifies backtester for new trading strategy." />
-    <MESSAGE value="feat(paperTrading): Implement paper trading environment&#10;&#10;Implement paper trading environment with core trading functionalities&#10;&#10;- Add paper trading core classes and models&#10;- Implement basic trading logic (open/close positions)&#10;- Implement XML saving and loading" />
     <MESSAGE value="feat(paper-trading): Refactor API and improve order logic&#10;&#10;- Introduce simple Binance API for fetching klines.&#10;- Update paper trader to use new API and calculate stop loss/take profit based on percentage.&#10;- Improve logging and configuration for paper trading script." />
     <MESSAGE value="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script" />
     <MESSAGE value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines." />
@@ -536,6 +533,9 @@
     <MESSAGE value="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback" />
     <MESSAGE value="fix(paperTrader): add delta logging &amp; df reset&#10;&#10;- Add logging of time delta, order/pos/trade counts&#10;- Reset df when it exceeds lookback&#10;- Minor IDE workspace update" />
     <MESSAGE value="fix(fetcher): improve error handling in fetcher.py&#10;&#10;- Add exception handling for general errors.&#10;- Improve retry mechanism for unexpected errors.&#10;- Update IDE workspace." />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(fetcher): improve error handling in fetcher.py&#10;&#10;- Add exception handling for general errors.&#10;- Improve retry mechanism for unexpected errors.&#10;- Update IDE workspace." />
+    <MESSAGE value="fix(paperTrader): improve order evaluation and debug output&#10;&#10;- Move strategy evaluation within the trading loop.&#10;- Pass strategy output to `_evaluate_and_create_order_request`.&#10;- Enable `start_on_new_candle` for main paper trade." />
+    <MESSAGE value="fix(paperTrader): add confidence to verbose output&#10;&#10;Add confidence level to the verbose output for debugging.&#10;&#10;- Include 'conf' value in the verbose output.&#10;- This provides insight into the model's certainty.&#10;&#10;This change helps monitor model confidence during paper trading." />
+    <MESSAGE value="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance" />
   </component>
 </project>
