@@ -121,8 +121,6 @@ class PaperTrader:
         last_new = new.iloc[-1]
 
         if last_old["Close Time"] == last_new["Close Time"]:
-            print(f"Updating df, new price: {new.iloc[-1]['Close']} - Balance: {self.portfolio.balance}.",
-                  end="\r")
             self.df.iloc[-1] = last_new
         else:
             logger.debug(f"Updating df, new candle formed. Adding new candle {new.iloc[-1]['Close']}...")
@@ -314,6 +312,11 @@ class PaperTrader:
         print()
 
         while True:
+            print(f"OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
+                  f"TR: {len(self.portfolio.trade_records)} | BAL: {self.portfolio.balance} | PRICE: {self.df.iloc[-1]['Close']}\r")
+            if len(self.df) > self.lookback:
+                logger.error("Too many candles in df, resetting... ", len(self.df))
+
             self._update_df()
 
             self._evaluate_and_create_order_request()
