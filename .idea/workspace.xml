@@ -104,14 +104,6 @@
       <option name="presentableId" value="Default" />
       <updated>1739215295581</updated>
     </task>
-    <task id="LOCAL-00006" summary="feat(geneticAlgorithm): remove hardcoded parameters&#10;&#10;- Remove hardcoded bt_settings from GeneticAlgorithm init&#10;- Add extensive logging of GA runs and top individuals for analysis&#10;- Improve code readability&#10;&#10;The hardcoded parameters limited the flexibility of the GeneticAlgorithm. The logs will aid in understanding and improving algorithm performance.">
-      <option name="closed" value="true" />
-      <created>1739288660932</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1739288660932</updated>
-    </task>
     <task id="LOCAL-00007" summary="feat(geneticAlgorithm): add dataset index to log&#10;&#10;Add the active dataset index to the logbook and table.&#10;&#10;- Include dataset index to track dataset rotation.&#10;- Add print statement to debug dataset rotation.&#10;- Update logbook header to display dataset index.">
       <option name="closed" value="true" />
       <created>1739288848559</created>
@@ -496,7 +488,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749971922605</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback">
+      <option name="closed" value="true" />
+      <created>1749971963054</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1749971963054</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

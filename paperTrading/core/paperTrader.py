@@ -309,10 +309,10 @@ class PaperTrader:
             sleep_time = seconds_to_next_boundry(parse_interval(self.interval))
             print(f"Sleeping for {sleep_time} seconds before starting...")
             time.sleep(sleep_time)
-        print()
+        datetime_start = datetime.now()
 
         while True:
-            print(f"OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
+            print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
                   f"TR: {len(self.portfolio.trade_records)} | BAL: {self.portfolio.balance} | PRICE: {self.df.iloc[-1]['Close']}", end="\r")
             if len(self.df) > self.lookback:
                 logger.error("Too many candles in df, resetting... ", len(self.df))
