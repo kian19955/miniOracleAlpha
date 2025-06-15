@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance" />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance&#10;- improve error handling in fetcher">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,14 +105,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739215295581</updated>
-    </task>
-    <task id="LOCAL-00012" summary="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.&#10;- Replaces logger.info with print for individual ranks and fitness values.">
-      <option name="closed" value="true" />
-      <created>1739558306609</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1739558306609</updated>
     </task>
     <task id="LOCAL-00013" summary="feat(geneticAlgorithm): extend dataset window&#10;&#10;Extends the time window for each dataset.&#10;&#10;- Increase `days` parameter from 93 to 270.&#10;- Shift `start` dates for continuous historical window.&#10;- Add try-except block to handle exceptions in ga.run.">
       <option name="closed" value="true" />
@@ -496,7 +490,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749975230887</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance&#10;- improve error handling in fetcher">
+      <option name="closed" value="true" />
+      <created>1749975340841</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1749975340841</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -511,7 +513,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(paper-trading): Refactor API and improve order logic&#10;&#10;- Introduce simple Binance API for fetching klines.&#10;- Update paper trader to use new API and calculate stop loss/take profit based on percentage.&#10;- Improve logging and configuration for paper trading script." />
     <MESSAGE value="feat(paper-trading): improve order logic and API&#10;&#10;- Introduce simple Binance API for fetching klines&#10;- Calculate stop loss/take profit based on percentage&#10;- Improve logging and config for paper trading script" />
     <MESSAGE value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend-based trading&#10;- Block reentry in paperTrader until signal resets&#10;- Improve plotter with DataFrame validation and error handling&#10;&#10;This commit introduces the KianStrat, which leverages Dow trend analysis for paper trading. It prevents multiple entries on sustained signals, improves chart plotting robustness and the addition of trendlines." />
     <MESSAGE value="feat(paper-trading): Enhance Dow trend strat integration&#10;&#10;- Add KianStrat for Dow trend trading&#10;- Block reentry until signal resets&#10;- Improve plotter robustness&#10;&#10;This commit introduces KianStrat, leveraging Dow trend analysis for paper trading. Prevents multiple entries, improves chart plotting and trendline addition." />
@@ -536,6 +537,7 @@
     <MESSAGE value="fix(paperTrader): improve order evaluation and debug output&#10;&#10;- Move strategy evaluation within the trading loop.&#10;- Pass strategy output to `_evaluate_and_create_order_request`.&#10;- Enable `start_on_new_candle` for main paper trade." />
     <MESSAGE value="fix(paperTrader): add confidence to verbose output&#10;&#10;Add confidence level to the verbose output for debugging.&#10;&#10;- Include 'conf' value in the verbose output.&#10;- This provides insight into the model's certainty.&#10;&#10;This change helps monitor model confidence during paper trading." />
     <MESSAGE value="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance" />
+    <MESSAGE value="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance&#10;- improve error handling in fetcher" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(paper-trader): update candlestick interval&#10;&#10;update interval to 5m for better trade signals&#10;&#10;- adjust interval to prevent over-trading&#10;- improve strategy performance&#10;- improve error handling in fetcher" />
   </component>
 </project>

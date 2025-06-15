@@ -32,10 +32,10 @@ class KianStrat:
         :param portfolio: Portfolio
         :return: -1 (Sell), 0 (Hold), 1 (Buy) Or a float indicating the probability of a successful order(-1 - 1)
         """
-        if trend_info is None or peaks is None or valleys is None:
+        if peaks is None or valleys is None:
             trend_info, peaks, valleys = detect_dow_trend(df)
 
-        if trend_info is None:
+        if self.check_trend and trend_info is None:
             return 0
 
         latest_peak_price: float = df.iloc[peaks[-1]]['Close']
