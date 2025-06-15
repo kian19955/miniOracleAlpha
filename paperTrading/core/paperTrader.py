@@ -276,8 +276,7 @@ class PaperTrader:
                 logger.info(f"Closing position (stop loss hit: {pos.stop_loss=}/{curr_close_price}): {pos}")
                 self.portfolio.close_position(pos.uuid, curr_close_price)
 
-    def _evaluate_and_create_order_request(self):
-        conf: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self.portfolio)
+    def _evaluate_and_create_order_request(self, conf: float | OrderRequest) -> None:
         if type(conf) != OrderRequest:
             order_request: OrderRequest | None = self._build_order_request(conf)
         else:
@@ -312,16 +311,21 @@ class PaperTrader:
         datetime_start = datetime.now()
 
         while True:
-            print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
-                  f"TR: {len(self.portfolio.trade_records)} | BAL: {self.portfolio.balance} | PRICE: {self.df.iloc[-1]['Close']}", end="\r")
+            # --- DEBUG ---
             if len(self.df) > self.lookback:
                 logger.error("Too many candles in df, resetting... ", len(self.df))
+            # --- ----- ---
 
             self._update_df()
 
-            self._evaluate_and_create_order_request()
+            conf: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self.portfolio) # move to _evaluate_and_create_order_request later
+            self._evaluate_and_create_order_request(conf)
 
             self._handle_order_requests()
             self._handle_positions()
 
+            # --- VERBOSE ---
+            print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
+                  f"TR: {len(self.portfolio.trade_records)} | BAL: {self.portfolio.balance} | PRICE: {self.df.iloc[-1]['Close']}", end="\r")
+            # --- -------- ---
             time.sleep(seconds_to_next_boundry(self.seconds_to_sleep))

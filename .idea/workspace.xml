@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(paperTrader): add delta logging &amp; df reset&#10;&#10;- Add logging of time delta, order/pos/trade counts&#10;- Reset df when it exceeds lookback&#10;- Minor IDE workspace update" />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(fetcher): improve error handling in fetcher.py&#10;&#10;- Add exception handling for general errors.&#10;- Improve retry mechanism for unexpected errors.&#10;- Update IDE workspace." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,14 +103,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739215295581</updated>
-    </task>
-    <task id="LOCAL-00008" summary="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration.">
-      <option name="closed" value="true" />
-      <created>1739289041170</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1739289041170</updated>
     </task>
     <task id="LOCAL-00009" summary="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration.">
       <option name="closed" value="true" />
@@ -496,7 +488,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749972220205</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="fix(fetcher): improve error handling in fetcher.py&#10;&#10;- Add exception handling for general errors.&#10;- Improve retry mechanism for unexpected errors.&#10;- Update IDE workspace.">
+      <option name="closed" value="true" />
+      <created>1749972802904</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1749972802904</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -511,7 +511,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(trading): add Dow theory and breakouts&#10;&#10;Implement Dow theory trend detection&#10;&#10;- Add Dow trend component with peak/valley detection&#10;- Integrate breakout detection for support/resistance&#10;- Enhance plotting with trend/breakout information" />
     <MESSAGE value="feat(backtester): add stop loss and take profit&#10;&#10;Implements stop loss and take profit to backtester&#10;&#10;- Add stop loss and take profit&#10;- Improves plotting backtester&#10;- Modifies backtester for new trading strategy" />
     <MESSAGE value="feat(backtester): add stop loss and take profit&#10;&#10;Implements stop loss and take profit to backtester&#10;&#10;- Add stop loss and take profit functionality.&#10;- Improves plotting backtester.&#10;- Modifies backtester for new trading strategy." />
     <MESSAGE value="feat(paperTrading): Implement paper trading environment&#10;&#10;Implement paper trading environment with core trading functionalities&#10;&#10;- Add paper trading core classes and models&#10;- Implement basic trading logic (open/close positions)&#10;- Implement XML saving and loading" />
@@ -536,6 +535,7 @@
     <MESSAGE value="feat(paper-trade): improve logging and position closing&#10;&#10;- Enhance logging for new candle formation.&#10;- Log UUID when closing positions.&#10;- Change main log level to INFO&#10;&#10;The balance info was also moved into paper trade message for better context. Also allows TestStrat use." />
     <MESSAGE value="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback" />
     <MESSAGE value="fix(paperTrader): add delta logging &amp; df reset&#10;&#10;- Add logging of time delta, order/pos/trade counts&#10;- Reset df when it exceeds lookback&#10;- Minor IDE workspace update" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(paperTrader): add delta logging &amp; df reset&#10;&#10;- Add logging of time delta, order/pos/trade counts&#10;- Reset df when it exceeds lookback&#10;- Minor IDE workspace update" />
+    <MESSAGE value="fix(fetcher): improve error handling in fetcher.py&#10;&#10;- Add exception handling for general errors.&#10;- Improve retry mechanism for unexpected errors.&#10;- Update IDE workspace." />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(fetcher): improve error handling in fetcher.py&#10;&#10;- Add exception handling for general errors.&#10;- Improve retry mechanism for unexpected errors.&#10;- Update IDE workspace." />
   </component>
 </project>
