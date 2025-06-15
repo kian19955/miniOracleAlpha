@@ -47,10 +47,7 @@ class TradeRecord(BaseTradingData):
             raise ValueError("Either pnl or closed_at_price must be provided")
 
         if pnl is None:
-            if position.side == Side.LONG:
-                pnl = (closed_at_price - position.entry_price) * position.qty
-            else:
-                pnl = (position.entry_price - closed_at_price) * position.qty
+            pnl = position.pnl(closed_at_price)
 
         return cls(
             root_uuid=position.root_uuid,
@@ -71,6 +68,9 @@ class TradeRecord(BaseTradingData):
             stop_loss=position.stop_loss,
             take_profit=position.take_profit
         )
+
+    def total_value(self) -> float:
+        return (self.entry_price * self.qty) + self.pnl
 
     def to_dict_for_csv(self) -> dict[str, str]:
         return {

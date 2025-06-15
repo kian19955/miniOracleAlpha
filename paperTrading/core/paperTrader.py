@@ -25,7 +25,7 @@ class PaperTrader:
             strat: object,
             initial_balance: float, risk_per_trade_pct: float, leverage: float = 1,
             buy_conf_threshold: float = 1, sell_conf_threshold: float = -1,
-            max_positions: Optional[int] = None, block_reentry_until_signal_reset: bool = False,
+            max_positions: Optional[int] = None, block_reentry_until_signal_change: bool = False,
             stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
     ):
         """
@@ -37,7 +37,7 @@ class PaperTrader:
         :param seconds_to_sleep: How many seconds to sleep between each iteration
         :param save_data_path: Path to save data
         :param max_positions: Maximum number of positions, if exceeded the oldest position will be closed
-        :param block_reentry_until_signal_reset: Only enter on signal switch from inactive to active. Prevents multiple entries while the signal stays above the threshold.
+        :param block_reentry_until_signal_change: Only enter on signal switch from inactive to active. Prevents multiple entries while the signal stays above the threshold.
         :param initial_balance:
         :param leverage:
         :param risk_per_trade_pct: How much of your total balance to risk per position in percentage
@@ -50,7 +50,7 @@ class PaperTrader:
         self.seconds_to_sleep = seconds_to_sleep
         self.save_data_path = save_data_path
         self.max_positions = max_positions
-        self.block_reentry_until_signal_reset = block_reentry_until_signal_reset
+        self.block_reentry_until_signal_change = block_reentry_until_signal_change
 
         self.leverage = leverage  # TODO: add leverage
         self.risk_per_trade = risk_per_trade_pct / 100
@@ -63,7 +63,7 @@ class PaperTrader:
         self.portfolio = Portfolio(balance=initial_balance)  # TODO: allow_dept support
 
         self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
-        self.signal_active: bool = False
+        self.last_signal_direction: Optional[Side] = None
 
         if parse_interval(self.interval) % self.seconds_to_sleep != 0:
             raise ValueError("sleep_interval must be divisible by interval")
@@ -247,7 +247,7 @@ class PaperTrader:
 
                 if new_pos is not None:
                     # Close oldest position if reached max positions
-                    if self.max_positions is not None and len(self.portfolio.positions) > self.max_positions:
+                    if self.max_positions is not None and (len(self.portfolio.positions) + 1) > self.max_positions:
                         logger.info(f"Closing oldest position: {self.portfolio.positions[0].uuid}")
                         self.portfolio.close_position(self.portfolio.positions[0].uuid,
                                                       closed_at_price=self.df.iloc[-1]["Close"])
@@ -291,16 +291,18 @@ class PaperTrader:
                     order_request.symbol = self.symbol
 
         if order_request is None:
-            self.signal_active = False
+            self.last_signal_direction = None
+            return
 
-        elif order_request is not None and (not self.block_reentry_until_signal_reset or not self.signal_active):
+        elif order_request is not None and (not self.block_reentry_until_signal_change or
+                                            self.last_signal_direction != order_request.side):
             # Check if qty can be calculated
             if order_request.stop_loss is None and self.stop_loss is None and order_request.qty is None:
                 logger.warning(
                     "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
                 return
 
-            self.signal_active = True
+            self.last_signal_direction = order_request.side
             self.portfolio.add_order_request(order_request)
 
     def run(self, start_on_new_candle: bool = False) -> None:
@@ -325,7 +327,12 @@ class PaperTrader:
             self._handle_positions()
 
             # --- VERBOSE ---
+            equity = self.portfolio.balance
+            for pos in self.portfolio.positions:
+                equity += pos.total_value(self.df.iloc[-1]["Close"])
+
             print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
-                  f"TR: {len(self.portfolio.trade_records)} | BAL: {self.portfolio.balance} | CONF: {conf if isinstance(conf, (float, int)) else conf.confidence} | PRICE: {self.df.iloc[-1]['Close']}", end="\r")
+                  f"TR: {len(self.portfolio.trade_records)} | BAL: {equity} | CONF: {conf if isinstance(conf, (float, int)) else conf.confidence} | "
+                  f"PRICE: {self.df.iloc[-1]['Close']}", end="\n")
             # --- -------- ---
             time.sleep(seconds_to_next_boundry(self.seconds_to_sleep))

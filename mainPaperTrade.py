@@ -37,7 +37,7 @@ def main():
 
         max_positions=1,  # int(input('Enter max positions: ')),
         seconds_to_sleep=5,  # int(input('Enter sleep interval: ')),
-        block_reentry_until_signal_reset=True,
+        block_reentry_until_signal_change=True,
 
         initial_balance=10000,  # float(input('Enter initial balance: ')),
         risk_per_trade_pct=0.2,  # float(input('Enter risk per position (% 0-1): ')),

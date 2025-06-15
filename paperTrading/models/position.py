@@ -20,6 +20,9 @@ class Position(BaseTradingData):
     :param take_profit: the price where the take profit is placed
     """
 
+    def total_value(self, closed_at_price: float) -> float:
+        return (self.entry_price * self.qty) + self.pnl(closed_at_price)
+
     @classmethod
     def from_order_request(cls, order_request: 'OrderRequest') -> 'Position':
         return Position(

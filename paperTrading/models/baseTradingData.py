@@ -24,5 +24,11 @@ class BaseTradingData:
     stop_loss: Optional[float] = None
     take_profit: Optional[float] = None
 
+    def pnl(self, closed_at_price: float) -> float:
+        if self.side == Side.LONG:
+            return (closed_at_price - self.entry_price) * self.qty
+        else:
+            return (self.entry_price - closed_at_price) * self.qty
+
     def return_timestamp(self) -> datetime:
         return datetime.fromtimestamp(self.timestamp, tz=timezone.utc)

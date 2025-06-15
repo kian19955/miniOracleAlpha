@@ -5,6 +5,10 @@ import copy
 import csv
 
 from paperTrading.models import TradeRecord, Position, OrderRequest
+import logging
+
+logger = logging.getLogger("oracle.analysis")
+
 
 
 @dataclass
@@ -76,7 +80,7 @@ class Portfolio:
         for pos in self.positions:
             if pos.uuid == uuid:
                 record = trade_record or TradeRecord.from_position(pos, closed_at_price=closed_at_price)
-                self.balance += record.pnl
+                self.balance += record.total_value()
                 self.positions.remove(pos)
                 self.trade_records.append(record)
                 return
