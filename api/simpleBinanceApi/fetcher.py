@@ -37,6 +37,11 @@ def fetch_klines(symbol: str, interval: str, limit: int, max_retries: int = 5, b
             wait = base_delay * (2 ** attempt)
             print(f"[Retry {attempt+1}] Network error: {e}. Waiting {wait:.2f}s...")
             time.sleep(wait)
+        except Exception as e:
+            error = e
+            wait = base_delay * (2 ** attempt)
+            print(f"[Retry {attempt+1}] Unexpected error: {e}. Waiting {wait:.2f}s...")
+            time.sleep(wait)
 
     else:
         raise error

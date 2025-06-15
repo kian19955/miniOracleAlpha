@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback" />
+    <list default="true" id="624b2897-8bf7-4ce4-af41-0a720c00ba3f" name="Changes" comment="fix(paperTrader): add delta logging &amp; df reset&#10;&#10;- Add logging of time delta, order/pos/trade counts&#10;- Reset df when it exceeds lookback&#10;- Minor IDE workspace update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,14 +103,6 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1739215295581</updated>
-    </task>
-    <task id="LOCAL-00007" summary="feat(geneticAlgorithm): add dataset index to log&#10;&#10;Add the active dataset index to the logbook and table.&#10;&#10;- Include dataset index to track dataset rotation.&#10;- Add print statement to debug dataset rotation.&#10;- Update logbook header to display dataset index.">
-      <option name="closed" value="true" />
-      <created>1739288848559</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1739288848559</updated>
     </task>
     <task id="LOCAL-00008" summary="perf(geneticAlgorithm): increase dataset rotation frequency&#10;&#10;Increase dataset rotation frequency to improve performance.&#10;&#10;- Modify dataset_rotation_freq from 3 to 10.&#10;- Improve algorithm exploration.">
       <option name="closed" value="true" />
@@ -496,7 +488,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749971963054</updated>
     </task>
-    <option name="localTasksCounter" value="56" />
+    <task id="LOCAL-00056" summary="fix(paperTrader): add delta logging &amp; df reset&#10;&#10;- Add logging of time delta, order/pos/trade counts&#10;- Reset df when it exceeds lookback&#10;- Minor IDE workspace update">
+      <option name="closed" value="true" />
+      <created>1749972220204</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1749972220205</updated>
+    </task>
+    <option name="localTasksCounter" value="57" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -511,7 +511,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat(trading): integrate shadows strategy&#10;&#10;Implements candlestick pattern-based strategy.&#10;&#10;- Adds Shadows Trending Touch strategy.&#10;- Modifies backtester for the new strategy.&#10;- Updates stop loss calculation." />
     <MESSAGE value="feat(trading): add Dow theory and breakouts&#10;&#10;Implement Dow theory trend detection&#10;&#10;- Add Dow trend component with peak/valley detection&#10;- Integrate breakout detection for support/resistance&#10;- Enhance plotting with trend/breakout information" />
     <MESSAGE value="feat(backtester): add stop loss and take profit&#10;&#10;Implements stop loss and take profit to backtester&#10;&#10;- Add stop loss and take profit&#10;- Improves plotting backtester&#10;- Modifies backtester for new trading strategy" />
     <MESSAGE value="feat(backtester): add stop loss and take profit&#10;&#10;Implements stop loss and take profit to backtester&#10;&#10;- Add stop loss and take profit functionality.&#10;- Improves plotting backtester.&#10;- Modifies backtester for new trading strategy." />
@@ -536,6 +535,7 @@
     <MESSAGE value="feat(paper-trade): improve order management &amp; risk&#10;&#10;- Update risk calculation to use percentage&#10;- Fix stop loss / take profit calcs&#10;- Remove redundant order req handling&#10;&#10;Updates risk management calculations to be based on percentage of balance and fixes calculation errors with stop loss and take profit levels. Cleans up order request logic by removing redundant handling. Also allows TestStrat use." />
     <MESSAGE value="feat(paper-trade): improve logging and position closing&#10;&#10;- Enhance logging for new candle formation.&#10;- Log UUID when closing positions.&#10;- Change main log level to INFO&#10;&#10;The balance info was also moved into paper trade message for better context. Also allows TestStrat use." />
     <MESSAGE value="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix(paperTrader): update df and add logging&#10;&#10;Update dataframe and add logging for state&#10;&#10;- Fix df update logic to handle duplicate close times&#10;- Add logging of key metrics (OR, POS, TR, BAL, PRICE)&#10;- Add error logging and reset when df exceeds lookback" />
+    <MESSAGE value="fix(paperTrader): add delta logging &amp; df reset&#10;&#10;- Add logging of time delta, order/pos/trade counts&#10;- Reset df when it exceeds lookback&#10;- Minor IDE workspace update" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix(paperTrader): add delta logging &amp; df reset&#10;&#10;- Add logging of time delta, order/pos/trade counts&#10;- Reset df when it exceeds lookback&#10;- Minor IDE workspace update" />
   </component>
 </project>
