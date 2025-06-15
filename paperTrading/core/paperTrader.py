@@ -326,6 +326,6 @@ class PaperTrader:
 
             # --- VERBOSE ---
             print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
-                  f"TR: {len(self.portfolio.trade_records)} | BAL: {self.portfolio.balance} | CONF: {conf} | PRICE: {self.df.iloc[-1]['Close']}", end="\r")
+                  f"TR: {len(self.portfolio.trade_records)} | BAL: {self.portfolio.balance} | CONF: {conf if type(conf) == float else conf.confidence} | PRICE: {self.df.iloc[-1]['Close']}", end="\r")
             # --- -------- ---
             time.sleep(seconds_to_next_boundry(self.seconds_to_sleep))
