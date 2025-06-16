@@ -8,7 +8,7 @@ import atexit
 import pandas as pd
 from pandas import DataFrame
 
-from paperTrading.core import SignalValidator
+from paperTrading.core import OrderRequestValidator, Executor
 from paperTrading.models import Portfolio, OrderRequest, Position, TradeRecord
 from paperTrading.enums import Side, Action
 from api.simpleBinanceApi.fetcher import fetch_klines
@@ -20,7 +20,6 @@ logger = logging.getLogger("oracle.analysis")
 # TODO: cooldown
 # TODO: add leverage
 # TODO: add trading fees
-# TODO: reinforced signals
 
 class PaperTrader:
     def __init__(
@@ -50,6 +49,10 @@ class PaperTrader:
         """
         if confirmation_streak_threshold < 1:
             raise ValueError("confirmation_streak_threshold must be at least 1")
+        if parse_interval(interval) % seconds_to_sleep != 0:
+            raise ValueError("sleep_interval must be divisible by interval")
+        if not os.path.exists(save_data_path):
+            raise ValueError("save_data_path does not exist")
 
         self.symbol = symbol
         self.interval = interval
@@ -57,34 +60,34 @@ class PaperTrader:
 
         self.seconds_to_sleep = seconds_to_sleep
         self.save_data_path = save_data_path
-        self.max_positions = max_positions
-        self.block_reentry_until_signal_change = block_reentry_until_signal_change
 
-        self.confirmation_streak_threshold = confirmation_streak_threshold
-        self.confirmation_streak: int = 0
-        self.validator = SignalValidator(
-            streak_threshold=confirmation_streak_threshold,
-            block_reentry_until_signal_change=block_reentry_until_signal_change
-        )
 
         self.leverage = leverage  # TODO: add leverage
-        self.risk_per_trade = risk_per_trade_pct / 100
 
         self.strat = strat
         self.buy_conf_threshold = buy_conf_threshold
         self.sell_conf_threshold = sell_conf_threshold
         self.stop_loss = stop_loss_pct / 100
         self.take_profit = take_profit_pct / 100
+
         self.portfolio = Portfolio(balance=initial_balance)  # TODO: allow_dept support
 
-        self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
-        self.last_request_side: Optional[Side] = None
-        self.last_executed_side: Optional[Side] = None
+        self.ord_req_validator = OrderRequestValidator(
+            streak_threshold=confirmation_streak_threshold,
+            block_reentry_until_signal_change=block_reentry_until_signal_change,
+            default_stop_loss=stop_loss_pct/100,
+        )
 
-        if parse_interval(self.interval) % self.seconds_to_sleep != 0:
-            raise ValueError("sleep_interval must be divisible by interval")
-        if not os.path.exists(self.save_data_path):
-            raise ValueError("save_data_path does not exist")
+        self.executor = Executor(
+            portfolio=self.portfolio,
+            risk_per_trade=risk_per_trade_pct / 100,
+            leverage=self.leverage,
+            stop_loss=self.stop_loss,
+            max_positions=max_positions,
+        )
+
+        self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
+        self.prev_price: Optional[float] = None
 
         atexit.register(self.save_data)
 
@@ -106,36 +109,19 @@ class PaperTrader:
 
         logger.info(f"Successfully saved data to {save_path}")
 
-    def calculate_position_size(self, ord_req: OrderRequest) -> float:
-        """
-        Compute position size based on risk.
-
-        :param ord_req: OrderRequest instance
-        :return: Quantity to trade.
-        """
-        # Calculate stop loss from absolute to percentage
-        if ord_req.stop_loss is not None:
-            if ord_req.entry_price is None:
-                entry_price = self.df.iloc[-1]["Close"]
-            else:
-                entry_price = ord_req.entry_price
-
-            stop_loss_ratio = abs(ord_req.stop_loss - entry_price) / entry_price
-        else:
-            stop_loss_ratio = self.stop_loss
-
-        risk_amount = self.portfolio.balance * self.risk_per_trade
-        loss_per_unit = abs(stop_loss_ratio - self.df.iloc[-1]["Close"])
-        return (risk_amount / loss_per_unit) * self.leverage
-
     def _update_df(self):
         """
         Fetch latest candles and update internal DataFrame.
         """
+        # 1) Update prev_price before updating df
+        self.prev_price = self.df.iloc[-1]["Close"]
+
+        #  # 2) Fetch updated candles
         new = fetch_klines(self.symbol, self.interval, limit=2)
         last_old = self.df.iloc[-1]
         last_new = new.iloc[-1]
 
+        # 3) Overwrite/append new candles
         if last_old["Close Time"] == last_new["Close Time"]:
             self.df.iloc[-1] = last_new
         else:
@@ -143,6 +129,14 @@ class PaperTrader:
             self.df = (pd.concat([self.df, new.copy()])
                        .drop_duplicates(subset=["Close Time"], keep="last"))
             self.df = self.df.tail(self.lookback)
+
+    def _price_reached(self, target: float) -> bool:
+        if self.prev_price is None:
+            return False
+
+        curr = self.df.iloc[-1]["Close"]
+        crossed = (self.prev_price <= target <= curr) or (self.prev_price >= target >= curr)
+        return crossed
 
     def _build_order_request(self, conf: float) -> OrderRequest | None:
         if conf >= self.buy_conf_threshold:
@@ -167,118 +161,16 @@ class PaperTrader:
             take_profit=curr_close_price + self.take_profit * curr_close_price
         )
 
-    def _price_reached(self, price: float) -> bool:
-        candle_1 = self.df.iloc[-2]["Close"]
-        candle_2 = self.df.iloc[-1]["Close"]
-
-        if candle_1 <= price <= candle_2 or candle_1 >= price >= candle_2:
-            return True
-
-        return False
-
-    def _validate_and_open_position(self, order_request: OrderRequest) -> Position | None:
-        if order_request.entry_price is not None:
-            if self._price_reached(order_request.entry_price):
-                return None
-
-        if order_request.qty is None:
-            pos_qty = self.calculate_position_size(order_request)
-
-        elif self.portfolio.balance < (order_request.qty * self.df.iloc[-1]["Close"]):
-            logger.warning("Not enough balance to execute predefined order, creating order with maximum possible size.")
-            pos_qty = self.portfolio.balance / self.df.iloc[-1]["Close"]
-
-        else:
-            pos_qty = order_request.qty
-
-        pos: Position = Position(
-            root_uuid=order_request.root_uuid,
-            symbol=self.symbol,
-            timestamp=datetime.now().timestamp(),
-
-            confidence=order_request.confidence,
-
-            entry_price=self.df.iloc[-1]["Close"],
-            side=order_request.side,
-            action=order_request.action,
-            qty=pos_qty,
-
-            stop_loss=order_request.stop_loss,
-            take_profit=order_request.take_profit
-        )
-
-        return pos
-
-    def _validate_and_close_position(self, ord_req: OrderRequest) -> OrderRequest | None:
-        curr_price = self.df.iloc[-1]["Close"]
-        if ord_req.entry_price is not None and not self._price_reached(ord_req.entry_price):
-            return
-
-        open_pos: list[Position] = self.portfolio.find_by_attributes(
-            self.portfolio.positions,
-            return_copy=False,
-            symbol=self.symbol,
-            side=ord_req.side
-        )
-        if not open_pos:
-            logger.warning(f"No open positions to close for request {ord_req.uuid}; closing request.")
-            return ord_req
-
-        open_pos.sort(key=lambda p: p.timestamp)
-        remaining_qty = ord_req.qty if ord_req.qty is not None else sum(p.qty for p in open_pos)
-
-        for pos in open_pos:
-            if remaining_qty <= 0:
-                logger.error("Closed more positions than requested.") if remaining_qty < 0 else None
-                break
-
-            min_qty = min(pos.qty, remaining_qty)
-
-            if min_qty >= pos.qty:
-                logger.info(f"Closing {pos.qty=} @ {curr_price} => pnl: {pos.pnl(curr_price)} for position {pos.uuid}")
-                self.portfolio.close_position(pos.uuid, closed_at_price=curr_price)
-            else:
-                temp_pos = copy.copy(pos)
-                temp_pos.qty = min_qty
-                tr = TradeRecord.from_position(temp_pos, closed_at_price=curr_price)
-                logger.info(f"Partially closing {min_qty=} @ {curr_price} => pnl: {tr.pnl} for position {pos.uuid}")
-                self.portfolio.trade_records.append(tr)
-                pos.qty -= min_qty
-
-            remaining_qty -= min_qty
-
-        if ord_req.qty is not None and remaining_qty > 0:
-            logger.warning(
-                f"Requested to close {ord_req.qty} - {ord_req.symbol}, "
-                f"but only filled partially. Remaining qty: {ord_req.qty - remaining_qty}"
-            )
-
-        return ord_req
-
     def _handle_order_requests(self) -> None:
         for ord_req in self.portfolio.order_requests:
 
+            if ord_req.entry_price is not None and not self._price_reached(ord_req.entry_price):
+                continue
+
             if ord_req.action == Action.OPEN:
-                new_pos: Position | None = self._validate_and_open_position(ord_req)
-
-                if new_pos is not None:
-                    # Close oldest position if reached max positions
-                    if self.max_positions is not None and (len(self.portfolio.positions) + 1) > self.max_positions:
-                        logger.info(f"Closing oldest position: {self.portfolio.positions[0].uuid}. "
-                                    f"PNL: {self.portfolio.positions[0].pnl(self.df.iloc[-1]['Close'])}")
-                        self.portfolio.close_position(self.portfolio.positions[0].uuid,
-                                                      closed_at_price=self.df.iloc[-1]["Close"])
-
-                    logger.info(f"Opening position: {new_pos}")
-                    self.portfolio.add_position(new_pos)
-                    self.portfolio.rmv_order_request(ord_req.uuid)
-
+                self.executor.open(ord_req, self.df.iloc[-1]["Close"])
             else:
-                ord_req: OrderRequest | None = self._validate_and_close_position(ord_req)
-
-                if ord_req is not None:
-                    logger.info(f"Closing order request {ord_req.uuid}")
-                    self.portfolio.rmv_order_request(ord_req.uuid)
+                self.executor.close(ord_req, self.df.iloc[-1]["Close"])
 
     def _handle_positions(self) -> None:
         for pos in self.portfolio.positions:
@@ -292,26 +184,6 @@ class PaperTrader:
             elif pos.stop_loss is not None and self._price_reached(pos.stop_loss):
                 logger.info(f"Closing position (stop loss hit: {pos.stop_loss=}/{curr_close_price}): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
                 self.portfolio.close_position(pos.uuid, curr_close_price)
-                
-    def _validate_creation_of_order_request(self, order_request: OrderRequest) -> bool:
-        # Check if the correct amount of consecutive signals have the same side. (STREAK)
-        self.confirmation_streak = self.confirmation_streak + 1 if (self.last_request_side == order_request.side) else 1
-        self.last_request_side = order_request.side
-        if self.confirmation_streak_threshold < self.confirmation_streak:
-            return False
-
-        # Check if the last order request has not the same side (BLOCK REENTRY)
-        if self.block_reentry_until_signal_change and self.last_executed_side == order_request.side:
-            return False
-
-        # Check if qty can be calculated
-        if order_request.stop_loss is None and self.stop_loss is None and order_request.qty is None:
-            logger.warning(
-                "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
-            return False
-
-        self.last_executed_side = order_request.side
-        return True
 
     def _evaluate_and_create_order_request(self, conf: float | OrderRequest) -> None:
         if type(conf) != OrderRequest:
@@ -328,28 +200,24 @@ class PaperTrader:
                     order_request.symbol = self.symbol
 
         if order_request is None:
-            self.last_request_side = None
+            self.ord_req_validator.reset_on_neutral()
             return
 
         elif order_request is not None:
-            if not self._validate_creation_of_order_request(order_request):
+            if self.ord_req_validator.is_valid(order_request):
                 return
 
             self.portfolio.add_order_request(order_request)
 
     def run(self, start_on_new_candle: bool = False) -> None:
+        # startup
         if start_on_new_candle:
             sleep_time = seconds_to_next_boundry(parse_interval(self.interval))
             print(f"Sleeping for {sleep_time} seconds before starting...")
             time.sleep(sleep_time)
+
         datetime_start = datetime.now()
-
         while True:
-            # --- DEBUG ---
-            if len(self.df) > self.lookback:
-                logger.error("Too many candles in df, resetting... ", len(self.df))
-            # --- ----- ---
-
             self._update_df()
 
             conf: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self.portfolio) # move to _evaluate_and_create_order_request later

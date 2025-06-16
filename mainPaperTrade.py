@@ -37,6 +37,8 @@ def main():
 
         max_positions=1,  # int(input('Enter max positions: ')),
         seconds_to_sleep=5,  # int(input('Enter sleep interval: ')),
+
+        confirmation_streak_threshold=2,
         block_reentry_until_signal_change=True,
 
         initial_balance=10000,  # float(input('Enter initial balance: ')),

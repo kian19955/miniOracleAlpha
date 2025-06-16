@@ -1,4 +1,4 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import datetime, timezone
 from typing import Optional
 from uuid import UUID, uuid4
@@ -29,6 +29,15 @@ class BaseTradingData:
             return (closed_at_price - self.entry_price) * self.qty
         else:
             return (self.entry_price - closed_at_price) * self.qty
+
+    def copy(self):
+        """
+        Returns a copy of the object with its unique uuid
+        :return: self
+        """
+        copied = replace(self)
+        copied.uuid = uuid4()
+        return copied
 
     def return_timestamp(self) -> datetime:
         return datetime.fromtimestamp(self.timestamp, tz=timezone.utc)
