@@ -40,11 +40,11 @@ def main():
         block_reentry_until_signal_change=True,
 
         initial_balance=10000,  # float(input('Enter initial balance: ')),
-        risk_per_trade_pct=0.2,  # float(input('Enter risk per position (% 0-1): ')),
+        risk_per_trade_pct=1,  # float(input('Enter risk per position (% 0-100): ')),
         leverage=1,  # float(input('Enter leverage: ')), #NOT IMPLEMENTED
 
-        stop_loss_pct=2,  # float(input('Enter stop loss (% 0-1): ')),
-        take_profit_pct=4,  # float(input('Enter take profit (% 0-1): ')),
+        stop_loss_pct=2,  # float(input('Enter stop loss (% 0-100): ')),
+        take_profit_pct=4,  # float(input('Enter take profit (% 0-100): ')),
 
         buy_conf_threshold=0.8,  # float(input('Enter buy confidence threshold (0 to 1): ')),
         sell_conf_threshold=-0.8,  # float(input('Enter sell confidence threshold (-1 to 0): ')),

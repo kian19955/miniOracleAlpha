@@ -8,6 +8,7 @@ import atexit
 import pandas as pd
 from pandas import DataFrame
 
+from paperTrading.core import SignalValidator
 from paperTrading.models import Portfolio, OrderRequest, Position, TradeRecord
 from paperTrading.enums import Side, Action
 from api.simpleBinanceApi.fetcher import fetch_klines
@@ -16,7 +17,10 @@ from utils import parse_interval, seconds_to_next_boundry
 import logging
 
 logger = logging.getLogger("oracle.analysis")
-
+# TODO: cooldown
+# TODO: add leverage
+# TODO: add trading fees
+# TODO: reinforced signals
 
 class PaperTrader:
     def __init__(
@@ -36,6 +40,7 @@ class PaperTrader:
         :param lookback:
         :param seconds_to_sleep: How many seconds to sleep between each iteration
         :param save_data_path: Path to save data
+        :param confirmation_streak_threshold: How many consecutive signals are required to before accepting the order request/signal.
         :param max_positions: Maximum number of positions, if exceeded the oldest position will be closed
         :param block_reentry_until_signal_change: Only enter on signal switch from inactive to active. Prevents multiple entries while the signal stays above the threshold.
         :param initial_balance:
@@ -43,6 +48,9 @@ class PaperTrader:
         :param risk_per_trade_pct: How much of your total balance to risk per position in percentage
         :param strat: A class containing an evaluate() -> float[-1.0, 1.0] method
         """
+        if confirmation_streak_threshold < 1:
+            raise ValueError("confirmation_streak_threshold must be at least 1")
+
         self.symbol = symbol
         self.interval = interval
         self.lookback = lookback
@@ -51,9 +59,13 @@ class PaperTrader:
         self.save_data_path = save_data_path
         self.max_positions = max_positions
         self.block_reentry_until_signal_change = block_reentry_until_signal_change
-        
+
         self.confirmation_streak_threshold = confirmation_streak_threshold
         self.confirmation_streak: int = 0
+        self.validator = SignalValidator(
+            streak_threshold=confirmation_streak_threshold,
+            block_reentry_until_signal_change=block_reentry_until_signal_change
+        )
 
         self.leverage = leverage  # TODO: add leverage
         self.risk_per_trade = risk_per_trade_pct / 100
@@ -66,7 +78,8 @@ class PaperTrader:
         self.portfolio = Portfolio(balance=initial_balance)  # TODO: allow_dept support
 
         self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
-        self.last_signal_direction: Optional[Side] = None
+        self.last_request_side: Optional[Side] = None
+        self.last_executed_side: Optional[Side] = None
 
         if parse_interval(self.interval) % self.seconds_to_sleep != 0:
             raise ValueError("sleep_interval must be divisible by interval")
@@ -222,13 +235,13 @@ class PaperTrader:
             min_qty = min(pos.qty, remaining_qty)
 
             if min_qty >= pos.qty:
-                logger.info(f"Closing {pos.qty=} @ {curr_price} for position {pos.uuid}")
+                logger.info(f"Closing {pos.qty=} @ {curr_price} => pnl: {pos.pnl(curr_price)} for position {pos.uuid}")
                 self.portfolio.close_position(pos.uuid, closed_at_price=curr_price)
             else:
-                logger.info(f"Partially closing {min_qty=} @ {curr_price} for position {pos.uuid}")
                 temp_pos = copy.copy(pos)
                 temp_pos.qty = min_qty
                 tr = TradeRecord.from_position(temp_pos, closed_at_price=curr_price)
+                logger.info(f"Partially closing {min_qty=} @ {curr_price} => pnl: {tr.pnl} for position {pos.uuid}")
                 self.portfolio.trade_records.append(tr)
                 pos.qty -= min_qty
 
@@ -236,7 +249,7 @@ class PaperTrader:
 
         if ord_req.qty is not None and remaining_qty > 0:
             logger.warning(
-                f"Requested to close {ord_req.qty}, "
+                f"Requested to close {ord_req.qty} - {ord_req.symbol}, "
                 f"but only filled partially. Remaining qty: {ord_req.qty - remaining_qty}"
             )
 
@@ -273,32 +286,32 @@ class PaperTrader:
             curr_close_price: float = self.df.iloc[-1]["Close"]
 
             if pos.take_profit is not None and self._price_reached(pos.take_profit):
-                logger.info(f"Closing position (take profit hit: {pos.take_profit=}/{curr_close_price}): {pos}")
+                logger.info(f"Closing position (take profit hit: {pos.take_profit=}/{curr_close_price}): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
                 self.portfolio.close_position(pos.uuid, curr_close_price)
 
             elif pos.stop_loss is not None and self._price_reached(pos.stop_loss):
-                logger.info(f"Closing position (stop loss hit: {pos.stop_loss=}/{curr_close_price}): {pos}")
+                logger.info(f"Closing position (stop loss hit: {pos.stop_loss=}/{curr_close_price}): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
                 self.portfolio.close_position(pos.uuid, curr_close_price)
                 
     def _validate_creation_of_order_request(self, order_request: OrderRequest) -> bool:
-        # TODO: move to seperate check funtion all of them 
-            # Problem, block reentry and confirmation loopp create infinite loop. 
-            same_order_side: bool = self.last_signal_direction == order_request.side
-            if self.block_reentry_until_signal_change and same_order_side:
-                return False
-            
-            self.confirmation_streak = self.confirmation_streak + 1 if same_order_side else 0
-            if self.confirmation_streak_threshold > self.confirmation_streak:
-                return False
-            
-            # Check if qty can be calculated
-            if order_request.stop_loss is None and self.stop_loss is None and order_request.qty is None:
-                logger.warning(
-                    "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
-                return False
-                
-            return True
-        
+        # Check if the correct amount of consecutive signals have the same side. (STREAK)
+        self.confirmation_streak = self.confirmation_streak + 1 if (self.last_request_side == order_request.side) else 1
+        self.last_request_side = order_request.side
+        if self.confirmation_streak_threshold < self.confirmation_streak:
+            return False
+
+        # Check if the last order request has not the same side (BLOCK REENTRY)
+        if self.block_reentry_until_signal_change and self.last_executed_side == order_request.side:
+            return False
+
+        # Check if qty can be calculated
+        if order_request.stop_loss is None and self.stop_loss is None and order_request.qty is None:
+            logger.warning(
+                "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
+            return False
+
+        self.last_executed_side = order_request.side
+        return True
 
     def _evaluate_and_create_order_request(self, conf: float | OrderRequest) -> None:
         if type(conf) != OrderRequest:
@@ -315,13 +328,13 @@ class PaperTrader:
                     order_request.symbol = self.symbol
 
         if order_request is None:
-            self.last_signal_direction = None
+            self.last_request_side = None
             return
 
         elif order_request is not None:
             if not self._validate_creation_of_order_request(order_request):
                 return
-            self.last_signal_direction = order_request.side
+
             self.portfolio.add_order_request(order_request)
 
     def run(self, start_on_new_candle: bool = False) -> None:
