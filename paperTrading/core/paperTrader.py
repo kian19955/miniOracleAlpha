@@ -93,6 +93,9 @@ class PaperTrader:
 
     def save_data(self):
         logger.info("Saving data...")
+        if len(self.portfolio.trade_records) == 0:
+            logger.info("No data to save")
+            return
 
         # Create dir and filename
         folder_name = "paperTradingData"
