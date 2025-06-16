@@ -7,4 +7,4 @@ class Side(Enum):
 
 class Action(Enum):
     CLOSE = "close"
-    OPEN = "buy"
+    OPEN = "open"

@@ -5,24 +5,28 @@ from paperTrading.models import Portfolio, OrderRequest, Position, TradeRecord
 
 logger = logging.getLogger("oracle.analysis")
 
+
 class Executor:
     """
     Handles turning validated OrderRequests into Positions,
     enforcing max_positions, and closing positions on requests.
     """
+
     def __init__(
-        self,
-        portfolio: Portfolio,
-        stop_loss: float,
-        risk_per_trade: float,
-        leverage: float,
-        max_positions: Optional[int] = None,
+            self,
+            portfolio: Portfolio,
+            stop_loss: float,
+            risk_per_trade: float,
+            leverage: float,
+            max_positions: Optional[int] = None,
+            drop_oldest_on_max: bool = False
     ):
         self.portfolio = portfolio
         self.stop_loss = stop_loss
         self.risk_per_trade = risk_per_trade
         self.leverage = leverage
         self.max_positions = max_positions
+        self.drop_oldest_on_max = drop_oldest_on_max
 
     def calculate_position_size(self, ord_req: OrderRequest, current_price: float) -> float:
         """
@@ -48,6 +52,26 @@ class Executor:
         return (risk_amount / loss_per_unit) * self.leverage
 
     def open(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
+        # Check if exceeding max positions
+        if (
+            self.max_positions is not None
+            and len(self.portfolio.positions) + 1 > self.max_positions
+        ):
+            if not self.drop_oldest_on_max:
+                logger.info(
+                    f"Max positions ({self.max_positions}) reached; dropping request {order_request.uuid}"
+                )
+                self.portfolio.rmv_order_request(order_request.uuid)
+                return
+
+            # since portfolio.positions maintains insertion order (FIFO), the first element is the oldest
+            oldest = self.portfolio.positions[0]
+            pnl = oldest.pnl(current_price)
+            logger.info(
+                f"Max positions reached; closing oldest {oldest.uuid} PnL={pnl}"
+            )
+            self.portfolio.close_position(oldest.uuid, closed_at_price=current_price)
+
         # determine qty if not provided
         if order_request.qty is None:
             qty = self.calculate_position_size(order_request, current_price)
@@ -73,19 +97,6 @@ class Executor:
             stop_loss=order_request.stop_loss,
             take_profit=order_request.take_profit,
         )
-
-        # enforce max_positions
-        if (
-            self.max_positions is not None
-            and len(self.portfolio.positions) + 1 > self.max_positions
-        ):
-            # since portfolio.positions maintains insertion order (oldest first), the first element is the oldest
-            oldest = self.portfolio.positions[0]
-            pnl = oldest.pnl(current_price)
-            logger.info(
-                f"Max positions reached; closing oldest {oldest.uuid} PnL={pnl}"
-            )
-            self.portfolio.close_position(oldest.uuid, closed_at_price=current_price)
 
         # add to portfolio and remove its order_request
         logger.info(f"Opening position: {pos}")
@@ -119,7 +130,8 @@ class Executor:
         # sort by timestamp to process oldest closes first
         for pos in sorted(open_positions, key=lambda p: p.timestamp):
             if remaining <= 0:
-                logger.error("Closed more positions than requested.") if remaining < 0 else None # TODO: for check (debug)
+                logger.error(
+                    "Closed more positions than requested.") if remaining < 0 else None  # TODO: for check (debug)
                 break
 
             take: float = min(pos.qty, remaining)

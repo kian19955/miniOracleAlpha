@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import Optional, Callable
 from uuid import UUID
 import copy
 import csv
@@ -16,10 +16,23 @@ class Portfolio:
     """
     A class representing a user's trading portfolio, containing order requests,
     open positions, and closed trade records.
+
+    :param balance: Initial balance of the portfolio.
+    :param allow_dept: Whether to allow positions that exceed the available balance.
+    :param on_order_request_added: List of callbacks triggered when an order request is added.
+    :param on_position_added: List of callbacks triggered when a position is added.
+    :param on_trade_record_added: List of callbacks triggered when a trade record is added.
+    :param order_requests: List of current order requests.
+    :param positions: List of current open positions.
+    :param trade_records: List of closed trade records.
     """
     balance: float
 
     allow_dept: bool = False
+
+    on_order_request_added: list[Callable[[OrderRequest], None]] = field(default_factory=list)
+    on_position_added: list[Callable[[Position], None]] = field(default_factory=list)
+    on_trade_record_added: list[Callable[[TradeRecord], None]] = field(default_factory=list)
 
     order_requests: list[OrderRequest] = field(default_factory=list)
     positions: list[Position] = field(default_factory=list)
@@ -36,6 +49,9 @@ class Portfolio:
         :param order_request: The OrderRequest instance to add.
         """
         self.order_requests.append(order_request)
+
+        for callback in self.on_order_request_added:
+            callback(order_request)
 
     def rmv_order_request(self, uuid: UUID) -> None:
         """
@@ -60,6 +76,9 @@ class Portfolio:
         self.rmv_order_request(position.uuid)
         self.positions.append(position)
 
+        for callback in self.on_position_added:
+            callback(position)
+
     def close_position(
         self,
         uuid: UUID,
@@ -80,9 +99,14 @@ class Portfolio:
         for pos in self.positions:
             if pos.uuid == uuid:
                 record = trade_record or TradeRecord.from_position(pos, closed_at_price=closed_at_price)
+
                 self.balance += record.total_value()
                 self.positions.remove(pos)
                 self.trade_records.append(record)
+
+                for callback in self.on_trade_record_added:
+                    callback(pos)
+
                 return
 
     @staticmethod
@@ -130,6 +154,9 @@ class Portfolio:
 
         :param path: The destination file path.
         """
+        if len(self.trade_records) == 0:
+            return
+
         data = []
         for trade_record in self.trade_records:
             data.append(trade_record.to_dict_for_csv())

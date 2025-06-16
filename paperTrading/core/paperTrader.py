@@ -1,4 +1,5 @@
 import copy
+import csv
 import os
 import time
 from datetime import datetime, timezone
@@ -27,8 +28,9 @@ class PaperTrader:
             seconds_to_sleep: int, save_data_path: str,
             strat: object,
             initial_balance: float, risk_per_trade_pct: float, leverage: float = 1,
-            buy_conf_threshold: float = 1, sell_conf_threshold: float = -1, confirmation_streak_threshold: int = 1,
-            max_positions: Optional[int] = None, block_reentry_until_signal_change: bool = False,
+            buy_conf_threshold: float = 1, sell_conf_threshold: float = -1,
+            confirmation_streak_threshold: int = 1, max_positions: Optional[int] = None, drop_oldest_on_max: bool = False,
+            block_reentry_until_signal_change: bool = False,
             stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
     ):
         """
@@ -41,6 +43,7 @@ class PaperTrader:
         :param save_data_path: Path to save data
         :param confirmation_streak_threshold: How many consecutive signals are required to before accepting the order request/signal.
         :param max_positions: Maximum number of positions, if exceeded the oldest position will be closed
+        :param drop_oldest_on_max: If True, automatically close the oldest position when max positions are reached; otherwise, rejects new positions.
         :param block_reentry_until_signal_change: Only enter on signal switch from inactive to active. Prevents multiple entries while the signal stays above the threshold.
         :param initial_balance:
         :param leverage:
@@ -70,7 +73,13 @@ class PaperTrader:
         self.stop_loss = stop_loss_pct / 100
         self.take_profit = take_profit_pct / 100
 
-        self.portfolio = Portfolio(balance=initial_balance)  # TODO: allow_dept support
+        self.portfolio = Portfolio(
+            balance=initial_balance,
+            on_position_added=[],
+            on_trade_record_added=[self._append_trade_record_to_csv],
+            on_order_request_added=[],
+
+        )  # TODO: allow_dept support
 
         self.ord_req_validator = OrderRequestValidator(
             streak_threshold=confirmation_streak_threshold,
@@ -88,29 +97,37 @@ class PaperTrader:
 
         self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
         self.prev_price: Optional[float] = None
+        self.csv_path = self._create_csv_path()
 
-        atexit.register(self.save_data)
-
-    def save_data(self):
-        logger.info("Saving data...")
-        if len(self.portfolio.trade_records) == 0:
-            logger.info("No data to save")
-            return
-
-        # Create dir and filename
+    def _create_csv_path(self) -> str:
+        """Create a path to save the data to. Name is based on symbol, interval and timestamp."""
         folder_name = "paperTradingData"
-        timestamp_str: str = datetime.now(timezone.utc).strftime('%Y-%m-%d_%H-%M-%S')
+        timestamp_str: str = datetime.now(timezone.utc).strftime('%Y-%m-%d_%Hh-%Mm-%Ss')
         filename = f"{self.strat.__class__.__name__}_{self.symbol}_{self.interval}_{timestamp_str}.csv"
 
         save_dir = os.path.join(self.save_data_path, folder_name)
-        save_path = os.path.join(save_dir, filename)
-
         os.makedirs(save_dir, exist_ok=True)
 
-        # Save data
-        self.portfolio.save_to_csv(save_path)
+        save_path = os.path.join(save_dir, filename)
 
-        logger.info(f"Successfully saved data to {save_path}")
+        # Initialize csv file
+        with open(save_path, "w", newline="") as f:
+            dummy_record = TradeRecord(
+                symbol="DUMMY", confidence=0.0, side=Side.LONG, action=Action.OPEN,
+                entry_price=0.0, qty=0.0, pnl=0.0,
+                entry_timestamp=0.0, exit_timestamp=0.0,
+                stop_loss=None, take_profit=None
+            )
+            writer = csv.DictWriter(f, fieldnames=dummy_record.to_dict_for_csv().keys())
+            writer.writeheader()
+
+        logger.info(f"Created csv file @ {save_path}")
+        return save_path
+
+    def _append_trade_record_to_csv(self, trade_record: TradeRecord) -> None:
+        with open(self.save_data_path, "a", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=trade_record.to_dict_for_csv().keys())
+            writer.writerow(trade_record.to_dict_for_csv())
 
     def _update_df(self):
         """

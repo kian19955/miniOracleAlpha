@@ -31,18 +31,19 @@ def main():
     )
 
     pt = PaperTrader(
-        symbol="DOGEUSDT",  # input('Enter symbol: '),
+        symbol="BTCUSDT",  # input('Enter symbol: '),
         interval="5m",  # input('Enter interval: '),
-        lookback=100,  # int(input('Enter limit: ')),
+        lookback=70,  # int(input('Enter limit: ')),
 
         max_positions=1,  # int(input('Enter max positions: ')),
+        drop_oldest_on_max=False,
         seconds_to_sleep=5,  # int(input('Enter sleep interval: ')),
 
         confirmation_streak_threshold=2,
         block_reentry_until_signal_change=True,
 
         initial_balance=10000,  # float(input('Enter initial balance: ')),
-        risk_per_trade_pct=1,  # float(input('Enter risk per position (% 0-100): ')),
+        risk_per_trade_pct=0.25,  # float(input('Enter risk per position (% 0-100): ')),
         leverage=1,  # float(input('Enter leverage: ')), #NOT IMPLEMENTED
 
         stop_loss_pct=2,  # float(input('Enter stop loss (% 0-100): ')),
