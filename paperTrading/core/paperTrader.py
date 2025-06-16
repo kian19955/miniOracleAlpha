@@ -162,7 +162,7 @@ class PaperTrader:
         if conf >= self.buy_conf_threshold:
             side = Side.LONG
             action = Action.OPEN
-        elif conf < self.sell_conf_threshold:
+        elif conf <= self.sell_conf_threshold:
             side = Side.SHORT
             action = Action.OPEN
         else:
@@ -225,9 +225,7 @@ class PaperTrader:
 
         elif order_request is not None:
             if self.ord_req_validator.is_valid(order_request):
-                return
-
-            self.portfolio.add_order_request(order_request)
+                self.portfolio.add_order_request(order_request)
 
     def run(self, start_on_new_candle: bool = False) -> None:
         # startup
