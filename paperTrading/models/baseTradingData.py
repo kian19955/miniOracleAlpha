@@ -3,14 +3,14 @@ from datetime import datetime, timezone
 from typing import Optional
 from uuid import UUID, uuid4
 
-from paperTrading.enums import Side, Action
+from paperTrading.enums import OrderType, Action
 
 
 @dataclass
 class BaseTradingData:
     confidence: float
 
-    side: Side
+    side: OrderType
     action: Action
     entry_price: Optional[float] = None
     qty: Optional[float] = None
@@ -25,7 +25,7 @@ class BaseTradingData:
     take_profit: Optional[float] = None
 
     def pnl(self, closed_at_price: float) -> float:
-        if self.side == Side.LONG:
+        if self.side == OrderType.LONG:
             return (closed_at_price - self.entry_price) * self.qty
         else:
             return (self.entry_price - closed_at_price) * self.qty

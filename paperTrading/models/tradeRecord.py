@@ -4,7 +4,7 @@ from typing import Optional
 from xml.dom.minidom import Element
 from xml.etree.ElementTree import SubElement
 
-from paperTrading.enums import Side
+from paperTrading.enums import OrderType
 from paperTrading.models import Position
 from paperTrading.models import BaseTradingData
 
@@ -54,7 +54,7 @@ class TradeRecord(BaseTradingData):
 
             symbol=position.symbol,
             entry_timestamp=position.timestamp,
-            exit_timestamp=datetime.now().timestamp(),
+            exit_timestamp=datetime.now(timezone.utc).timestamp(),
 
             confidence=position.confidence,
 

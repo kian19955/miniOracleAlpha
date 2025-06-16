@@ -1,17 +1,15 @@
-import copy
 import csv
 import os
 import time
 from datetime import datetime, timezone
 from typing import Optional
-import atexit
 
 import pandas as pd
 from pandas import DataFrame
 
 from paperTrading.core import OrderRequestValidator, Executor
 from paperTrading.models import Portfolio, OrderRequest, Position, TradeRecord
-from paperTrading.enums import Side, Action
+from paperTrading.enums import OrderType, Action
 from api.simpleBinanceApi.fetcher import fetch_klines
 from utils import parse_interval, seconds_to_next_boundry
 
@@ -62,8 +60,6 @@ class PaperTrader:
         self.lookback = lookback
 
         self.seconds_to_sleep = seconds_to_sleep
-        self.save_data_path = save_data_path
-
 
         self.leverage = leverage  # TODO: add leverage
 
@@ -93,19 +89,20 @@ class PaperTrader:
             leverage=self.leverage,
             stop_loss=self.stop_loss,
             max_positions=max_positions,
+            drop_oldest_on_max=drop_oldest_on_max
         )
 
         self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
         self.prev_price: Optional[float] = None
-        self.csv_path = self._create_csv_path()
+        self.csv_path = self._create_csv_path(save_data_path)
 
-    def _create_csv_path(self) -> str:
+    def _create_csv_path(self, save_data_path: str = None) -> str:
         """Create a path to save the data to. Name is based on symbol, interval and timestamp."""
         folder_name = "paperTradingData"
         timestamp_str: str = datetime.now(timezone.utc).strftime('%Y-%m-%d_%Hh-%Mm-%Ss')
         filename = f"{self.strat.__class__.__name__}_{self.symbol}_{self.interval}_{timestamp_str}.csv"
 
-        save_dir = os.path.join(self.save_data_path, folder_name)
+        save_dir = os.path.join(save_data_path, folder_name)
         os.makedirs(save_dir, exist_ok=True)
 
         save_path = os.path.join(save_dir, filename)
@@ -113,7 +110,7 @@ class PaperTrader:
         # Initialize csv file
         with open(save_path, "w", newline="") as f:
             dummy_record = TradeRecord(
-                symbol="DUMMY", confidence=0.0, side=Side.LONG, action=Action.OPEN,
+                symbol="DUMMY", confidence=0.0, side=OrderType.LONG, action=Action.OPEN,
                 entry_price=0.0, qty=0.0, pnl=0.0,
                 entry_timestamp=0.0, exit_timestamp=0.0,
                 stop_loss=None, take_profit=None
@@ -125,7 +122,7 @@ class PaperTrader:
         return save_path
 
     def _append_trade_record_to_csv(self, trade_record: TradeRecord) -> None:
-        with open(self.save_data_path, "a", newline="") as f:
+        with open(self.csv_path, "a", newline="") as f:
             writer = csv.DictWriter(f, fieldnames=trade_record.to_dict_for_csv().keys())
             writer.writerow(trade_record.to_dict_for_csv())
 
@@ -158,12 +155,43 @@ class PaperTrader:
         crossed = (self.prev_price <= target <= curr) or (self.prev_price >= target >= curr)
         return crossed
 
-    def _build_order_request(self, conf: float) -> OrderRequest | None:
-        if conf >= self.buy_conf_threshold:
-            side = Side.LONG
+    def _build_order_request(self, request: OrderRequest | float) -> OrderRequest | None:
+        # If request is already an OrderRequest, set default values if missing
+        if type(request) == OrderRequest:
+            # Check if symbol is set or can be set
+            if request.symbol is None:
+                if self.symbol is None:
+                    logger.warning(
+                        "Symbol is not set and order request has no symbol set, order request will be ignored.")
+                    return None
+                else:
+                    request.symbol = self.symbol
+            # Check if stop loss is set or can be set
+            if request.stop_loss is None:
+                if self.stop_loss is None:
+                    logger.warning(
+                        "Stop loss is not set and order request has no stop loss set, order request will be ignored.")
+                    return None
+                else:
+                    request.stop_loss = self.stop_loss
+
+            # Check if take profit is set or can be set
+            if request.take_profit is None:
+                if self.take_profit is None:
+                    logger.warning(
+                        "Take profit is not set and order request has no take profit set, order request will be ignored.")
+                    return None
+                else:
+                    request.take_profit = self.take_profit
+
+            return request
+
+        # If request is a float, build an OrderRequest
+        if request >= self.buy_conf_threshold:
+            side = OrderType.LONG
             action = Action.OPEN
-        elif conf <= self.sell_conf_threshold:
-            side = Side.SHORT
+        elif request <= self.sell_conf_threshold:
+            side = OrderType.SHORT
             action = Action.OPEN
         else:
             return None
@@ -172,7 +200,7 @@ class PaperTrader:
         return OrderRequest(
             symbol=self.symbol,
             timestamp=datetime.now().timestamp(),
-            confidence=conf,
+            confidence=request,
             side=side,
             action=action,
             entry_price=None,
@@ -182,7 +210,7 @@ class PaperTrader:
         )
 
     def _handle_order_requests(self) -> None:
-        for ord_req in self.portfolio.order_requests:
+        for ord_req in list(self.portfolio.order_requests):
 
             if ord_req.entry_price is not None and not self._price_reached(ord_req.entry_price):
                 continue
@@ -193,7 +221,7 @@ class PaperTrader:
                 self.executor.close(ord_req, self.df.iloc[-1]["Close"])
 
     def _handle_positions(self) -> None:
-        for pos in self.portfolio.positions:
+        for pos in list(self.portfolio.positions):
 
             curr_close_price: float = self.df.iloc[-1]["Close"]
 
@@ -206,18 +234,7 @@ class PaperTrader:
                 self.portfolio.close_position(pos.uuid, curr_close_price)
 
     def _evaluate_and_create_order_request(self, conf: float | OrderRequest) -> None:
-        if type(conf) != OrderRequest:
-            order_request: OrderRequest | None = self._build_order_request(conf)
-        else:
-            order_request = conf
-            # Check if symbol is set or can be set
-            if order_request.symbol is None:
-                if self.symbol is None:
-                    logger.warning(
-                        "Symbol is not set and order request has no symbol set, order request will be ignored.")
-                    order_request = None
-                else:
-                    order_request.symbol = self.symbol
+        order_request = self._build_order_request(conf)
 
         if order_request is None:
             self.ord_req_validator.reset_on_neutral()

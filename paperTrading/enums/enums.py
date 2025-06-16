@@ -1,7 +1,7 @@
 from enum import Enum
 
 
-class Side(Enum):
+class OrderType(Enum):
     LONG = "long"
     SHORT = "short"
 

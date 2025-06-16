@@ -1,1 +1,1 @@
-from .enums import Side, Action
+from .enums import OrderType, Action

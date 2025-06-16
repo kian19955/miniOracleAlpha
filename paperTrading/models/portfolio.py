@@ -105,7 +105,7 @@ class Portfolio:
                 self.trade_records.append(record)
 
                 for callback in self.on_trade_record_added:
-                    callback(pos)
+                    callback(record)
 
                 return
 
@@ -150,7 +150,7 @@ class Portfolio:
 
     def save_to_csv(self, path: str) -> None:
         """
-        Save all trade records to an XML file.
+        Save all trade records to an CSV file.
 
         :param path: The destination file path.
         """

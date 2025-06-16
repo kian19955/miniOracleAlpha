@@ -5,7 +5,7 @@ from pandas import DataFrame
 from tradingComponents.Dow import detect_dow_trend
 from tradingComponents.Dow.utils.dowEnums import Trend
 from paperTrading.models import OrderRequest, Portfolio
-from paperTrading.enums import Side, Action
+from paperTrading.enums import OrderType, Action
 
 
 class KianStrat:
@@ -50,7 +50,7 @@ class KianStrat:
                 latest_price > latest_peak_price):
             return OrderRequest(
                 confidence=1,
-                side=Side.LONG,
+                side=OrderType.LONG,
                 action=Action.OPEN,
                 stop_loss=latest_valley_price,
                 take_profit=latest_price + self.risk_to_reward * (latest_peak_price - latest_valley_price),
@@ -62,7 +62,7 @@ class KianStrat:
               latest_price < latest_valley_price):
             return OrderRequest(
                 confidence=-1,
-                side=Side.SHORT,
+                side=OrderType.SHORT,
                 action=Action.OPEN,
                 stop_loss=latest_peak_price,
                 take_profit=latest_price - self.risk_to_reward * (latest_peak_price - latest_valley_price),

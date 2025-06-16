@@ -28,60 +28,53 @@ class Executor:
         self.max_positions = max_positions
         self.drop_oldest_on_max = drop_oldest_on_max
 
-    def calculate_position_size(self, ord_req: OrderRequest, current_price: float) -> float:
+    def calculate_position_size(self, ord_req: OrderRequest, entry_price: float) -> float:
         """
         Compute position size based on risk.
 
         :param ord_req: OrderRequest instance
-        :param current_price: Current close. df.iloc[-1]["Close"]
+        :param entry_price: Current close. df.iloc[-1]["Close"]
         :return: Quantity to trade.
         """
         # Calculate stop loss from absolute to percentage
         if ord_req.stop_loss is not None:
-            if ord_req.entry_price is None:
-                entry_price = current_price
-            else:
-                entry_price = ord_req.entry_price
-
             stop_loss_ratio = abs(ord_req.stop_loss - entry_price) / entry_price
         else:
             stop_loss_ratio = self.stop_loss
 
         risk_amount = self.portfolio.balance * self.risk_per_trade
-        loss_per_unit = abs(stop_loss_ratio - current_price)
-        return (risk_amount / loss_per_unit) * self.leverage
+        loss_per_trade = stop_loss_ratio * self.leverage
+        return risk_amount / loss_per_trade
 
     def open(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
         # Check if exceeding max positions
-        if (
-            self.max_positions is not None
-            and len(self.portfolio.positions) + 1 > self.max_positions
-        ):
+        exec_price = order_request.entry_price if order_request.entry_price is not None else current_price
+
+        # 1) Enforce max_positions
+        if self.max_positions is not None and len(self.portfolio.positions) + 1 > self.max_positions:
             if not self.drop_oldest_on_max:
-                logger.info(
-                    f"Max positions ({self.max_positions}) reached; dropping request {order_request.uuid}"
-                )
+                logger.info(f"Max positions reached; dropping request {order_request.uuid}")
                 self.portfolio.rmv_order_request(order_request.uuid)
-                return
+                return None
 
             # since portfolio.positions maintains insertion order (FIFO), the first element is the oldest
             oldest = self.portfolio.positions[0]
-            pnl = oldest.pnl(current_price)
+            pnl = oldest.pnl(exec_price)
             logger.info(
-                f"Max positions reached; closing oldest {oldest.uuid} PnL={pnl}"
+                f"Max positions reached; closing oldest {oldest.uuid} @ {exec_price} => PnL={pnl}"
             )
             self.portfolio.close_position(oldest.uuid, closed_at_price=current_price)
 
-        # determine qty if not provided
+        # 2) Determine how many units to buy/sell
         if order_request.qty is None:
-            qty = self.calculate_position_size(order_request, current_price)
+            qty = self.calculate_position_size(order_request, exec_price)
         else:
-            total_cost = order_request.qty * current_price
+            total_cost = order_request.qty * exec_price
             if total_cost > self.portfolio.balance:
                 logger.warning(
                     "Insufficient balance: resizing order to max affordable qty"
                 )
-                qty = self.portfolio.balance / current_price
+                qty = self.portfolio.balance / exec_price
             else:
                 qty = order_request.qty
 
@@ -90,7 +83,7 @@ class Executor:
             symbol=order_request.symbol,
             timestamp=order_request.timestamp,
             confidence=order_request.confidence,
-            entry_price=current_price,
+            entry_price=exec_price,
             side=order_request.side,
             action=order_request.action,
             qty=qty,
@@ -101,10 +94,9 @@ class Executor:
         # add to portfolio and remove its order_request
         logger.info(f"Opening position: {pos}")
         self.portfolio.add_position(pos)
-        self.portfolio.rmv_order_request(order_request.uuid)
         return pos
 
-    def close(self, order_request: OrderRequest, current_price: float) -> Optional[OrderRequest]:
+    def close(self, order_request: OrderRequest, current_price: float) -> None:
         # find matching open positions
         open_positions = self.portfolio.find_by_attributes(
             self.portfolio.positions,
@@ -144,7 +136,11 @@ class Executor:
 
                 tr = TradeRecord.from_position(partial, closed_at_price=current_price)
                 logger.info(f"Closing partial {take=} PnL={tr.pnl} for {pos.uuid}")
+                self.portfolio.balance += tr.total_value()
                 self.portfolio.trade_records.append(tr)
+
+                for callback in self.portfolio.on_trade_record_added:
+                    callback(tr)
 
                 pos.qty -= take
             remaining -= take

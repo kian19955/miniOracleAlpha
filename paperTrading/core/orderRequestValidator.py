@@ -1,6 +1,6 @@
 from typing import Optional
 import logging
-from paperTrading.enums import Side
+from paperTrading.enums import OrderType
 from paperTrading.models import OrderRequest
 
 logger = logging.getLogger(__name__)
@@ -28,9 +28,9 @@ class OrderRequestValidator:
         self.default_stop_loss = default_stop_loss
 
         # internal state
-        self._last_signal: Optional[Side] = None
+        self._last_signal: Optional[OrderType] = None
         self._streak: int = 0
-        self._last_executed_side: Optional[Side] = None
+        self._last_executed_side: Optional[OrderType] = None
 
     def reset_on_neutral(self) -> None:
         """
