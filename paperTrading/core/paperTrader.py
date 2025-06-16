@@ -24,7 +24,7 @@ class PaperTrader:
             seconds_to_sleep: int, save_data_path: str,
             strat: object,
             initial_balance: float, risk_per_trade_pct: float, leverage: float = 1,
-            buy_conf_threshold: float = 1, sell_conf_threshold: float = -1,
+            buy_conf_threshold: float = 1, sell_conf_threshold: float = -1, confirmation_streak_threshold: int = 1,
             max_positions: Optional[int] = None, block_reentry_until_signal_change: bool = False,
             stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
     ):
@@ -51,6 +51,9 @@ class PaperTrader:
         self.save_data_path = save_data_path
         self.max_positions = max_positions
         self.block_reentry_until_signal_change = block_reentry_until_signal_change
+        
+        self.confirmation_streak_threshold = confirmation_streak_threshold
+        self.confirmation_streak: int = 0
 
         self.leverage = leverage  # TODO: add leverage
         self.risk_per_trade = risk_per_trade_pct / 100
@@ -276,6 +279,26 @@ class PaperTrader:
             elif pos.stop_loss is not None and self._price_reached(pos.stop_loss):
                 logger.info(f"Closing position (stop loss hit: {pos.stop_loss=}/{curr_close_price}): {pos}")
                 self.portfolio.close_position(pos.uuid, curr_close_price)
+                
+    def _validate_creation_of_order_request(self, order_request: OrderRequest) -> bool:
+        # TODO: move to seperate check funtion all of them 
+            # Problem, block reentry and confirmation loopp create infinite loop. 
+            same_order_side: bool = self.last_signal_direction == order_request.side
+            if self.block_reentry_until_signal_change and same_order_side:
+                return False
+            
+            self.confirmation_streak = self.confirmation_streak + 1 if same_order_side else 0
+            if self.confirmation_streak_threshold > self.confirmation_streak:
+                return False
+            
+            # Check if qty can be calculated
+            if order_request.stop_loss is None and self.stop_loss is None and order_request.qty is None:
+                logger.warning(
+                    "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
+                return False
+                
+            return True
+        
 
     def _evaluate_and_create_order_request(self, conf: float | OrderRequest) -> None:
         if type(conf) != OrderRequest:
@@ -295,14 +318,9 @@ class PaperTrader:
             self.last_signal_direction = None
             return
 
-        elif order_request is not None and (not self.block_reentry_until_signal_change or
-                                            self.last_signal_direction != order_request.side):
-            # Check if qty can be calculated
-            if order_request.stop_loss is None and self.stop_loss is None and order_request.qty is None:
-                logger.warning(
-                    "Order request has no stop loss or quantity set and self.stop_loss_pct is not set, order request will be ignored.")
+        elif order_request is not None:
+            if not self._validate_creation_of_order_request(order_request):
                 return
-
             self.last_signal_direction = order_request.side
             self.portfolio.add_order_request(order_request)
 
