@@ -46,8 +46,8 @@ class Executor:
             raise ValueError("Stop‑loss must be different from entry price to compute size")
 
         risk_amount = self.portfolio.balance * self.risk_per_trade
-        qty = risk_amount / (stop_loss_ratio * self.leverage)
-        return qty
+        risk_amount = risk_amount / (stop_loss_ratio * self.leverage)
+        return risk_amount / entry_price
 
     def open(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
         # Check if exceeding max positions
