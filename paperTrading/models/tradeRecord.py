@@ -19,7 +19,7 @@ class TradeRecord(BaseTradingData):
     :param confidence: confidence level (-1.0 to 1.0) where -1 = max sell, 0 = neutral, +1 = max buy
 
     :param entry_price: price at which the asset was bought
-    :param side: Side.LONG or Side.SHORT
+    :param type: Side.LONG or Side.SHORT
     :param action: Action.SELL or Action.BUY
     :param qty: quantity in base units, if none the Simulator will decide
 
@@ -59,7 +59,7 @@ class TradeRecord(BaseTradingData):
             confidence=position.confidence,
 
             entry_price=position.entry_price,
-            side=position.side,
+            type=position.type,
             action=position.action,
             qty=position.qty,
 
@@ -81,7 +81,7 @@ class TradeRecord(BaseTradingData):
 
             "confidence": self.confidence,
 
-            "side": self.side.name,
+            "side": self.type.name,
             "action": self.action.name,
             "qty": self.qty,
             "pnl": self.pnl,

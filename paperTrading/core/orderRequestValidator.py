@@ -44,7 +44,7 @@ class OrderRequestValidator:
         """
         Returns True if the given OrderRequest meets all validation rules.
         """
-        side = order_request.side
+        side = order_request.type
 
         # 1) Confirmation streak
         self._streak = (self._streak + 1) if self._last_signal == side else 1

@@ -50,7 +50,7 @@ class KianStrat:
                 latest_price > latest_peak_price):
             return OrderRequest(
                 confidence=1,
-                side=OrderType.LONG,
+                type=OrderType.LONG,
                 action=Action.OPEN,
                 stop_loss=latest_valley_price,
                 take_profit=latest_price + self.risk_to_reward * (latest_peak_price - latest_valley_price),
@@ -62,7 +62,7 @@ class KianStrat:
               latest_price < latest_valley_price):
             return OrderRequest(
                 confidence=-1,
-                side=OrderType.SHORT,
+                type=OrderType.SHORT,
                 action=Action.OPEN,
                 stop_loss=latest_peak_price,
                 take_profit=latest_price - self.risk_to_reward * (latest_peak_price - latest_valley_price),

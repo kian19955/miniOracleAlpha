@@ -12,7 +12,7 @@ class Position(BaseTradingData):
     :param confidence: confidence level of the OrderRequest (-1.0 to 1.0) where -1 = max sell, 0 = neutral, +1 = max buy
 
     :param entry_price: price at which the asset was bought
-    :param side: Side.LONG or Side.SHORT
+    :param type: Side.LONG or Side.SHORT
     :param action: Action.SELL or Action.BUY
     :param qty: quantity of the asset
 
@@ -31,7 +31,7 @@ class Position(BaseTradingData):
             timestamp=order_request.timestamp,
             confidence=order_request.confidence,
             entry_price=order_request.entry_price,
-            side=order_request.side,
+            type=order_request.type,
             action=order_request.action,
             qty=order_request.qty,
             stop_loss=order_request.stop_loss,

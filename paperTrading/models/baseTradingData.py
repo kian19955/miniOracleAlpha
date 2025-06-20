@@ -10,7 +10,7 @@ from paperTrading.enums import OrderType, Action
 class BaseTradingData:
     confidence: float
 
-    side: OrderType
+    type: OrderType
     action: Action
     entry_price: Optional[float] = None
     qty: Optional[float] = None
@@ -25,7 +25,7 @@ class BaseTradingData:
     take_profit: Optional[float] = None
 
     def pnl(self, closed_at_price: float) -> float:
-        if self.side == OrderType.LONG:
+        if self.type == OrderType.LONG:
             return (closed_at_price - self.entry_price) * self.qty
         else:
             return (self.entry_price - closed_at_price) * self.qty

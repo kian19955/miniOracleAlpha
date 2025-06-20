@@ -63,7 +63,7 @@ class Executor:
         # 1) Enforce max_positions
         if self.max_positions is not None and len(self.portfolio.positions) + 1 > self.max_positions:
             if not self.drop_oldest_on_max:
-                logger.info(f"Max positions reached; dropping request {order_request.uuid}")
+                logger.info(f"Max positions reached; dropping request to {order_request.action} {order_request.type} for {order_request.symbol}")
                 self.portfolio.rmv_order_request(order_request.uuid)
                 return None
 
@@ -94,7 +94,7 @@ class Executor:
             timestamp=order_request.timestamp,
             confidence=order_request.confidence,
             entry_price=exec_price,
-            side=order_request.side,
+            type=order_request.type,
             action=order_request.action,
             qty=qty,
             stop_loss=order_request.stop_loss,
@@ -112,7 +112,7 @@ class Executor:
             self.portfolio.positions,
             return_copy=False,
             symbol=order_request.symbol,
-            side=order_request.side,
+            side=order_request.type,
         )
 
         if not open_positions:

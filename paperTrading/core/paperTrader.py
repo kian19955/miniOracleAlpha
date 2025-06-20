@@ -110,7 +110,7 @@ class PaperTrader:
         # Initialize csv file
         with open(save_path, "w", newline="") as f:
             dummy_record = TradeRecord(
-                symbol="DUMMY", confidence=0.0, side=OrderType.LONG, action=Action.OPEN,
+                symbol="DUMMY", confidence=0.0, type=OrderType.LONG, action=Action.OPEN,
                 entry_price=0.0, qty=0.0, pnl=0.0,
                 entry_timestamp=0.0, exit_timestamp=0.0,
                 stop_loss=None, take_profit=None
@@ -201,7 +201,7 @@ class PaperTrader:
             symbol=self.symbol,
             timestamp=datetime.now().timestamp(),
             confidence=request,
-            side=side,
+            type=side,
             action=action,
             entry_price=None,
             qty=None,

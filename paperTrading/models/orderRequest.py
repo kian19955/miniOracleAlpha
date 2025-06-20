@@ -14,7 +14,7 @@ class OrderRequest(BaseTradingData):
     :param confidence: confidence level (-1.0 to 1.0) where -1 = max sell, 0 = neutral, +1 = max buy, can be of type float
 
     :param entry_price: price for limit orders, if none will buy/sell at current price
-    :param side: Side.LONG or Side.SHORT
+    :param type: Side.LONG or Side.SHORT
     :param action: Action.SELL or Action.BUY
     :param qty: quantity in base units, if none the Simulator will decide
 
