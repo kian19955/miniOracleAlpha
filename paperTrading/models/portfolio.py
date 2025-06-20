@@ -132,12 +132,6 @@ class Portfolio:
 
         return results
 
-    def get_realized_pnl(self) -> float:
-        """
-        Calculate the total profit/loss across all trade records.
-        :return:
-        """
-        return sum(tr.pnl for tr in self.trade_records)
 
     def get_qty(self, symbol: Optional[str] = None) -> float:
         """
@@ -147,6 +141,25 @@ class Portfolio:
         :return: Total quantity
         """
         return sum(pos.qty for pos in self.positions if pos.symbol == symbol or symbol is None)
+
+    def net_worth(self, latest_price: float) -> float:
+        """
+        Calculate the net worth of the portfolio.
+        :return:
+        """
+        net_worth = self.balance
+        for pos in self.positions:
+            net_worth += pos.total_value(latest_price)
+
+        return net_worth
+
+    @property
+    def realized_pnl(self) -> float:
+        """
+        Calculate the total profit/loss across all trade records.
+        :return:
+        """
+        return sum(tr.pnl for tr in self.trade_records)
 
     def save_to_csv(self, path: str) -> None:
         """
@@ -165,7 +178,6 @@ class Portfolio:
             writer = csv.DictWriter(f, fieldnames=data[0].keys())
             writer.writeheader()
             writer.writerows(data)
-
 
     def __repr__(self) -> str:
         return (

@@ -5,6 +5,7 @@ from custom_logger import setup_logger
 from paperTrading import PaperTrader
 
 from tradingComponents.strategies.kianStrat import KianStrat
+from paperTrading.reporters.default.consoleReporter import ConsoleReporter
 
 strat = KianStrat(
     check_trend=False,
@@ -51,6 +52,9 @@ def main():
 
         buy_conf_threshold=0.8,  # float(input('Enter buy confidence threshold (0 to 1): ')),
         sell_conf_threshold=-0.8,  # float(input('Enter sell confidence threshold (-1 to 0): ')),
+
+        reporter=ConsoleReporter,
+        reporter_kwargs={'str_end': '\r'},
 
         strat=strat,
         save_data_path=os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data'),

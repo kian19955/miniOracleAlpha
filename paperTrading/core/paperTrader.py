@@ -1,3 +1,4 @@
+import atexit
 import csv
 import os
 import time
@@ -8,9 +9,10 @@ import pandas as pd
 from pandas import DataFrame
 
 from paperTrading.core import OrderRequestValidator, Executor
-from paperTrading.models import Portfolio, OrderRequest, Position, TradeRecord
+from paperTrading.models import Portfolio, OrderRequest, TradeRecord
 from paperTrading.enums import OrderType, Action
 from api.simpleBinanceApi.fetcher import fetch_klines
+from paperTrading.reporters import BaseReporter, ContextBuilder
 from utils import parse_interval, seconds_to_next_boundry
 
 import logging
@@ -30,6 +32,7 @@ class PaperTrader:
             confirmation_streak_threshold: int = 1, max_positions: Optional[int] = None, drop_oldest_on_max: bool = False,
             block_reentry_until_signal_change: bool = False,
             stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
+            reporter: type[BaseReporter] = None, reporter_kwargs: dict = None
     ):
         """
         The Portfolio object will be passed if the evaluate() method is containing a parameter named "portfolio"
@@ -37,6 +40,8 @@ class PaperTrader:
         :param symbol: If None the OrderRequest will need to return the symbol. If not None the OrderRequest symbols will be overwritten
         :param interval: The interval of the klines to fetch
         :param lookback: How many candles the df will hold
+        :param strat: A class containing an evaluate() -> float between[-1.0, 1.0] method
+        :param initial_balance: The initial balance of the portfolio
         :param seconds_to_sleep: How many seconds to sleep between each iteration.
             The simulator will pretend to be on the exact price when tp or st is hit.
             Decreasing this value will make the simulation run faster but less accurate for fluctuations.
@@ -46,7 +51,9 @@ class PaperTrader:
         :param drop_oldest_on_max: If True, automatically close the oldest position when max positions are reached; otherwise, rejects new positions.
         :param block_reentry_until_signal_change: Only enter on signal switch from inactive to active. Prevents multiple entries while the signal stays above the threshold.
         :param risk_per_trade_pct: How much of your total balance to risk per position in percentage
-        :param strat: A class containing an evaluate() -> float[-1.0, 1.0] method
+        :param reporter: A class containing inheriting from BaseReporter
+        :param reporter_kwargs: Keyword arguments to pass to the reporter
+
         """
         if confirmation_streak_threshold < 1:
             raise ValueError("confirmation_streak_threshold must be at least 1")
@@ -54,6 +61,9 @@ class PaperTrader:
             raise ValueError("sleep_interval must be divisible by interval")
         if not os.path.exists(save_data_path):
             raise ValueError("save_data_path does not exist")
+
+        if reporter_kwargs is None:
+            reporter_kwargs = {}
 
         self.symbol = symbol
         self.interval = interval
@@ -69,7 +79,7 @@ class PaperTrader:
         self.stop_loss = stop_loss_pct / 100
         self.take_profit = take_profit_pct / 100
 
-        self.portfolio = Portfolio(
+        self._portfolio = Portfolio(
             balance=initial_balance,
             on_position_added=[],
             on_trade_record_added=[self._append_trade_record_to_csv],
@@ -77,20 +87,28 @@ class PaperTrader:
 
         )  # TODO: allow_dept support
 
-        self.ord_req_validator = OrderRequestValidator(
+        self._ord_req_validator = OrderRequestValidator(
             streak_threshold=confirmation_streak_threshold,
             block_reentry_until_signal_change=block_reentry_until_signal_change,
             default_stop_loss=stop_loss_pct/100,
         )
 
-        self.executor = Executor(
-            portfolio=self.portfolio,
+        self._executor = Executor(
+            portfolio=self._portfolio,
             risk_per_trade=risk_per_trade_pct / 100,
             leverage=self.leverage,
             stop_loss=self.stop_loss,
             max_positions=max_positions,
             drop_oldest_on_max=drop_oldest_on_max
         )
+
+        if reporter is not None:
+            self._reporter = reporter(portfolio=self._portfolio, simulator=self, **reporter_kwargs)
+            atexit.register(self._reporter.end)
+        else:
+            self._reporter = None
+
+        self._ctx_builder = ContextBuilder()
 
         self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
         self.prev_price: Optional[float] = None
@@ -210,39 +228,41 @@ class PaperTrader:
         )
 
     def _handle_order_requests(self) -> None:
-        for ord_req in list(self.portfolio.order_requests):
+        for ord_req in list(self._portfolio.order_requests):
 
             if ord_req.entry_price is not None and not self._price_reached(ord_req.entry_price):
                 continue
 
             if ord_req.action == Action.OPEN:
-                self.executor.open(ord_req, self.df.iloc[-1]["Close"])
+                self._executor.open(ord_req, self.df.iloc[-1]["Close"])
             else:
-                self.executor.close(ord_req, self.df.iloc[-1]["Close"])
+                self._executor.close(ord_req, self.df.iloc[-1]["Close"])
 
     def _handle_positions(self) -> None:
-        for pos in list(self.portfolio.positions):
+        for pos in list(self._portfolio.positions):
 
             curr_close_price: float = self.df.iloc[-1]["Close"]
 
             if pos.take_profit is not None and self._price_reached(pos.take_profit):
                 logger.info(f"Closing position (take profit hit: {pos.take_profit=}/{curr_close_price}): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
-                self.portfolio.close_position(pos.uuid, curr_close_price)
+                self._portfolio.close_position(pos.uuid, curr_close_price)
 
             elif pos.stop_loss is not None and self._price_reached(pos.stop_loss):
                 logger.info(f"Closing position (stop loss hit: {pos.stop_loss=}/{curr_close_price}): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
-                self.portfolio.close_position(pos.uuid, curr_close_price)
+                self._portfolio.close_position(pos.uuid, curr_close_price)
 
-    def _evaluate_and_create_order_request(self, conf: float | OrderRequest) -> None:
-        order_request = self._build_order_request(conf)
+    def _evaluate_and_create_order_request(self) -> None:
+        req: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self._portfolio)
+        self._ctx_builder.set_latest_request(req)
+        order_request = self._build_order_request(req)
 
         if order_request is None:
-            self.ord_req_validator.reset_on_neutral()
+            self._ord_req_validator.reset_on_neutral()
             return
 
         elif order_request is not None:
-            if self.ord_req_validator.is_valid(order_request):
-                self.portfolio.add_order_request(order_request)
+            if self._ord_req_validator.is_valid(order_request):
+                self._portfolio.add_order_request(order_request)
 
     def run(self, start_on_new_candle: bool = False) -> None:
         # startup
@@ -251,27 +271,17 @@ class PaperTrader:
             print(f"Sleeping for {sleep_time} seconds before starting...")
             time.sleep(sleep_time)
 
-        datetime_start = datetime.now()
-        last_networth = None
+        self._reporter.start()
         while True:
             self._update_df()
 
-            conf: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self.portfolio) # move to _evaluate_and_create_order_request later
-            self._evaluate_and_create_order_request(conf)
+            self._evaluate_and_create_order_request()
 
             self._handle_order_requests()
             self._handle_positions()
 
-            # --- VERBOSE ---
-            net_worth = self.portfolio.balance
-            for pos in self.portfolio.positions:
-                net_worth += pos.total_value(self.df.iloc[-1]["Close"])
-            last_networth = net_worth if last_networth is None else last_networth
+            if self._reporter is not None:
+                self._reporter.report(self._ctx_builder.build())
+                self._ctx_builder.reset()
 
-            print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
-                  f"TR: {len(self.portfolio.trade_records)} | NETWORTH: {round(net_worth, 4)} {"(+)" if net_worth > last_networth else ""}{round(net_worth - last_networth, 2)} | "
-                  f"CONF: {conf if isinstance(conf, (float, int)) else conf.confidence} | "
-                  f"PRICE: {self.df.iloc[-1]['Close']}", end="\r")
-            last_networth = net_worth
-            # --- -------- ---
             time.sleep(seconds_to_next_boundry(self.seconds_to_sleep))
