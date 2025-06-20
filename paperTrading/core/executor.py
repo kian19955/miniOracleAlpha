@@ -46,7 +46,14 @@ class Executor:
             raise ValueError("Stop‑loss must be different from entry price to compute size")
 
         risk_amount = self.portfolio.balance * self.risk_per_trade
-        # risk_amount = risk_amount / (stop_loss_ratio * self.leverage) # TODO: Removed due to issue: sl: 0.01, therefor risk_amount*100 > balance each time
+        risk_amount = risk_amount / (stop_loss_ratio * self.leverage) # TODO: REWRITE due to issue: sl: 0.01, therefor risk_amount*100 > balance each time
+
+        # --- ISSUE FIX TEMP ---
+        if min(risk_amount, self.portfolio.balance) == self.portfolio.balance:
+            risk_amount = self.portfolio.balance
+            logger.warning(f"Risk amount is greater than balance; using total balance instead (ISSUE): {risk_amount}")
+        # -----------------------
+
         return risk_amount / entry_price
 
     def open(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
