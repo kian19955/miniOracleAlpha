@@ -57,7 +57,6 @@ class Executor:
         return risk_amount / entry_price
 
     def open(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
-        # Check if exceeding max positions
         exec_price = order_request.entry_price if order_request.entry_price is not None else current_price
 
         # 1) Enforce max_positions
