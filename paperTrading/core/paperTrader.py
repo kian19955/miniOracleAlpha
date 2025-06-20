@@ -252,6 +252,7 @@ class PaperTrader:
             time.sleep(sleep_time)
 
         datetime_start = datetime.now()
+        last_networth = None
         while True:
             self._update_df()
 
