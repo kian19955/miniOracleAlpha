@@ -269,7 +269,7 @@ class PaperTrader:
             last_networth = net_worth if last_networth is None else last_networth
 
             print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
-                  f"TR: {len(self.portfolio.trade_records)} | NETWORTH: {net_worth} {"(+)" if net_worth > last_networth else "(-)"}{net_worth - last_networth} | "
+                  f"TR: {len(self.portfolio.trade_records)} | NETWORTH: {round(net_worth, 4)} {"(+)" if net_worth > last_networth else "(-)"}{round(net_worth - last_networth, 2)} | "
                   f"CONF: {conf if isinstance(conf, (float, int)) else conf.confidence} | "
                   f"PRICE: {self.df.iloc[-1]['Close']}", end="\r")
             last_networth = net_worth
