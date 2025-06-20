@@ -38,6 +38,7 @@ class OrderRequestValidator:
         to break the existing confirmation streak.
         """
         self._last_signal = None
+        self._last_executed_side = None
         # next valid signal will reset streak to 1
 
     def is_valid(self, order_request: OrderRequest) -> bool:
@@ -57,7 +58,7 @@ class OrderRequestValidator:
         if self.block_reentry and self._last_executed_side == side:
             return False
 
-        # 3) Ensure we have either stop_loss or direct qty
+        # 4) Ensure we have either stop_loss or direct qty
         if (
                 order_request.stop_loss is None
                 and self.default_stop_loss is None

@@ -35,16 +35,16 @@ class PaperTrader:
         The Portfolio object will be passed if the evaluate() method is containing a parameter named "portfolio"
 
         :param symbol: If None the OrderRequest will need to return the symbol. If not None the OrderRequest symbols will be overwritten
-        :param interval:
-        :param lookback:
-        :param seconds_to_sleep: How many seconds to sleep between each iteration
+        :param interval: The interval of the klines to fetch
+        :param lookback: How many candles the df will hold
+        :param seconds_to_sleep: How many seconds to sleep between each iteration.
+            The simulator will pretend to be on the exact price when tp or st is hit.
+            Decreasing this value will make the simulation run faster but less accurate for fluctuations.
         :param save_data_path: Path to save data
         :param confirmation_streak_threshold: How many consecutive signals are required to before accepting the order request/signal.
         :param max_positions: Maximum number of positions, if exceeded the oldest position will be closed
         :param drop_oldest_on_max: If True, automatically close the oldest position when max positions are reached; otherwise, rejects new positions.
         :param block_reentry_until_signal_change: Only enter on signal switch from inactive to active. Prevents multiple entries while the signal stays above the threshold.
-        :param initial_balance:
-        :param leverage:
         :param risk_per_trade_pct: How much of your total balance to risk per position in percentage
         :param strat: A class containing an evaluate() -> float[-1.0, 1.0] method
         """
