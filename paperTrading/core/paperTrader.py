@@ -265,9 +265,12 @@ class PaperTrader:
             net_worth = self.portfolio.balance
             for pos in self.portfolio.positions:
                 net_worth += pos.total_value(self.df.iloc[-1]["Close"])
+            last_networth = net_worth if last_networth is None else last_networth
 
             print(f"DELTA: {datetime.now() - datetime_start} | OR: {len(self.portfolio.order_requests)} | POS: {len(self.portfolio.positions)} | "
-                  f"TR: {len(self.portfolio.trade_records)} | NETWORTH: {net_worth} | CONF: {conf if isinstance(conf, (float, int)) else conf.confidence} | "
+                  f"TR: {len(self.portfolio.trade_records)} | NETWORTH: {net_worth} {"(+)" if net_worth > last_networth else "(-)"}{net_worth - last_networth} | "
+                  f"CONF: {conf if isinstance(conf, (float, int)) else conf.confidence} | "
                   f"PRICE: {self.df.iloc[-1]['Close']}", end="\r")
+            last_networth = net_worth
             # --- -------- ---
             time.sleep(seconds_to_next_boundry(self.seconds_to_sleep))
