@@ -1,7 +1,7 @@
-import copy
 from typing import Optional
 import logging
 from paperTrading.models import Portfolio, OrderRequest, Position, TradeRecord
+from paperTrading.reporters import ContextBuilder
 
 logger = logging.getLogger("oracle.analysis")
 
@@ -15,6 +15,7 @@ class Executor:
     def __init__(
             self,
             portfolio: Portfolio,
+            ctx_builder: ContextBuilder,
             stop_loss: float,
             risk_per_trade: float,
             leverage: float,
@@ -22,6 +23,7 @@ class Executor:
             drop_oldest_on_max: bool = False
     ):
         self.portfolio = portfolio
+        self.ctx_builder = ctx_builder
         self.stop_loss = stop_loss
         self.risk_per_trade = risk_per_trade
         self.leverage = leverage
@@ -33,7 +35,7 @@ class Executor:
         Compute position size based on risk.
 
         :param ord_req: OrderRequest instance
-        :param entry_price: Current close. df.iloc[-1]["Close"]
+        :param entry_price: Current close_pos. df.iloc[-1]["Close"]
         :return: Quantity to trade.
         """
         # Calculate stop loss from absolute to percentage
@@ -56,7 +58,7 @@ class Executor:
 
         return risk_amount / entry_price
 
-    def open(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
+    def open_pos(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
         exec_price = order_request.entry_price if order_request.entry_price is not None else current_price
 
         # 1) Enforce max_positions
@@ -87,26 +89,23 @@ class Executor:
             else:
                 qty = order_request.qty
 
-        pos = Position(
-            root_uuid=order_request.root_uuid,
-            symbol=order_request.symbol,
-            timestamp=order_request.timestamp,
-            confidence=order_request.confidence,
-            entry_price=exec_price,
-            type=order_request.type,
-            action=order_request.action,
-            qty=qty,
-            stop_loss=order_request.stop_loss,
-            take_profit=order_request.take_profit,
+
+        pos = Position.from_order_request(
+            order_request=order_request,
+            pos_kwargs=dict(
+                entry_price=exec_price,
+                qty=qty,
+            ),
         )
 
         # add to portfolio and remove its order_request
         logger.info(f"Opening position: {pos}")
         self.portfolio.add_position(pos)
+        self.ctx_builder.add_new_position(pos.uuid)
         return pos
 
-    def close(self, order_request: OrderRequest, current_price: float) -> None:
-        # find matching open positions
+    def close_pos(self, order_request: OrderRequest, current_price: float) -> None:
+        # find matching open_pos positions
         open_positions = self.portfolio.find_by_attributes(
             self.portfolio.positions,
             return_copy=False,
@@ -116,7 +115,7 @@ class Executor:
 
         if not open_positions:
             logger.warning(
-                f"No open positions to close for {order_request.uuid}; dropping request"
+                f"No open_pos positions to close_pos for {order_request.uuid}; dropping request"
             )
             self.portfolio.rmv_order_request(order_request.uuid)
             return
@@ -129,7 +128,7 @@ class Executor:
         )
 
         # sort by timestamp to process oldest closes first
-        for pos in sorted(open_positions, key=lambda p: p.timestamp):
+        for pos in sorted(open_positions, key=lambda p: p.creation_time):
             if remaining <= 0:
                 logger.error(
                     "Closed more positions than requested.") if remaining < 0 else None  # TODO: for check (debug)
@@ -138,7 +137,8 @@ class Executor:
             take: float = min(pos.qty, remaining)
             if take >= pos.qty:
                 logger.info(f"Closing full pos {pos.uuid} PnL={pos.pnl(current_price)}")
-                self.portfolio.close_position(pos.uuid, closed_at_price=current_price)
+                tr_uuid = self.portfolio.close_position(pos.uuid, closed_at_price=current_price)
+                self.ctx_builder.add_new_trade_record(tr_uuid)
             else:
                 partial = pos.copy()
                 partial.qty = take
@@ -147,6 +147,7 @@ class Executor:
                 logger.info(f"Closing partial {take=} PnL={tr.pnl} for {pos.uuid}")
                 self.portfolio.balance += tr.total_value()
                 self.portfolio.trade_records.append(tr)
+                self.ctx_builder.add_new_trade_record(tr.uuid)
 
                 for callback in self.portfolio.on_trade_record_added:
                     callback(tr)
@@ -156,7 +157,7 @@ class Executor:
 
         if order_request.qty is not None and remaining > 0:
             logger.warning(
-                f"Could not fully fill close request {order_request.uuid}; leftover={remaining}"
+                f"Could not fully fill close_pos request {order_request.uuid}; leftover={remaining}"
             )
 
         # remove the request

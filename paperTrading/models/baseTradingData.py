@@ -1,5 +1,5 @@
 from dataclasses import dataclass, field, replace
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Optional
 from uuid import UUID, uuid4
 
@@ -16,13 +16,26 @@ class BaseTradingData:
     qty: Optional[float] = None
 
     symbol: Optional[str] = None
-    timestamp: float = field(default_factory=datetime.now(timezone.utc).timestamp)
+    creation_time: datetime = field(default_factory=lambda: datetime.now(timezone.utc))
+    max_holding_period: Optional[timedelta] = None
 
     uuid: UUID = field(default_factory=uuid4, init=False)
     root_uuid: UUID = field(default_factory=uuid4)
 
     stop_loss: Optional[float] = None
     take_profit: Optional[float] = None
+
+    def __post_init__(self):
+        if self.entry_price is not None and self.entry_price <= 0:
+            raise ValueError("Entry price must be greater than 0")
+        if self.qty is not None and self.qty <= 0:
+            raise ValueError("Quantity must be greater than 0")
+        if self.stop_loss is not None and self.stop_loss <= 0:
+            raise ValueError("Stop loss must be greater than 0")
+        if self.take_profit is not None and self.take_profit <= 0:
+            raise ValueError("Take profit must be greater than 0")
+        if self.max_holding_period is not None and self.max_holding_period <= timedelta(0):
+            raise ValueError("Max holding period must be greater than 0")
 
     def pnl(self, closed_at_price: float) -> float:
         if self.type == OrderType.LONG:
@@ -38,6 +51,3 @@ class BaseTradingData:
         copied = replace(self)
         copied.uuid = uuid4()
         return copied
-
-    def return_timestamp(self) -> datetime:
-        return datetime.fromtimestamp(self.timestamp, tz=timezone.utc)

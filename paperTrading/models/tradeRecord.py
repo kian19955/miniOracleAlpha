@@ -13,8 +13,8 @@ class TradeRecord(BaseTradingData):
     """
     :param uuid: universally unique identifier (uuid.uuid4())
     :param symbol: e.g. "BTCUSDT"
-    :param entry_timestamp: unix timestamp at which the asset was bought, timezone is UTC
-    :param exit_timestamp: unix timestamp at which the asset was sold, timezone is UTC
+    :param entry_time: unix timestamp at which the asset was bought, timezone is UTC
+    :param exit_time: unix timestamp at which the asset was sold, timezone is UTC
 
     :param confidence: confidence level (-1.0 to 1.0) where -1 = max sell, 0 = neutral, +1 = max buy
 
@@ -28,8 +28,8 @@ class TradeRecord(BaseTradingData):
     :param stop_loss: stop loss if used
     :param take_profit: take profit if used
     """
-    entry_timestamp: float
-    exit_timestamp: float
+    entry_time: datetime
+    exit_time: datetime
 
     pnl: float
 
@@ -53,8 +53,10 @@ class TradeRecord(BaseTradingData):
             root_uuid=position.root_uuid,
 
             symbol=position.symbol,
-            entry_timestamp=position.timestamp,
-            exit_timestamp=datetime.now(timezone.utc).timestamp(),
+
+            entry_time=position.creation_time,
+            exit_time=datetime.now(timezone.utc),
+            max_holding_period=position.max_holding_period,
 
             confidence=position.confidence,
 
@@ -87,8 +89,9 @@ class TradeRecord(BaseTradingData):
             "pnl": self.pnl,
 
             "entry_price": self.entry_price,
-            "entry_timestamp": self.entry_timestamp,
-            "exit_timestamp": self.exit_timestamp,
+            "entry_timestamp": self.entry_time.timestamp(),
+            "exit_timestamp": self.exit_time.timestamp(),
+            "holding_duration": str(self.max_holding_period),
 
             "stop_loss": self.stop_loss,
             "take_profit": self.take_profit

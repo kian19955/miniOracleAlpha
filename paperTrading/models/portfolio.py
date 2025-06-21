@@ -15,7 +15,7 @@ logger = logging.getLogger("oracle.analysis")
 class Portfolio:
     """
     A class representing a user's trading portfolio, containing order requests,
-    open positions, and closed trade records.
+    open_pos positions, and closed trade records.
 
     :param balance: Initial balance of the portfolio.
     :param allow_dept: Whether to allow positions that exceed the available balance.
@@ -23,7 +23,7 @@ class Portfolio:
     :param on_position_added: List of callbacks triggered when a position is added.
     :param on_trade_record_added: List of callbacks triggered when a trade record is added.
     :param order_requests: List of current order requests.
-    :param positions: List of current open positions.
+    :param positions: List of current open_pos positions.
     :param trade_records: List of closed trade records.
     """
     balance: float
@@ -84,13 +84,14 @@ class Portfolio:
         uuid: UUID,
         closed_at_price: Optional[float] = None,
         trade_record: Optional[TradeRecord] = None
-    ) -> None:
+    ) -> UUID:
         """
-        Close an open position by UUID and record the trade.
+        Close an open_pos position by UUID and record the trade.
 
-        :param uuid: The UUID of the position to close.
+        :param uuid: The UUID of the position to close_pos.
         :param closed_at_price: Price at which the position is closed. Required if `trade_record` is not provided.
         :param trade_record: A TradeRecord to use. If None, one will be created from the position.
+        :return: The UUID of the trade record.added
         :raises ValueError: If neither `closed_at_price` nor `trade_record` is provided.
         """
         if trade_record is None and closed_at_price is None:
@@ -107,7 +108,7 @@ class Portfolio:
                 for callback in self.on_trade_record_added:
                     callback(record)
 
-                return
+                return record.uuid
 
     @staticmethod
     def find_by_attributes(

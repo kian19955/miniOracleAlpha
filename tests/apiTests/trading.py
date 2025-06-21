@@ -75,13 +75,13 @@ def test_cancel_all_orders():
         print("Cancel all orders test failed:", e)
 
 def test_close_open_position():
-    """Test closing an open position for BTCUSDT."""
-    print("Testing closing open position for BTCUSDT...")
+    """Test closing an open_pos position for BTCUSDT."""
+    print("Testing closing open_pos position for BTCUSDT...")
     try:
         close_open_position("BTCUSDT", position_side=SIDE_BUY)
         print("Closed position")
     except Exception as e:
-        print("Close open position test failed:", e)
+        print("Close open_pos position test failed:", e)
 
 if __name__ == "__main__":
     test_place_order_none_params()

@@ -2,7 +2,7 @@ import atexit
 import csv
 import os
 import time
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 from typing import Optional
 
 import pandas as pd
@@ -32,6 +32,7 @@ class PaperTrader:
             confirmation_streak_threshold: int = 1, max_positions: Optional[int] = None, drop_oldest_on_max: bool = False,
             block_reentry_until_signal_change: bool = False,
             stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
+            default_expiration_time: Optional[datetime] = None, default_holding_period: Optional[timedelta] = None,
             reporter: type[BaseReporter] = None, reporter_kwargs: dict = None
     ):
         """
@@ -48,7 +49,7 @@ class PaperTrader:
         :param save_data_path: Path to save data
         :param confirmation_streak_threshold: How many consecutive signals are required to before accepting the order request/signal.
         :param max_positions: Maximum number of positions, if exceeded the oldest position will be closed
-        :param drop_oldest_on_max: If True, automatically close the oldest position when max positions are reached; otherwise, rejects new positions.
+        :param drop_oldest_on_max: If True, automatically close_pos the oldest position when max positions are reached; otherwise, rejects new positions.
         :param block_reentry_until_signal_change: Only enter on signal switch from inactive to active. Prevents multiple entries while the signal stays above the threshold.
         :param risk_per_trade_pct: How much of your total balance to risk per position in percentage
         :param reporter: A class containing inheriting from BaseReporter
@@ -78,6 +79,8 @@ class PaperTrader:
         self.sell_conf_threshold = sell_conf_threshold
         self.stop_loss = stop_loss_pct / 100
         self.take_profit = take_profit_pct / 100
+        self.default_expiration_time = default_expiration_time
+        self.default_holding_period = default_holding_period
 
         self._portfolio = Portfolio(
             balance=initial_balance,
@@ -93,8 +96,11 @@ class PaperTrader:
             default_stop_loss=stop_loss_pct/100,
         )
 
+        self._ctx_builder = ContextBuilder()
+
         self._executor = Executor(
             portfolio=self._portfolio,
+            ctx_builder=self._ctx_builder,
             risk_per_trade=risk_per_trade_pct / 100,
             leverage=self.leverage,
             stop_loss=self.stop_loss,
@@ -107,8 +113,6 @@ class PaperTrader:
             atexit.register(self._reporter.end)
         else:
             self._reporter = None
-
-        self._ctx_builder = ContextBuilder()
 
         self.df: DataFrame = fetch_klines(symbol=self.symbol, interval=self.interval, limit=self.lookback)
         self.prev_price: Optional[float] = None
@@ -130,7 +134,7 @@ class PaperTrader:
             dummy_record = TradeRecord(
                 symbol="DUMMY", confidence=0.0, type=OrderType.LONG, action=Action.OPEN,
                 entry_price=0.0, qty=0.0, pnl=0.0,
-                entry_timestamp=0.0, exit_timestamp=0.0,
+                entry_time=datetime.now(timezone.utc), exit_time=datetime.now(timezone.utc),
                 stop_loss=None, take_profit=None
             )
             writer = csv.DictWriter(f, fieldnames=dummy_record.to_dict_for_csv().keys())
@@ -202,6 +206,14 @@ class PaperTrader:
                 else:
                     request.take_profit = self.take_profit
 
+            # Set default expiration time if custom expiration time is not set
+            if self.default_expiration_time is not None and request.expiration_time is None:
+                request.expiration_time = self.default_expiration_time
+
+            # Set default holding period if custom holding period is not set
+            if self.default_holding_period is not None and request.holding_period is None:
+                request.holding_period = self.default_holding_period
+
             return request
 
         # If request is a float, build an OrderRequest
@@ -217,7 +229,7 @@ class PaperTrader:
         curr_close_price = self.df.iloc[-1]["Close"]
         return OrderRequest(
             symbol=self.symbol,
-            timestamp=datetime.now().timestamp(),
+            creation_time=datetime.now(),
             confidence=request,
             type=side,
             action=action,
@@ -230,26 +242,37 @@ class PaperTrader:
     def _handle_order_requests(self) -> None:
         for ord_req in list(self._portfolio.order_requests):
 
+            if ord_req.expiration_time is not None and ord_req.is_expired():
+                self._portfolio.rmv_order_request(ord_req.uuid)
+                self._ctx_builder.add_dropped_order_request(ord_req.uuid)
+                logger.info(f"Order request expired: {ord_req.uuid}")
+                continue
+
             if ord_req.entry_price is not None and not self._price_reached(ord_req.entry_price):
                 continue
 
             if ord_req.action == Action.OPEN:
-                self._executor.open(ord_req, self.df.iloc[-1]["Close"])
+                self._executor.open_pos(ord_req, self.df.iloc[-1]["Close"])
             else:
-                self._executor.close(ord_req, self.df.iloc[-1]["Close"])
+                self._executor.close_pos(ord_req, self.df.iloc[-1]["Close"])
 
     def _handle_positions(self) -> None:
         for pos in list(self._portfolio.positions):
-
+            close_pos: bool = False
             curr_close_price: float = self.df.iloc[-1]["Close"]
 
             if pos.take_profit is not None and self._price_reached(pos.take_profit):
                 logger.info(f"Closing position (take profit hit: {pos.take_profit=}/{curr_close_price}): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
-                self._portfolio.close_position(pos.uuid, curr_close_price)
 
             elif pos.stop_loss is not None and self._price_reached(pos.stop_loss):
                 logger.info(f"Closing position (stop loss hit: {pos.stop_loss=}/{curr_close_price}): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
-                self._portfolio.close_position(pos.uuid, curr_close_price)
+
+            elif pos.max_holding_period is not None and pos.holding_period_reached():
+                logger.info(f"Closing position (max holding period of {pos.max_holding_period} reached): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
+
+            if close_pos:
+                tr_uuid = self._portfolio.close_position(pos.uuid, curr_close_price)
+                self._ctx_builder.add_new_trade_record(tr_uuid)
 
     def _evaluate_and_create_order_request(self) -> None:
         req: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self._portfolio)
@@ -263,6 +286,7 @@ class PaperTrader:
         elif order_request is not None:
             if self._ord_req_validator.is_valid(order_request):
                 self._portfolio.add_order_request(order_request)
+                self._ctx_builder.add_new_order_request(order_request.uuid)
 
     def run(self, start_on_new_candle: bool = False) -> None:
         # startup

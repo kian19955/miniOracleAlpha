@@ -182,7 +182,7 @@ def keyboard_listener():
                     print("🛑 Manual Close Triggered!")
                     close_position(price)
                 else:
-                    print("❌ No open position to close.")
+                    print("❌ No open_pos position to close_pos.")
             time.sleep(0.2)
 
 ws = websocket.WebSocketApp(

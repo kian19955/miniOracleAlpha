@@ -122,7 +122,7 @@ def validate_order(func):
         print(f"Validating {func.__name__} order...")
         open_status, _ = is_position_open()
         if open_status:
-            print("Position already open, cannot open a new one.")
+            print("Position already open_pos, cannot open_pos a new one.")
             return
 
         available = get_available_balance()
@@ -160,7 +160,7 @@ def validate_order(func):
 
 @validate_order
 def open_long(trade_quantity):
-    print("Attempting to open long position...")
+    print("Attempting to open_pos long position...")
     try:
         order = client.futures_create_order(
             symbol=symbol,
@@ -174,7 +174,7 @@ def open_long(trade_quantity):
 
 @validate_order
 def open_short(trade_quantity):
-    print("Attempting to open short position...")
+    print("Attempting to open_pos short position...")
     try:
         order = client.futures_create_order(
             symbol=symbol,
@@ -187,10 +187,10 @@ def open_short(trade_quantity):
         print("Error opening short position:", e)
 
 def close_position():
-    print("Attempting to close position...")
+    print("Attempting to close_pos position...")
     open_status, pos = is_position_open()
     if not open_status:
-        print("No open position to close.")
+        print("No open_pos position to close_pos.")
         return
 
     position_amt = float(pos.get("positionAmt", 0))
@@ -260,7 +260,7 @@ if input("Use keyboard shortcuts? (y/n): ").lower().strip() == "y":
     keyboard.add_hotkey('v', set_ticker)
 
     keyboard.add_hotkey('q', lambda: exit() if get_current_position() is None else print(
-        "Cannot exit while a position is open."), suppress=True)
+        "Cannot exit while a position is open_pos."), suppress=True)
 
     keyboard.wait('e')
     print("Exiting program.")
@@ -279,6 +279,6 @@ else:
             case "v":
                 set_ticker()
             case "q":
-                exit() if get_current_position() is None else print("Cannot exit while a position is open.")
+                exit() if get_current_position() is None else print("Cannot exit while a position is open_pos.")
             case _:
                 print("Invalid choice. Please try again.")

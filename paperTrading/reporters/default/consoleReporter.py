@@ -24,7 +24,7 @@ class ConsoleReporter(BaseReporter):
             f"OR: {len(self.portfolio.order_requests)} | "
             f"POS: {len(self.portfolio.positions)} | "
             f"TR: {len(self.portfolio.trade_records)} | "
-            f"NETWORTH: {net_worth} {"(+)" if net_worth >= self.last_networth else ""}{round(net_worth - self.last_networth, 2)} | "
+            f"NETWORTH: {net_worth} {"(+)" if net_worth >= self.last_networth else ""}{round(net_worth - self.last_networth, 3)} | "
             f"CONF: {conf} | "
             f"PRICE: {self.simulator.df.iloc[-1]['Close']}", end=self.str_end
         )

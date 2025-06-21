@@ -6,5 +6,5 @@ class OrderType(Enum):
     SHORT = "short"
 
 class Action(Enum):
-    CLOSE = "close"
-    OPEN = "open"
+    CLOSE = "close_pos"
+    OPEN = "open_pos"
