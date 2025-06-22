@@ -24,6 +24,7 @@ class Executor:
             stop_loss: float,
             risk_per_trade: float,
             taker_fee: float,
+            maker_fee: float,
             leverage: float,
             max_positions: Optional[int] = None,
             drop_oldest_on_max: bool = False,
@@ -33,6 +34,7 @@ class Executor:
         self.stop_loss = stop_loss
         self.risk_per_trade = risk_per_trade
         self.taker_fee = taker_fee
+        self.maker_fee = maker_fee
         self.leverage = leverage
         self.max_positions = max_positions
         self.drop_oldest_on_max = drop_oldest_on_max
@@ -65,6 +67,17 @@ class Executor:
         # -----------------------
 
         return risk_amount / entry_price
+
+    def _handle_commissions(self, ord_req: OrderRequest, current_price: float) -> None:
+        if not ord_req.should_execute_order(current_price):
+            ord_req.is_maker = True
+        else:
+            ord_req.is_maker = False
+        if ord_req.entry_price is not None:
+            current_price = ord_req.entry_price
+
+        ord_req.commission += ord_req.qty * current_price * (self.maker_fee if ord_req.is_maker else self.taker_fee)
+        self.portfolio.balance -= ord_req.commission
 
     def open_pos(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
         exec_price = order_request.entry_price if order_request.entry_price is not None else current_price
@@ -103,13 +116,16 @@ class Executor:
                 qty = order_request.qty
         order_request.qty = qty
 
-        # 3) Create position
+        # 3) Handle commissions
+        self._handle_commissions(order_request, current_price)
+
+        # 4) Create position
         pos = Position.from_order_request(
             order_request=order_request,
             entry_price=exec_price,
         )
 
-        # 4) Add to portfolio and remove its order_request
+        # 5) Add to portfolio and remove its order_request
         logger.info(f"Opening position: {pos}")
         self.portfolio.add_position(pos, order_request.uuid)
         self.ctx_builder.add_new_position(pos.uuid)
@@ -138,8 +154,10 @@ class Executor:
             if order_request.qty is not None
             else sum(p.qty for p in open_positions)
         )
+        order_request.qty = total_to_close
         remaining: float = total_to_close
 
+        self._handle_commissions(order_request, current_price)
         fee_per_unit = order_request.commission / total_to_close
         # We want to migrate the fee to each of the positions to close respectively
         # Therefor we add the closing fee to balance as self.portfolio.(partially_)close_position will subtract it

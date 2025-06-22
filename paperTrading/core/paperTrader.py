@@ -117,6 +117,7 @@ class PaperTrader:
             max_positions=max_positions,
             drop_oldest_on_max=drop_oldest_on_max,
             taker_fee=self.taker_fee,
+            maker_fee=self.maker_fee
         )
 
         if reporter is not None:
@@ -297,13 +298,7 @@ class PaperTrader:
                 )
                 self._ctx_builder.add_new_trade_record(tr_uuid)
 
-    def _handle_commissions(self, ord_req: OrderRequest) -> None:
-        if not ord_req.should_execute_order(self.df.iloc[-1]["Close"]):
-            ord_req.is_maker = True
-        else:
-            ord_req.is_maker = False
-        ord_req.commission += ord_req.qty * ord_req.entry_price * (self.maker_fee if ord_req.is_maker else self.taker_fee)
-        self._portfolio.balance -= ord_req.commission
+
 
     def _evaluate_and_create_order_request(self) -> None:
         req: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self._portfolio)
