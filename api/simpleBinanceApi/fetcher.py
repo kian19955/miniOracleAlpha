@@ -67,3 +67,22 @@ def fetch_klines(symbol: str, interval: str, limit: int, max_retries: int = 5, b
     df[float_cols] = df[float_cols].astype(float)
 
     return df
+
+def fetch_order_book(symbol: str) -> pd.DataFrame:
+    """Fetch and combine the order book into a single DataFrame with MultiIndex columns.
+
+    :param symbol: The trading pair symbol (e.g., 'BTCUSDT')
+    :return: DataFrame with MultiIndex columns where:
+             - Level 0: 'Bids' or 'Asks'
+             - Level 1: 'Price' or 'Quantity'
+    """
+    order_book = client.get_order_book(symbol=symbol)
+    bids_df = pd.DataFrame(order_book['bids'], columns=['Price', 'Quantity'], dtype=float)
+    ask_df = pd.DataFrame(order_book['asks'], columns=['Price', 'Quantity'], dtype=float)
+    order_book_df: pd.DataFrame = pd.concat([bids_df, ask_df], keys=['Bids', 'Asks'], axis=1)
+    return order_book_df
+
+
+if __name__ == '__main__':
+    data = fetch_order_book(symbol='BTCUSDT')
+    print(type(data))

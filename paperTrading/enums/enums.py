@@ -1,10 +1,14 @@
 from enum import Enum
 
 
-class OrderType(Enum):
+class PositionDirection(Enum):
     LONG = "long"
     SHORT = "short"
 
-class Action(Enum):
+class OrderAction(Enum):
     CLOSE = "close_pos"
     OPEN = "open_pos"
+
+class OrderType(Enum):
+    LIMIT = "limit"
+    MARKET = "market"

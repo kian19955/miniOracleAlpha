@@ -4,7 +4,7 @@ from typing import Optional
 from xml.dom.minidom import Element
 from xml.etree.ElementTree import SubElement
 
-from paperTrading.enums import OrderType
+from paperTrading.enums import PositionDirection
 from paperTrading.models import Position
 from paperTrading.models import BaseTradingData
 
@@ -19,7 +19,7 @@ class TradeRecord(BaseTradingData):
     :param confidence: confidence level (-1.0 to 1.0) where -1 = max sell, 0 = neutral, +1 = max buy
 
     :param entry_price: price at which the asset was bought
-    :param type: Side.LONG or Side.SHORT
+    :param direction: Side.LONG or Side.SHORT
     :param action: Action.SELL or Action.BUY
     :param qty: quantity in base units, if none the Simulator will decide
 
@@ -28,16 +28,25 @@ class TradeRecord(BaseTradingData):
     :param stop_loss: stop loss if used
     :param take_profit: take profit if used
     """
+    closing_reason: str
+
     entry_time: datetime
     exit_time: datetime
 
     pnl: float
 
     @classmethod
-    def from_position(cls, position: Position, pnl: Optional[float] = None, closed_at_price: Optional[float] = None) -> "TradeRecord":
+    def from_position(
+            cls,
+            position: Position,
+            pnl: Optional[float] = None,
+            closed_at_price: Optional[float] = None,
+            closing_reason: Optional[str] = None
+    ) -> "TradeRecord":
         """
         Creates a TradeRecord from a Position
 
+        :param closing_reason: The reason the position was closed
         :param position: A Position
         :param pnl: If None will be calculated from closed_at_price
         :param closed_at_price: Price at which the asset was sold
@@ -59,16 +68,19 @@ class TradeRecord(BaseTradingData):
             max_holding_period=position.max_holding_period,
 
             confidence=position.confidence,
+            closing_reason=closing_reason,
 
             entry_price=position.entry_price,
-            type=position.type,
+            direction=position.direction,
             action=position.action,
             qty=position.qty,
 
             pnl=pnl,
 
             stop_loss=position.stop_loss,
-            take_profit=position.take_profit
+            take_profit=position.take_profit,
+
+            commission=position.commission
         )
 
     def total_value(self) -> float:
@@ -82,8 +94,9 @@ class TradeRecord(BaseTradingData):
             "symbol": self.symbol,
 
             "confidence": self.confidence,
+            "closing_reason": self.closing_reason,
 
-            "side": self.type.name,
+            "side": self.direction.name,
             "action": self.action.name,
             "qty": self.qty,
             "pnl": self.pnl,
@@ -94,5 +107,8 @@ class TradeRecord(BaseTradingData):
             "holding_duration": str(self.max_holding_period),
 
             "stop_loss": self.stop_loss,
-            "take_profit": self.take_profit
+            "take_profit": self.take_profit,
+
+            "is_maker": self.is_maker,
+            "commission": self.commission
         }

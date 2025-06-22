@@ -3,15 +3,17 @@ from datetime import datetime, timezone, timedelta
 from typing import Optional
 from uuid import UUID, uuid4
 
-from paperTrading.enums import OrderType, Action
+from paperTrading.enums import PositionDirection, OrderAction, OrderType
 
 
 @dataclass
 class BaseTradingData:
     confidence: float
 
-    type: OrderType
-    action: Action
+    direction: PositionDirection
+    action: OrderAction
+    type: OrderType = field(default=None, init=False)
+
     entry_price: Optional[float] = None
     qty: Optional[float] = None
 
@@ -25,6 +27,9 @@ class BaseTradingData:
     stop_loss: Optional[float] = None
     take_profit: Optional[float] = None
 
+    is_maker: bool = field(default=False)
+    commission: float = 0
+
     def __post_init__(self):
         if self.entry_price is not None and self.entry_price <= 0:
             raise ValueError("Entry price must be greater than 0")
@@ -36,9 +41,12 @@ class BaseTradingData:
             raise ValueError("Take profit must be greater than 0")
         if self.max_holding_period is not None and self.max_holding_period <= timedelta(0):
             raise ValueError("Max holding period must be greater than 0")
+        if self.type == OrderType.LIMIT and self.entry_price is None:
+            raise ValueError("Limit order must have entry price")
+
 
     def pnl(self, closed_at_price: float) -> float:
-        if self.type == OrderType.LONG:
+        if self.direction == PositionDirection.LONG:
             return (closed_at_price - self.entry_price) * self.qty
         else:
             return (self.entry_price - closed_at_price) * self.qty

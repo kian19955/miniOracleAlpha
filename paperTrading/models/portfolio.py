@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 from typing import Optional, Callable
-from uuid import UUID
+from uuid import UUID, uuid4
 import copy
 import csv
 
+from paperTrading.enums import OrderAction
 from paperTrading.models import TradeRecord, Position, OrderRequest
 import logging
 
@@ -45,9 +46,13 @@ class Portfolio:
     def add_order_request(self, order_request: OrderRequest) -> None:
         """
         Add a new order request to the portfolio.
+        If the order request is a maker order, its commission is subtracted from the balance.
+        (Else the commission is subtracted when a position is created)
 
         :param order_request: The OrderRequest instance to add.
         """
+        if order_request.is_maker:
+            self.balance -= order_request.commission
         self.order_requests.append(order_request)
 
         for callback in self.on_order_request_added:
@@ -61,33 +66,64 @@ class Portfolio:
         """
         self.order_requests[:] = [o for o in self.order_requests if o.uuid != uuid]
 
-    def add_position(self, position: Position) -> None:
+    def add_position(self, position: Position, order_request_uuid: Optional[UUID] = None) -> None:
         """
         Add a new position to the portfolio. If it originated from an order request,
         the corresponding request is removed.
 
+        :param order_request_uuid:
         :param position: The Position instance to add.
         """
+        if position.action == OrderAction.CLOSE:
+            raise ValueError("Cannot add a position with action 'close'  to the portfolio")
+
         cost: float = position.entry_price * position.qty
+
         if not self.allow_dept and cost > self.balance:
             raise ValueError("Not enough balance")
 
         self.balance -= cost
-        self.rmv_order_request(position.uuid)
+        self.rmv_order_request(order_request_uuid)
         self.positions.append(position)
 
         for callback in self.on_position_added:
             callback(position)
 
+    def partially_close_position(
+        self,
+        uuid: UUID,
+        fill_qty: float,
+        closed_at_price: Optional[float] = None,
+        closing_reason: str = "",
+        closing_fee: float = 0,
+    ) -> UUID:
+        pos = self.find_by_attributes(self.positions, uuid=uuid)[0]
+        partial = pos.copy()
+
+        pos.qty -= fill_qty
+        partial.qty = fill_qty
+        self.positions.append(partial)
+
+        return self.close_position(
+            partial.uuid,
+            closed_at_price=closed_at_price,
+            closing_reason=closing_reason,
+            closing_fee=closing_fee,
+        )
+
     def close_position(
         self,
         uuid: UUID,
         closed_at_price: Optional[float] = None,
-        trade_record: Optional[TradeRecord] = None
+        trade_record: Optional[TradeRecord] = None,
+        closing_reason: str = "",
+        closing_fee: float = 0
     ) -> UUID:
         """
         Close an open_pos position by UUID and record the trade.
 
+        :param closing_fee: Closing fees, will be added to the positions commission automatically
+        :param closing_reason: The reason for closing the position
         :param uuid: The UUID of the position to close_pos.
         :param closed_at_price: Price at which the position is closed. Required if `trade_record` is not provided.
         :param trade_record: A TradeRecord to use. If None, one will be created from the position.
@@ -99,7 +135,15 @@ class Portfolio:
 
         for pos in self.positions:
             if pos.uuid == uuid:
-                record = trade_record or TradeRecord.from_position(pos, closed_at_price=closed_at_price)
+
+                pos.commission += closing_fee
+                self.balance -= closing_fee
+
+                record = trade_record or TradeRecord.from_position(
+                    pos,
+                    closed_at_price=closed_at_price,
+                    closing_reason=closing_reason
+                )
 
                 self.balance += record.total_value()
                 self.positions.remove(pos)

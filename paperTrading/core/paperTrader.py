@@ -10,7 +10,7 @@ from pandas import DataFrame
 
 from paperTrading.core import OrderRequestValidator, Executor
 from paperTrading.models import Portfolio, OrderRequest, TradeRecord
-from paperTrading.enums import OrderType, Action
+from paperTrading.enums import PositionDirection, OrderAction
 from api.simpleBinanceApi.fetcher import fetch_klines
 from paperTrading.reporters import BaseReporter, ContextBuilder
 from utils import parse_interval, seconds_to_next_boundry
@@ -20,15 +20,15 @@ import logging
 logger = logging.getLogger("oracle.analysis")
 # TODO: cooldown
 # TODO: add leverage
-# TODO: add trading fees
 
 class PaperTrader:
     def __init__(
             self, symbol: Optional[str], interval: str, lookback: int,
             seconds_to_sleep: int, save_data_path: str,
             strat: object,
-            initial_balance: float, risk_per_trade_pct: float, leverage: float = 1,
+            initial_balance: float, risk_per_trade_pct: float = 1, leverage: float = 1,
             buy_conf_threshold: float = 1, sell_conf_threshold: float = -1,
+            maker_fee_pct: float = 0, taker_fee_pct: float = 0,
             confirmation_streak_threshold: int = 1, max_positions: Optional[int] = None, drop_oldest_on_max: bool = False,
             block_reentry_until_signal_change: bool = False,
             stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
@@ -43,6 +43,10 @@ class PaperTrader:
         :param lookback: How many candles the df will hold
         :param strat: A class containing an evaluate() -> float between[-1.0, 1.0] method
         :param initial_balance: The initial balance of the portfolio
+        :param buy_conf_threshold: The confidence threshold for the buy signal
+        :param sell_conf_threshold: The confidence threshold for the sell signal
+        :param maker_fee_pct: The maker fee in percentage
+        :param taker_fee_pct: The taker fee in percentage
         :param seconds_to_sleep: How many seconds to sleep between each iteration.
             The simulator will pretend to be on the exact price when tp or st is hit.
             Decreasing this value will make the simulation run faster but less accurate for fluctuations.
@@ -75,10 +79,16 @@ class PaperTrader:
         self.leverage = leverage  # TODO: add leverage
 
         self.strat = strat
+
+        self.maker_fee = maker_fee_pct / 100
+        self.taker_fee = taker_fee_pct / 100
+
         self.buy_conf_threshold = buy_conf_threshold
         self.sell_conf_threshold = sell_conf_threshold
+
         self.stop_loss = stop_loss_pct / 100
         self.take_profit = take_profit_pct / 100
+
         self.default_expiration_time = default_expiration_time
         self.default_holding_period = default_holding_period
 
@@ -105,7 +115,8 @@ class PaperTrader:
             leverage=self.leverage,
             stop_loss=self.stop_loss,
             max_positions=max_positions,
-            drop_oldest_on_max=drop_oldest_on_max
+            drop_oldest_on_max=drop_oldest_on_max,
+            taker_fee=self.taker_fee,
         )
 
         if reporter is not None:
@@ -132,10 +143,10 @@ class PaperTrader:
         # Initialize csv file
         with open(save_path, "w", newline="") as f:
             dummy_record = TradeRecord(
-                symbol="DUMMY", confidence=0.0, type=OrderType.LONG, action=Action.OPEN,
-                entry_price=0.0, qty=0.0, pnl=0.0,
+                symbol="DUMMY", confidence=1.0, direction=PositionDirection.LONG, action=OrderAction.OPEN,
+                entry_price=1.0, qty=1.0, pnl=1.0,
                 entry_time=datetime.now(timezone.utc), exit_time=datetime.now(timezone.utc),
-                stop_loss=None, take_profit=None
+                stop_loss=None, take_profit=None, closing_reason="DUMMY"
             )
             writer = csv.DictWriter(f, fieldnames=dummy_record.to_dict_for_csv().keys())
             writer.writeheader()
@@ -218,11 +229,11 @@ class PaperTrader:
 
         # If request is a float, build an OrderRequest
         if request >= self.buy_conf_threshold:
-            side = OrderType.LONG
-            action = Action.OPEN
+            side = PositionDirection.LONG
+            action = OrderAction.OPEN
         elif request <= self.sell_conf_threshold:
-            side = OrderType.SHORT
-            action = Action.OPEN
+            side = PositionDirection.SHORT
+            action = OrderAction.OPEN
         else:
             return None
 
@@ -231,7 +242,7 @@ class PaperTrader:
             symbol=self.symbol,
             creation_time=datetime.now(),
             confidence=request,
-            type=side,
+            direction=side,
             action=action,
             entry_price=None,
             qty=None,
@@ -245,13 +256,13 @@ class PaperTrader:
             if ord_req.expiration_time is not None and ord_req.is_expired():
                 self._portfolio.rmv_order_request(ord_req.uuid)
                 self._ctx_builder.add_dropped_order_request(ord_req.uuid)
-                logger.info(f"Order request expired: {ord_req.uuid}")
+                logger.info(f"Order request expired: {ord_req.root_uuid}")
                 continue
 
-            if ord_req.entry_price is not None and not self._price_reached(ord_req.entry_price):
+            if not ord_req.should_execute_order(self.df.iloc[-1]["Close"]):
                 continue
 
-            if ord_req.action == Action.OPEN:
+            if ord_req.action == OrderAction.OPEN:
                 self._executor.open_pos(ord_req, self.df.iloc[-1]["Close"])
             else:
                 self._executor.close_pos(ord_req, self.df.iloc[-1]["Close"])
@@ -260,19 +271,39 @@ class PaperTrader:
         for pos in list(self._portfolio.positions):
             close_pos: bool = False
             curr_close_price: float = self.df.iloc[-1]["Close"]
+            reason: str = ""
 
             if pos.take_profit is not None and self._price_reached(pos.take_profit):
-                logger.info(f"Closing position (take profit hit: {pos.take_profit=}/{curr_close_price}): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
+                logger.info(f"Closing position (take profit hit: {pos.take_profit=}/{curr_close_price}): {pos.root_uuid} => pnl: {pos.pnl(curr_close_price)}")
+                reason = "take_profit"
+                close_pos = True
 
             elif pos.stop_loss is not None and self._price_reached(pos.stop_loss):
-                logger.info(f"Closing position (stop loss hit: {pos.stop_loss=}/{curr_close_price}): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
+                logger.info(f"Closing position (stop loss hit: {pos.stop_loss=}/{curr_close_price}): {pos.root_uuid} => pnl: {pos.pnl(curr_close_price)}")
+                reason = "stop_loss"
+                close_pos = True
 
             elif pos.max_holding_period is not None and pos.holding_period_reached():
-                logger.info(f"Closing position (max holding period of {pos.max_holding_period} reached): {pos.uuid} => pnl: {pos.pnl(curr_close_price)}")
+                logger.info(f"Closing position (max holding period of {pos.max_holding_period} reached): {pos.root_uuid} => pnl: {pos.pnl(curr_close_price)}")
+                reason = "max_holding_period"
+                close_pos = True
 
             if close_pos:
-                tr_uuid = self._portfolio.close_position(pos.uuid, curr_close_price)
+                tr_uuid = self._portfolio.close_position(
+                    pos.uuid,
+                    curr_close_price,
+                    closing_reason=reason,
+                    closing_fee=pos.qty * curr_close_price * self.taker_fee
+                )
                 self._ctx_builder.add_new_trade_record(tr_uuid)
+
+    def _handle_commissions(self, ord_req: OrderRequest) -> None:
+        if not ord_req.should_execute_order(self.df.iloc[-1]["Close"]):
+            ord_req.is_maker = True
+        else:
+            ord_req.is_maker = False
+        ord_req.commission += ord_req.qty * ord_req.entry_price * (self.maker_fee if ord_req.is_maker else self.taker_fee)
+        self._portfolio.balance -= ord_req.commission
 
     def _evaluate_and_create_order_request(self) -> None:
         req: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self._portfolio)
@@ -285,6 +316,9 @@ class PaperTrader:
 
         elif order_request is not None:
             if self._ord_req_validator.is_valid(order_request):
+
+                self._handle_commissions(order_request)
+
                 self._portfolio.add_order_request(order_request)
                 self._ctx_builder.add_new_order_request(order_request.uuid)
 
