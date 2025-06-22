@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta
 from logging import DEBUG, INFO
 import random
 from custom_logger import setup_logger
@@ -43,7 +44,7 @@ def main():
         confirmation_streak_threshold=2,
         block_reentry_until_signal_change=True,
 
-        default_max_holding_period=None,
+        default_max_holding_period=timedelta(hours=5),
 
         initial_balance=10000,  # float(input('Enter initial balance: ')),
         risk_per_trade_pct=0.25,  # float(input('Enter risk per position (% 0-100): ')),
