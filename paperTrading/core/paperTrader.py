@@ -222,8 +222,8 @@ class PaperTrader:
                 request.expiration_time = self.default_expiration_time
 
             # Set default holding period if custom holding period is not set
-            if self.default_max_holding_period is not None and request.holding_period is None:
-                request.holding_period = self.default_max_holding_period
+            if self.default_max_holding_period is not None and request.max_holding_period is None:
+                request.max_holding_period = self.default_max_holding_period
 
             return request
 
