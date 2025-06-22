@@ -32,7 +32,7 @@ class PaperTrader:
             confirmation_streak_threshold: int = 1, max_positions: Optional[int] = None, drop_oldest_on_max: bool = False,
             block_reentry_until_signal_change: bool = False,
             stop_loss_pct: Optional[float] = None, take_profit_pct: Optional[float] = None,
-            default_expiration_time: Optional[datetime] = None, default_holding_period: Optional[timedelta] = None,
+            default_expiration_time: Optional[datetime] = None, default_max_holding_period: Optional[timedelta] = None,
             reporter: type[BaseReporter] = None, reporter_kwargs: dict = None
     ):
         """
@@ -90,7 +90,7 @@ class PaperTrader:
         self.take_profit = take_profit_pct / 100
 
         self.default_expiration_time = default_expiration_time
-        self.default_holding_period = default_holding_period
+        self.default_max_holding_period = default_max_holding_period
 
         self._portfolio = Portfolio(
             balance=initial_balance,
@@ -222,8 +222,8 @@ class PaperTrader:
                 request.expiration_time = self.default_expiration_time
 
             # Set default holding period if custom holding period is not set
-            if self.default_holding_period is not None and request.holding_period is None:
-                request.holding_period = self.default_holding_period
+            if self.default_max_holding_period is not None and request.holding_period is None:
+                request.holding_period = self.default_max_holding_period
 
             return request
 

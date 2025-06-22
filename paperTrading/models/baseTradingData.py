@@ -59,3 +59,14 @@ class BaseTradingData:
         copied = replace(self)
         copied.uuid = uuid4()
         return copied
+
+
+if __name__ == '__main__':
+    import time
+    order1 = BaseTradingData(confidence=1.0, direction=PositionDirection.LONG, action=OrderAction.CLOSE, qty=1)
+    time.sleep(1)
+    order2 = BaseTradingData(confidence=1.0, direction=PositionDirection.LONG, action=OrderAction.CLOSE, qty=1)
+
+
+    print(order1.creation_time)
+    print(order2.creation_time)
