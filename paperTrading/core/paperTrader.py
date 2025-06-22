@@ -312,8 +312,6 @@ class PaperTrader:
         elif order_request is not None:
             if self._ord_req_validator.is_valid(order_request):
 
-                self._handle_commissions(order_request)
-
                 self._portfolio.add_order_request(order_request)
                 self._ctx_builder.add_new_order_request(order_request.uuid)
 
