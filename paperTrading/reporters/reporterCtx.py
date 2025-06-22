@@ -29,9 +29,10 @@ class ContextBuilder:
         self.has_reporter = has_reporter
         self._context = MutableReportContext()
 
-    def only_if_reporter(self, func):
+    @staticmethod
+    def only_if_reporter(func):
         @wraps(func)
-        def wrapper(*args, **kwargs):
+        def wrapper(self, *args, **kwargs):
             if self.has_reporter:
                 return func(self, *args, **kwargs)
 

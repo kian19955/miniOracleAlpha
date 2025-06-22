@@ -47,6 +47,9 @@ def main():
         risk_per_trade_pct=0.25,  # float(input('Enter risk per position (% 0-100): ')),
         leverage=1,  # float(input('Enter leverage: ')), #NOT IMPLEMENTED
 
+        maker_fee_pct=0.02,  # float(input('Enter maker fee (% 0-100): ')),
+        taker_fee_pct=0.04,  # float(input('Enter taker fee (% 0-100): ')),
+
         stop_loss_pct=2,  # float(input('Enter stop loss (% 0-100): ')),
         take_profit_pct=4,  # float(input('Enter take profit (% 0-100): ')),
 
