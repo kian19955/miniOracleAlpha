@@ -120,7 +120,7 @@ class Executor:
         order_request.qty = qty
 
         # 3) Handle commissions
-        self._handle_commissions(order_request, current_price)
+        self._handle_commissions(order_request)
 
         # 4) Create position
         pos = Position.from_order_request(
