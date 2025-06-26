@@ -102,8 +102,8 @@ class TradeRecord(BaseTradingData):
             "pnl": self.pnl,
 
             "entry_price": self.entry_price,
-            "entry_timestamp": self.entry_time.timestamp(),
-            "exit_timestamp": self.exit_time.timestamp(),
+            "entry_timestamp": str(self.entry_time),
+            "exit_timestamp": str(self.exit_time),
             "holding_duration": str(self.max_holding_period),
 
             "stop_loss": self.stop_loss,

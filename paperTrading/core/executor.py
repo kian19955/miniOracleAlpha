@@ -68,19 +68,22 @@ class Executor:
 
         return risk_amount / entry_price
 
-    def _handle_commissions(self, ord_req: OrderRequest, current_price: float) -> None:
-        if not ord_req.should_execute_order(current_price):
+    def _handle_commissions(self, ord_req: OrderRequest) -> None:
+        if not ord_req.should_execute_order(ord_req.entry_price):
             ord_req.is_maker = True
         else:
             ord_req.is_maker = False
-        if ord_req.entry_price is not None:
-            current_price = ord_req.entry_price
 
-        ord_req.commission += ord_req.qty * current_price * (self.maker_fee if ord_req.is_maker else self.taker_fee)
+        commission: float = ord_req.qty * ord_req.entry_price * (self.maker_fee if ord_req.is_maker else self.taker_fee)
+
+        ord_req.commission += commission
+        ord_req.qty = ord_req.qty - (commission / ord_req.entry_price)
+
         self.portfolio.balance -= ord_req.commission
 
     def open_pos(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
         exec_price = order_request.entry_price if order_request.entry_price is not None else current_price
+        order_request.entry_price = exec_price
 
         # 1) Enforce max_positions
         if self.max_positions is not None and len(self.portfolio.positions) + 1 > self.max_positions:
@@ -122,7 +125,6 @@ class Executor:
         # 4) Create position
         pos = Position.from_order_request(
             order_request=order_request,
-            entry_price=exec_price,
         )
 
         # 5) Add to portfolio and remove its order_request
@@ -132,6 +134,9 @@ class Executor:
         return pos
 
     def close_pos(self, order_request: OrderRequest, current_price: float) -> None:
+        exec_price = order_request.entry_price if order_request.entry_price is not None else current_price
+        order_request.entry_price = exec_price
+
         # find matching open_pos positions
         open_positions = self.portfolio.find_by_attributes(
             self.portfolio.positions,
@@ -157,7 +162,7 @@ class Executor:
         order_request.qty = total_to_close
         remaining: float = total_to_close
 
-        self._handle_commissions(order_request, current_price)
+        self._handle_commissions(order_request)
         fee_per_unit = order_request.commission / total_to_close
         # We want to migrate the fee to each of the positions to close respectively
         # Therefor we add the closing fee to balance as self.portfolio.(partially_)close_position will subtract it
@@ -175,10 +180,10 @@ class Executor:
             closing_fee = take * fee_per_unit
 
             if take >= pos.qty:
-                logger.info(f"Closing full pos {pos.uuid} PnL={pos.pnl(current_price)}")
+                logger.info(f"Closing full pos {pos.uuid} PnL={pos.pnl(exec_price)}")
                 tr_uuid = self.portfolio.close_position(
                     pos.uuid,
-                    closed_at_price=current_price,
+                    closed_at_price=exec_price,
                     closing_reason="Full Close - Action.CLOSE",
                     closing_fee=closing_fee
                 )
@@ -187,7 +192,7 @@ class Executor:
                 partial_tr_uuid = self.portfolio.partially_close_position(
                     pos.uuid,
                     fill_qty=take,
-                    closed_at_price=current_price,
+                    closed_at_price=exec_price,
                     closing_reason="Partial Close - Action.CLOSE",
                     closing_fee=closing_fee
                 )

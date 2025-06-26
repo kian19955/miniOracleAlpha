@@ -20,6 +20,8 @@ import logging
 logger = logging.getLogger("oracle.analysis")
 # TODO: cooldown
 # TODO: add leverage
+# TODO: add mutlilevel stoploss/takeprofit
+# TODO: make it possible to return list[order_request | float]
 
 class PaperTrader:
     def __init__(
@@ -297,8 +299,6 @@ class PaperTrader:
                     closing_fee=pos.qty * curr_close_price * self.taker_fee
                 )
                 self._ctx_builder.add_new_trade_record(tr_uuid)
-
-
 
     def _evaluate_and_create_order_request(self) -> None:
         req: float | OrderRequest = self.strat.evaluate(self.df, portfolio=self._portfolio)

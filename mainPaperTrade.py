@@ -1,7 +1,6 @@
 import os
 from datetime import timedelta
 from logging import DEBUG, INFO
-import random
 from custom_logger import setup_logger
 from paperTrading import PaperTrader
 
