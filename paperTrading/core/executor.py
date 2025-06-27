@@ -68,6 +68,14 @@ class Executor:
 
         return risk_amount / entry_price
 
+    def _handle_cost_exceeding_balance(self, ord_req: OrderRequest, entry_price: float) -> bool:
+        total_cost = ord_req.qty * ord_req.entry_price
+        if total_cost > self.portfolio.balance:
+            logger.warning(
+                "Insufficient balance: resizing order to max affordable qty"
+            )
+            ord_req.qty = self.portfolio.balance / ord_req.entry_price
+
     def _handle_commissions(self, ord_req: OrderRequest) -> None:
         if not ord_req.should_execute_order(ord_req.entry_price):
             ord_req.is_maker = True
@@ -78,6 +86,7 @@ class Executor:
 
         ord_req.commission += commission
         ord_req.qty = ord_req.qty - (commission / ord_req.entry_price)
+        self._handle_cost_exceeding_balance(ord_req, ord_req.entry_price)
 
         self.portfolio.balance -= ord_req.commission
 
@@ -95,9 +104,8 @@ class Executor:
 
             # since portfolio.positions maintains insertion order (FIFO), the first element is the oldest
             oldest = self.portfolio.positions[0]
-            pnl = oldest.pnl(exec_price)
             logger.info(
-                f"Max positions reached; closing oldest {oldest.uuid} @ {exec_price} => PnL={pnl}"
+                f"Max positions reached; closing oldest {oldest.uuid} @ {exec_price} => PnL={oldest.pnl(exec_price)}"
             )
             self.portfolio.close_position(
                 oldest.uuid,
@@ -107,17 +115,8 @@ class Executor:
 
         # 2) Determine how many units to buy/sell
         if order_request.qty is None:
-            qty = self._calculate_position_size(order_request, exec_price)
-        else:
-            total_cost = order_request.qty * exec_price
-            if total_cost > self.portfolio.balance:
-                logger.warning(
-                    "Insufficient balance: resizing order to max affordable qty"
-                )
-                qty = self.portfolio.balance / exec_price
-            else:
-                qty = order_request.qty
-        order_request.qty = qty
+            order_request.qty = self._calculate_position_size(order_request, exec_price)
+        self._handle_cost_exceeding_balance(order_request, exec_price)
 
         # 3) Handle commissions
         self._handle_commissions(order_request)
