@@ -86,9 +86,9 @@ class Executor:
 
         ord_req.commission += commission
         ord_req.qty = ord_req.qty - (commission / ord_req.entry_price)
-        self._handle_cost_exceeding_balance(ord_req, ord_req.entry_price)
 
         self.portfolio.balance -= ord_req.commission
+        self._handle_cost_exceeding_balance(ord_req, ord_req.entry_price)
 
     def open_pos(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
         exec_price = order_request.entry_price if order_request.entry_price is not None else current_price
