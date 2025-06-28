@@ -105,7 +105,7 @@ class PaperTrader:
         self._ord_req_validator = OrderRequestValidator(
             streak_threshold=confirmation_streak_threshold,
             block_reentry_until_signal_change=block_reentry_until_signal_change,
-            default_stop_loss=stop_loss_pct/100,
+            had_default_stop_loss=True if self.stop_loss is not None else False,
         )
 
         self._ctx_builder = ContextBuilder()

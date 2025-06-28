@@ -18,14 +18,14 @@ class OrderRequestValidator:
             self,
             streak_threshold: int = 1,
             block_reentry_until_signal_change: bool = False,
-            default_stop_loss: Optional[float] = None,
+            had_default_stop_loss: bool = False,
     ):
         if streak_threshold < 1:
             raise ValueError("streak_threshold must be at least 1")
 
         self.streak_threshold = streak_threshold
         self.block_reentry = block_reentry_until_signal_change
-        self.default_stop_loss = default_stop_loss
+        self.has_default_stop_loss = had_default_stop_loss
 
         # internal state
         self._last_signal: Optional[PositionDirection] = None
@@ -61,7 +61,7 @@ class OrderRequestValidator:
         # 4) Ensure we have either stop_loss or direct qty
         if (
                 order_request.stop_loss is None
-                and self.default_stop_loss is None
+                and not self.has_default_stop_loss
                 and order_request.qty is None
         ):
             logger.warning(

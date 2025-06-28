@@ -68,7 +68,7 @@ class Executor:
 
         return risk_amount / entry_price
 
-    def _handle_cost_exceeding_balance(self, ord_req: OrderRequest, entry_price: float) -> bool:
+    def _handle_cost_exceeding_balance(self, ord_req: OrderRequest):
         total_cost = ord_req.qty * ord_req.entry_price
         if total_cost > self.portfolio.balance:
             logger.warning(
@@ -88,7 +88,7 @@ class Executor:
         ord_req.qty = ord_req.qty - (commission / ord_req.entry_price)
 
         self.portfolio.balance -= ord_req.commission
-        self._handle_cost_exceeding_balance(ord_req, ord_req.entry_price)
+        self._handle_cost_exceeding_balance(ord_req)
 
     def open_pos(self, order_request: OrderRequest, current_price: float) -> Optional[Position]:
         exec_price = order_request.entry_price if order_request.entry_price is not None else current_price
@@ -116,7 +116,7 @@ class Executor:
         # 2) Determine how many units to buy/sell
         if order_request.qty is None:
             order_request.qty = self._calculate_position_size(order_request, exec_price)
-        self._handle_cost_exceeding_balance(order_request, exec_price)
+        self._handle_cost_exceeding_balance(order_request)
 
         # 3) Handle commissions
         self._handle_commissions(order_request)
