@@ -33,7 +33,7 @@ class KianStrat:
         :return: -1 (Sell), 0 (Hold), 1 (Buy) Or a float indicating the probability of a successful order(-1 - 1)
         """
         if peaks is None or valleys is None:
-            trend_info, peaks, valleys = detect_dow_trend(df)
+            trend_info, peaks, valleys = detect_dow_trend(df.iloc[:-1])
 
         if self.check_trend and trend_info is None:
             return 0
