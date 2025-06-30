@@ -9,7 +9,8 @@ from paperTrading.reporters.default.consoleReporter import ConsoleReporter
 
 strat = KianStrat(
     check_trend=False,
-    risk_to_reward=2
+    risk_to_reward=2,
+    stop_loss_limit=0.003
 )
 
 

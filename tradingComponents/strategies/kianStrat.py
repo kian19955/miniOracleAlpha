@@ -9,9 +9,10 @@ from paperTrading.enums import PositionDirection, OrderAction
 
 
 class KianStrat:
-    def __init__(self, check_trend: bool = True, risk_to_reward: float = 2):
+    def __init__(self, check_trend: bool = True, risk_to_reward: float = 2, stop_loss_limit: float = 0.003):
         self.check_trend = check_trend
         self.risk_to_reward = risk_to_reward
+        self.stop_loss_limit = stop_loss_limit
 
     def evaluate(
             self, df: DataFrame,
@@ -48,6 +49,11 @@ class KianStrat:
         if (peaks[-1] < valleys[-1] and
                 (not self.check_trend or trend_info['trend'] == Trend.UPTREND) and
                 latest_price > latest_peak_price):
+            # Send only if stop loss is 0.3% or higher
+            if abs(latest_valley_price-latest_price)/latest_price < self.stop_loss_limit:
+                return 0
+
+
             return OrderRequest(
                 confidence=1,
                 direction=PositionDirection.LONG,
@@ -60,6 +66,11 @@ class KianStrat:
         elif (valleys[-1] < peaks[-1] and
               (not self.check_trend or trend_info['trend'] == Trend.DOWNTREND) and
               latest_price < latest_valley_price):
+
+            # Send only if stop loss is 0.3% or higher
+            if abs(latest_peak_price-latest_price)/latest_price < self.stop_loss_limit:
+                return 0
+
             return OrderRequest(
                 confidence=-1,
                 direction=PositionDirection.SHORT,
